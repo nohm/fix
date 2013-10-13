@@ -1,0 +1,36 @@
+<% provide(:title, 'Maxi - Edit entry') %>
+<h3>Editing entry</h3>
+<%= form_for :post, url: entries_path(@entry.id), method: :patch do |f| %>
+  <%= render 'layouts/entries_errors_messages' %>
+
+  <p>
+    <%= f.label :number %><br>
+    <%= f.text_field :number, :value => @entry.number  %>
+  </p>
+ 
+  <p>
+    <%= f.label :brand %><br>
+    <%= f.text_field :brand, :value => @entry.brand %>
+  </p>
+
+  <p>
+    <%= f.label :typenum %><br>
+    <%= f.text_field :typenum, :value => @entry.typenum %>
+  </p>
+
+  <p>
+    <%= f.label :serialnum %><br>
+    <%= f.text_field :serialnum, :value => @entry.serialnum %>
+  </p>
+
+  <p>
+    <%= f.label :note %><br>
+    <%= f.text_field :note, :value => @entry.note %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Back', root_url %>

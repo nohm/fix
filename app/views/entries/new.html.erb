@@ -1,0 +1,41 @@
+<% provide(:title, 'Badger - New entry') %>
+
+<%= bootstrap_form_for(@entry, :html => { :class => 'form-horizontal', :multipart => true }, help: :block) do |f| %>
+  <%= f.alert_message "Please fix the errors below." %>
+  
+  <legend>New entry</legend>
+
+  <%= f.select :appliance_id, @appliance_names %>
+  <%= f.text_field :brand %>
+  <%= f.text_field :typenum %>
+  <%= f.text_field :serialnum %>
+
+  <%= f.text_field :defect, label: 'What\'s broken?' %>
+  <%= f.text_field :ordered, label: 'Parts ordered?' %>
+
+  <%= f.control_group :test do %>
+    <%= f.check_box :test, label: 'Test OK' %>
+  <% end %>
+  <%= f.control_group :repaired do %>
+    <%= f.check_box :repaired, label: 'Repaired' %>
+  <% end %>
+  <%= f.control_group :ready do %>
+    <%= f.check_box :ready, label: 'Ready' %>
+  <% end %>
+  <%= f.control_group :scrap do %>
+    <%= f.check_box :scrap, label: 'Scrap' %>
+  <% end %>
+  <%= f.control_group :accessoires do %>
+    <%= f.check_box :accessoires, label: 'Accessoires' %>
+  <% end %>
+
+  <%= f.text_area :note %>
+
+  <%= f.hidden_field :company, :value => params[:company] %>
+
+  <p>First save the entry, then show it and there you can add images.</p>
+ 
+  <%= f.primary 'Save entry', data: { disable_with: 'Saving...' } %>
+<% end %>
+ 
+<%= link_to 'Back', entries_path(company: params[:company]) %>

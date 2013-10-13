@@ -1,0 +1,50 @@
+<% provide(:title, 'Badger - Invoices for ' + params[:company]) %>
+
+<legend>Invoices for <%= params[:company] %></legend>
+  <div>
+    <% if @invoices.length == 0 %>
+      <p>No invoices here</p>
+    <% else %>
+      <table class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Items</th>
+            <th>Date</th>
+            <th style="width:17px;"></th>
+            <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+              <th style="width:17px;"></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody class="searchable">
+          <% @invoices.each do |invoice| %>
+            <tr>
+              <td><%= invoice.id %></td>
+              <td><%= invoice.items.lines.length %></td>
+              <td><%= invoice.created_at.to_date %></td>
+                <td>
+                  <%= link_to(invoice) do %>
+                    <i class="icon-search"></i>
+                  <% end %>
+                </td>
+                <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+                <td>
+                  <%= link_to(invoice_path(invoice), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
+                    <i class="icon-remove"></i>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <%= paginate @invoices %>
+  </div>
+<% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+  <div>
+    <%= link_to("Add invoice", new_invoice_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
+  </div>
+<% end %>

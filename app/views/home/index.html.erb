@@ -1,4 +1,26 @@
-<h3>Home</h3>
-<% @users.each do |user| %>
-  <p>User: <%=link_to user.name, user %></p>
-<% end %>
+<div class="hero-unit center">
+  <h1>Badger</h1>
+  <p>Welcome to this data storage.</p>
+  <% if current_user.nil? %>
+    <p>
+      <%= link_to("Login", new_user_session_path, :class => 'btn btn-primarybtn-large') %>
+      <%= link_to("Sign up", new_user_registration_path, :class => 'btn btn-primarybtn-large') %>
+    </p>
+  <% else %>
+    <% unless current_user.has_role? :user %>
+      <p>These links are also in the top right menu.</p>
+      <% @roles.each do |role| %>
+        <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' %>
+          <p>
+            <h5 class="button-title"><%= role.name.titleize %></h5>
+            <%= link_to("Entries", entries_path(company: role.name), :class => 'btn btn-primary') %>
+            <%= link_to("Invoices", invoices_path(company: role.name), :class => 'btn btn-primary') %>
+          </p>
+        <% end %>
+      <% end %>
+    <% else %>
+      You will be assigned to your respective company soon.<br>
+      Can't wait? Contact the admin <a href="mailto:<%= ENV['ADMIN_EMAIL'] %>">here</a>
+    <% end %>
+  <% end %>
+</div>

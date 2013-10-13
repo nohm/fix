@@ -1,0 +1,15 @@
+<% provide(:title, 'Badger - New invoice') %>
+
+<%= bootstrap_form_for :invoice, :url => invoices_path, help: :block do |f| %>
+  <%= f.alert_message "Please fix the errors below." %>
+  
+  <legend>New invoice</legend>
+
+  <%= f.text_area :items %>
+
+  <%= f.hidden_field :company, :value => params[:company] %>
+
+  <%= f.primary 'Save invoice', data: { disable_with: 'Saving...' } %>
+<% end %>
+
+<%= link_to "Back", invoices_path %>

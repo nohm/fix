@@ -7,4 +7,15 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  before_filter :role_list
+  def role_list
+  	unless current_user.nil?
+	    if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin
+	    	@roles = Role.all
+	    else
+	    	@roles = Role.where(name: current_user.roles.first.name)
+	    end
+	end
+  end
+
 end

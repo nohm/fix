@@ -2,8 +2,9 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Maxi" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Maxi" %>">
+    <title><%= content_for?(:title) ? yield(:title) : "Badger" %></title>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Badger" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -20,7 +21,7 @@
     <div id="main" role="main">
       <div class="container">
         <div class="content">
-           <div class="row">
+          <div class="row">
             <div class="span12">
               <%= render 'layouts/messages' %>
               <%= yield %>
@@ -31,5 +32,10 @@
         </div>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
+    <footer>
+      <div class="container">
+        <p class="pull-right muted">&copy; nohm 2013</p>
+      </div>
+    </footer>
   </body>
 </html>

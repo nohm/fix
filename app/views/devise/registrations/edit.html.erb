@@ -1,27 +1,18 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% provide(:title, 'Badger - Edit account') %>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
-<p><%= f.label :name %><br />
-<%= f.text_field :name %></p>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <legend>Edit account</legend>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+  <%= f.text_field :name %>
+  <%= f.email_field :email %>
+  <%= f.password_field :password, :help => '(leave blank if you don\'t want to change it)', :autocomplete => 'off' %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.password_field :current_password, :help => '(we need your current password to confirm your changes)' %>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
-
-  <div><%= f.submit "Update" %></div>
+  <%= f.primary 'Update account', data: { disable_with: 'Updating account...' } %>
 <% end %>
 
-<h3>Cancel my account</h3>
-
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
-
 <%= link_to "Back", :back %>

@@ -1,0 +1,80 @@
+<% provide(:title, 'Badger - Invoice') %>
+
+<legend>Invoice</legend>
+
+<div class="well well-large">
+  <div style="overflow:auto">
+    <div style="width:30%;float:left;margin-left:15%">
+      <strong>Sender</strong>
+      <p>
+        TVA Service Center<br>
+        Twentelaan 2<br>
+        7609RE, Almelo, The Netherlands<br>
+        +31 546 851212
+      </p>
+    </div>
+    <div style="width:35%;float:right">
+      <strong>Adressee</strong>
+      <p>
+        Maxi-Outlet<br>
+        Meineckestra&szlig;e 22<br>
+        10719, Berlin, Germany<br>
+        +49 30 89758777
+      </p>
+    </div>
+  </div>
+  <dl class="dl-horizontal">
+    <dt>ID</dt>
+    <dd><%= @invoice.id %></dd>
+    <dt>Items</dt>
+    <dd><%= @invoice.items.lines.length %></dd>
+    <dt>Date</dt>
+    <dd><%= @invoice.created_at.to_date %></dd>
+  </dl>
+</div>
+
+<div>
+  <% if @entries.length == 0 %>
+    <p>No entries here</p>
+  <% else %>
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Appliance</th>
+          <th>Brand</th>
+          <th>Type</th>
+          <th>Serial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @entries.each do |entry| %>
+          <tr>
+            <td><%= entry.number %></td>
+            <td><%= entry.appliance %></td>
+            <td><%= entry.brand %></td>
+            <td><%= entry.typenum %></td>
+            <td><%= entry.serialnum %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<div class="well well-large">
+  <div style="overflow:auto">
+    <div style="width:30%;float:left;margin-left:15%">
+      <strong>Signature sender</strong>
+      <p style="margin-top:50px">
+        ____________________
+      </p>
+    </div>
+    <div style="width:35%;float:right">
+      <strong>Signature adressee</strong>
+      <p style="margin-top:50px">
+        ____________________
+      </p>
+    </div>
+  </div>
+</div>

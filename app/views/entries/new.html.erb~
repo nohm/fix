@@ -1,0 +1,42 @@
+<% provide(:title, 'New entry') %>
+<h3>New entry</h3>
+
+<%= form_for :entry, url: entries_path do |f| %>
+  <%= render 'layouts/entries_errors_messages' %>
+
+  <p>
+    <%= f.label :number %>
+    <%= f.text_field :number %>
+  </p>
+ 
+  <p>
+    <%= f.label :brand %>
+    <%= f.text_field :brand %>
+  </p>
+
+  <p>
+    <%= f.label :typenum %>
+    <%= f.text_field :typenum %>
+  </p>
+
+  <p>
+    <%= f.label :serialnum %>
+    <%= f.text_field :serialnum %>
+  </p>
+
+  <p>
+    <%= f.label :note %>
+    <%= f.text_field :note %>
+  </p>
+
+  <p>
+    <%= f.label :attach %>
+    <%= f.file_field :attach %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Back', root_url %>

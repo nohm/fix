@@ -11,7 +11,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130908173003) do
+ActiveRecord::Schema.define(version: 20130930135732) do
+
+  create_table "appliances", force: true do |t|
+    t.string   "name"
+    t.string   "abb"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attachments", force: true do |t|
+    t.integer  "entry_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "attach_file_name"
+    t.string   "attach_content_type"
+    t.integer  "attach_file_size"
+    t.datetime "attach_updated_at"
+  end
+
+  add_index "attachments", ["entry_id"], name: "index_attachments_on_entry_id"
+
+  create_table "entries", force: true do |t|
+    t.string   "number"
+    t.string   "brand"
+    t.string   "typenum"
+    t.string   "serialnum"
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "defect"
+    t.string   "ordered"
+    t.integer  "repaired"
+    t.integer  "ready"
+    t.integer  "scrap"
+    t.integer  "accessoires"
+    t.integer  "test"
+    t.integer  "sent"
+    t.datetime "sent_date"
+    t.string   "company"
+    t.integer  "appliance_id"
+  end
+
+  create_table "invoices", force: true do |t|
+    t.string   "items"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "company"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name"

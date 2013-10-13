@@ -1,0 +1,32 @@
+<% provide(:title, 'Badger - Appliance panel') %>
+<legend>Entries</legend>
+
+<% if @appliances.length == 0 %>
+  <p>No appliances here</p>
+<% else %>
+	<div class="table-responsive">
+	<table class="table table-condensed table-striped">
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Abbrevation</th>
+	      <th style="width:17px;"></th>
+	      <th style="width:17px;"></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  <% @appliances.each do |appliance| %>
+	    <tr>
+	      <td><%= appliance.name %></td>
+	      <td><%= appliance.abb %></td>
+	    </tr>
+	  <% end %>
+	  </tbody>
+	</table>
+	</div>
+
+    <%= paginate @appliances %>
+<% end %>
+<div>
+  <%= link_to("Add appliance", new_appliance_path, :class => 'btn btn-mini btn-primary') %>
+</div>

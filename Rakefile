@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Maxi::Application.load_tasks
+Badger::Application.load_tasks

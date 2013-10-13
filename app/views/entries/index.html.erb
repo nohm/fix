@@ -1,0 +1,106 @@
+<% provide(:title, 'Badger - Entries for ' + params[:company]) %>
+
+<legend>Entries for <%= params[:company] %></legend>
+  <div>
+    <% if @entries.length == 0 %>
+      <p>No entries here</p>
+    <% else %>
+      <table class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Appliance</th>
+            <th>Brand</th>
+            <th>Type</th>
+            <th>Serial</th>
+            <th>Sent?</th>
+            <th style="width:17px;"></th>
+            <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+              <th style="width:17px;"></th>
+              <th style="width:17px;"></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody class="searchable">
+          <% @entries.each do |entry| %>
+            <tr>
+              <td><%= @appliances[entry.appliance_id - 1].abb + entry.number %></td>
+              <td><%= @appliances[entry.appliance_id - 1].name %></td>
+              <td><%= entry.brand %></td>
+              <td><%= entry.typenum %></td>
+              <td><%= entry.serialnum %></td>
+              <td>
+                <% if entry.sent == 1 %>
+                  <p class="label label-success" style="margin:0">Yes - <%= entry.sent_date.to_date %></p>
+                <% else %>
+                  <p class="label label-important" style="margin:0">No</p>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to(entry_path(entry, company: params[:company])) do %>
+                  <i class="icon-search"></i>
+                <% end %>
+              </td>
+              <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+                <td>
+                  <%= link_to(edit_entry_path(entry, company: params[:company])) do %>
+                    <i class="icon-pencil"></i>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to(entry_path(entry, company: params[:company]), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
+                    <i class="icon-remove"></i>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <% if @pagination %>
+        <%= paginate @entries %>
+      <% end %>
+    <% end %>
+
+    <% unless @pagination %>
+      <%= link_to('Back to overview', entries_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
+      <br>
+      <br>
+    <% end %>
+  </div>
+  <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+    <div>
+      <%= link_to("Add entry", new_entry_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
+      <br>
+      <br>
+      <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+        <p>  
+          <%= text_field_tag :searchnum, params[:searchnum], :placeholder => 'Search number..' %>
+          <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+          <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+        </p>  
+      <% end %>
+      <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+        <p>  
+          <%= text_field_tag :searchbrand, params[:searchbrand], :placeholder => 'Search brand..' %>
+          <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+          <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+        </p>  
+      <% end %>
+      <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+        <p>  
+          <%= text_field_tag :searchtype, params[:searchtype], :placeholder => 'Search type..' %>
+          <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+          <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+        </p>  
+      <% end %>
+      <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+        <p>  
+          <%= text_field_tag :searchserial, params[:searchserial], :placeholder => 'Search serial..' %>
+          <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+          <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+        </p>  
+      <% end %>
+    </div>
+  <% end %>

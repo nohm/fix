@@ -1,0 +1,120 @@
+<% provide(:title, 'Badger - Entry overview') %>
+<legend>Entry</legend>
+
+<h2><%= @appliance.abb + @entry.number %></h2>
+<h3><%= @entry.brand + ' ' + @entry.typenum + ' ' + @appliance.name %></h3>
+
+<div class="row">
+  <div class="span6">
+    <div class="table-responsive">
+      <table class="table table-condensed table-striped">
+
+        <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+          <tr>
+            <td><h6>Barcode</h6></td>
+            <td><%= @entry.get_barcode(@entry.number).html_safe %></td>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td><h6>Serial Number</h6></td>
+          <td><%= @entry.serialnum %></td>
+        </tr>
+        <tr>
+          <td><h6>Sent?</h6></td>
+          <% if @entry.sent == 1 %>
+            <td>Yes - <%= @entry.sent_date.to_date %></td>
+              <% else %>
+            <td>No</td>
+          <% end %>
+        </tr>
+
+        <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+          <tr>
+            <td><h6>Defect</h6></td>
+            <td><%= @entry.defect.presence || '-' %></td>
+          </tr>
+          <tr>
+            <td><h6>Ordered</h6></td>
+            <td><%= @entry.ordered.presence || '-' %></td>
+          </tr>
+          <tr>
+            <td><h6>Test OK</h6></td>
+            <td><%= @entry.test == 1 ? 'Yes' : 'No' %></td>
+          </tr>
+          <tr>
+            <td><h6>Repaired</h6></td>
+            <td><%= @entry.repaired == 1 ? 'Yes' : 'No'  %></td>
+          </tr>
+          <tr>
+            <td><h6>Ready</h6></td>
+            <td><%= @entry.ready == 1 ? 'Yes' : 'No'  %></td>
+          </tr>
+          <tr>
+            <td><h6>Scrap</h6></td>
+            <td><%= @entry.scrap == 1 ? 'Yes' : 'No'  %></td>
+          </tr>
+          <tr>
+            <td><h6>Accessoires</h6></td>
+            <td><%= @entry.accessoires == 1 ? 'Yes' : 'No'  %></td>
+          </tr>
+          <tr>
+            <td><h6>Note</h6></td>
+            <td><%= @entry.note.presence || '-' %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+  <div class="span6">
+    <div class="table-responsive">
+      <table class="table table-condensed table-striped">
+        <tr>
+          <td><h6>Images</h6></td>
+          <td>
+            <% if @entry.attachments.length == 0 %>
+              -
+            <% else %>
+              <% @entry.attachments.each do |attachment| %>
+              <div>
+                <%= link_to(attachment.attach.url) do %>
+                  <%= image_tag attachment.attach.url(:thumb) %>
+                <% end %>
+                <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+                  <br>
+                  <%= link_to 'Delete', [attachment.entry, attachment], method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
+              <% end %>
+              </div>
+            <% end %>
+          </td>
+      </table>
+    </div>
+
+    <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+      <% unless @entry.attachments.length >= 10 %>
+        <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
+          <%= f.file_field :attach, :label => 'Attach image' %>
+          <%= f.primary 'Add image', data: { disable_with: 'Saving...' } %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
+
+<div style="margin-bottom:10px">
+  <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+    <% unless @entry.attachments.length == 1 %>
+      <%= link_to("Create zip", zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
+    <% end %>
+    <%= link_to("Create sticker", sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
+  <% end %>
+  <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+    <%= link_to("Edit entry", edit_entry_path(@entry, company: params[:company]), :class => 'btn btn-mini btn-primary') %>
+    <%= link_to("Delete entry", entry_path(@entry, company: params[:company]), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
+  <% end %>
+</div>
+
+<%= link_to "Back", entries_path(company: params[:company]) %>
