@@ -72,35 +72,45 @@
   <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
     <div>
       <%= link_to("Add entry", new_entry_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
-      <br>
-      <br>
-      <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
-        <p>  
-          <%= text_field_tag :searchnum, params[:searchnum], :placeholder => 'Search number..' %>
-          <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
-          <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
-        </p>  
-      <% end %>
-      <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
-        <p>  
-          <%= text_field_tag :searchbrand, params[:searchbrand], :placeholder => 'Search brand..' %>
-          <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
-          <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
-        </p>  
-      <% end %>
-      <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
-        <p>  
-          <%= text_field_tag :searchtype, params[:searchtype], :placeholder => 'Search type..' %>
-          <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
-          <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
-        </p>  
-      <% end %>
-      <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
-        <p>  
-          <%= text_field_tag :searchserial, params[:searchserial], :placeholder => 'Search serial..' %>
-          <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
-          <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
-        </p>  
-      <% end %>
+      <a data-toggle="modal" href="#search-form" type="button" class="btn btn-mini btn-primary">Search</a>
+      <div id="search-form" class="modal" style="display: none;">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">&#215;</a>
+          <h3>Search</h3>
+        </div>
+        <div class="modal-body">
+          <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+            <p>  
+              <%= text_field_tag :searchnum, params[:searchnum], :placeholder => 'Search number..' %>
+              <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+              <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+            </p>  
+          <% end %>
+          <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+            <p>  
+              <%= text_field_tag :searchbrand, params[:searchbrand], :placeholder => 'Search brand..' %>
+              <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+              <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+            </p>  
+          <% end %>
+          <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+            <p>  
+              <%= text_field_tag :searchtype, params[:searchtype], :placeholder => 'Search type..' %>
+              <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+              <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+            </p>  
+          <% end %>
+          <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+            <p>  
+              <%= text_field_tag :searchserial, params[:searchserial], :placeholder => 'Search serial..' %>
+              <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+              <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+            </p>  
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <a class="btn" data-dismiss="modal" href="#">Close</a>
+        </div>
+      </div>
     </div>
   <% end %>
