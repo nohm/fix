@@ -1,6 +1,5 @@
 class CreateAttachments < ActiveRecord::Migration
   def change
-    drop_table :attachments
     create_table :attachments do |t|
       t.references :entry, index: true
       t.string :attachment_file_name

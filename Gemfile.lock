@@ -39,6 +39,10 @@ GEM
     bootstrap_form (1.0.0)
     builder (3.1.4)
     cancan (1.6.10)
+    capistrano (3.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 0.0.23)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -86,6 +90,9 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.0)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.7.0)
     orm_adapter (0.4.0)
     paperclip (3.5.1)
       activemodel (>= 3.0.0)
@@ -132,6 +139,12 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.8)
+    sshkit (1.0.0)
+      net-scp
+      net-ssh
+      term-ansicolor
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -139,6 +152,7 @@ GEM
     thread_safe (0.1.2)
       atomic
     tilt (1.4.1)
+    tins (0.12.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -161,6 +175,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap_form
   cancan
+  capistrano
   coffee-rails (~> 4.0.0)
   devise
   figaro
