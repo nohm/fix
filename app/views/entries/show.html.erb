@@ -97,6 +97,7 @@
         <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
           <%= f.file_field :attach, :label => 'Attach image' %>
           <%= f.primary 'Add image', data: { disable_with: 'Saving...' } %>
+          <%= f.hidden_field :company, :value => params[:company] %>
         <% end %>
       <% end %>
     <% end %>
