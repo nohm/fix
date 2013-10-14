@@ -26,4 +26,35 @@ class Entry < ActiveRecord::Base
       end
     end
   end
+
+  def get_status
+    status = 'New'
+
+    if self.test == 1
+      status = 'Tested'
+    end
+
+    if self.repaired == 1
+      status = 'Repaired'
+    end
+
+    if self.ready == 1
+      status = 'Ready'
+    end
+
+    if self.scrap == 1
+      status = 'Scrap'
+    end
+
+    if self.accessoires == 1
+      status = 'Waiting for accessoires'
+    end
+
+    if self.sent == 1
+      status = 'Sent ' + self.sent_date.to_date.to_s
+    end
+
+    # return status
+    status
+  end
 end

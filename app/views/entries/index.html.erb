@@ -13,7 +13,7 @@
             <th>Brand</th>
             <th>Type</th>
             <th>Serial</th>
-            <th>Sent?</th>
+            <th>Status</th>
             <th style="width:17px;"></th>
             <% if current_user.has_role? :manager or current_user.has_role? :admin %>
               <th style="width:17px;"></th>
@@ -29,13 +29,7 @@
               <td><%= entry.brand %></td>
               <td><%= entry.typenum %></td>
               <td><%= entry.serialnum %></td>
-              <td>
-                <% if entry.sent == 1 %>
-                  <p class="label label-success" style="margin:0">Yes - <%= entry.sent_date.to_date %></p>
-                <% else %>
-                  <p class="label label-important" style="margin:0">No</p>
-                <% end %>
-              </td>
+              <td><%= entry.get_status %></td>
               <td>
                 <%= link_to(entry_path(entry, company: params[:company])) do %>
                   <i class="icon-search"></i>
