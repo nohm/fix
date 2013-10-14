@@ -42,7 +42,8 @@ class EntriesController < ApplicationController
 
   def sticker
     @entry = Entry.find(params[:id])
-    render inline: '<div style="margin-top:-60px;"><h1 style="float:left;margin-left:5px;margin-right:5px;margin-top:20px"><%= @entry.number %></h1><p style="float:left"><%= @entry.get_barcode(@entry.number).html_safe %></p></div>'
+    @appliance = Appliance.all[@entry.appliance_id - 1]
+    render inline: '<div><h1 style="float:left;margin-left:5px;margin-right:5px;margin-top:20px"><%= @appliance.abb + @entry.number.to_s %></h1><p style="float:left"><%= @entry.get_barcode(@appliance.abb + @entry.number.to_s).html_safe %></p></div>'
   end
 
   def edit

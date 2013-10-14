@@ -12,7 +12,7 @@
         <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
           <tr>
             <td><h6>Barcode</h6></td>
-            <td><%= @entry.get_barcode(@entry.number).html_safe %></td>
+            <td><%= @entry.get_barcode(@appliance.abb + @entry.number.to_s).html_safe %></td>
           </tr>
         <% end %>
 
