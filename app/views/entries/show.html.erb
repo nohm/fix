@@ -83,7 +83,7 @@
                 <% end %>
                 <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
                   <br>
-                  <%= link_to 'Delete', [attachment.entry, attachment, company: params[:company]], method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <%= link_to 'Delete', entry_attachment_path(@entry.id, attachment, company: params[:company]), method: :delete, data: { confirm: 'Are you sure?' } %>
                 <% end %>
               <% end %>
               </div>
@@ -96,8 +96,8 @@
       <% unless @entry.attachments.length >= 10 %>
         <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
           <%= f.file_field :attach, :label => 'Attach image' %>
-          <%= f.primary 'Add image', data: { disable_with: 'Saving...' } %>
           <%= f.hidden_field :company, :value => params[:company] %>
+          <%= f.primary 'Add image', data: { disable_with: 'Saving...' } %>
         <% end %>
       <% end %>
     <% end %>

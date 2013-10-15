@@ -10,6 +10,6 @@ class AttachmentsController < ApplicationController
     @attachment = @entry.attachments.find(params[:id])
     @attachment.attach.destroy
     @attachment.destroy
-    redirect_to entry_path(@entry, company: params[:attachment][:company])
+    redirect_to entry_path(@entry, company: params[:company])
   end
 end
