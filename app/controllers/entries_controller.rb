@@ -34,9 +34,10 @@ class EntriesController < ApplicationController
 
   def zip
     @entry = Entry.find(params[:id])
+    @appliance = Appliance.all[@entry.appliance_id - 1]
     temp_file  = Tempfile.new("#{@entry.id}-#{@entry.number}")
     @entry.zip_images(temp_file)
-    send_file temp_file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@entry.number}-images.zip"
+    send_file temp_file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@appliance.abb + @entry.number.to_s}-images.zip"
     temp_file.close
   end
 

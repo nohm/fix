@@ -24,7 +24,7 @@
               <td><%= invoice.items.lines.length %></td>
               <td><%= invoice.created_at.to_date %></td>
                 <td>
-                  <%= link_to(invoice) do %>
+                  <%= link_to(invoice_path(invoice, company: params[:company])) do %>
                     <i class="icon-search"></i>
                   <% end %>
                 </td>

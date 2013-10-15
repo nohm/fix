@@ -13,6 +13,7 @@ class InvoicesController < ApplicationController
       @entries.push(@entry)
     end
     @appliances = Appliance.all
+    @company_data = eval(ENV["COMPANIES"])[Role.where(name: params[:company]).take.id - 5]
   end
 
   def index
