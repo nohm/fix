@@ -1,4 +1,5 @@
 class AttachmentsController < ApplicationController
+
   def create
     @entry = Entry.find(params[:entry_id])
     @attachment = @entry.attachments.create(params[:attachment].permit(:attach))

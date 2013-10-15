@@ -9,7 +9,7 @@
     <div class="table-responsive">
       <table class="table table-condensed table-striped">
 
-        <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+        <% if can? :create, Entry %>
           <tr>
             <td><h6>Barcode</h6></td>
             <td><%= @entry.get_barcode(@appliance.abb + @entry.number.to_s).html_safe %></td>
@@ -29,7 +29,7 @@
           <% end %>
         </tr>
 
-        <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+        <% if can? :create, Entry %>
           <tr>
             <td><h6>Defect</h6></td>
             <td><%= @entry.defect.presence || '-' %></td>
@@ -81,7 +81,7 @@
                 <%= link_to(attachment.attach.url) do %>
                   <%= image_tag attachment.attach.url(:thumb) %>
                 <% end %>
-                <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+                <% if can? :destroy, Attachment %>
                   <br>
                   <%= link_to 'Delete', entry_attachment_path(@entry.id, attachment, company: params[:company]), method: :delete, data: { confirm: 'Are you sure?' } %>
                 <% end %>
@@ -92,7 +92,7 @@
       </table>
     </div>
 
-    <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+    <% if can? :create, Attachment %>
       <% unless @entry.attachments.length >= 10 %>
         <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
           <%= f.file_field :attach, :label => 'Attach image' %>
@@ -106,16 +106,16 @@
 </div>
 
 <div style="margin-bottom:10px">
-  <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
-    <% unless @entry.attachments.length == 1 %>
-      <%= link_to("Create zip", zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
-    <% end %>
+  <% unless @entry.attachments.length == 0 %>
+    <%= link_to("Create zip", zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
+  <% end %>
+  <% if can? :create, Entry %>
     <%= link_to("Create sticker", sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
   <% end %>
-  <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+  <% if can? :edit, Entry %>
     <%= link_to("Edit entry", edit_entry_path(@entry, company: params[:company]), :class => 'btn btn-mini btn-primary') %>
   <% end %>
-  <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+  <% if can? :destroy, Entry %>
     <%= link_to("Delete entry", entry_path(@entry, company: params[:company]), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
   <% end %>
 </div>

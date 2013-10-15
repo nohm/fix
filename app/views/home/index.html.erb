@@ -1,13 +1,13 @@
 <div class="hero-unit center">
   <h1>Badger</h1>
   <p>Welcome to this data storage.</p>
-  <% if current_user.nil? %>
+  <% unless user_signed_in? %>
     <p>
       <%= link_to("Login", new_user_session_path, :class => 'btn btn-primarybtn-large') %>
       <%= link_to("Sign up", new_user_registration_path, :class => 'btn btn-primarybtn-large') %>
     </p>
   <% else %>
-    <% unless current_user.has_role? :user %>
+    <% if can? :see_data, Entry %>
       <p>These links are also in the top right menu.</p>
       <% @roles.each do |role| %>
         <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' %>

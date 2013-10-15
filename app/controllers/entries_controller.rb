@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
+
   def index
-    if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin or current_user.roles.first.name == params[:company]
+    if can? :create, Entry or current_user.roles.first.name == params[:company]
       if params[:searchnum]
         begin
           @entries = Entry.where('appliance_id LIKE ? AND number LIKE ? AND company = ?', Appliance.where(abb: params[:search][0]).first.id, params[:searchnum][1..-1].to_i, params[:company])
@@ -18,6 +19,8 @@ class EntriesController < ApplicationController
         @entries = Entry.where(company: params[:company]).page(params[:page]).per(25)
         @pagination = true
       end
+    else
+      redirect_to root_path, :alert => "You\'re not authorized for this"
     end
     @appliances = Appliance.all
   end

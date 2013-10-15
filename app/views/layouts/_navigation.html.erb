@@ -13,23 +13,25 @@
           </li>
           <li class="divider"></li>
 
-          <% @roles.each do |role| %>
-            <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' %>
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#"><%= role.name.titleize %></a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <%= link_to(entries_path(company: role.name)) do %>
-                      <i class="icon-list"></i>Entries
-                    <% end %>
-                  </li>
-                  <li>
-                    <%= link_to(invoices_path(company: role.name)) do %>
-                      <i class="icon-briefcase"></i>Invoices
-                    <% end %>
-                  </li>
-                </ul>
-              </li>
+          <% if can? :see_data, Entry %>
+            <% @roles.each do |role| %>
+              <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' %>
+                <li class="dropdown-submenu">
+                  <a tabindex="-1" href="#"><%= role.name.titleize %></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <%= link_to(entries_path(company: role.name)) do %>
+                        <i class="icon-list"></i>Entries
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to(invoices_path(company: role.name)) do %>
+                        <i class="icon-briefcase"></i>Invoices
+                      <% end %>
+                    </li>
+                  </ul>
+                </li>
+              <% end %>
             <% end %>
           <% end %>
 
@@ -40,11 +42,15 @@
               <i class="icon-cog"></i>Edit account
             <% end %>
           </li>
-          <% if current_user.has_role? :admin %>
+          <% if can? :manage, User %>
             <li>
               <%= link_to(users_path) do %>
                 <i class="icon-user"></i>User panel
               <% end %>
+            </li>
+          <% end %>
+          <% if can? :manage, Appliance %>
+            <li>
               <%= link_to(appliances_path) do %>
                 <i class="icon-file"></i>Appliance panel
               <% end %>

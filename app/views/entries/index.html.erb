@@ -15,8 +15,10 @@
             <th>Serial</th>
             <th>Status</th>
             <th style="width:17px;"></th>
-            <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+            <% if can? :edit, Entry %>
               <th style="width:17px;"></th>
+            <% end %>
+            <% if can? :destroy, Entry %>
               <th style="width:17px;"></th>
             <% end %>
           </tr>
@@ -35,14 +37,14 @@
                   <i class="icon-search"></i>
                 <% end %>
               </td>
-              <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+              <% if can? :edit, Entry %>
                 <td>
                   <%= link_to(edit_entry_path(entry, company: params[:company])) do %>
                     <i class="icon-pencil"></i>
                   <% end %>
                 </td>
               <% end %>
-              <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+              <% if can? :destroy, Entry %>
                 <td>
                   <%= link_to(entry_path(entry, company: params[:company]), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
                     <i class="icon-remove"></i>
@@ -65,10 +67,11 @@
       <br>
     <% end %>
   </div>
-  <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
-    <div>
-      <%= link_to("Add entry", new_entry_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
-      <a data-toggle="modal" href="#search-form" type="button" class="btn btn-mini btn-primary">Search</a>
+  <div>
+  <% if can? :create, Entry %>
+    <%= link_to("Add entry", new_entry_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
+  <% end %>
+    <a data-toggle="modal" href="#search-form" type="button" class="btn btn-mini btn-primary">Search</a>
       <div id="search-form" class="modal" style="display: none;">
         <div class="modal-header">
           <a class="close" data-dismiss="modal">&#215;</a>
@@ -109,4 +112,3 @@
         </div>
       </div>
     </div>
-  <% end %>

@@ -12,7 +12,7 @@
             <th>Items</th>
             <th>Date</th>
             <th style="width:17px;"></th>
-            <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+            <% if can? :destroy, Invoice %>
               <th style="width:17px;"></th>
             <% end %>
           </tr>
@@ -28,7 +28,7 @@
                     <i class="icon-search"></i>
                   <% end %>
                 </td>
-                <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+                <% if can? :destroy, Invoice %>
                 <td>
                   <%= link_to(invoice_path(invoice, company: params[:company]), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
                     <i class="icon-remove"></i>
@@ -43,7 +43,7 @@
 
     <%= paginate @invoices %>
   </div>
-<% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+<% if can? :create, Invoice %>
   <div>
     <%= link_to("Add invoice", new_invoice_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
   </div>
