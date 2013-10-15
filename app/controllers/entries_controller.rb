@@ -76,7 +76,7 @@ class EntriesController < ApplicationController
         redirect_to entries_path(company: params[:entry][:company]), :notice => "Entry updated."
       else
         @appliance_names = Appliance.pluck(:name, :id)
-        render 'edit'
+        render 'edit', company: params[:invoice][:company]
       end
     else
       update_all(params[:entry][:numbers])
@@ -103,7 +103,7 @@ class EntriesController < ApplicationController
       redirect_to entries_path(company: params[:entry][:company]), :notice => "Entry added."
     else
       @appliance_names = Appliance.pluck(:name, :id)
-      render 'new'
+      render 'new', company: params[:invoice][:company]
     end
   end
 
