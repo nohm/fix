@@ -114,13 +114,4 @@ class EntriesController < ApplicationController
     redirect_to entries_path(company: company), :notice => "Entry deleted."
   end
 
-  def update_all(numbers)
-    numbers.lines do |line|
-      num = line.tr("\n","").tr("\r","")
-      @entry = Entry.find_by(number: num)
-      @entry.update_attribute(:sent, '1')
-    end
-    redirect_to sendlist_path(:entries => numbers)
-  end
-
 end

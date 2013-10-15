@@ -16,6 +16,7 @@
     <div style="width:35%;float:right">
       <strong>Adressee</strong>
       <p>
+        <strong>THIS SHOULD BE COMPANY BASED</strong><br>
         Maxi-Outlet<br>
         Meineckestra&szlig;e 22<br>
         10719, Berlin, Germany<br>
@@ -50,8 +51,8 @@
       <tbody>
         <% @entries.each do |entry| %>
           <tr>
-            <td><%= entry.number %></td>
-            <td><%= entry.appliance %></td>
+            <td><%= @appliances[entry.appliance_id - 1].abb + entry.number.to_s %></td>
+            <td><%= @appliances[entry.appliance_id - 1].name %></td>
             <td><%= entry.brand %></td>
             <td><%= entry.typenum %></td>
             <td><%= entry.serialnum %></td>

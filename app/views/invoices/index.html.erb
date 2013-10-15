@@ -30,7 +30,7 @@
                 </td>
                 <% if current_user.has_role? :manager or current_user.has_role? :admin %>
                 <td>
-                  <%= link_to(invoice_path(invoice), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
+                  <%= link_to(invoice_path(invoice, company: params[:company]), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
                     <i class="icon-remove"></i>
                   <% end %>
                 </td>
