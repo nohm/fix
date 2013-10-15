@@ -1,5 +1,10 @@
 <%= link_to "Badger", root_path, :class => 'brand' %>
 
+<script type="text/javascript">
+  $('.dropdown-menu .dropdown-submenu a[data-toggle="dropdown-submenu"]').click(function (e) {                 
+    e.stopPropagation();
+  });
+</script>
 
 <% if user_signed_in? %>
   <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
