@@ -62,3 +62,7 @@ footer {
   margin-top: 45px;
   @include box_sizing;
 }
+
+.dropdown-backdrop {
+  position: static;
+}
