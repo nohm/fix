@@ -83,7 +83,7 @@
                 <% end %>
                 <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
                   <br>
-                  <%= link_to 'Delete', [attachment.entry, attachment], method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <%= link_to 'Delete', [attachment.entry, attachment, company: params[:company]], method: :delete, data: { confirm: 'Are you sure?' } %>
                 <% end %>
               <% end %>
               </div>
@@ -112,8 +112,10 @@
     <% end %>
     <%= link_to("Create sticker", sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
   <% end %>
+  <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
+    <%= link_to("Edit entry", edit_entry_path(@entry, company: params[:company]), :class => 'btn btn-mini btn-primary') %>4
+  <% end %>
   <% if current_user.has_role? :manager or current_user.has_role? :admin %>
-    <%= link_to("Edit entry", edit_entry_path(@entry, company: params[:company]), :class => 'btn btn-mini btn-primary') %>
     <%= link_to("Delete entry", entry_path(@entry, company: params[:company]), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
   <% end %>
 </div>

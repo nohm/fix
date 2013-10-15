@@ -35,12 +35,14 @@
                   <i class="icon-search"></i>
                 <% end %>
               </td>
-              <% if current_user.has_role? :manager or current_user.has_role? :admin %>
+              <% if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin %>
                 <td>
                   <%= link_to(edit_entry_path(entry, company: params[:company])) do %>
                     <i class="icon-pencil"></i>
                   <% end %>
                 </td>
+              <% end %>
+              <% if current_user.has_role? :manager or current_user.has_role? :admin %>
                 <td>
                   <%= link_to(entry_path(entry, company: params[:company]), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
                     <i class="icon-remove"></i>
