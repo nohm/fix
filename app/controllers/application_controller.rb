@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 	    else
 	    	@roles = Role.where(name: current_user.roles.first.name)
 	    end
-	end
+	  end
   end
 
 end

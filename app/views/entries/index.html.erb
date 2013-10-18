@@ -1,6 +1,6 @@
-<% provide(:title, 'Badger - Entries for ' + params[:company]) %>
+<% provide(:title, 'Badger - Entries for ' + session[:company]) %>
 
-<legend>Entries for <%= params[:company] %></legend>
+<legend>Entries for <%= session[:company] %></legend>
   <div>
     <% if @entries.length == 0 %>
       <p>No entries here</p>
@@ -33,20 +33,20 @@
               <td><%= entry.serialnum %></td>
               <td><%= entry.get_status %></td>
               <td>
-                <%= link_to(entry_path(entry, company: params[:company])) do %>
+                <%= link_to entry_path(entry) do %>
                   <i class="icon-search"></i>
                 <% end %>
               </td>
               <% if can? :edit, Entry %>
                 <td>
-                  <%= link_to(edit_entry_path(entry, company: params[:company])) do %>
+                  <%= link_to edit_entry_path(entry) do %>
                     <i class="icon-pencil"></i>
                   <% end %>
                 </td>
               <% end %>
               <% if can? :destroy, Entry %>
                 <td>
-                  <%= link_to(entry_path(entry, company: params[:company]), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
+                  <%= link_to(entry_path(entry), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
                     <i class="icon-remove"></i>
                   <% end %>
                 </td>
@@ -62,14 +62,14 @@
     <% end %>
 
     <% unless @pagination %>
-      <%= link_to('Back to overview', entries_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
+      <%= link_to('Back to overview', entries_path, :class => 'btn btn-mini btn-primary') %>
       <br>
       <br>
     <% end %>
   </div>
   <div>
   <% if can? :create, Entry %>
-    <%= link_to("Add entry", new_entry_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
+    <%= link_to("Add entry", new_entry_path, :class => 'btn btn-mini btn-primary') %>
   <% end %>
     <a data-toggle="modal" href="#search-form" type="button" class="btn btn-mini btn-primary">Search</a>
       <div id="search-form" class="modal" style="display: none;">

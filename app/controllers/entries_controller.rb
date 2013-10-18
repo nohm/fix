@@ -1,22 +1,25 @@
 class EntriesController < ApplicationController
 
   def index
-    if can? :create, Entry or current_user.roles.first.name == params[:company]
+    unless params[:company].nil?
+      session[:company] = params[:company]
+    end
+    if !session[:company].nil? or can? :create, Entry or current_user.roles.first.name == session[:company]
       if params[:searchnum]
         begin
-          @entries = Entry.where('appliance_id LIKE ? AND number LIKE ? AND company = ?', Appliance.where(abb: params[:search][0]).first.id, params[:searchnum][1..-1].to_i, params[:company])
-          redirect_to entry_path(@entries.first, company: params[:company])
+          @entries = Entry.where('appliance_id LIKE ? AND number LIKE ? AND company = ?', Appliance.where(abb: params[:search][0]).first.id, params[:searchnum][1..-1].to_i, session[:company])
+          redirect_to entry_path(@entries.first)
         rescue
-          redirect_to entries_path(company: params[:company]), :alert => "Entry not found with number #{params[:searchnum]}."
+          redirect_to entries_path, :alert => "Entry not found with number #{params[:searchnum]}."
         end
       elsif params[:searchbrand]
-        @entries = Entry.where('brand LIKE ? AND company = ?', params[:searchbrand], params[:company])
+        @entries = Entry.where('brand LIKE ? AND company = ?', params[:searchbrand], session[:company])
       elsif params[:searchtype]
-        @entries = Entry.where('typenum LIKE ? AND company = ?', params[:searchtype], params[:company])
+        @entries = Entry.where('typenum LIKE ? AND company = ?', params[:searchtype], session[:company])
       elsif params[:searchserial]
-        @entries = Entry.where('serialnum LIKE ? AND company = ?', params[:searchserial], params[:company])
+        @entries = Entry.where('serialnum LIKE ? AND company = ?', params[:searchserial], session[:company])
       else
-        @entries = Entry.where(company: params[:company]).page(params[:page]).per(25)
+        @entries = Entry.where(company: session[:company]).page(params[:page]).per(25)
         @pagination = true
       end
     else
@@ -77,10 +80,10 @@ class EntriesController < ApplicationController
       end
       
       if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
-        redirect_to entries_path(company: params[:entry][:company]), :notice => "Entry updated."
+        redirect_to entries_path, :notice => "Entry updated."
       else
         @appliance_names = Appliance.pluck(:name, :id)
-        render 'edit', company: params[:entry][:company]
+        render 'edit'
       end
     else
       update_all(params[:entry][:numbers])
@@ -104,18 +107,17 @@ class EntriesController < ApplicationController
     @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
     
     if @entry.save
-      redirect_to entries_path(company: params[:entry][:company]), :notice => "Entry added."
+      redirect_to entries_path, :notice => "Entry added."
     else
       @appliance_names = Appliance.pluck(:name, :id)
-      render 'new', company: params[:entry][:company]
+      render 'new'
     end
   end
 
   def destroy
     entry = Entry.find(params[:id])
-    company = entry.company
     entry.destroy
-    redirect_to entries_path(company: company), :notice => "Entry deleted."
+    redirect_to entries_path, :notice => "Entry deleted."
   end
 
 end

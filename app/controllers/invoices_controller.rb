@@ -14,12 +14,17 @@ class InvoicesController < ApplicationController
       @entries.push(@entry)
     end
     @appliances = Appliance.all
-    @company_data = eval(ENV["COMPANIES"])[Role.where(name: params[:company]).take.id - 5]
+    @company_data = eval(ENV["COMPANIES"])[Role.where(name: session[:company]).take.id - 5]
   end
 
   def index
-  	if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin or current_user.roles.first.name == params[:company]
-      @invoices = Invoice.where(company: params[:company]).page(params[:page]).per(25)
+    unless params[:company].nil?
+      session[:company] = params[:company]
+    end
+  	if !session[:company].nil? or can? :create, Invoice or current_user.roles.first.name == session[:company]
+      @invoices = Invoice.where(company: session[:company]).page(params[:page]).per(25)
+    else
+      redirect_to root_path, :alert => "You\'re not authorized for this"
     end
   end
 
@@ -33,7 +38,7 @@ class InvoicesController < ApplicationController
       entry.update_attribute(:sent_date, "")
     end
     invoice.destroy
-    redirect_to invoices_path(company: params[:company]), :notice => "Invoice deleted."
+    redirect_to invoices_path, :notice => "Invoice deleted."
   end
 
   def create
@@ -59,7 +64,7 @@ class InvoicesController < ApplicationController
     end
 
     if non_existing.length == 0 and already_sent.length == 0 and wrong_comp.length == 0 and @invoice.save
-      redirect_to invoices_path(company: params[:invoice][:company]), :notice => "Invoice added."
+      redirect_to invoices_path, :notice => "Invoice added."
     else
       non_existing.each do |item|
       	flash["alert#{item}"] = "#{item} doesn't exist!"
@@ -68,9 +73,9 @@ class InvoicesController < ApplicationController
       	flash["alert#{item}"] = "#{item} was already sent!"
       end
       wrong_comp.each do |item|
-        flash["alert#{item}"] = "#{item} doesn't belong to #{params[:invoice][:company]}!"
+        flash["alert#{item}"] = "#{item} doesn't belong to #{session[:company]}!"
       end
-      render 'new', company: params[:invoice][:company]
+      render 'new'
     end
   end
 end

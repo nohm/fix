@@ -83,7 +83,7 @@
                 <% end %>
                 <% if can? :destroy, Attachment %>
                   <br>
-                  <%= link_to 'Delete', entry_attachment_path(@entry.id, attachment, company: params[:company]), method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <%= link_to 'Delete', entry_attachment_path(@entry.id, attachment), method: :delete, data: { confirm: 'Are you sure?' } %>
                 <% end %>
               <% end %>
               </div>
@@ -96,7 +96,6 @@
       <% unless @entry.attachments.length >= 10 %>
         <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
           <%= f.file_field :attach, :label => 'Attach image' %>
-          <%= f.hidden_field :company, :value => params[:company] %>
           <%= f.primary 'Add image', data: { disable_with: 'Saving...' } %>
         <% end %>
       <% end %>
@@ -113,11 +112,11 @@
     <%= link_to("Create sticker", sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
   <% end %>
   <% if can? :edit, Entry %>
-    <%= link_to("Edit entry", edit_entry_path(@entry, company: params[:company]), :class => 'btn btn-mini btn-primary') %>
+    <%= link_to("Edit entry", edit_entry_path(@entry), :class => 'btn btn-mini btn-primary') %>
   <% end %>
   <% if can? :destroy, Entry %>
-    <%= link_to("Delete entry", entry_path(@entry, company: params[:company]), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
+    <%= link_to("Delete entry", entry_path(@entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
   <% end %>
 </div>
 
-<%= link_to "Back", entries_path(company: params[:company]) %>
+<%= link_to "Back", entries_path %>

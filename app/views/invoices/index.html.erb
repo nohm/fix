@@ -1,6 +1,6 @@
-<% provide(:title, 'Badger - Invoices for ' + params[:company]) %>
+<% provide(:title, 'Badger - Invoices for ' + session[:company]) %>
 
-<legend>Invoices for <%= params[:company] %></legend>
+<legend>Invoices for <%= session[:company] %></legend>
   <div>
     <% if @invoices.length == 0 %>
       <p>No invoices here</p>
@@ -24,13 +24,13 @@
               <td><%= invoice.items.lines.length %></td>
               <td><%= invoice.created_at.to_date %></td>
                 <td>
-                  <%= link_to(invoice_path(invoice, company: params[:company])) do %>
+                  <%= link_to invoice_path(invoice) do %>
                     <i class="icon-search"></i>
                   <% end %>
                 </td>
                 <% if can? :destroy, Invoice %>
                 <td>
-                  <%= link_to(invoice_path(invoice, company: params[:company]), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
+                  <%= link_to(invoice_path(invoice), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
                     <i class="icon-remove"></i>
                   <% end %>
                 </td>
@@ -45,6 +45,6 @@
   </div>
 <% if can? :create, Invoice %>
   <div>
-    <%= link_to("Add invoice", new_invoice_path(company: params[:company]), :class => 'btn btn-mini btn-primary') %>
+    <%= link_to("Add invoice", new_invoice_path, :class => 'btn btn-mini btn-primary') %>
   </div>
 <% end %>

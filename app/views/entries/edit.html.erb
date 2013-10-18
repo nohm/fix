@@ -31,11 +31,11 @@
 
   <%= f.text_area :note %>
 
-  <%= f.hidden_field :company, :value => params[:company] %>
+  <%= f.hidden_field :company, :value => session[:company] %>
 
   <p>First save the entry, then show it and there you can add images.</p>
  
   <%= f.primary 'Update entry', data: { disable_with: 'Saving...' } %>
 <% end %>
  
-<%= link_to 'Back', entries_path(company: params[:company]) %>
+<%= link_to 'Back', entries_path %>
