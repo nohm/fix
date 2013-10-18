@@ -62,10 +62,10 @@ class EntriesController < ApplicationController
     unless params[:id] == 'all'
       @entry = Entry.find(params[:id])
 
-      unless params[:entry][:sent].to_i == 1 and @entry.sent == 0
-        params[:entry][:sent_date] = ""
-      else
+      if params[:entry][:sent].to_i == 1 and @entry.sent == 0
         params[:entry][:sent_date] = DateTime.now
+      elsif params[:entry][:sent].to_i == 0 and @entry.sent == 0
+        params[:entry][:sent_date] = ""
       end
 
       if @entry.appliance_id == params[:entry][:appliance_id].to_i
