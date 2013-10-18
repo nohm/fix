@@ -4,7 +4,7 @@
 
   <legend>Sign in</legend>
 
-  <%= f.text_field :login, :autofocus => true %>
+  <%= f.email_field :email, :autofocus => true %>
   <%= f.password_field :password %>
 
   <% if devise_mapping.rememberable? -%>
