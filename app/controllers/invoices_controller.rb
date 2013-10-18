@@ -21,7 +21,7 @@ class InvoicesController < ApplicationController
     unless params[:company].nil?
       session[:company] = params[:company]
     end
-  	if !session[:company].nil? or can? :create, Invoice or current_user.roles.first.name == session[:company]
+  	if !session[:company].nil? and (can? :create, Entry or current_user.roles.first.name == session[:company])
       @invoices = Invoice.where(company: session[:company]).page(params[:page]).per(25)
     else
       redirect_to root_path, :alert => "You\'re not authorized for this"

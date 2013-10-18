@@ -7,6 +7,14 @@ class Entry < ActiveRecord::Base
   validates :typenum, presence: true
   validates :serialnum, presence: true
 
+  before_save :format_input
+
+  def format_input
+    self.brand = self.brand.titleize #stupid missing bang
+    self.typenum.upcase!
+    self.serialnum.upcase!
+  end
+
   def get_barcode(number)
     require 'barby'
     require 'barby/barcode/code_128'

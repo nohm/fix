@@ -4,7 +4,7 @@ class EntriesController < ApplicationController
     unless params[:company].nil?
       session[:company] = params[:company]
     end
-    if !session[:company].nil? or can? :create, Entry or current_user.roles.first.name == session[:company]
+    if !session[:company].nil? and (can? :create, Entry or current_user.roles.first.name == session[:company])
       if params[:searchnum]
         begin
           @entries = Entry.where('appliance_id LIKE ? AND number LIKE ? AND company = ?', Appliance.where(abb: params[:search][0]).first.id, params[:searchnum][1..-1].to_i, session[:company])
