@@ -94,10 +94,22 @@
 
     <% if can? :create, Attachment %>
       <% unless @entry.attachments.length >= 10 %>
-        <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
-          <%= f.file_field :attach, :label => 'Attach image' %>
-          <%= f.primary 'Add image', data: { disable_with: 'Saving...' } %>
-        <% end %>
+        <a data-toggle="modal" href="#attachment-form" type="button" class="btn btn-mini btn-primary">Add attachment</a>
+        <div id="attachment-form" class="modal" style="display: none;">
+          <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
+            <div class="modal-header">
+              <a class="close" data-dismiss="modal">&#215;</a>
+              <h3>Add attachment</h3>
+            </div>
+            <div class="modal-body">
+                <%= f.file_field :attach, :label => 'Select a file..' %>
+            </div>
+            <div class="modal-footer">
+            <%= f.primary 'Add image', data: { disable_with: 'Saving...' } %>
+              <a class="btn" data-dismiss="modal" href="#">Close</a>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     <% end %>
 
