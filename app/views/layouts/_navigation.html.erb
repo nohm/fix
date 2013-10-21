@@ -8,7 +8,7 @@
 
           <li>
             <%= link_to(root_path) do %>
-              <i class="icon-home"></i>Home
+              <i class="icon-home icon-white"></i>Home
             <% end %>
           </li>
           <li class="divider"></li>
@@ -21,12 +21,12 @@
                   <ul class="dropdown-menu">
                     <li>
                       <%= link_to(entries_path(company: role.name)) do %>
-                        <i class="icon-list"></i>Entries
+                        <i class="icon-list icon-white"></i>Entries
                       <% end %>
                     </li>
                     <li>
                       <%= link_to(invoices_path(company: role.name)) do %>
-                        <i class="icon-briefcase"></i>Invoices
+                        <i class="icon-briefcase icon-white"></i>Invoices
                       <% end %>
                     </li>
                   </ul>
@@ -39,27 +39,27 @@
           <li class="divider"></li>
           <li>
             <%= link_to(edit_user_registration_path) do %>
-              <i class="icon-cog"></i>Edit account
+              <i class="icon-cog icon-white"></i>Edit account
             <% end %>
           </li>
           <% if can? :manage, User %>
             <li>
               <%= link_to(users_path) do %>
-                <i class="icon-user"></i>User panel
+                <i class="icon-user icon-white"></i>User panel
               <% end %>
             </li>
           <% end %>
           <% if can? :manage, Appliance %>
             <li>
               <%= link_to(appliances_path) do %>
-                <i class="icon-file"></i>Appliance panel
+                <i class="icon-file icon-white"></i>Appliance panel
               <% end %>
             </li>
           <% end %>
           <li class="divider"></li>
           <li>
             <%= link_to(destroy_user_session_path, :method => 'delete') do %>
-              <i class="icon-off"></i>Logout
+              <i class="icon-off icon-white"></i>Logout
             <% end %>
           </li>
             
