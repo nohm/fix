@@ -53,6 +53,13 @@ class EntriesController < ApplicationController
     render inline: '<div><h1 style="float:left;margin-left:5px;margin-right:5px;margin-top:20px"><%= @appliance.abb + @entry.number.to_s %></h1><p style="float:left"><%= @entry.get_barcode(@appliance.abb + @entry.number.to_s).html_safe %></p></div>'
   end
 
+  def entryhistory
+    @entry = Entry.find(params[:id])
+    @appliance = Appliance.all[@entry.appliance_id - 1]
+    @history = History.where(entry_id: params[:id])
+    @users = User.all
+  end
+
   def edit
     @entry = Entry.find(params[:id])
     @appliance_names = Appliance.pluck(:name, :id)
@@ -88,6 +95,8 @@ class EntriesController < ApplicationController
     else
       update_all(params[:entry][:numbers])
     end
+
+    History.new({:entry_id => @entry.id, :user_id => current_user.id, :action => 'update'}).save
   end
  
   def create
@@ -112,12 +121,17 @@ class EntriesController < ApplicationController
       @appliance_names = Appliance.pluck(:name, :id)
       render 'new'
     end
+
+    History.new({:entry_id => @entry.id, :user_id => current_user.id, :action => 'create'}).save
   end
 
   def destroy
     entry = Entry.find(params[:id])
+    entry_id = entry.company[0].upcase! + Appliance.where(appliance_id: entry.appliance_id).abb + entry.id
     entry.destroy
     redirect_to entries_path, :notice => "Entry deleted."
+
+    History.new({:entry_id => entry_id, :user_id => current_user.id, :action => 'destroy'}).save
   end
 
 end

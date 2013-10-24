@@ -8,9 +8,11 @@ class Ability
     elsif user.has_role? :manager
       can :see_data, :all
       can :manage, [Entry, Invoice, Attachment, Appliance]
+      can :see_history, :all
     elsif user.has_role? :technician
       can :see_data, :all
       can [:index, :show, :create, :edit], [Entry, Invoice, Attachment]
+      can :create, History
       cannot :manage, [User, Appliance]
 
     elsif user.has_role? :vitel or user.roles.first.name == 'maxi-outlet' or user.has_role? :tronex or user.has_role? :ahead

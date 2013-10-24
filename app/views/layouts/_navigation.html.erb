@@ -56,6 +56,13 @@
               <% end %>
             </li>
           <% end %>
+          <% if can? :see_history, Entry %>
+            <li>
+              <%= link_to(history_index_path) do %>
+                <i class="icon-file icon-white"></i>History
+              <% end %>
+            </li>
+          <% end %>
           <li class="divider"></li>
           <li>
             <%= link_to(destroy_user_session_path, :method => 'delete') do %>

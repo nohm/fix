@@ -7,7 +7,9 @@ Badger::Application.routes.draw do
   end
   resources :invoices
   resources :appliances
+  resources :history
   match 'entries/:id/sticker' => 'entries#sticker', :as => :sticker, :via => :get
   match 'entries/:id/zip' => 'entries#zip', :as => :zip, :via => :get
+  match 'entries/:id/entryhistory' => 'entries#entryhistory', :as => :entryhistory, :via => :get
   match 'entries/search' => 'entries#search', :as => :search, :via => :get
 end
