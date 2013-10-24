@@ -1,7 +1,7 @@
 <% provide(:title, 'Badger - Entry overview') %>
 <legend>Entry</legend>
 
-<h2><%= @appliance.abb + @entry.number %></h2>
+<h2><%= @entry.company[0].upcase! + @appliance.abb + @entry.number %></h2>
 <h3><%= @entry.brand + ' ' + @entry.typenum + ' ' + @appliance.name %></h3>
 
 <div class="row">

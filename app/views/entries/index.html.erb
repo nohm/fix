@@ -26,7 +26,7 @@
         <tbody class="searchable">
           <% @entries.each do |entry| %>
             <tr>
-              <td><%= @appliances[entry.appliance_id - 1].abb + entry.number %></td>
+              <td><%= entry.company[0].upcase! + @appliances[entry.appliance_id - 1].abb + entry.number %></td>
               <td><%= @appliances[entry.appliance_id - 1].name %></td>
               <td><%= entry.brand %></td>
               <td><%= entry.typenum %></td>

@@ -49,8 +49,8 @@ class InvoicesController < ApplicationController
     wrong_comp = Array.new
  	  @invoice.items.lines do |line|
       num = line.tr("\n","").tr("\r","")
-      @app = Appliance.where(abb: num[0]).take
-      @entry = Entry.where(number: num[1..-1], appliance_id: @app.id).take
+      @app = Appliance.where(abb: num[1]).take
+      @entry = Entry.where(number: num[2..-1], appliance_id: @app.id).take
       if @entry.nil?
       	non_existing.push(num)
       elsif @entry.sent.to_i == 1
