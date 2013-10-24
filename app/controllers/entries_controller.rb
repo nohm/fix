@@ -35,12 +35,12 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
-    @appliance = Appliance.all[@entry.appliance_id - 1]
+    @appliance = Appliance.where(id: @entry.appliance_id).first
   end
 
   def zip
     @entry = Entry.find(params[:id])
-    @appliance = Appliance.all[@entry.appliance_id - 1]
+    @appliance = Appliance.where(id: @entry.appliance_id).first
     temp_file  = Tempfile.new("#{@entry.id}-#{@entry.number}")
     @entry.zip_images(temp_file)
     send_file temp_file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s}-images.zip"
@@ -49,7 +49,7 @@ class EntriesController < ApplicationController
 
   def sticker
     @entry = Entry.find(params[:id])
-    @appliance = Appliance.all[@entry.appliance_id - 1]
+    @appliance = Appliance.where(id: @entry.appliance_id).first
     render inline: '<div>
                       <h1 style="float:left;margin-left:25px;margin-right:5px;margin-top:5px">
                         <%= @entry.company[0].upcase! + @appliance.abb + @entry.number.to_s %>
@@ -62,7 +62,7 @@ class EntriesController < ApplicationController
 
   def entryhistory
     @entry = Entry.find(params[:id])
-    @appliance = Appliance.all[@entry.appliance_id - 1]
+    @appliance = Appliance.where(id: @entry.appliance_id).first
     @history = History.where(entry_id: params[:id])
     @users = User.all
   end
@@ -134,7 +134,7 @@ class EntriesController < ApplicationController
 
   def destroy
     entry = Entry.find(params[:id])
-    entry_id = entry.company[0].upcase! + Appliance.all[entry.appliance_id - 1].abb + entry.id
+    entry_id = entry.company[0].upcase! + Appliance.where(id: entry.appliance_id).first.abb + entry.id
     entry.destroy
     redirect_to entries_path, :notice => "Entry deleted."
 
