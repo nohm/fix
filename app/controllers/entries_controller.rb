@@ -134,7 +134,7 @@ class EntriesController < ApplicationController
 
   def destroy
     entry = Entry.find(params[:id])
-    entry_id = entry.company[0].upcase! + Appliance.where(id: entry.appliance_id).first.abb + entry.id
+    entry_id = entry.company[0].upcase! + Appliance.where(id: entry.appliance_id).first.abb + entry.id.to_s
     entry.destroy
     redirect_to entries_path, :notice => "Entry deleted."
 
