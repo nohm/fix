@@ -134,11 +134,10 @@ class EntriesController < ApplicationController
 
   def destroy
     entry = Entry.find(params[:id])
-    entry_id = entry.company[0].upcase! + Appliance.where(id: entry.appliance_id).first.abb + entry.id.to_s
     entry.destroy
     redirect_to entries_path, :notice => "Entry deleted."
 
-    History.new({:entry_id => entry_id, :user_id => current_user.id, :action => 'destroy'}).save
+    History.new({:entry_id => 0, :user_id => current_user.id, :action => 'destroy'}).save
   end
 
 end
