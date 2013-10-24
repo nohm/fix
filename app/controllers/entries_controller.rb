@@ -43,14 +43,21 @@ class EntriesController < ApplicationController
     @appliance = Appliance.all[@entry.appliance_id - 1]
     temp_file  = Tempfile.new("#{@entry.id}-#{@entry.number}")
     @entry.zip_images(temp_file)
-    send_file temp_file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@appliance.abb + @entry.number.to_s}-images.zip"
+    send_file temp_file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s}-images.zip"
     temp_file.close
   end
 
   def sticker
     @entry = Entry.find(params[:id])
     @appliance = Appliance.all[@entry.appliance_id - 1]
-    render inline: '<div><h1 style="float:left;margin-left:5px;margin-right:5px;margin-top:20px"><%= @appliance.abb + @entry.number.to_s %></h1><p style="float:left"><%= @entry.get_barcode(@appliance.abb + @entry.number.to_s).html_safe %></p></div>'
+    render inline: '<div>
+                      <h1 style="float:left;margin-left:25px;margin-right:5px;margin-top:5px">
+                        <%= @entry.company[0].upcase! + @appliance.abb + @entry.number.to_s %>
+                      </h1>
+                      <p style="float:left;margin-top:-10px">
+                        <%= @entry.get_barcode(@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s).html_safe %>
+                      </p>
+                    </div>'
   end
 
   def entryhistory

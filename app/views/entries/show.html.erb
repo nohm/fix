@@ -12,7 +12,7 @@
         <% if can? :create, Entry %>
           <tr>
             <td><h6>Barcode</h6></td>
-            <td><%= @entry.get_barcode(@appliance.abb + @entry.number.to_s).html_safe %></td>
+            <td><%= @entry.get_barcode(@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s).html_safe %></td>
           </tr>
         <% end %>
 
