@@ -93,7 +93,7 @@ class EntriesController < ApplicationController
         end
       end
       
-      if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
+      if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
         redirect_to entries_path, :notice => "Entry updated."
       else
         @appliance_names = Appliance.pluck(:name, :id)
@@ -120,7 +120,7 @@ class EntriesController < ApplicationController
       params[:entry][:number] = entries.last.number.to_i + 1
     end
 
-    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
+    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
     
     if @entry.save
       redirect_to entries_path, :notice => "Entry added."
