@@ -85,7 +85,7 @@ class EntriesController < ApplicationController
       if @entry.appliance_id == params[:entry][:appliance_id].to_i
         params[:entry][:number] = @entry.number
       else
-        entries = Entry.where(appliance_id: params[:entry][:appliance_id]).order('number')
+        entries = Entry.where(appliance_id: params[:entry][:appliance_id])
         if entries.length == 0
           params[:entry][:number] = 1
         else 
@@ -113,7 +113,7 @@ class EntriesController < ApplicationController
       params[:entry][:sent_date] = DateTime.now
     end
 
-    entries = Entry.where(appliance_id: params[:entry][:appliance_id]).order('number')
+    entries = Entry.where(appliance_id: params[:entry][:appliance_id])
     if entries.length == 0
       params[:entry][:number] = 1
     else 
