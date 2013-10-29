@@ -38,7 +38,7 @@ class Entry < ActiveRecord::Base
   def get_status
     status = 'New'
 
-    if self.test == 1 or !self.defect.nil?
+    if self.test == 1 or (!self.defect.nil? and self.defect.length != 0)
       status = 'Tested'
     end
 
