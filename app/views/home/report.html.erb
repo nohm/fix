@@ -1,0 +1,9 @@
+<% provide(:title, 'Badger - Report error') %>
+
+<%= bootstrap_form_for :home, :url => send_report_path, help: :block do |f| %>  
+  <legend>Report error</legend>
+  <%= f.text_area :message %>
+  <%= f.primary 'Send report', data: { disable_with: 'Sending...' } %>
+<% end %>
+
+<%= link_to "Back", invoices_path %>

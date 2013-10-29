@@ -65,6 +65,12 @@
           <% end %>
           <li class="divider"></li>
           <li>
+            <%= link_to(report_path) do %>
+              <i class="icon-bell icon-white"></i>Report error
+            <% end %>
+          </li>
+          <li class="divider"></li>
+          <li>
             <%= link_to(destroy_user_session_path, :method => 'delete') do %>
               <i class="icon-off icon-white"></i>Logout
             <% end %>

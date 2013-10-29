@@ -12,4 +12,10 @@ class Mailer < ActionMailer::Base
   	@url = "http://snack.sytes.net/badger/users"
     mail(to: ENV["GMAIL_USERNAME"], subject: 'New sign up for Badger')
   end
+
+  def send_error_report(user, message)
+    @user = user
+    @message = message
+    mail(to: ENV["GMAIL_USERNAME"], subject: 'Badger: Error report')
+  end
 end
