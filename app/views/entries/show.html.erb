@@ -117,8 +117,10 @@
 </div>
 
 <div style="margin-bottom:10px">
-  <% unless @entry.attachments.length == 0 %>
-    <%= link_to("Create zip", zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
+  <% if can? :zip, Entry %>
+    <% unless @entry.attachments.length == 0 %>
+      <%= link_to("Create zip", zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
+    <% end %>
   <% end %>
   <% if can? :create, Entry %>
     <%= link_to("Create sticker", sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
@@ -129,7 +131,7 @@
   <% if can? :destroy, Entry %>
     <%= link_to("Delete entry", entry_path(@entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
   <% end %>
-  <% if can? :see_history, Entry %>
+  <% if can? :entryhistory, Entry %>
     <%= link_to("View history", entryhistory_path(@entry), :class => 'btn btn-mini btn-primary') %>
   <% end %>
 </div>

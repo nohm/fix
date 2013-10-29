@@ -1,10 +1,15 @@
 class InvoicesController < ApplicationController
+  before_filter :authenticate_user!
 
   def new
+    authorize! :new, Invoice, :message => 'You\'re not authorized for this.'
+
     @invoice = Invoice.new
   end
 
   def show
+    authorize! :show, Invoice, :message => 'You\'re not authorized for this.'
+
     @invoice = Invoice.find(params[:id])
     @entries = Array.new
   	@invoice.items.lines do |line|
@@ -18,6 +23,8 @@ class InvoicesController < ApplicationController
   end
 
   def index
+    authorize! :index, Invoice, :message => 'You\'re not authorized for this.'
+
     unless params[:company].nil?
       session[:company] = params[:company]
     end
@@ -29,6 +36,8 @@ class InvoicesController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Invoice, :message => 'You\'re not authorized for this.'
+
     invoice = Invoice.find(params[:id])
     invoice.items.lines do |line|
       num = line.tr("\n","").tr("\r","")
@@ -42,6 +51,8 @@ class InvoicesController < ApplicationController
   end
 
   def create
+    authorize! :create, Invoice, :message => 'You\'re not authorized for this.'
+
     @invoice = Invoice.new(params[:invoice].permit(:items,:company))
 
  	  non_existing = Array.new

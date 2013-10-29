@@ -1,10 +1,13 @@
 class EntriesController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
+    authorize! :index, Entry, :message => 'You\'re not authorized for this.'
+
     unless params[:company].nil?
       session[:company] = params[:company]
     end
-    if !session[:company].nil? and (can? :create, Entry or current_user.roles.first.name == session[:company])
+    if !session[:company].nil? and (can? :index, Entry or current_user.roles.first.name == session[:company])
       if params[:searchnum]
         begin
           @entries = Entry.where('appliance_id LIKE ? AND number LIKE ? AND company = ?', Appliance.where(abb: params[:searchnum][1]).first.id, params[:searchnum][2..-1].to_i, session[:company])
@@ -22,23 +25,29 @@ class EntriesController < ApplicationController
         @entries = Entry.where(company: session[:company]).page(params[:page]).per(25)
         @pagination = true
       end
+      @appliances = Appliance.all
     else
-      redirect_to root_path, :alert => "You\'re not authorized for this"
+      redirect_to root_path, :alert => "You\'re not authorized for this."
     end
-    @appliances = Appliance.all
   end
 
   def new
+    authorize! :new, Entry, :message => 'You\'re not authorized for this.'
+
     @entry = Entry.new
     @appliance_names = Appliance.pluck(:name, :id)
   end
 
   def show
+    authorize! :show, Entry, :message => 'You\'re not authorized for this.'
+
     @entry = Entry.find(params[:id])
     @appliance = Appliance.where(id: @entry.appliance_id).first
   end
 
   def zip
+    authorize! :zip, Entry, :message => 'You\'re not authorized for this.'
+
     @entry = Entry.find(params[:id])
     @appliance = Appliance.where(id: @entry.appliance_id).first
     temp_file  = Tempfile.new("#{@entry.id}-#{@entry.number}")
@@ -48,19 +57,18 @@ class EntriesController < ApplicationController
   end
 
   def sticker
-    @entry = Entry.find(params[:id])
-    @appliance = Appliance.where(id: @entry.appliance_id).first
-    render inline: '<div>
-                      <h1 style="float:left;margin-left:25px;margin-right:5px;margin-top:5px">
-                        <%= @entry.company[0].upcase! + @appliance.abb + @entry.number.to_s %>
-                      </h1>
-                      <p style="float:left;margin-top:-10px">
-                        <%= @entry.get_barcode(@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s).html_safe %>
-                      </p>
-                    </div>'
+    authorize! :sticker, Entry, :message => 'You\'re not authorized for this.'
+
+    entry = Entry.find(params[:id])
+    appliance = Appliance.where(id: entry.appliance_id).first
+    @number = entry.company[0].upcase! + appliance.abb + entry.number.to_s
+    @barcode = entry.get_barcode(@number).html_safe
+    render 'sticker', :layout => false
   end
 
   def entryhistory
+    authorize! :entryhistory, Entry, :message => 'You\'re not authorized for this.'
+
     @entry = Entry.find(params[:id])
     @appliance = Appliance.where(id: @entry.appliance_id).first
     @history = History.where(entry_id: params[:id])
@@ -68,45 +76,47 @@ class EntriesController < ApplicationController
   end
 
   def edit
+    authorize! :edit, Entry, :message => 'You\'re not authorized for this.'
+
     @entry = Entry.find(params[:id])
     @appliance_names = Appliance.pluck(:name, :id)
   end
 
   def update
-    unless params[:id] == 'all'
-      @entry = Entry.find(params[:id])
+    authorize! :update, Entry, :message => 'You\'re not authorized for this.'
 
-      if params[:entry][:sent].to_i == 1 and @entry.sent == 0
-        params[:entry][:sent_date] = DateTime.now
-      elsif params[:entry][:sent].to_i == 0 and @entry.sent == 0
-        params[:entry][:sent_date] = ""
-      end
+    @entry = Entry.find(params[:id])
 
-      if @entry.appliance_id == params[:entry][:appliance_id].to_i
-        params[:entry][:number] = @entry.number
-      else
-        entries = Entry.where(appliance_id: params[:entry][:appliance_id])
-        if entries.length == 0
-          params[:entry][:number] = 1
-        else 
-          params[:entry][:number] = entries.last.number.to_i + 1
-        end
-      end
-      
-      if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
-        redirect_to entries_path, :notice => "Entry updated."
-      else
-        @appliance_names = Appliance.pluck(:name, :id)
-        render 'edit'
-      end
+    if params[:entry][:sent].to_i == 1 and @entry.sent == 0
+      params[:entry][:sent_date] = DateTime.now
+    elsif params[:entry][:sent].to_i == 0 and @entry.sent == 0
+      params[:entry][:sent_date] = ""
+    end
+
+    if @entry.appliance_id == params[:entry][:appliance_id].to_i
+      params[:entry][:number] = @entry.number
     else
-      update_all(params[:entry][:numbers])
+      entries = Entry.where(appliance_id: params[:entry][:appliance_id])
+      if entries.length == 0
+        params[:entry][:number] = 1
+      else 
+        params[:entry][:number] = entries.last.number.to_i + 1
+      end
+    end
+      
+    if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
+      redirect_to entries_path, :notice => "Entry updated."
+    else
+      @appliance_names = Appliance.pluck(:name, :id)
+      render 'edit'
     end
 
     History.new({:entry_id => @entry.id, :user_id => current_user.id, :action => 'update'}).save
   end
  
   def create
+    authorize! :create, Entry, :message => 'You\'re not authorized for this.'
+
     unless params[:entry][:sent].to_i == 1
       params[:entry][:sent_date] = ""
     else
@@ -133,6 +143,8 @@ class EntriesController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Entry, :message => 'You\'re not authorized for this.'
+
     entry = Entry.find(params[:id])
     entry.destroy
     redirect_to entries_path, :notice => "Entry deleted."

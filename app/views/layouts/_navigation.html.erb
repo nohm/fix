@@ -56,10 +56,10 @@
               <% end %>
             </li>
           <% end %>
-          <% if can? :see_history, Entry %>
+          <% if can? :index, History %>
             <li>
               <%= link_to(history_index_path) do %>
-                <i class="icon-file icon-white"></i>History
+                <i class="icon-book icon-white"></i>History
               <% end %>
             </li>
           <% end %>
