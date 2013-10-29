@@ -10,8 +10,8 @@ class EntriesController < ApplicationController
     if !session[:company].nil? and (can? :index, Entry or current_user.roles.first.name == session[:company])
       if params[:searchnum]
         begin
-          @entries = Entry.where('appliance_id LIKE ? AND number LIKE ? AND company = ?', Appliance.where(abb: params[:searchnum][1]).first.id, params[:searchnum][2..-1].to_i, session[:company])
-          redirect_to entry_path(@entries.first)
+          @entries = Entry.where('appliance_id = ? AND number = ? AND company = ?', Appliance.where(abb: params[:searchnum][1].upcase).first.id, params[:searchnum][2..-1].to_i, session[:company])
+          redirect_to entry_path(@entries.first.id)
         rescue
           redirect_to entries_path, :alert => "Entry not found with number #{params[:searchnum]}."
         end
