@@ -15,6 +15,9 @@
             <th>Serial</th>
             <th>Status</th>
             <th style="width:17px;"></th>
+            <% if can? :zip, Entry %>
+              <th style="width:17px;"></th>
+            <% end %>
             <% if can? :edit, Entry %>
               <th style="width:17px;"></th>
             <% end %>
@@ -36,7 +39,14 @@
                 <%= link_to entry_path(entry) do %>
                   <i class="icon-search"></i>
                 <% end %>
-              </td>
+              </td>   
+              <% if can? :zip, Entry %>
+                <% unless entry.attachments.length == 0 %>
+                  <%= link_to zip_path(entry) do %>
+                    <i class="icon-picture"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
               <% if can? :edit, Entry %>
                 <td>
                   <%= link_to edit_entry_path(entry) do %>
