@@ -35,18 +35,20 @@
               <td><%= entry.typenum %></td>
               <td><%= entry.serialnum %></td>
               <td><%= entry.get_status %></td>
-              <td>
-                <%= link_to entry_path(entry) do %>
-                  <i class="icon-search"></i>
-                <% end %>
-              </td>   
               <% if can? :zip, Entry %>
+                <td>
                 <% unless entry.attachments.length == 0 %>
                   <%= link_to zip_path(entry) do %>
                     <i class="icon-picture"></i>
                   <% end %>
                 <% end %>
+                </td>
               <% end %>
+              <td>
+                <%= link_to entry_path(entry) do %>
+                  <i class="icon-search"></i>
+                <% end %>
+              </td>
               <% if can? :edit, Entry %>
                 <td>
                   <%= link_to edit_entry_path(entry) do %>
