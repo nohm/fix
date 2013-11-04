@@ -18,4 +18,11 @@ class Mailer < ActionMailer::Base
     @message = message
     mail(to: ENV["GMAIL_USERNAME"], subject: 'Badger: Error report')
   end
+
+
+  def send_role_update(user)
+    @role = user.roles.first.name
+    @url = "http://snack.sytes.net/badger"
+    mail(to: user.email, subject: 'Badger: Role updated')
+  end
 end
