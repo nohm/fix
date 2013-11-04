@@ -25,7 +25,7 @@
     <dt>ID</dt>
     <dd><%= @invoice.id %></dd>
     <dt>Items</dt>
-    <dd><%= @invoice.items.lines.length %></dd>
+    <dd><%= @invoice.items %></dd>
     <dt>Date</dt>
     <dd><%= @invoice.created_at.to_date %></dd>
   </dl>
@@ -48,7 +48,7 @@
       <tbody>
         <% @entries.each do |entry| %>
           <tr>
-            <td><%= @appliances[entry.appliance_id - 1].abb + entry.number.to_s %></td>
+            <td><%= entry.company[0].upcase! + @appliances[entry.appliance_id - 1].abb + entry.number.to_s %></td>
             <td><%= @appliances[entry.appliance_id - 1].name %></td>
             <td><%= entry.brand %></td>
             <td><%= entry.typenum %></td>

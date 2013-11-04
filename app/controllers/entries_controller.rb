@@ -43,6 +43,7 @@ class EntriesController < ApplicationController
 
     @entry = Entry.find(params[:id])
     @appliance = Appliance.where(id: @entry.appliance_id).first
+    @invoice = Invoice.where(id: @entry.invoice_id).first
   end
 
   def zip

@@ -11,13 +11,7 @@ class InvoicesController < ApplicationController
     authorize! :show, Invoice, :message => 'You\'re not authorized for this.'
 
     @invoice = Invoice.find(params[:id])
-    @entries = Array.new
-  	@invoice.items.lines do |line|
-      num = line.tr("\n","").tr("\r","")
-      @app = Appliance.find_by(abb: num[0])
-      @entry = Entry.where(number: num[1..-1], appliance_id: @app.id).take
-      @entries.push(@entry)
-    end
+  	@entries = Entry.where(invoice_id: params[:id])
     @appliances = Appliance.all
     @company_data = eval(ENV["COMPANIES"])[Role.where(name: session[:company]).take.id - 5]
   end
@@ -42,9 +36,9 @@ class InvoicesController < ApplicationController
     invoice.items.lines do |line|
       num = line.tr("\n","").tr("\r","")
       app = Appliance.find_by(abb: num[0])
-      entry = Entry.where(number: num[1..-1], appliance_id: app.id).take
+      entry = Entry.where(company: session[:company], number: num[1..-1], appliance_id: app.id).take
       entry.update_attribute(:sent, 0)
-      entry.update_attribute(:sent_date, "")
+      entry.update_attribute(:invoice_id, nil)
     end
     invoice.destroy
     redirect_to invoices_path, :notice => "Invoice deleted."
@@ -53,28 +47,33 @@ class InvoicesController < ApplicationController
   def create
     authorize! :create, Invoice, :message => 'You\'re not authorized for this.'
 
-    @invoice = Invoice.new(params[:invoice].permit(:items,:company))
+    params[:invoice][:items] = params[:invoice][:items].lines.length
+    @invoice = Invoice.new(params[:invoice].permit(:items, :company))
 
  	  non_existing = Array.new
  	  already_sent = Array.new
     wrong_comp = Array.new
- 	  @invoice.items.lines do |line|
+ 	  params[:invoice][:items].lines do |line|
       num = line.tr("\n","").tr("\r","")
-      @app = Appliance.where(abb: num[1]).take
-      @entry = Entry.where(number: num[2..-1], appliance_id: @app.id).take
-      if @entry.nil?
+      app = Appliance.where(abb: num[1]).take
+      entry = Entry.where(company: session[:company], number: num[2..-1], appliance_id: app.id).take
+      if entry.nil?
       	non_existing.push(num)
-      elsif @entry.sent.to_i == 1
+      elsif entry.sent.to_i == 1
       	already_sent.push(num)
-      elsif @entry.company != params[:invoice][:company]
+      elsif entry.company != session[:company]
         wrong_comp.push(num)
-      else
-      	@entry.update_attribute(:sent, 1)
-        @entry.update_attribute(:sent_date, DateTime.now)
       end
     end
 
     if non_existing.length == 0 and already_sent.length == 0 and wrong_comp.length == 0 and @invoice.save
+      params[:invoice][:items].lines do |line|
+        num = line.tr("\n","").tr("\r","")
+        app = Appliance.where(abb: num[1]).take
+        entry = Entry.where(company: session[:company], number: num[2..-1], appliance_id: app.id).take
+        entry.update_attribute(:sent, 1)
+        entry.update_attribute(:invoice_id, @invoice.id)
+      end
       redirect_to invoices_path, :notice => "Invoice added."
     else
       non_existing.each do |item|

@@ -21,7 +21,7 @@
           <% @invoices.each do |invoice| %>
             <tr>
               <td><%= invoice.id %></td>
-              <td><%= invoice.items.lines.length %></td>
+              <td><%= invoice.items %></td>
               <td><%= invoice.created_at.to_date %></td>
                 <td>
                   <%= link_to invoice_path(invoice) do %>

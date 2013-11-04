@@ -59,7 +59,7 @@ class Entry < ActiveRecord::Base
     end
 
     if self.sent == 1
-      status = 'Sent ' + self.sent_date.to_date.to_s
+      status = 'Sent ' + Invoice.where(id: self.invoice_id).first.created_at.to_date.to_s
     end
 
     # return status

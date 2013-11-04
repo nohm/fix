@@ -22,8 +22,8 @@
         </tr>
         <tr>
           <td><h6>Sent?</h6></td>
-          <% if @entry.sent == 1 %>
-            <td>Yes - <%= @entry.sent_date.to_date %></td>
+          <% unless @entry.invoice_id.nil? %>
+            <td>Yes - <%= @invoice.created_at.to_date %></td>
               <% else %>
             <td>No</td>
           <% end %>
