@@ -46,16 +46,16 @@ class Entry < ActiveRecord::Base
       status = 'Repaired'
     end
 
-    if self.ready == 1
-      status = 'Ready'
-    end
-
     if self.scrap == 1
       status = 'Scrap'
     end
 
     if self.accessoires == 1
       status = 'Waiting for accessoires'
+    end
+
+    if self.ready == 1
+      status = 'Ready'
     end
 
     if self.sent == 1
