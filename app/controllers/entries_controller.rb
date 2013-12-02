@@ -101,7 +101,7 @@ class EntriesController < ApplicationController
     end
       
     if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:note,:company))
-      redirect_to entries_path, :page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages, :notice => "Entry updated."
+      redirect_to entries_path(:page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages), :notice => "Entry updated."
     else
       @appliance_names = Appliance.pluck(:name, :id)
       render 'edit'
@@ -123,7 +123,7 @@ class EntriesController < ApplicationController
     @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:note,:company))
     
     if @entry.save
-      redirect_to entries_path, :page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages, :notice => "Entry added."
+      redirect_to entries_path(:page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages), :notice => "Entry added."
     else
       @appliance_names = Appliance.pluck(:name, :id)
       render 'new'
