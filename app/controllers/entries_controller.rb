@@ -62,8 +62,9 @@ class EntriesController < ApplicationController
 
     entry = Entry.find(params[:id])
     appliance = Appliance.where(id: entry.appliance_id).first
-    @number = entry.company[0].upcase! + appliance.abb + entry.number.to_s
-    @barcode = entry.get_barcode(@number).html_safe
+    @abb = entry.company[0].upcase! + appliance.abb
+    @number = entry.number.to_s
+    @barcode = entry.get_barcode(@abb + @number).html_safe
     render 'sticker', :layout => false
   end
 
@@ -88,12 +89,6 @@ class EntriesController < ApplicationController
 
     @entry = Entry.find(params[:id])
 
-    if params[:entry][:sent].to_i == 1 and @entry.sent == 0
-      params[:entry][:sent_date] = DateTime.now
-    elsif params[:entry][:sent].to_i == 0 and @entry.sent == 0
-      params[:entry][:sent_date] = ""
-    end
-
     if @entry.appliance_id == params[:entry][:appliance_id].to_i
       params[:entry][:number] = @entry.number
     else
@@ -105,7 +100,7 @@ class EntriesController < ApplicationController
       end
     end
       
-    if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
+    if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:note,:company))
       redirect_to entries_path, :notice => "Entry updated."
     else
       @appliance_names = Appliance.pluck(:name, :id)
@@ -118,12 +113,6 @@ class EntriesController < ApplicationController
   def create
     authorize! :create, Entry, :message => 'You\'re not authorized for this.'
 
-    unless params[:entry][:sent].to_i == 1
-      params[:entry][:sent_date] = ""
-    else
-      params[:entry][:sent_date] = DateTime.now
-    end
-
     entries = Entry.where(appliance_id: params[:entry][:appliance_id])
     if entries.length == 0
       params[:entry][:number] = 1
@@ -131,7 +120,7 @@ class EntriesController < ApplicationController
       params[:entry][:number] = entries.last.number.to_i + 1
     end
 
-    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:sent_date,:note,:company))
+    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:note,:company))
     
     if @entry.save
       redirect_to entries_path, :notice => "Entry added."
