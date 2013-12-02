@@ -5,6 +5,10 @@ class MoreEntryFields < ActiveRecord::Migration
   	add_column :entries, :testerb, :string
   	add_column :entries, :class_id, :integer
 
-  	add_column :classifications, :name, :string
+  	create_table :classifications do |t|
+      t.string :name
+
+      t.timestamps
+    end
   end
 end
