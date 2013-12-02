@@ -24,4 +24,5 @@ class AppliancesController < ApplicationController
       render 'new'
     end
   end
+  
 end
