@@ -7,6 +7,9 @@ class EntriesController < ApplicationController
     unless params[:company].nil?
       session[:company] = params[:company]
     end
+    unless params[:page].nil?
+      session[:page] = params[:page]
+    end
     if !session[:company].nil? and (can? :index, Entry or current_user.roles.first.name == session[:company])
       if params[:searchnum]
         begin
@@ -104,7 +107,7 @@ class EntriesController < ApplicationController
     end
       
     if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company))
-      redirect_to entries_path(:page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages), :notice => "Entry updated."
+      redirect_to entries_path(:page => session[:page]), :notice => "Entry updated."
     else
       @appliance_names = Appliance.pluck(:name, :id)
     @class_names = Classifications.pluck(:name, :id)

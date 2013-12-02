@@ -38,8 +38,31 @@ ActiveRecord::Schema.define(version: 20131202120046) do
     t.datetime "updated_at"
   end
 
-# Could not dump table "entries" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "entries", force: true do |t|
+    t.string   "number"
+    t.string   "brand"
+    t.string   "typenum"
+    t.string   "serialnum"
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "defect"
+    t.string   "ordered"
+    t.integer  "repaired"
+    t.integer  "ready"
+    t.integer  "scrap"
+    t.integer  "accessoires"
+    t.integer  "test"
+    t.integer  "sent"
+    t.string   "company"
+    t.integer  "appliance_id"
+    t.integer  "invoice_id"
+    t.string   "repair"
+    t.string   "testera"
+    t.string   "testerb"
+    t.integer  "class_id"
+  end
 
   create_table "histories", force: true do |t|
     t.integer  "entry_id"
