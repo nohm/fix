@@ -28,11 +28,27 @@
             <td>No</td>
           <% end %>
         </tr>
+        <tr>
+          <td><h6>Class</h6></td>
+          <td><%= @classification.name.presence || '-' %></td>
+        </tr>
 
         <% if can? :create, Entry %>
           <tr>
             <td><h6>Defect</h6></td>
             <td><%= @entry.defect.presence || '-' %></td>
+          </tr>
+          <tr>
+            <td><h6>Repair</h6></td>
+            <td><%= @entry.repair.presence || '-' %></td>
+          </tr>
+          <tr>
+            <td><h6>First tester</h6></td>
+            <td><%= @entry.testera.presence || '-' %></td>
+          </tr>
+          <tr>
+            <td><h6>Second tester</h6></td>
+            <td><%= @entry.testerb.presence || '-' %></td>
           </tr>
           <tr>
             <td><h6>Ordered</h6></td>

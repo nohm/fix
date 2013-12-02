@@ -36,6 +36,7 @@ class EntriesController < ApplicationController
 
     @entry = Entry.new
     @appliance_names = Appliance.pluck(:name, :id)
+    @class_names = Classifications.pluck(:name, :id)
   end
 
   def show
@@ -43,6 +44,7 @@ class EntriesController < ApplicationController
 
     @entry = Entry.find(params[:id])
     @appliance = Appliance.where(id: @entry.appliance_id).first
+    @classification = Classifications.where(id: @entry.class_id).first
     @invoice = Invoice.where(id: @entry.invoice_id).first
   end
 
@@ -82,6 +84,7 @@ class EntriesController < ApplicationController
 
     @entry = Entry.find(params[:id])
     @appliance_names = Appliance.pluck(:name, :id)
+    @class_names = Classifications.pluck(:name, :id)
   end
 
   def update
@@ -100,10 +103,11 @@ class EntriesController < ApplicationController
       end
     end
       
-    if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:note,:company))
+    if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company))
       redirect_to entries_path(:page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages), :notice => "Entry updated."
     else
       @appliance_names = Appliance.pluck(:name, :id)
+    @class_names = Classifications.pluck(:name, :id)
       render 'edit'
     end
 
@@ -120,12 +124,13 @@ class EntriesController < ApplicationController
       params[:entry][:number] = entries.last.number.to_i + 1
     end
 
-    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:ordered,:test,:repaired,:ready,:scrap,:accessoires,:sent,:note,:company))
+    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company))
     
     if @entry.save
       redirect_to entries_path(:page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages), :notice => "Entry added."
     else
       @appliance_names = Appliance.pluck(:name, :id)
+    @class_names = Classifications.pluck(:name, :id)
       render 'new'
     end
 

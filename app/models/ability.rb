@@ -10,7 +10,7 @@ class Ability
       can :see_data, :all
       can :see_history, :all
       can :manage, [Entry, Invoice]
-      can [:create, :destroy], [Attachment, Appliance]
+      can [:create, :destroy], [Attachment, Appliance, Classifications]
       can :index, History
 
     elsif user.has_role? :technician

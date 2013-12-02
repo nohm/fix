@@ -7,6 +7,7 @@ Badger::Application.routes.draw do
   end
   resources :invoices
   resources :appliances
+  resources :classifications
   resources :history
   
   # Special routes for error reporting

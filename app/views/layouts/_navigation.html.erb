@@ -56,6 +56,13 @@
               <% end %>
             </li>
           <% end %>
+          <% if can? :manage, Classifications %>
+            <li>
+              <%= link_to(classifications_path) do %>
+                <i class="icon-file icon-white"></i>Class panel
+              <% end %>
+            </li>
+          <% end %>
           <% if can? :index, History %>
             <li>
               <%= link_to(history_index_path) do %>

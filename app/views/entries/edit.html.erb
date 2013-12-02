@@ -11,7 +11,11 @@
   <%= f.text_field :serialnum %>
 
   <%= f.text_field :defect, label: 'What\'s broken?' %>
+  <%= f.text_field :repair, label: 'What\'s repaired?' %>
   <%= f.text_field :ordered, label: 'Parts ordered?' %>
+
+  <%= f.text_field :testera, label: 'First tester' %>
+  <%= f.text_field :testerb, label: 'Second tester?' %>
 
   <%= f.control_group :test do %>
     <%= f.check_box :test, label: 'Test OK' %>
@@ -28,6 +32,8 @@
   <%= f.control_group :accessoires do %>
     <%= f.check_box :accessoires, label: 'Accessoires' %>
   <% end %>
+
+  <%= f.select :class_id, @class_names %>
 
   <%= f.text_area :note %>
 

@@ -1,0 +1,29 @@
+<% provide(:title, 'Badger - Class panel') %>
+<legend>Entries</legend>
+
+<% if @classifications.length == 0 %>
+  <p>No classes here</p>
+<% else %>
+	<div class="table-responsive">
+	<table class="table table-condensed table-striped">
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th style="width:17px;"></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  <% @classifications.each do |classification| %>
+	    <tr>
+	      <td><%= classification.name %></td>
+	    </tr>
+	  <% end %>
+	  </tbody>
+	</table>
+	</div>
+
+    <%= paginate @classifications %>
+<% end %>
+<div>
+  <%= link_to("Add classification", new_classification_path, :class => 'btn btn-mini btn-primary') %>
+</div>
