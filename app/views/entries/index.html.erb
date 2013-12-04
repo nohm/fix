@@ -20,6 +20,7 @@
             <% end %>
             <% if can? :edit, Entry %>
               <th style="width:17px;"></th>
+              <th style="width:17px;"></th>
             <% end %>
             <% if can? :destroy, Entry %>
               <th style="width:17px;"></th>
@@ -50,6 +51,11 @@
                 <% end %>
               </td>
               <% if can? :edit, Entry %>
+                <td>
+                  <%= link_to sticker_path(entry) do %>
+                    <i class="icon-barcode"></i>
+                  <% end %>
+                </td>
                 <td>
                   <%= link_to edit_entry_path(entry) do %>
                     <i class="icon-pencil"></i>
