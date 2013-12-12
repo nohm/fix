@@ -9,13 +9,13 @@ class Ability
     elsif user.has_role? :manager
       can :see_data, :all
       can :see_history, :all
-      can :manage, [Entry, Invoice]
+      can :manage, [Entry, Invoice, Stats]
       can [:create, :destroy], [Attachment, Appliance, Classifications]
       can :index, History
 
     elsif user.has_role? :technician
       can :see_data, :all
-      can :manage, Entry
+      can :manage, [Entry, Stats]
       cannot [:entryhistory, :destroy], Entry
       can [:create, :destroy], Attachment
 
@@ -23,6 +23,7 @@ class Ability
       can :see_data, :all
       can [:index, :show], [Entry, Invoice, Attachment]
       can :zip, Entry
+      can :manage, Stats
 
     elsif user.has_role? :user
       # ...
