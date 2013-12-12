@@ -29,6 +29,13 @@
                         <i class="icon-briefcase icon-white"></i>Invoices
                       <% end %>
                     </li>
+                    <% if can? :manage, Stats %>
+                      <li>
+                        <%= link_to(stats_path(company: role.name)) do %>
+                          <i class="icon-zoom-in icon-white"></i>Stats panel
+                        <% end %>
+                      </li>
+                    <% end %>
                   </ul>
                 </li>
               <% end %>
@@ -63,13 +70,6 @@
               <% end %>
             </li>
           <% end %>          
-          <% if can? :manage, Stats and session[:company] != nil %>
-            <li>
-              <%= link_to(stats_path) do %>
-                <i class="icon-zoom-in icon-white"></i>Stats panel
-              <% end %>
-            </li>
-          <% end %>
           <% if can? :index, History %>
             <li>
               <%= link_to(history_index_path) do %>

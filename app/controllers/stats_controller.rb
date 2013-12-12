@@ -1,5 +1,13 @@
 class StatsController < ApplicationController
 	def index
+
+	    unless params[:company].nil?
+	      session[:company] = params[:company]
+	    end
+	    if session[:company].nil?
+	      redirect_to root_path, :alert => "You\'re not authorized for this."
+	    end
+
 		# Set it up
 		@entry_stats = Array.new
 		(0..6).each do |i|
