@@ -11,7 +11,7 @@ class StatsController < ApplicationController
 		@entries.each do |entry|
 			processed = 0
 
-		    if entry.sent == 1 and processed == 0
+		    if entry.sent == 1
 				@entry_stats[6] = @entry_stats[6] + 1
 				processed = 1
 		    end
@@ -36,7 +36,7 @@ class StatsController < ApplicationController
 				processed = 1
 		    end
 
-		    if entry.test == 1 or (!entry.defect.nil? and entry.defect.length != 0)
+		    if (entry.test == 1 or (!entry.defect.nil? and entry.defect.length != 0)) and processed = 0
 		      @entry_stats[1] = @entry_stats[1] + 1
 		      processed = 1
 		    end
