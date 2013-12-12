@@ -11,7 +11,18 @@ class InvoicesController < ApplicationController
     authorize! :show, Invoice, :message => 'You\'re not authorized for this.'
 
     @invoice = Invoice.find(params[:id])
+
     @entries = Entry.where(invoice_id: params[:id])
+
+    @classes = Classifications.all
+    @entry_data = Array.new
+    (0..@classes.length).each do |i|
+      @entry_data[i] = Array.new
+    end
+    @entries.each do |entry|
+      @entry_data[entry.class_id].append(entry)
+    end
+
     @appliances = Appliance.all
     @company_data = eval(ENV["COMPANIES"])[Role.where(name: session[:company]).take.id - 5]
   end

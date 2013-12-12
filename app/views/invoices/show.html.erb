@@ -29,6 +29,15 @@
     <dt>Date</dt>
     <dd><%= @invoice.created_at.to_date %></dd>
   </dl>
+
+  <dl class="dl-horizontal">
+    <% @entry_data.each do |classdata| %>
+      <% unless classdata.length == 0 %>
+        <dt><%= @classes[classdata[0].class_id - 1].name %></dt>
+        <dd><%= classdata.length %></dd>
+      <% end %>
+    <% end %>
+  </dl>
 </div>
 
 <div>
@@ -46,14 +55,22 @@
         </tr>
       </thead>
       <tbody>
-        <% @entries.each do |entry| %>
-          <tr>
-            <td><%= entry.company[0].upcase! + @appliances[entry.appliance_id - 1].abb + entry.number.to_s %></td>
-            <td><%= @appliances[entry.appliance_id - 1].name %></td>
-            <td><%= entry.brand %></td>
-            <td><%= entry.typenum %></td>
-            <td><%= entry.serialnum %></td>
-          </tr>
+        <% @entry_data.each do |classdata| %>
+          <% unless classdata.length == 0 %>
+            <tr>
+              <td><strong>Class <%= @classes[classdata[0].class_id - 1].name %></strong></td>
+              <td></td><td></td><td></td><td></td>
+            </tr>
+            <% classdata.each do |entry| %>
+              <tr>
+                <td><%= entry.company[0].upcase! + @appliances[entry.appliance_id - 1].abb + entry.number.to_s %></td>
+                <td><%= @appliances[entry.appliance_id - 1].name %></td>
+                <td><%= entry.brand %></td>
+                <td><%= entry.typenum %></td>
+                <td><%= entry.serialnum %></td>
+              </tr>
+            <% end %>
+          <% end %>
         <% end %>
       </tbody>
     </table>

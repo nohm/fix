@@ -32,7 +32,7 @@
                     <% if can? :manage, Stats %>
                       <li>
                         <%= link_to(stats_path(company: role.name)) do %>
-                          <i class="icon-zoom-in icon-white"></i>Stats panel
+                          <i class="icon-zoom-in icon-white"></i>Stats
                         <% end %>
                       </li>
                     <% end %>
@@ -41,7 +41,6 @@
               <% end %>
             <% end %>
           <% end %>
-
 
           <li class="divider"></li>
           <li>
