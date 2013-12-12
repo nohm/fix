@@ -20,6 +20,7 @@ gem 'barby'
 gem 'has_barcode'
 gem 'rubyzip'
 gem 'kaminari'
+gem 'lazy_high_charts'
 group :assets do
   gem 'therubyracer', :platform=>:ruby
 end

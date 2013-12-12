@@ -62,6 +62,13 @@
                 <i class="icon-ok icon-white"></i>Class panel
               <% end %>
             </li>
+          <% end %>          
+          <% if can? :manage, Stats and session[:company] != nil %>
+            <li>
+              <%= link_to(stats_path) do %>
+                <i class="icon-zoom-in icon-white"></i>Stats panel
+              <% end %>
+            </li>
           <% end %>
           <% if can? :index, History %>
             <li>
