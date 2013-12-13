@@ -1,3 +1,12 @@
 <div class="hero-unit center">
-  <%= high_chart('line_chart', @chart) %>
+  <% @charts.each_with_index do |chart, index| %>
+    <div<% unless index == @charts.length %> style='margin-bottom:50px'<% end%>>
+      <% if index == 0 %>
+        <p>Global status</p>
+      <% elsif index == 1 %>
+        <p>Brand and type specific status</p>
+      <% end %>
+  		<%= high_chart('line_chart_' + index.to_s, chart) %>
+  	</div>
+  <% end %>
 </div>
