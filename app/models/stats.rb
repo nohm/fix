@@ -30,12 +30,12 @@ class Stats < ActiveRecord::Base
   end
 
   # generates a chart based on title and data
-  def generate_chart title, data
+  def generate_chart title, subtitle, data
     chart = LazyHighCharts::HighChart.new('column') do |f|
       f.chart({ type: 'column', marginRight: 130, marginBottom: 25 })
       f.title({ text: 'Status for ' + title, x: -20 })
       f.yAxis({ title: { text: 'Amount' }, plotLines: [{ value: 0, width: 1, color: '#808080' }] })
-      f.xAxis({ categories: ['Status'] })
+      f.xAxis({ categories: ['Status - Total: ' + subtitle] })
       f.legend({ layout: 'vertical', align: 'right', verticalAlign: 'top', x: -10, y: 100, borderWidth: 0 })
       
       f.series({ name: 'New', data: [data[0].to_f] })

@@ -38,10 +38,14 @@ class StatsController < ApplicationController
 
 		# Generate chart data
 		@charts = Array.new
-		@charts.append Stats.new.generate_chart(session[:company], entry_stats_global) # global chart first
+		@charts.append Stats.new.generate_chart(session[:company], entries.length.to_s, entry_stats_global) # global chart first
 		entry_stats.each_pair do |brand, brand_data|
 			brand_data.each_pair do |type, type_data|
-			    @charts.append Stats.new.generate_chart(brand + ' ' + type, type_data) # each brand and type sorted chart after
+				type_total = 0
+				type_data.each do |i|
+					type_total += i
+				end
+			    @charts.append Stats.new.generate_chart(brand + ' ' + type, type_total.to_s, type_data) # each brand and type sorted chart after
 			end
 		end
 	end
