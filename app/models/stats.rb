@@ -6,23 +6,23 @@ class Stats < ActiveRecord::Base
       return 6
     end
 
-    if entry.ready == 1 and processed == 0
+    if entry.ready == 1
       return 5
     end
 
-    if entry.accessoires == 1 and processed == 0
+    if entry.accessoires == 1
       return 4
     end
 
-    if entry.scrap == 1 and processed == 0
+    if entry.scrap == 1
       return 3
     end
 
-    if entry.repaired == 1 and processed == 0
+    if entry.repaired == 1
       return 2
     end
 
-    if (entry.test == 1 or (!entry.defect.nil? and entry.defect.length != 0)) and processed == 0
+    if (entry.test == 1 or (!entry.defect.nil? and entry.defect.length != 0))
       return 1
     end
 
