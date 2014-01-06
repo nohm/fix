@@ -12,7 +12,7 @@
   <%= f.password_field :current_password, :help => '(we need your current password to confirm your changes)' %>
 
   <%= f.form_group do %>
-  	<%= f.submit 'Update account', data: { disable_with: 'Updating account...' } %>
+  	<%= f.submit 'Update account', data: { disable_with: 'Updating account...' }, class: "btn btn-primary" %>
   <% end %>
 <% end %>
 

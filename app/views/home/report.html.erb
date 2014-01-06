@@ -4,7 +4,7 @@
   <legend>Report error</legend>
   <%= f.text_area :message %>
   <%= f.form_group do %>
-  	<%= f.submit 'Send report', data: { disable_with: 'Sending...' } %>
+  	<%= f.submit 'Send report', data: { disable_with: 'Sending...' }, class: "btn btn-primary" %>
   <% end %>
 <% end %>
 

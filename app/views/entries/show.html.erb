@@ -110,25 +110,33 @@
 
     <% if can? :create, Attachment %>
       <% unless @entry.attachments.length >= 10 %>
-        <a data-toggle="modal" href="#attachment-form" type="button" class="btn btn-mini btn-primary">Add attachment</a>
-        <div id="attachment-form" class="modal" style="display: none;">
-          <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
-            <div class="modal-header">
-              <a class="close" data-dismiss="modal">&#215;</a>
-              <h3>Add attachment</h3>
-            </div>
-            <div class="modal-body">
-                <%= f.file_field :attach, :label => 'Select a file..' %>
-            </div>
-            <div class="modal-footer">
-            <%= f.submit 'Add image', data: { disable_with: 'Saving...' } %>
-              <a class="btn" data-dismiss="modal" href="#">Close</a>
-            </div>
-          <% end %>
-        </div>
+        <!-- Button trigger modal -->
+        <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal">
+          Add attachment
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="modalLabel">Add attachment</h4>
+                </div>
+                <div class="modal-body">
+                  <%= f.file_field :attach, :label => 'Select a file..' %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= f.submit 'Add image', data: { disable_with: 'Saving...' }, class: "btn btn-primary" %>
+                </div>
+              <% end %>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
       <% end %>
     <% end %>
-
   </div>
 </div>
 
