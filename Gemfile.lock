@@ -177,7 +177,7 @@ DEPENDENCIES
   barby
   better_errors
   binding_of_caller
-  bootstrap-sass (~> 3.0.3.0)
+  bootstrap-sass
   bootstrap_form
   cancan
   capistrano
