@@ -5,7 +5,7 @@
     <% if @invoices.length == 0 %>
       <p>No invoices here</p>
     <% else %>
-      <table class="table table-condensed table-striped">
+      <table class="table table-condensed table-striped table-hover">
         <thead>
           <tr>
             <th>#</th>
@@ -25,13 +25,13 @@
               <td><%= invoice.created_at.to_date %></td>
                 <td>
                   <%= link_to invoice_path(invoice) do %>
-                    <i class="icon-search"></i>
+                    <span class="glyphicon glyphicon-search"></span>
                   <% end %>
                 </td>
                 <% if can? :destroy, Invoice %>
                 <td>
                   <%= link_to(invoice_path(invoice), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
-                    <i class="icon-remove"></i>
+                    <span class="glyphicon glyphicon-remove"></span>
                   <% end %>
                 </td>
               <% end %>

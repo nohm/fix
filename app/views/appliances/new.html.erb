@@ -1,6 +1,6 @@
 <% provide(:title, 'Badger - New appliance') %>
 
-<%= bootstrap_form_for :appliance, :url => appliances_path, help: :block do |f| %>
+<%= bootstrap_form_for :appliance, :url => appliances_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message "Please fix the errors below." %>
   
   <legend>New appliance</legend>
@@ -8,7 +8,9 @@
   <%= f.text_field :name %>
   <%= f.text_field :abb, :label => 'Abbrevation' %>
 
-  <%= f.primary 'Save appliance', data: { disable_with: 'Saving...' } %>
+  <%= f.form_group do %>
+  	<%= f.submit 'Save appliance', data: { disable_with: 'Saving...' } %>
+  <% end %>
 <% end %>
 
 <%= link_to "Back", appliances_path %>

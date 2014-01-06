@@ -1,6 +1,6 @@
 <% provide(:title, 'Badger - New entry') %>
 
-<%= bootstrap_form_for(@entry, :html => { :class => 'form-horizontal', :multipart => true }, help: :block) do |f| %>
+<%= bootstrap_form_for(@entry, :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
   <%= f.alert_message "Please fix the errors below." %>
   
   <legend>New entry</legend>
@@ -17,19 +17,19 @@
   <%= f.text_field :testera, label: 'First tester' %>
   <%= f.text_field :testerb, label: 'Second tester' %>
 
-  <%= f.control_group :test do %>
+  <%= f.form_group :test do %>
     <%= f.check_box :test, label: 'Test OK' %>
   <% end %>
-  <%= f.control_group :repaired do %>
+  <%= f.form_group :repaired do %>
     <%= f.check_box :repaired, label: 'Repaired' %>
   <% end %>
-  <%= f.control_group :ready do %>
+  <%= f.form_group :ready do %>
     <%= f.check_box :ready, label: 'Ready' %>
   <% end %>
-  <%= f.control_group :scrap do %>
+  <%= f.form_group :scrap do %>
     <%= f.check_box :scrap, label: 'Scrap' %>
   <% end %>
-  <%= f.control_group :accessoires do %>
+  <%= f.form_group :accessoires do %>
     <%= f.check_box :accessoires, label: 'Accessoires' %>
   <% end %>
 
@@ -41,7 +41,9 @@
 
   <p>First save the entry, then show it and there you can add images.</p>
  
-  <%= f.primary 'Save entry', data: { disable_with: 'Saving...' } %>
+  <%= f.form_group do %>
+    <%= f.submit 'Save entry', data: { disable_with: 'Saving...' } %>
+  <% end %>
 <% end %>
  
 <%= link_to 'Back', entries_path %>

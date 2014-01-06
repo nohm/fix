@@ -1,95 +1,12 @@
-<%= link_to "Badger", root_path, :class => 'brand' %>
-
-<% if user_signed_in? %>
-    <ul class="nav pull-right">
-      <li class="dropdown pull-right">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-
-          <li>
-            <%= link_to(root_path) do %>
-              <i class="icon-home icon-white"></i>Home
-            <% end %>
-          </li>
-          <li class="divider"></li>
-
-          <% if can? :see_data, Entry %>
-            <% @roles.each do |role| %>
-              <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' %>
-                <li class="dropdown-submenu">
-                  <a tabindex="-1" href="#"><%= role.name.titleize %></a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <%= link_to(entries_path(company: role.name)) do %>
-                        <i class="icon-list icon-white"></i>Entries
-                      <% end %>
-                    </li>
-                    <li>
-                      <%= link_to(invoices_path(company: role.name)) do %>
-                        <i class="icon-briefcase icon-white"></i>Invoices
-                      <% end %>
-                    </li>
-                    <% if can? :manage, Stats %>
-                      <li>
-                        <%= link_to(stats_path(company: role.name)) do %>
-                          <i class="icon-zoom-in icon-white"></i>Stats
-                        <% end %>
-                      </li>
-                    <% end %>
-                  </ul>
-                </li>
-              <% end %>
-            <% end %>
-          <% end %>
-
-          <li class="divider"></li>
-          <li>
-            <%= link_to(edit_user_registration_path) do %>
-              <i class="icon-cog icon-white"></i>Edit account
-            <% end %>
-          </li>
-          <% if can? :manage, User %>
-            <li>
-              <%= link_to(users_path) do %>
-                <i class="icon-user icon-white"></i>User panel
-              <% end %>
-            </li>
-          <% end %>
-          <% if can? :manage, Appliance %>
-            <li>
-              <%= link_to(appliances_path) do %>
-                <i class="icon-file icon-white"></i>Appliance panel
-              <% end %>
-            </li>
-          <% end %>
-          <% if can? :manage, Classifications %>
-            <li>
-              <%= link_to(classifications_path) do %>
-                <i class="icon-ok icon-white"></i>Class panel
-              <% end %>
-            </li>
-          <% end %>          
-          <% if can? :index, History %>
-            <li>
-              <%= link_to(history_index_path) do %>
-                <i class="icon-book icon-white"></i>History
-              <% end %>
-            </li>
-          <% end %>
-          <li class="divider"></li>
-          <li>
-            <%= link_to(report_path) do %>
-              <i class="icon-bell icon-white"></i>Report error
-            <% end %>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <%= link_to(destroy_user_session_path, :method => 'delete') do %>
-              <i class="icon-off icon-white"></i>Logout
-            <% end %>
-          </li>
-            
-        </ul>
-      </li>
-    </ul>
-<% end %>
+<ul class="nav navbar-nav navbar-right">
+  <li role="presentation">
+    <%= link_to(edit_user_registration_path) do %>
+      <span class="glyphicon glyphicon-cog"></span>Edit account
+    <% end %>
+  </li>
+  <li role="presentation">
+    <%= link_to(destroy_user_session_path, :method => 'delete', :role => "menuitem", :tabindex => "-1") do %>
+      <span class="glyphicon glyphicon-off"></span>Logout
+    <% end %>
+  </li>
+</ul>

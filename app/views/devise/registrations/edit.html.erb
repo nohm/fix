@@ -1,6 +1,6 @@
 <% provide(:title, 'Badger - Edit account') %>
 
-<%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }, style: :horizontal, left: "col-sm-2", right: "col-sm-6") do |f| %>
   <%= devise_error_messages! %>
 
   <legend>Edit account</legend>
@@ -11,7 +11,9 @@
   <%= f.password_field :password_confirmation %>
   <%= f.password_field :current_password, :help => '(we need your current password to confirm your changes)' %>
 
-  <%= f.primary 'Update account', data: { disable_with: 'Updating account...' } %>
+  <%= f.form_group do %>
+  	<%= f.submit 'Update account', data: { disable_with: 'Updating account...' } %>
+  <% end %>
 <% end %>
 
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>

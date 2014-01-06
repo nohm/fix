@@ -10,7 +10,6 @@
  *
  *= require_self
  *= require_tree .
- *= require bootstrap_form
 */
 
 $grayMediumLight: #eaeaea;
@@ -34,7 +33,7 @@ $grayMediumLight: #eaeaea;
 }
 
 /* give icons some extra margin to the right */
-i[class^=icon-] {
+.glyphicon {
   margin-right: 3px;
 }
 
@@ -68,9 +67,17 @@ footer {
 
 /* Invert dropdown-submenu arrow colors
    so a dark theme displays correctly */
-.dropdown-submenu > a:after {
+/*.dropdown-submenu > a:after {
   border-left-color: white !important;
 }
 .dropdown-submenu:hover > a:after {
   border-left-color: #080b0e !important;
+}*/
+
+a span {
+  color: #333
+}
+
+a span:hover {
+  color: #000
 }

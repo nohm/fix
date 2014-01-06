@@ -1,13 +1,15 @@
 <% provide(:title, 'Badger - New class') %>
 
-<%= bootstrap_form_for :classification, :url => classifications_path, help: :block do |f| %>
+<%= bootstrap_form_for :classification, :url => classifications_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message "Please fix the errors below." %>
   
   <legend>New classification</legend>
   
   <%= f.text_field :name %>
 
-  <%= f.primary 'Save classification', data: { disable_with: 'Saving...' } %>
+  <%= f.form_group do %>
+  	<%= f.submit 'Save classification', data: { disable_with: 'Saving...' } %>
+  <% end %>
 <% end %>
 
 <%= link_to "Back", classifications_path %>

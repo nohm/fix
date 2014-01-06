@@ -1,6 +1,6 @@
 <% provide(:title, 'Badger - New invoice') %>
 
-<%= bootstrap_form_for :invoice, :url => invoices_path, help: :block do |f| %>
+<%= bootstrap_form_for :invoice, :url => invoices_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message "Please fix the errors below." %>
   
   <legend>New invoice</legend>
@@ -9,7 +9,9 @@
 
   <%= f.hidden_field :company, :value => session[:company] %>
 
-  <%= f.primary 'Save invoice', data: { disable_with: 'Saving...' } %>
+  <%= f.form_group do %>
+    <%= f.submit 'Save invoice', data: { disable_with: 'Saving...' } %>
+  <% end %>
 <% end %>
 
 <%= link_to "Back", invoices_path %>

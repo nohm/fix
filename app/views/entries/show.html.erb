@@ -5,7 +5,7 @@
 <h3><%= @entry.brand + ' ' + @entry.typenum + ' ' + @appliance.name %></h3>
 
 <div class="row">
-  <div class="span6">
+  <div class="col-md-6">
     <div class="table-responsive">
       <table class="table table-condensed table-striped">
 
@@ -83,7 +83,7 @@
     </div>
   </div>
 
-  <div class="span6">
+  <div class="col-md-6">
     <div class="table-responsive">
       <table class="table table-condensed table-striped">
         <tr>
@@ -121,7 +121,7 @@
                 <%= f.file_field :attach, :label => 'Select a file..' %>
             </div>
             <div class="modal-footer">
-            <%= f.primary 'Add image', data: { disable_with: 'Saving...' } %>
+            <%= f.submit 'Add image', data: { disable_with: 'Saving...' } %>
               <a class="btn" data-dismiss="modal" href="#">Close</a>
             </div>
           <% end %>

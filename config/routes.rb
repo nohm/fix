@@ -10,7 +10,7 @@ Badger::Application.routes.draw do
   resources :classifications
   resources :history
   resources :stats
-  
+
   # Special routes for error reporting
   match 'report' => 'home#report', :as => :report, :via => :get
   match 'send_report' => 'home#send_report', :as => :send_report, :via => :post

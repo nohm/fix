@@ -5,7 +5,8 @@
     <% if @entries.length == 0 %>
       <p>No entries here</p>
     <% else %>
-      <table class="table table-condensed table-striped">
+      <div class="table-responsive">
+      <table class="table table-condensed table-striped table-hover">
         <thead>
           <tr>
             <th>Number</th>
@@ -40,32 +41,32 @@
                 <td>
                 <% unless entry.attachments.length == 0 %>
                   <%= link_to zip_path(entry) do %>
-                    <i class="icon-picture"></i>
+                    <span class="glyphicon glyphicon-picture"></span>
                   <% end %>
                 <% end %>
                 </td>
               <% end %>
               <td>
                 <%= link_to entry_path(entry) do %>
-                  <i class="icon-search"></i>
+                  <span class="glyphicon glyphicon-search"></span>
                 <% end %>
               </td>
               <% if can? :edit, Entry %>
                 <td>
                   <%= link_to sticker_path(entry) do %>
-                    <i class="icon-barcode"></i>
+                    <span class="glyphicon glyphicon-barcode"></span>
                   <% end %>
                 </td>
                 <td>
                   <%= link_to edit_entry_path(entry) do %>
-                    <i class="icon-pencil"></i>
+                    <span class="glyphicon glyphicon-pencil"></span>
                   <% end %>
                 </td>
               <% end %>
               <% if can? :destroy, Entry %>
                 <td>
                   <%= link_to(entry_path(entry), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
-                    <i class="icon-remove"></i>
+                    <span class="glyphicon glyphicon-remove"></span>
                   <% end %>
                 </td>
               <% end %>
@@ -73,6 +74,7 @@
           <% end %>
         </tbody>
       </table>
+      </div>
 
       <% if @pagination %>
         <%= paginate @entries %>
