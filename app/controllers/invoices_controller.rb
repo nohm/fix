@@ -86,13 +86,13 @@ class InvoicesController < ApplicationController
       redirect_to invoices_path, :notice => "Invoice added."
     else
       non_existing.each do |item|
-      	flash["alert#{item}"] = "#{item} doesn't exist!"
+      	flash["alert #{item}"] = "#{item} doesn't exist!"
       end
       already_sent.each do |item|
-      	flash["alert#{item}"] = "#{item} was already sent!"
+      	flash["alert #{item}"] = "#{item} was already sent!"
       end
       wrong_comp.each do |item|
-        flash["alert#{item}"] = "#{item} doesn't belong to #{session[:company]}!"
+        flash["alert #{item}"] = "#{item} doesn't belong to #{session[:company]}!"
       end
       render 'new'
     end

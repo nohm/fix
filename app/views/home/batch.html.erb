@@ -1,0 +1,66 @@
+<% provide(:title, 'Badger - Batch Update') %>
+
+<%= bootstrap_form_for :entry, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
+  <%= f.alert_message "Please fix the errors below." %>
+  
+  <legend>Batch update</legend>
+  <div class="alert alert-danger"><strong>Careful in here!</strong> You can easily mess a lot of stuff up!</div>
+
+  <%= f.text_area :ordernumbers %>
+
+  <hr/>
+
+  <%= f.select :appliance_id, @appliance_names %>
+  <%= f.text_field :brand %>
+  <%= f.text_field :typenum %>
+  <%= f.text_field :serialnum %>
+
+  <%= f.text_field :defect, label: 'What\'s broken?' %>
+  <%= f.text_field :repair, label: 'What\'s repaired?' %>
+  <%= f.text_field :ordered, label: 'Parts ordered?' %>
+
+  <%= f.text_field :testera, label: 'First tester' %>
+  <%= f.text_field :testerb, label: 'Second tester' %>
+
+  <%= f.form_group :test do %>
+    <%= f.check_box :test, label: 'Test OK' %>
+  <% end %>
+  <%= f.form_group :repaired do %>
+    <%= f.check_box :repaired, label: 'Repaired' %>
+  <% end %>
+  <%= f.form_group :ready do %>
+    <%= f.check_box :ready, label: 'Ready' %>
+  <% end %>
+  <%= f.form_group :scrap do %>
+    <%= f.check_box :scrap, label: 'Scrap' %>
+  <% end %>
+  <%= f.form_group :accessoires do %>
+    <%= f.check_box :accessoires, label: 'Accessoires' %>
+  <% end %>
+
+  <%= f.select :class_id, @class_names %>
+
+  <%= f.text_area :note %>
+
+  <%= f.hidden_field :company, :value => session[:company] %>
+
+  <%= f.form_group do %>
+    <%= f.submit 'Batch update entries', data: { disable_with: 'Saving...' }, class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+<%= link_to "Back", invoices_path %>
+
+<script>
+	var inputs = $(".form-group");
+	for (var i = 1; i < inputs.length; i++) {
+		var input = inputs[i];
+		var which_input = input.children[1].children[0].id;
+		if (which_input != "") {
+			input.innerHTML = input.innerHTML + '<div class="checkbox batch-update"><label for="' + which_input + '_enable"><input name="entry[enable][' + which_input + ']" value="0" type="hidden"><input id="' + which_input + '_enable" name="entry[enable][' + which_input + ']" value="1" type="checkbox"> Enable</label></div>';
+		} else {
+			var which_input_checkbox = input.children[1].children[0].children[0].htmlFor;
+			input.innerHTML = input.innerHTML + '<div class="checkbox batch-update"><label for="' + which_input_checkbox + '_enable"><input name="entry[enable][' + which_input_checkbox + ']" value="0" type="hidden"><input id="' + which_input_checkbox + '_enable" name="entry[enable][' + which_input_checkbox + ']" value="1" type="checkbox"> Enable</label></div>';
+		}
+	}
+</script>

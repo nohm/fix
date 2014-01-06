@@ -17,6 +17,9 @@
             <% if can? :manage, Stats %>
               <%= link_to("Stats", stats_path(company: role.name), :class => 'btn btn-primary') %>
             <% end %>
+            <% if can? :create, Entry %>
+              <%= link_to("Batch", batch_path(company: role.name), :class => 'btn btn-primary') %>
+            <% end %>
           </div>
         <% end %>
       <% end %>

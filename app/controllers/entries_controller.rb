@@ -118,6 +118,7 @@ class EntriesController < ApplicationController
   end
  
   def create
+    sdk
     authorize! :create, Entry, :message => 'You\'re not authorized for this.'
 
     entries = Entry.where(appliance_id: params[:entry][:appliance_id])
