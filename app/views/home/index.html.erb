@@ -1,35 +1,36 @@
-<div class="hero-unit center">
-  <h1>Badger</h1>
+<div class="jumbotron center">
+  <h2><strong>Badger</strong></h2>
   <p>Welcome to this data storage.</p>
   <% unless user_signed_in? %>
     <p>
-      <%= link_to("Login", new_user_session_path, :class => 'btn btn-primary btn-large') %>
-      <%= link_to("Sign up", new_user_registration_path, :class => 'btn btn-primary btn-large') %>
+      Sign in at the top.<br/>
+      Sign up at the bottom.
     </p>
   <% else %>
     <% if can? :see_data, Entry %>
       <% @roles.each do |role| %>
         <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' %>
-          <div>
-            <h5 class="button-title"><%= role.name.titleize %></h5>
-            <%= link_to("Entries", entries_path(company: role.name), :class => 'btn btn-primary') %>
-            <%= link_to("Invoices", invoices_path(company: role.name), :class => 'btn btn-primary') %>
+          <div class="col-xs-6 col-sm-3">
+            <h4><%= role.name.titleize %></h4>
+            <%= link_to("Entries", entries_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
+            <%= link_to("Invoices", invoices_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
             <% if can? :manage, Stats %>
-              <%= link_to("Stats", stats_path(company: role.name), :class => 'btn btn-primary') %>
+              <%= link_to("Stats", stats_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
             <% end %>
             <% if can? :create, Entry %>
-              <%= link_to("Batch", batch_path(company: role.name), :class => 'btn btn-primary') %>
+              <%= link_to("Batch", batch_path(company: role.name), :class => 'btn btn-primary btn-index') %>
             <% end %>
           </div>
         <% end %>
       <% end %>
       <% if can? :manage, User %>
-        <hr/>
-        <h5 class="button-title">Admin Pages</h5>
-        <%= link_to("User Panel", users_path, :class => 'btn btn-primary') %>
-        <%= link_to("Appliance Panel", appliances_path, :class => 'btn btn-primary') %>
-        <%= link_to("Class Panel", classifications_path, :class => 'btn btn-primary') %>
-        <%= link_to("History Panel", history_index_path, :class => 'btn btn-primary') %>
+        <div class="col-xs-6 col-sm-3">
+          <h4>Admin Pages</h4>
+          <%= link_to("Users", users_path, :class => 'btn btn-primary btn-index') %><br/>
+          <%= link_to("Appliances", appliances_path, :class => 'btn btn-primary btn-index') %><br/>
+          <%= link_to("Classes", classifications_path, :class => 'btn btn-primary btn-index') %><br/>
+          <%= link_to("History", history_index_path, :class => 'btn btn-primary btn-index') %>
+        </div>
       <% end %>
     <% else %>
       You will be assigned to your respective company soon.<br>
