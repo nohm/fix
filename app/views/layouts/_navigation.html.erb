@@ -1,3 +1,15 @@
+<ul class="nav navbar-nav">
+    <li role="presentation">
+        <p class="text-muted info-label">
+          <% if user_signed_in? %>
+            <%= current_user.name %>
+          <% end %>
+          <% unless session[:company].nil? %>
+            @ <%= session[:company].titleize %>
+          <% end %>
+        </p>
+    </li>
+</ul>
 <ul class="nav navbar-nav navbar-right">
   <li role="presentation">
     <%= link_to(edit_user_registration_path) do %>

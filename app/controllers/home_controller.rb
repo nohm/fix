@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+   session[:company] = nil
   end
 
   # Batch function for updating multiple entries
