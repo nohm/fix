@@ -55,6 +55,10 @@ class InvoicesController < ApplicationController
   def create
     authorize! :create, Invoice, :message => 'You\'re not authorized for this.'
 
+    if session[:company].nil?
+      redirect_to root_path, :notice => 'Please re-open the entry index'
+    end
+
     items = params[:invoice][:items]
     params[:invoice][:items] = params[:invoice][:items].lines.length
     @invoice = Invoice.new(params[:invoice].permit(:items, :company))

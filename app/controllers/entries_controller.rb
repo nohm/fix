@@ -93,6 +93,10 @@ class EntriesController < ApplicationController
   def update
     authorize! :update, Entry, :message => 'You\'re not authorized for this.'
 
+    if session[:company].nil?
+      redirect_to root_path, :notice => 'Please re-open the entry index'
+    end
+
     @entry = Entry.find(params[:id])
 
     if @entry.appliance_id == params[:entry][:appliance_id].to_i
@@ -119,6 +123,10 @@ class EntriesController < ApplicationController
  
   def create
     authorize! :create, Entry, :message => 'You\'re not authorized for this.'
+
+    if session[:company].nil?
+      redirect_to root_path, :notice => 'Please re-open the entry index'
+    end
 
     entries = Entry.where(appliance_id: params[:entry][:appliance_id])
     if entries.length == 0
