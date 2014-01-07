@@ -54,8 +54,10 @@ footer {
   padding-top: 5px
 }
 
-.button-title {
-  margin-bottom: 0
+/* Give buttons on the index some top margin */
+.btn-index {
+  min-width: 125px;
+  margin-bottom: 5px !important;
 }
 
 /* Fix bootswatch alert colors

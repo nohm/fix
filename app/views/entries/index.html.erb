@@ -93,17 +93,17 @@
   <% end %>
 
   <!-- Button trigger modal -->
-  <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal">
+  <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal-search">
     Search
   </button>
 
   <!-- Modal -->
-  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal fade" id="modal-search" tabindex="-1" role="dialog" aria-labelledby="modalLabel-search" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="modalLabel">Search</h4>
+          <h4 class="modal-title" id="modalLabel-search">Search</h4>
         </div>
         <div class="modal-body">
           <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>

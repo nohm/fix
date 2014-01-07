@@ -1,15 +1,15 @@
 class Mailer < ActionMailer::Base
-  default from: 'noreply@snack.sytes.net'
+  default from: 'noreply@nohm.eu'
  
   def send_welcome_message(user)
   	@user = user
-  	@url = "http://snack.sytes.net/badger"
+  	@url = "http://nohm.eu/badger"
     mail(to: user.email, subject: 'Welcome to Badger, ' + user.name)
   end
 
   def send_new_user_message(user)
   	@user = user
-  	@url = "http://snack.sytes.net/badger/users"
+  	@url = "http://nohm.eu/badger/users"
     mail(to: ENV["GMAIL_USERNAME"], subject: 'New sign up for Badger')
   end
 
@@ -22,7 +22,7 @@ class Mailer < ActionMailer::Base
 
   def send_role_update(user)
     @role = user.roles.first.name
-    @url = "http://snack.sytes.net/badger"
+    @url = "http://nohm.eu/badger"
     mail(to: user.email, subject: 'Badger: Role updated')
   end
 end

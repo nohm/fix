@@ -4,7 +4,7 @@
   <legend>Forgot your password?</legend>
   <%= f.email_field :email, :autofocus => true %>
 
-  <%= f.primary "Send me reset password instructions", data: { disable_with: 'Sending...' } %>
+  <%= f.submit "Send me reset password instructions", data: { disable_with: 'Sending...' } %>
 <% end %>
 
 <%= render "devise/shared/links" %>

@@ -111,18 +111,18 @@
     <% if can? :create, Attachment %>
       <% unless @entry.attachments.length >= 10 %>
         <!-- Button trigger modal -->
-        <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal">
+        <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal-attachment">
           Add attachment
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal fade" id="modal-attachment" tabindex="-1" role="dialog" aria-labelledby="modalLabel-attachment" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="modalLabel">Add attachment</h4>
+                  <h4 class="modal-title" id="modalLabel-attachment">Add attachment</h4>
                 </div>
                 <div class="modal-body">
                   <%= f.file_field :attach, :label => 'Select a file..' %>

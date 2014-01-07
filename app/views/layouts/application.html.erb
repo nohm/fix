@@ -15,14 +15,12 @@
       <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <% if user_signed_in? %>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-          <% end %>
           <%= link_to("Badger", root_path, :class => "navbar-brand") %>
         </div>
 
@@ -30,6 +28,8 @@
         <nav class="collapse navbar-collapse navbar-collapse-1" role="navigation">
           <% if user_signed_in? %>
             <%= render 'layouts/navigation' %>
+          <% else %>
+            <%= render 'layouts/signin' %>
           <% end %>
         </nav><!-- /.navbar-collapse -->
       </div>
@@ -50,8 +50,17 @@
     </div> <!--! end of #main -->
     <footer>
       <div class="container">
-        <p class="pull-right text-muted"><%= link_to("Report an error", report_path) %> - &copy; nohm 2013</p>
+        <p class="pull-right text-muted">
+          <% unless user_signed_in? %>
+            <%= render 'layouts/signup_button' %> - 
+            <%= link_to "Forgot your password?", new_password_path(:user) %> - 
+          <% end %>
+          <%= render 'layouts/report_button' %> - 
+          &copy; nohm 2013
+        </p>
       </div>
     </footer>
+    <%= render 'layouts/signup_form' %> 
+    <%= render 'layouts/report_form' %> 
   </body>
 </html>
