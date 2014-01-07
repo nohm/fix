@@ -1,7 +1,6 @@
 <% provide(:title, 'Badger - Edit account') %>
 
 <%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }, style: :horizontal, left: "col-sm-2", right: "col-sm-6") do |f| %>
-  <%= devise_error_messages! %>
 
   <legend>Edit account</legend>
 
