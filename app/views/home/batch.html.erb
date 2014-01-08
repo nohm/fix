@@ -1,10 +1,13 @@
 <% provide(:title, 'Badger - Batch Update') %>
 
-<%= bootstrap_form_for :entry, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
+<%= bootstrap_form_for :entry, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block do |f| %>
   <%= f.alert_message "Please fix the errors below." %>
   
   <legend>Batch update</legend>
-  <div class="alert alert-danger"><strong>Careful in here!</strong> You can easily mess a lot of stuff up!</div>
+  <div class="alert alert-danger">
+    <strong>Careful in here!</strong> You can easily mess a lot of stuff up!<br/>
+    Enter numbers at top, enable the boxes next to the field you'd like to use, fill the fields and save.
+  </div>
 
   <%= f.text_area :ordernumbers %>
 
@@ -57,10 +60,10 @@
 		var input = inputs[i];
 		var which_input = input.children[1].children[0].id;
 		if (which_input != "") {
-			input.innerHTML = input.innerHTML + '<div class="checkbox batch-update"><label for="' + which_input + '_enable"><input name="entry[enable][' + which_input + ']" value="0" type="hidden"><input id="' + which_input + '_enable" name="entry[enable][' + which_input + ']" value="1" type="checkbox"> Enable</label></div>';
+			input.innerHTML = input.innerHTML + '<div class="checkbox col-sm-2 batch-update"><label for="' + which_input + '_enable"><input name="entry[enable][' + which_input + ']" value="0" type="hidden"><input id="' + which_input + '_enable" name="entry[enable][' + which_input + ']" value="1" type="checkbox"> Enable</label></div>';
 		} else {
 			var which_input_checkbox = input.children[1].children[0].children[0].htmlFor;
-			input.innerHTML = input.innerHTML + '<div class="checkbox batch-update"><label for="' + which_input_checkbox + '_enable"><input name="entry[enable][' + which_input_checkbox + ']" value="0" type="hidden"><input id="' + which_input_checkbox + '_enable" name="entry[enable][' + which_input_checkbox + ']" value="1" type="checkbox"> Enable</label></div>';
+			input.innerHTML = input.innerHTML + '<div class="checkbox col-sm-2 batch-update"><label for="' + which_input_checkbox + '_enable"><input name="entry[enable][' + which_input_checkbox + ']" value="0" type="hidden"><input id="' + which_input_checkbox + '_enable" name="entry[enable][' + which_input_checkbox + ']" value="1" type="checkbox"> Enable</label></div>';
 		}
 	}
 </script>

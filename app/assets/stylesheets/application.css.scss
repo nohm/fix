@@ -37,6 +37,7 @@ $grayMediumLight: #eaeaea;
   margin-right: 3px;
 }
 
+/* Completely center an object and its text */
 .center {
   text-align: center;
   margin-left: auto;
@@ -45,13 +46,14 @@ $grayMediumLight: #eaeaea;
   margin-top: auto;
 }
 
+/* /invoices class titles need no margin */
 table h6 {
   margin: 0 !important
 }
 
 /* Copyright footer */
 footer {
-  padding-top: 5px
+  padding-top: 10px
 }
 
 /* Give buttons on the index some top margin */
@@ -67,30 +69,22 @@ footer {
   padding: 0 !important;
 }
 
-/* Invert dropdown-submenu arrow colors
-   so a dark theme displays correctly */
-/*.dropdown-submenu > a:after {
-  border-left-color: white !important;
-}
-.dropdown-submenu:hover > a:after {
-  border-left-color: #080b0e !important;
-}*/
-
+/* Give glyphicons in anchors same colors */
 a span {
   color: #333
 }
-
 a span:hover {
   color: #000
 }
 
+/* /navigation name/company label styled like an anchor */
 .info-label {
   margin: 0 !important;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 15px;
   position: relative;
 }
 
+/* /stats charts get some bottom margin */
 .stat-chart {
   margin-bottom: 50px !important;
 }
