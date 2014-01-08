@@ -25,17 +25,17 @@
       <td><%= user.roles.first.name.titleize %></td>
       <td>
         <%= link_to(user) do %>
-          <i class="icon-search"></i>
+          <span class="glyphicon glyphicon-search"></span>
         <% end %>
       </td>
       <td>
-        <a data-toggle="modal" href="#role-options-<%= user.id %>" type="button"><i class="icon-pencil"></i></a>
+        <a href="#" data-toggle="modal" data-toggle="modal" data-target="#role-options-<%= user.id %>" type="button"><span class="glyphicon glyphicon-pencil"></span></a>
         <%= render user %>
       </td>
       <td>
         <% unless user.id == current_user.id %>
           <%= link_to(user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
-            <i class="icon-remove"></i>
+            <span class="glyphicon glyphicon-remove"></span>
           <% end %>
         <% end %>
       </td>

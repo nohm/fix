@@ -1,15 +1,19 @@
-<div id="role-options-<%= user.id %>" class="modal" style="display: none;">
-  <%= form_for user, :url => user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">&#215;</a>
-      <h3>Change Role</h3>
+<div id="role-options-<%= user.id %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel-user-<%= user.id%>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= bootstrap_form_for user, :url => user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="modalLabel-user-<%= user.id%>">Change Role</h4>
+        </div>
+        <div class="modal-body">
+          <%= collection_select :user, :role_ids, Role.all, :id, :name, checked: user.role_ids.first %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit "Change Role", :class => "btn" %>
+        </div>
+      <% end %>
     </div>
-    <div class="modal-body">
-      <%= collection_select :user, :role_ids, Role.all, :id, :name, checked: user.role_ids.first %>
-    </div>
-    <div class="modal-footer">
-      <%= f.submit "Change Role", :class => "btn" %>
-      <a class="btn" data-dismiss="modal" href="#">Close</a>
-    </div>
-  <% end %>
+  </div>
 </div>
