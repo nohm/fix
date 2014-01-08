@@ -61,6 +61,7 @@
           <th>Brand</th>
           <th>Type</th>
           <th>Serial</th>
+          <th style="width:17px;"></th>
         </tr>
       </thead>
       <tbody>
@@ -68,7 +69,7 @@
           <% unless classdata.length == 0 %>
             <tr>
               <td><strong>Class <%= @classes[classdata[0].class_id - 1].name %></strong></td>
-              <td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td><td></td><td></td>
             </tr>
             <% classdata.each do |entry| %>
               <tr>
@@ -77,6 +78,15 @@
                 <td><%= entry.brand %></td>
                 <td><%= entry.typenum %></td>
                 <td><%= entry.serialnum %></td>
+                <% if entry.scrap == 1 %>
+                  <td><span class="glyphicon glyphicon-trash"></span></td>
+                <% elsif entry.repaired == 1 %>
+                  <td><span class="glyphicon glyphicon-wrench"></span></td>
+                <% elsif entry.test == 1 %>
+                  <td><span class="glyphicon glyphicon-ok"></span></td>
+                <% else %>
+                  <td></td>
+                <% end %>
               </tr>
             <% end %>
           <% end %>
