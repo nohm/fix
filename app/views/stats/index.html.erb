@@ -1,12 +1,19 @@
 <div class="hero-unit center">
-  <% @charts.each_with_index do |chart, index| %>
-    <div<% unless index == @charts.length %> style='margin-bottom:50px'<% end%>>
-      <% if index == 0 %>
-        <p>Global status</p>
-      <% elsif index == 1 %>
-        <p>Brand and type specific status</p>
-      <% end %>
-  		<%= high_chart('line_chart_' + index.to_s, chart) %>
-  	</div>
+  <% @charts.each_pair do |key, array| %>
+        <% if key == :global %>
+          <h4>Global status</h4>
+        <% end %>
+
+        <div class="col-md-6 stat-chart">
+      		<%= high_chart('pie_chart_stats_' + key.to_s, array[0]) %>
+        </div>
+
+        <div class="col-md-6 stat-chart">
+          <%= high_chart('pie_chart_status_' + key.to_s, array[1]) %>
+        </div>
+
+        <% if key == :global %>
+          <h4>Brand and type specific status</h4>
+        <% end %>
   <% end %>
 </div>
