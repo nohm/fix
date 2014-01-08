@@ -49,7 +49,7 @@ class StatsController < ApplicationController
 			if entry.scrap == 1
 				entry_stats_status[entry.brand][entry.typenum][2] = entry_stats_status[entry.brand][entry.typenum][2] + 1
 				entry_stats_status_global[2] = entry_stats_status_global[2] + 1
-			elsif entry.repair == 1
+			elsif entry.repaired == 1
 				entry_stats_status[entry.brand][entry.typenum][1] = entry_stats_status[entry.brand][entry.typenum][1] + 1
 				entry_stats_status_global[1] = entry_stats_status_global[1] + 1
 			elsif entry.test == 1
