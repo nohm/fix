@@ -38,6 +38,15 @@
       <% end %>
     <% end %>
   </dl>
+
+  <dl class="dl-horizontal">
+    <% @entry_status.each_with_index do |statusdata, index| %>
+      <% unless statusdata == 0 %>
+        <dt><%= @statuses[index] %></dt>
+        <dd><%= statusdata %></dd>
+      <% end %>
+    <% end %>
+  </dl>
 </div>
 
 <div>

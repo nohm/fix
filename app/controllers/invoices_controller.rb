@@ -15,12 +15,24 @@ class InvoicesController < ApplicationController
     @entries = Entry.where(invoice_id: params[:id])
 
     @classes = Classifications.all
+    @statuses = ['Tested', 'Repaired', 'Scrapped']
     @entry_data = Array.new
+    @entry_status = Array.new
     (0..@classes.length).each do |i|
       @entry_data[i] = Array.new
     end
+    (0..2).each do |i|
+      @entry_status[i] = 0
+    end
     @entries.each do |entry|
       @entry_data[entry.class_id].append(entry)
+      if entry.scrap == 1
+        @entry_status[2] = @entry_status[2] + 1
+      elsif entry.repaired == 1
+        @entry_status[1] = @entry_status[1] + 1
+      elsif entry.test == 1
+        @entry_status[0] = @entry_status[0] + 1
+      end
     end
 
     @appliances = Appliance.all
