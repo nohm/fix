@@ -69,10 +69,10 @@ class StatsController < ApplicationController
 				type_data.each do |i|
 					type_total += i
 				end
-				unless @charts.has_key? (brand + type.gsub(' ', '_'))
-					@charts[brand + type.gsub(' ', '_')] = Array.new
+				unless @charts.has_key? (brand + '_' + type.gsub(' ', '_'))
+					@charts[brand + '_'  + type.gsub(' ', '_')] = Array.new
 				end
-			    @charts[brand + type.gsub(' ', '_')].append Stats.new.generate_chart(brand + ' ' + type, type_total.to_s, type_data) # each brand and type sorted chart after
+			    @charts[brand + '_'  + type.gsub(' ', '_')].append Stats.new.generate_chart(brand + ' ' + type, type_total.to_s, type_data) # each brand and type sorted chart after
 			end
 		end
 		entry_stats_status.each_pair do |brand, brand_data|
@@ -82,9 +82,9 @@ class StatsController < ApplicationController
 					type_data.each do |i|
 						type_total += i
 					end
-			    	@charts[brand + type.gsub(' ', '_')].append Stats.new.generate_chart_status(brand + ' ' + type, type_total.to_s, type_data) # each brand and type sorted chart after
+			    	@charts[brand + '_'  + type.gsub(' ', '_')].append Stats.new.generate_chart_status(brand + ' ' + type, type_total.to_s, type_data) # each brand and type sorted chart after
 				else
-					@charts[brand + type.gsub(' ', '_')].append LazyHighCharts::HighChart.new('pie')
+					@charts[brand + '_'  + type.gsub(' ', '_')].append LazyHighCharts::HighChart.new('pie')
 				end
 			end
 		end

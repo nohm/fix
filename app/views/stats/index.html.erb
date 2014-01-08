@@ -4,12 +4,17 @@
           <h4>Global status</h4>
         <% end %>
 
-        <div class="col-md-6 stat-chart">
-      		<%= high_chart('pie_chart_stats_' + key.to_s, array[0]) %>
-        </div>
+        <a href="#" class="btn btn-success btn-chart" onClick="$('#charts_<%= key.to_s %>').slideToggle();$(window).trigger('resize');" id="<%= key.to_s %>">Show/Hide <%= key.to_s.gsub('_', ' ') %></a><br/>
+        <div id="charts_<%= key.to_s %>" <% unless key == :global %>style="display:none;"<% end %>>
 
-        <div class="col-md-6 stat-chart">
-          <%= high_chart('pie_chart_status_' + key.to_s, array[1]) %>
+          <div class="col-md-6 stat-chart">
+            <%= high_chart('pie_chart_stats_' + key.to_s, array[0]) %>
+          </div>
+
+          <div class="col-md-6 stat-chart">
+            <%= high_chart('pie_chart_status_' + key.to_s, array[1]) %>
+          </div>
+
         </div>
 
         <% if key == :global %>
