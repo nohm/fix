@@ -47,7 +47,7 @@ class HomeController < ApplicationController
           end
         end
       end
-      redirect_to root_path, :notice => "Batch updated!"
+      redirect_to root_path, :notice => "Batch updated #{items.lines.length} items!"
     else
       non_existing.each do |item|
         flash["alert #{item}"] = "#{item} doesn't exist!"
