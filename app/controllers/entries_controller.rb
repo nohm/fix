@@ -32,10 +32,7 @@ class EntriesController < ApplicationController
         @pagination = true
       end
       @appliances = Appliance.all
-      @statuses = Entry.select("DISTINCT status").map(&:status)
-      Entry.all.each do |entry|
-        entry.update_attribute(:status, entry.get_status)
-      end
+      @statuses = Entry.select("DISTINCT status").map(&:status).sort!
     else
       redirect_to root_path, :alert => "You\'re not authorized for this."
     end
@@ -117,7 +114,7 @@ class EntriesController < ApplicationController
       end
     end
 
-    params[:entry][:status] = @entry.get_status
+    params[:entry][:status] = Entry.new.get_status params[:entry]
       
     if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company,:status))
       redirect_to entries_path(:page => session[:page]), :notice => "Entry updated."
@@ -144,7 +141,7 @@ class EntriesController < ApplicationController
       params[:entry][:number] = entries.last.number.to_i + 1
     end
 
-    params[:entry][:status] = @entry.get_status
+    params[:entry][:status] = Entry.new.get_status params[:entry]
 
     @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company,:status))
     
