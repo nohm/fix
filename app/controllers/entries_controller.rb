@@ -2,14 +2,6 @@ class EntriesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-          Entry.where(company: session[:company]).each do |entry|
-        status = entry.get_status
-        unless @statuses.include? status
-          @statuses.append status
-        end
-        entry.update_attribute(:status, entry.get_status)
-      end
-
     authorize! :index, Entry, :message => 'You\'re not authorized for this.'
 
     unless params[:company].nil?
@@ -41,6 +33,9 @@ class EntriesController < ApplicationController
       end
       @appliances = Appliance.all
       @statuses = Entry.select("DISTINCT status").map(&:status)
+      Entry.all.each do |entry|
+        entry.update_attribute(:status, entry.get_status)
+      end
     else
       redirect_to root_path, :alert => "You\'re not authorized for this."
     end
