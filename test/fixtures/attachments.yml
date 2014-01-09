@@ -2,14 +2,14 @@
 
 one:
   entry_id: 1
-  attachment_file_name: MyString
-  attachments_file_size: MyString
-  attachment_content_type: MyString
-  attachment_updated_at: MyString
+  attach_file_name: MyString
+  attach_file_size: MyString
+  attach_content_type: MyString
+  attach_updated_at: MyString
 
 two:
   entry_id: 1
-  attachment_file_name: MyString
-  attachments_file_size: MyString
-  attachment_content_type: MyString
-  attachment_updated_at: MyString
+  attach_file_name: MyString
+  attach_file_size: MyString
+  attach_content_type: MyString
+  attach_updated_at: MyString

@@ -11,6 +11,7 @@ Badger::Application.routes.draw do
   resources :history
   resources :stats
 
+  # Special routes for batch updating
   match 'batch' => 'home#batch', :as => :batch, :via => :get
   match 'batch' => 'home#batch_update', :as => :batch_update, :via => :post
 
