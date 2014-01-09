@@ -10,6 +10,7 @@ class EntriesController < ApplicationController
     unless params[:page].nil?
       session[:page] = params[:page]
     end
+    
     if !session[:company].nil? and (can? :index, Entry or current_user.roles.first.name == session[:company])
       if params[:searchnum]
         begin
@@ -24,11 +25,27 @@ class EntriesController < ApplicationController
         @entries = Entry.where('typenum LIKE ? AND company = ?', params[:searchtype], session[:company])
       elsif params[:searchserial]
         @entries = Entry.where('serialnum LIKE ? AND company = ?', params[:searchserial], session[:company])
+      elsif params[:searchstatus]
+        @entries_unsorted = Entry.where(company: session[:company])
+        @entries = Array.new
+        @entries_unsorted.each do |entry|
+          if entry.get_status == params[:searchstatus]
+            @entries.append entry
+          end
+        end
       else
         @entries = Entry.where(company: session[:company]).page(params[:page]).per(25)
         @pagination = true
       end
       @appliances = Appliance.all
+      @statuses = Array.new
+      Entry.where(company: session[:company]).each do |entry|
+        status = entry.get_status
+        unless @statuses.include? status
+          @statuses.append status
+        end
+      end
+      @statuses.sort!
     else
       redirect_to root_path, :alert => "You\'re not authorized for this."
     end

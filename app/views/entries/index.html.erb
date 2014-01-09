@@ -82,7 +82,7 @@
     <% end %>
 
     <% unless @pagination %>
-      <%= link_to('Back to overview', entries_path, :class => 'btn btn-mini btn-primary') %>
+      <%= link_to('Back to overview', entries_path(company: session[:company]), :class => 'btn btn-mini btn-primary') %>
       <br>
       <br>
     <% end %>
@@ -92,52 +92,61 @@
     <%= link_to("Add entry", new_entry_path, :class => 'btn btn-mini btn-primary') %>
   <% end %>
 
-  <!-- Button trigger modal -->
-  <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal-search">
-    Search
-  </button>
+  <% if @pagination %>
+    <!-- Button trigger modal -->
+    <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal-search">
+      Search
+    </button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="modal-search" tabindex="-1" role="dialog" aria-labelledby="modalLabel-search" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="modalLabel-search">Search</h4>
-        </div>
-        <div class="modal-body">
-          <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
-              <p>  
-                <%= text_field_tag :searchnum, params[:searchnum], :placeholder => 'Search number..' %>
-                <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
-                <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
-              </p>  
-            <% end %>
+    <!-- Modal -->
+    <div class="modal fade" id="modal-search" tabindex="-1" role="dialog" aria-labelledby="modalLabel-search" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="modalLabel-search">Search</h4>
+          </div>
+          <div class="modal-body">
             <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
-              <p>  
-                <%= text_field_tag :searchbrand, params[:searchbrand], :placeholder => 'Search brand..' %>
-                <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
-                <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
-              </p>  
-            <% end %>
-            <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
-              <p>  
-                <%= text_field_tag :searchtype, params[:searchtype], :placeholder => 'Search type..' %>
-                <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
-                <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
-              </p>  
-            <% end %>
-            <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
-              <p>  
-                <%= text_field_tag :searchserial, params[:searchserial], :placeholder => 'Search serial..' %>
-                <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
-                <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
-              </p>  
-            <% end %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+                <p>  
+                  <%= text_field_tag :searchnum, params[:searchnum], :placeholder => 'Search number..' %>
+                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+                  <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+                </p>  
+              <% end %>
+              <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+                <p>  
+                  <%= text_field_tag :searchbrand, params[:searchbrand], :placeholder => 'Search brand..' %>
+                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+                  <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+                </p>  
+              <% end %>
+              <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+                <p>  
+                  <%= text_field_tag :searchtype, params[:searchtype], :placeholder => 'Search type..' %>
+                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+                  <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+                </p>  
+              <% end %>
+              <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+                <p>  
+                  <%= text_field_tag :searchserial, params[:searchserial], :placeholder => 'Search serial..' %>
+                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+                  <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+                </p>  
+              <% end %>
+              <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+                <p>  
+                  <%= select_tag :searchstatus, options_for_select(@statuses) %>
+                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
+                  <%= submit_tag "Search", :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
+                </p>  
+              <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+  <% end %>
