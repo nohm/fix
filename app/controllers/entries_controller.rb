@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
   before_filter :authenticate_user!
 
+  # TODO: Make this function better / quicker
   def index
     authorize! :index, Entry, :message => 'You\'re not authorized for this.'
 
@@ -10,7 +11,7 @@ class EntriesController < ApplicationController
     unless params[:page].nil?
       session[:page] = params[:page]
     end
-    
+
     if !session[:company].nil? and (can? :index, Entry or current_user.roles.first.name == session[:company])
       if params[:searchnum]
         begin
