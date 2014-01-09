@@ -2,8 +2,8 @@
 
 one:
   items: MyString
-  date: 2013-09-11 10:59:14
+  company: MyString
 
 two:
   items: MyString
-  date: 2013-09-11 10:59:14
+  company: MyString
