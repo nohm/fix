@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212092414) do
+ActiveRecord::Schema.define(version: 20140109114027) do
 
   create_table "appliances", force: true do |t|
     t.string   "name"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20131212092414) do
     t.string   "testera"
     t.string   "testerb"
     t.integer  "class_id"
+    t.string   "status"
   end
 
   create_table "histories", force: true do |t|

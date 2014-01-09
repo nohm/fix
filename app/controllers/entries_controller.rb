@@ -1,8 +1,15 @@
 class EntriesController < ApplicationController
   before_filter :authenticate_user!
 
-  # TODO: Make this function better / quicker
   def index
+          Entry.where(company: session[:company]).each do |entry|
+        status = entry.get_status
+        unless @statuses.include? status
+          @statuses.append status
+        end
+        entry.update_attribute(:status, entry.get_status)
+      end
+
     authorize! :index, Entry, :message => 'You\'re not authorized for this.'
 
     unless params[:company].nil?
@@ -27,26 +34,13 @@ class EntriesController < ApplicationController
       elsif params[:searchserial]
         @entries = Entry.where('serialnum LIKE ? AND company = ?', params[:searchserial], session[:company])
       elsif params[:searchstatus]
-        @entries_unsorted = Entry.where(company: session[:company])
-        @entries = Array.new
-        @entries_unsorted.each do |entry|
-          if entry.get_status == params[:searchstatus]
-            @entries.append entry
-          end
-        end
+        @entries = Entry.where(status: params[:searchstatus], company: session[:company])
       else
         @entries = Entry.where(company: session[:company]).page(params[:page]).per(25)
         @pagination = true
       end
       @appliances = Appliance.all
-      @statuses = Array.new
-      Entry.where(company: session[:company]).each do |entry|
-        status = entry.get_status
-        unless @statuses.include? status
-          @statuses.append status
-        end
-      end
-      @statuses.sort!
+      @statuses = Entry.select("DISTINCT status").map(&:status)
     else
       redirect_to root_path, :alert => "You\'re not authorized for this."
     end
@@ -127,12 +121,14 @@ class EntriesController < ApplicationController
         params[:entry][:number] = entries.last.number.to_i + 1
       end
     end
+
+    params[:entry][:status] = @entry.get_status
       
-    if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company))
+    if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company,:status))
       redirect_to entries_path(:page => session[:page]), :notice => "Entry updated."
     else
       @appliance_names = Appliance.pluck(:name, :id)
-    @class_names = Classifications.pluck(:name, :id)
+      @class_names = Classifications.pluck(:name, :id)
       render 'edit'
     end
 
@@ -153,7 +149,9 @@ class EntriesController < ApplicationController
       params[:entry][:number] = entries.last.number.to_i + 1
     end
 
-    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company))
+    params[:entry][:status] = @entry.get_status
+
+    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company,:status))
     
     if @entry.save
       redirect_to entries_path(:page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages), :notice => "Entry added."

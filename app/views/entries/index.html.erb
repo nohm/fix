@@ -36,7 +36,7 @@
               <td><%= entry.brand %></td>
               <td><%= entry.typenum %></td>
               <td><%= entry.serialnum %></td>
-              <td><%= entry.get_status %></td>
+              <td><%= entry.status %></td>
               <% if can? :zip, Entry %>
                 <td>
                 <% unless entry.attachments.length == 0 %>
