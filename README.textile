@@ -1,4 +1,4 @@
-h1. Badger
+h1. Badger !https://travis-ci.org/nohm/badger.png?branch=master!:https://travis-ci.org/nohm/badger
 
 This is a data storage project build for the company I work at, it's fully open source if you care for using it and should be easy to setup
 
