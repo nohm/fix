@@ -20,15 +20,15 @@ class EntriesController < ApplicationController
           redirect_to entries_path, :alert => "Entry not found with number #{params[:searchnum]}."
         end
       elsif params[:searchbrand]
-        @entries = Entry.where('brand LIKE ? AND company = ?', params[:searchbrand], session[:company])
+        @entries = Entry.where('brand LIKE ? AND company = ?', params[:searchbrand], session[:company]).order('id ASC')
       elsif params[:searchtype]
-        @entries = Entry.where('typenum LIKE ? AND company = ?', params[:searchtype], session[:company])
+        @entries = Entry.where('typenum LIKE ? AND company = ?', params[:searchtype], session[:company]).order('id ASC')
       elsif params[:searchserial]
-        @entries = Entry.where('serialnum LIKE ? AND company = ?', params[:searchserial], session[:company])
+        @entries = Entry.where('serialnum LIKE ? AND company = ?', params[:searchserial], session[:company]).order('id ASC')
       elsif params[:searchstatus]
-        @entries = Entry.where(status: params[:searchstatus], company: session[:company])
+        @entries = Entry.where(status: params[:searchstatus], company: session[:company]).order('id ASC')
       else
-        @entries = Entry.where(company: session[:company]).page(params[:page]).per(25)
+        @entries = Entry.where(company: session[:company]).order('id ASC').page(params[:page]).per(25)
         @pagination = true
       end
       @appliances = Appliance.all

@@ -12,7 +12,7 @@ class InvoicesController < ApplicationController
 
     @invoice = Invoice.find(params[:id])
 
-    @entries = Entry.where(invoice_id: params[:id])
+    @entries = Entry.where(invoice_id: params[:id]).order('id ASC')
 
     @classes = Classifications.all
     @statuses = ['Tested', 'Repaired', 'Scrapped']
@@ -46,7 +46,7 @@ class InvoicesController < ApplicationController
       session[:company] = params[:company]
     end
     if !session[:company].nil? and (can? :create, Entry or current_user.roles.first.name == session[:company])
-      @invoices = Invoice.where(company: session[:company]).page(params[:page]).per(25)
+      @invoices = Invoice.where(company: session[:company]).order('id ASC').page(params[:page]).per(25)
     else
       redirect_to root_path, :alert => "You\'re not authorized for this"
     end
