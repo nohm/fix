@@ -1,5 +1,5 @@
-<div class="jumbotron center">
-  <h2><strong>Badger</strong></h2>
+<div class="center">
+  <h2>Badger</h2>
   <p>Welcome to this data storage.</p>
   <% unless user_signed_in? %>
     <p>
@@ -22,15 +22,6 @@
             <% end %>
           </div>
         <% end %>
-      <% end %>
-      <% if can? :manage, User %>
-        <div class="col-xs-6 col-sm-3">
-          <h4>Admin Pages</h4>
-          <%= link_to("Users", users_path, :class => 'btn btn-primary btn-index') %><br/>
-          <%= link_to("Appliances", appliances_path, :class => 'btn btn-primary btn-index') %><br/>
-          <%= link_to("Classes", classifications_path, :class => 'btn btn-primary btn-index') %><br/>
-          <%= link_to("History", history_index_path, :class => 'btn btn-primary btn-index') %>
-        </div>
       <% end %>
     <% else %>
       You will be assigned to your respective company soon.<br>

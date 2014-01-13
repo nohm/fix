@@ -92,14 +92,22 @@ a span:hover {
   margin-bottom: 50px !important;
 }
 
-.bs-footer {
-  display:block;
-  padding-top: 40px;
-  padding-bottom: 30px;
-  margin-top: 100px;
+/* Reset content background */
+.content {
+  background-color: #fff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Footer styling */
+footer {
+  margin-top: 40px;
+  background-color: #F8F8F8;
   color: #777;
   text-align: center;
   border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
 .footer-links {
   margin: 10px 0;
@@ -114,10 +122,10 @@ a span:hover {
 }
 
 @media (min-width: 768px) {
-  .bs-footer {
+  footer {
     text-align: left;
   }
-  .bs-footer p {
+  footer p {
     margin-bottom: 0;
   }
 }

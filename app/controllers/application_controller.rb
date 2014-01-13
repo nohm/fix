@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
-  before_filter :role_list
+  before_filter :role_list, :request_timer, :build_subtitle
   def role_list
   	unless current_user.nil?
 	    if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin
@@ -16,6 +16,21 @@ class ApplicationController < ActionController::Base
 	    	@roles = Role.where(name: current_user.roles.first.name)
 	    end
 	  end
+  end
+
+  def request_timer
+    @time = Time.now.to_f
+  end
+
+  def build_subtitle
+    @subtitle = ''
+    if user_signed_in?
+      @subtitle = current_user.name
+    end
+    unless session[:company].nil?
+      @subtitle ='@' + session[:company].titleize
+    end
+    @subtitle
   end
 
 end

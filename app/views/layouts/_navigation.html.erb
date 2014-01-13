@@ -1,12 +1,7 @@
 <ul class="nav navbar-nav">
     <li role="presentation">
         <p class="text-muted info-label">
-          <% if user_signed_in? %>
-            <%= current_user.name %>
-          <% end %>
-          <% unless session[:company].nil? %>
-            @ <%= session[:company].titleize %>
-          <% end %>
+          <%= @subtitle %>
         </p>
     </li>
 </ul>
