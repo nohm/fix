@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
       @subtitle = current_user.name
     end
     unless session[:company].nil?
-      @subtitle ='@' + session[:company].titleize
+      @subtitle = @subtitle + ' @ ' + session[:company].titleize
     end
     @subtitle
   end
