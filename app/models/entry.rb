@@ -6,6 +6,7 @@ class Entry < ActiveRecord::Base
   validates :brand, presence: true
   validates :typenum, presence: true
   validates :serialnum, presence: true
+  validates :company, presence: true
 
   before_save :format_input
 

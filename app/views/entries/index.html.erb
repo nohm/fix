@@ -52,7 +52,7 @@
                 <% end %>
               </td>
               <% if can? :edit, Entry %>
-                <td>
+                <td data-no-turbolink>
                   <%= link_to sticker_path(entry) do %>
                     <span class="glyphicon glyphicon-barcode"></span>
                   <% end %>
