@@ -50,22 +50,16 @@
     </div> <!--! end of #main -->
     <footer class="bs-footer">
       <div class="container">
-            <div class="bs-social">
-        <ul class="bs-social-buttons"></ul>
-    </div>
-    <p></p>
-    <p>&copy; nohm 2013</p>
-    <ul class="footer-links">
-          <% unless user_signed_in? %>
-        <li><%= render 'layouts/signup/button' %></li>
-        <li class="muted"> · </li>
-        <li><%= link_to "Forgot your password?", new_password_path(:user) %></li>
-        <li class="muted"> · </li>
-        <% end %>
-        <li><%= render 'layouts/report/button' %></li>
-    </ul>
-
-</div>
+        <p>Made and maintained by <a href="mailto:info@nohm.eu">nohm</a></p>
+        <ul class="footer-links">
+            <% unless user_signed_in? %>
+              <li><%= render 'layouts/signup/button' %></li>
+              <li class="muted"> · </li>
+              <li><%= link_to "Forgot your password?", new_password_path(:user) %></li>
+              <li class="muted"> · </li>
+            <% end %>
+            <li><%= render 'layouts/report/button' %></li>
+        </ul>
       </div>
     </footer>
     <%= render 'layouts/signup/form' %> 
