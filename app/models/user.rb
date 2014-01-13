@@ -5,6 +5,22 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def admin?
+    self.has_role? :admin
+  end
+
+  def manager?
+    self.admin? or self.has_role? :manager
+  end
+
+  def staff?
+    self.manager? or self.has_role? :technician
+  end
+
+  def supplier?
+    self.has_role? :vitel or self..roles.first.name == "maxi-outlet" or self.has_role? :tronex or self.has_role? :ahead
+  end
+
   after_create :default_role, :welcome_mail, :notify_admin
 
   private
