@@ -2,6 +2,12 @@
     <li role="presentation">
         <p class="text-muted info-label">
           <%= @subtitle %>
+          <% if user_signed_in? %>
+            <%= current_user.name %>
+          <% end %>
+          <% unless session[:company].nil? %>
+            <%= ' @ ' + session[:company].titleize %>
+          <% end %>
         </p>
     </li>
 </ul>

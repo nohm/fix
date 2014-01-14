@@ -52,10 +52,12 @@
     <footer>
       <div class="container">
         <p>Made and maintained by <a href="mailto:info@nohm.eu">nohm</a></p>
-        <p>
-          <code>uptime <%= %x[uptime | awk '{print $3":"$1}'] %></code>
-          <code>response <%= "%.2f" % (Time.now.to_f - @time + 0.02) %></code>
-        </p>
+        <% if can? :manage, User %>
+          <p>
+            <code>uptime <%= %x[uptime | awk '{print $3":"$1}'] %></code>
+            <code>response <%= "%.2f" % (Time.now.to_f - @time + 0.02) %></code>
+          </p>
+        <% end %>
         <ul class="footer-links">
             <% unless user_signed_in? %>
               <li><%= render 'layouts/signup/button' %></li>
