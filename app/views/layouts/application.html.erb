@@ -82,7 +82,9 @@
       </div>
     </footer>
 
-    <%= render 'layouts/signup/form' %> 
+    <% unless user_signed_in? %>
+      <%= render 'layouts/signup/form' %> 
+    <% end %>
     <%= render 'layouts/report/form' %> 
   </body>
 </html>
