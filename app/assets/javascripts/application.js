@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require bootstrap/modal
+//= require bootstrap/alert
+//= require bootstrap/button
+//= require bootstrap/collapse
+//= require bootstrap/transition
 //= require highcharts/highcharts
 //= require turbolinks
