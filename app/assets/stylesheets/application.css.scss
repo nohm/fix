@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap_and_overrides
+ *= require_tree .
 */
 
 .content {
@@ -120,4 +120,43 @@ footer {
   footer p {
     margin-bottom: 0;
   }
+}
+
+body {
+    min-height: 100%;
+  min-width: 100%;
+}
+
+/* Landing page */
+.landing {
+  padding: 0;
+  background: url(../header-bg.jpg) no-repeat center;
+}
+
+.landing #headerwrap {
+  margin-top: -10px;
+  padding-top: 20px;
+  text-align: center;
+  min-height: 700px;
+  width: 100%;
+}
+
+.landing #headerwrap h1 {
+  margin-top: 50px;
+  font-size: 80px;
+  font-weight: 700;
+}
+
+.landing #headerwrap h1, #headerwrap h2 {
+  color: #fafafa;
+}
+
+.landing .btn-signup {
+  padding: 5px 12px !important;
+}
+
+.landing .btn-report {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
-  before_filter :role_list, :request_timer
+  before_filter :role_list, :logged_in
   def role_list
   	unless current_user.nil?
 	    if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin
@@ -18,7 +18,9 @@ class ApplicationController < ActionController::Base
 	  end
   end
 
-  def request_timer
-    @time = Time.now.to_f
+  def logged_in
+    unless user_signed_in?
+      @logged_in = 'landing'
+    end
   end
 end
