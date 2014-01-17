@@ -1,0 +1,29 @@
+<%= stylesheet_link_tag "landing" %>
+
+<div id="headerwrap">
+	<div class="container">
+		<br>
+		<h1>Badger</h1>
+		<h2>Welcome to this data storage.</h2>
+		<div class="row">
+			<br>
+			<br>
+			<div>
+				<%= bootstrap_form_for(:user, :as => :user, :url => user_session_path, :html => { :class => 'navbar-form' }, help: :block) do |f| %>
+			    <%= f.email_field :email, hide_label: :true, placeholder: 'Email', :autofocus => true %>
+		  	  <%= f.password_field :password, hide_label: :true, placeholder: 'Password' %>
+	   		  <%= f.hidden_field :remember_me, :value => "1" %>
+  			  <%= f.submit 'Sign in', data: { disable_with: 'Signing in...' }, class: "btn btn-success" %>
+          <%= render 'layouts/signup/button' %>
+				<% end %>
+			</div>
+		</div>
+  </div><!-- /container -->
+</div><!-- /headerwrap -->
+
+<!-- Report button with extra classes -->
+<a href="#" class="btn btn-warning btn-report" data-toggle="modal" data-target="#modal-report">
+  Report a problem
+</a>
+
+<%= render 'layouts/signup/form' %> 

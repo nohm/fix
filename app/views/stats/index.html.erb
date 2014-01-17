@@ -1,3 +1,5 @@
+<% provide(:title, 'Badger - Stats for ' + session[:company]) %>
+
 <div class="hero-unit center">
   <% @charts.each_pair do |key, array| %>
         <% if key == :global %>
