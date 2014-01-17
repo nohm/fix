@@ -1,9 +1,18 @@
-<div>
-  <p style="margin-left:12px">
-    <%= @barcode %>
-  </p>
-  <h1 style="margin-left:19px;font-size:25px;margin-top:-30px">
-    <%= @abb %>
-    <%= @number %>
-  </h1>
-</div>
+<html>
+  <head>
+    <title>
+      <%= @abb %><%= @number %>
+    </title>
+  </head>
+  <body onload="window.print()">
+    <div>
+  	  <p style="margin-left:12px">
+  	    <%= @barcode %>
+  	  </p>
+  	  <h1 style="margin-left:19px;font-size:25px;margin-top:-30px">
+  	    <%= @abb %>
+  	    <%= @number %>
+  	  </h1>
+  	</div>
+	</body>
+</html>

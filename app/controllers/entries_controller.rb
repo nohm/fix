@@ -50,16 +50,16 @@ class EntriesController < ApplicationController
     authorize! :show, Entry, :message => 'You\'re not authorized for this.'
 
     @entry = Entry.find(params[:id])
-    @appliance = Appliance.where(id: @entry.appliance_id).first
-    @classification = Classifications.where(id: @entry.class_id).first
-    @invoice = Invoice.where(id: @entry.invoice_id).first
+    @appliance = Appliance.find(@entry.appliance_id)
+    @classification = Classifications.find(@entry.class_id)
+    @invoice = Invoice.find(@entry.invoice_id)
   end
 
   def zip
     authorize! :zip, Entry, :message => 'You\'re not authorized for this.'
 
     @entry = Entry.find(params[:id])
-    @appliance = Appliance.where(id: @entry.appliance_id).first
+    @appliance = Appliance.find(@entry.appliance_id)
     temp_file  = Tempfile.new("#{@entry.id}-#{@entry.number}")
     @entry.zip_images(temp_file)
     send_file temp_file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s}-images.zip"
@@ -70,7 +70,7 @@ class EntriesController < ApplicationController
     authorize! :sticker, Entry, :message => 'You\'re not authorized for this.'
 
     entry = Entry.find(params[:id])
-    appliance = Appliance.where(id: entry.appliance_id).first
+    appliance = Appliance.find(entry.appliance_id)
     @abb = entry.company[0].upcase! + appliance.abb
     @number = entry.number.to_s
     @barcode = entry.get_barcode(@abb + @number).html_safe
@@ -81,7 +81,7 @@ class EntriesController < ApplicationController
     authorize! :entryhistory, Entry, :message => 'You\'re not authorized for this.'
 
     @entry = Entry.find(params[:id])
-    @appliance = Appliance.where(id: @entry.appliance_id).first
+    @appliance = Appliance.find(@entry.appliance_id)
     @history = History.where(entry_id: params[:id])
     @users = User.all
   end
