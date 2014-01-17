@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
-  before_filter :role_list, :logged_in
+  before_filter :role_list, :is_landing
   def role_list
   	unless current_user.nil?
 	    if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin
@@ -18,9 +18,9 @@ class ApplicationController < ActionController::Base
 	  end
   end
 
-  def logged_in
+  def is_landing
     unless user_signed_in?
-      @logged_in = 'landing'
+      @landing = 'landing'
     end
   end
 end
