@@ -11,7 +11,6 @@ module Badger
 
     config.generators do |g|
       
-      
     end
 
     # Settings in config/environments/* take precedence over those specified here.

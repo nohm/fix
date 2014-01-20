@@ -20,12 +20,13 @@ gem 'has_barcode'
 gem 'rubyzip'
 gem 'kaminari'
 gem 'lazy_high_charts'
+
 group :assets do
   gem 'therubyracer', :platform=>:ruby
 end
+
 group :development do
   gem 'puma'
-  gem 'capistrano'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'quiet_assets'

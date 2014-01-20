@@ -81,7 +81,52 @@ a span:hover {
 
 /* /stats charts get some bottom margin */
 .stat-chart {
-  margin-bottom: 50px !important;
+  margin-top: 15px !important;
+  margin-bottom: 30px !important;
+}
+
+.stat-toggle {
+  margin-bottom: 30px !important;
+}
+
+/* Custom colours for stat progress bars */
+.stat-colour-new {
+  color: #16a085 !important;  
+  background-color: #16a085 !important; 
+}
+
+.stat-colour-tested {
+  color: #27ae60 !important;
+  background-color: #27ae60 !important;
+}
+
+.stat-colour-repaired {
+  color: #2980b9 !important;
+  background-color: #2980b9 !important;
+}
+
+.stat-colour-scrap {
+  color: #8e44ad !important;
+  background-color: #8e44ad !important;
+}
+
+.stat-colour-waiting {
+  color: #f39c12 !important;
+  background-color: #f39c12 !important;
+}
+
+.stat-colour-ready {
+  color: #d35400 !important;
+  background-color: #d35400 !important;
+}
+
+.stat-colour-sent {
+  color: #c0392b !important;
+  background-color: #c0392b !important;
+}
+
+.stat-colour-none {
+  background-color: transparent !important
 }
 
 /* Reset content background */

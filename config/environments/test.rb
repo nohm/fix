@@ -32,7 +32,7 @@ Badger::Application.configure do
   config.action_mailer.delivery_method = :test
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'snack.sytes.net' }
+  config.action_mailer.default_url_options = { :host => 'nohm.eu' }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
