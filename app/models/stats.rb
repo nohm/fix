@@ -109,6 +109,7 @@ class Stats < ActiveRecord::Base
       (0..length).each do |i|
         bar << build_label(((data[i].to_f / count.to_f) * 100.0).round(1).to_s, data[i].to_s, labels[i])
       end
+      bar << "<tr><td>100%</td><td>(#{count})</td><td>Total</td><td></td>"
       bar << '</table>'
   end
 
