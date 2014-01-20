@@ -52,7 +52,9 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @appliance = Appliance.find(@entry.appliance_id)
     @classification = Classifications.find(@entry.class_id)
-    @invoice = Invoice.find(@entry.invoice_id)
+    unless @entry.invoice_id.nil?
+      @invoice = Invoice.find(@entry.invoice_id)
+    end
   end
 
   def zip
