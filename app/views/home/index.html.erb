@@ -8,8 +8,13 @@
     </p>
   <% else %>
     <% if can? :see_data, Entry %>
+      <% if current_user.guest? %>   
+        <div class="alert alert-success">
+          <Strong>Welcome guest!</strong>You will be able to use most functions a technician can use for managing this program, there are even more features but you'd have to be an admin for that, and that is something that's off-limits to guests.
+        </div>
+      <% end %>
       <% @roles.each do |role| %>
-        <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' %>
+        <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' or (role.name == 'guest' and current_user.staff?) %>
           <div class="col-xs-6 col-sm-3">
             <h4><%= role.name.titleize %></h4>
             <%= link_to("Entries", entries_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>

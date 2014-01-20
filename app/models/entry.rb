@@ -9,11 +9,50 @@ class Entry < ActiveRecord::Base
   validates :company, presence: true
 
   before_save :format_input
+  after_save :update_status
 
   def format_input
     self.brand = self.brand.titleize #stupid missing bang
     self.typenum.upcase!
     self.serialnum.upcase!
+  end
+
+  def update_status
+    new_status = get_status
+    unless new_status == self.status
+      self.update_attribute(:status, new_status)
+    end
+  end
+
+  def get_status
+    status = 'New'
+
+    if self.test == 1 or (!self.defect.nil? and self.defect.length != 0)
+      status = 'Tested'
+    end
+
+    if self.repaired == 1
+      status = 'Repaired'
+    end
+
+    if self.scrap == 1
+      status = 'Scrap'
+    end
+
+    if self.accessoires == 1
+      status = 'Waiting for accessoires'
+    end
+
+    if self.ready == 1
+      status = 'Ready'
+    end
+
+    if self.sent == 1
+      status = 'Sent ' + Invoice.where(id: self.invoice_id).first.created_at.to_date.to_s
+    end
+
+    # return status
+    status
   end
 
   def get_barcode(number)
@@ -34,36 +73,5 @@ class Entry < ActiveRecord::Base
         zos.print IO.read(attachment.attach.path)
       end
     end
-  end
-
-  def get_status data
-    status = 'New'
-
-    if data[:test] == "1" or (!data[:defect].nil? and data[:defect].length != 0)
-      status = 'Tested'
-    end
-
-    if data[:repaired] == "1"
-      status = 'Repaired'
-    end
-
-    if data[:scrap] == "1"
-      status = 'Scrap'
-    end
-
-    if data[:accessoires] == "1"
-      status = 'Waiting for accessoires'
-    end
-
-    if data[:ready] == "1"
-      status = 'Ready'
-    end
-
-    if data[:sent] == "1"
-      status = 'Sent ' + Invoice.where(id: data[:invoice_id]).first.created_at.to_date.to_s
-    end
-
-    # return status
-    status
   end
 end

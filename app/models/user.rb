@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     self.has_role? :vitel or self..roles.first.name == "maxi-outlet" or self.has_role? :tronex or self.has_role? :ahead
   end
 
+  def guest?
+    self.has_role? :guest
+  end
+
   after_create :default_role, :welcome_mail, :notify_admin
 
   private

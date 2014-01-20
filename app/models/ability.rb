@@ -19,11 +19,17 @@ class Ability
       cannot [:entryhistory, :destroy], Entry
       can [:create, :destroy], Attachment
 
-    elsif user.has_role? :vitel or user.roles.first.name == 'maxi-outlet' or user.has_role? :tronex or user.has_role? :ahead
+    elsif user.has_role? :vitel or user.has_role? :maxioutlet or user.has_role? :tronex or user.has_role? :ahead
       can :see_data, :all
       can [:index, :show], [Entry, Invoice, Attachment]
       can :zip, Entry
       can :manage, Stats
+
+    elsif user.has_role? :guest
+      can :see_data, :all
+      can :manage, [Entry, Stats]
+      cannot [:entryhistory, :destroy], Entry
+      can [:create, :destroy], Attachment
 
     elsif user.has_role? :user
       # ...

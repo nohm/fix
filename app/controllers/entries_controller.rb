@@ -113,8 +113,6 @@ class EntriesController < ApplicationController
         params[:entry][:number] = entries.last.number.to_i + 1
       end
     end
-
-    params[:entry][:status] = Entry.new.get_status params[:entry]
       
     if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company,:status))
       redirect_to entries_path(:page => session[:page]), :notice => "Entry updated."
@@ -140,8 +138,6 @@ class EntriesController < ApplicationController
     else 
       params[:entry][:number] = entries.last.number.to_i + 1
     end
-
-    params[:entry][:status] = Entry.new.get_status params[:entry]
 
     @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company,:status))
     
