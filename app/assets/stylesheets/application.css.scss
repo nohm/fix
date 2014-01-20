@@ -174,8 +174,9 @@ body {
 
 /* Landing page */
 .landing {
+  position: relative;
   padding: 0;
-  background: url(../assets/header-bg.jpg) no-repeat center;
+  background-color: #fafafa;
 }
 
 .landing #headerwrap {
@@ -187,13 +188,12 @@ body {
 }
 
 .landing #headerwrap h1 {
-  margin-top: 50px;
   font-size: 80px;
   font-weight: 700;
 }
 
 .landing #headerwrap h1, #headerwrap h2 {
-  color: #fafafa;
+  color: #232323;
 }
 
 .landing .btn-signup {
@@ -202,6 +202,335 @@ body {
 
 .landing .btn-report {
   position: absolute;
-  top: 10px;
+  top: 20px;
   right: 10px;
+}
+
+.wrapper {
+    position: absolute;
+    z-index: 1;
+    width: 290px;
+    top: 66%;
+    left: 50%;
+    margin-top: -330px;
+    margin-left: -145px;
+}
+
+/* Washing machine */
+.washingmachine {
+    position: absolute;
+    height: 380px;
+    width: 290px;
+    border-top: 14px solid #97BDAF;
+    border-radius: 4px;
+    background-color: #E4F2ED;
+}
+
+/* Shadow */
+.washingmachine:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: 20px;
+    left: 50%;
+    margin-left: -145px;
+    width: 290px;
+    height: 20px;
+    -webkit-box-shadow: 0 20px 40px 30px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow:    0 20px 40px 30px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow:     0 20px 40px 30px rgba(0, 0, 0, 0.15);
+    -o-box-shadow:      0 20px 40px 30px rgba(0, 0, 0, 0.15);
+    box-shadow:         0 20px 40px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Lint filter */
+.washingmachine:after {
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    left: 15px;
+    width: 70px;
+    height: 35px;
+    border-radius: 2px;
+    border: 1px solid #B1CBC2;
+}
+
+/* Door */
+.washingmachine .door {
+    position: absolute;
+    top: 90px;
+    left: 43.5%;
+    margin-left: -77px;
+    width: 185px;
+    height: 185px;
+    border: 22px solid #97BDAF;
+    border-radius: 97px;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, rgba(73, 96, 88, 0.85)),
+        color-stop(1, rgba(87, 115, 105, 0.85))
+    );
+    background-image:      -o-linear-gradient(bottom, rgba(73, 96, 88, 0.85) 0%, rgba(87, 115, 105, 0.85) 100%);
+    background-image:    -moz-linear-gradient(bottom, rgba(73, 96, 88, 0.85) 0%, rgba(87, 115, 105, 0.85) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgba(73, 96, 88, 0.85) 0%, rgba(87, 115, 105, 0.85) 100%);
+    background-image:     -ms-linear-gradient(bottom, rgba(73, 96, 88, 0.85) 0%, rgba(87, 115, 105, 0.85) 100%);
+    background-image:         linear-gradient(to bottom, rgba(73, 96, 88, 0.85) 0%, rgba(87, 115, 105, 0.85) 100%);
+    -webkit-transform: translateZ(0);
+    -moz-transform:    translateZ(0);
+    -ms-transform:     translateZ(0);
+    -o-transform:      translateZ(0);
+    transform:         translateZ(0);
+    -webkit-animation: close 0.5s ease-in 0s 1 forwards;
+    -moz-animation:    close 0.5s ease-in 0s 1 forwards;
+    -ms-animation:     close 0.5s ease-in 0s 1 forwards;
+    -o-animation:      close 0.5s ease-in 0s 1 forwards;
+    animation:         close 0.5s ease-in 0s 1 forwards;
+}
+
+.washingmachine:hover .door {
+    -webkit-transform: translateZ(0);
+    -moz-transform:    translateZ(0);
+    -ms-transform:     translateZ(0);
+    -o-transform:      translateZ(0);
+    transform:         translateZ(0);
+    -webkit-animation: open 0.5s ease-in 0s 1 forwards;
+    -moz-animation:    open 0.5s ease-in 0s 1 forwards;
+    -ms-animation:     open 0.5s ease-in 0s 1 forwards;
+    -o-animation:      open 0.5s ease-in 0s 1 forwards;
+    animation:         open 0.5s ease-in 0s 1 forwards;
+}
+
+/* Animate to open */
+@-webkit-keyframes open {
+    from {
+        -webkit-transform: perspective(1000px) rotateY(0deg);
+        -webkit-transform-origin: 0% 0%;
+    }
+    to {
+        -webkit-transform: perspective(1000px) rotateY(-105deg);
+        -webkit-transform-origin: 0% 0%;
+    }
+}
+
+@-moz-keyframes open {
+    from {
+        -moz-transform: perspective(1000px) rotateY(0deg);
+        -moz-transform-origin: 0% 0%;
+    }
+    to {
+        -moz-transform: perspective(1000px) rotateY(-105deg);
+        -moz-transform-origin: 0% 0%;
+    }
+}
+
+@-ms-keyframes open {
+    from {
+        -ms-transform: perspective(1000px) rotateY(0deg);
+        -ms-transform-origin: 0% 0%;
+    }
+    to {
+        -ms-transform: perspective(1000px) rotateY(-105deg);
+        -ms-transform-origin: 0% 0%;
+    }
+}
+
+@-o-keyframes open {
+    from {
+        -o-transform: perspective(1000px) rotateY(0deg);
+        -o-transform-origin: 0% 0%;
+    }
+    to {
+        -o-transform: perspective(1000px) rotateY(-105deg);
+        -o-transform-origin: 0% 0%;
+    }
+}
+
+@keyframes open {
+    from {
+        transform: perspective(1000px) rotateY(0deg);
+        transform-origin: 0% 0%;
+    }
+    to {
+        transform: perspective(1000px) rotateY(-105deg);
+        transform-origin: 0% 0%;
+    }
+}
+
+/* Animate to closed */
+@-webkit-keyframes close {
+    from {
+        -webkit-transform: perspective(1000px) rotateY(-105deg);
+        -webkit-transform-origin: 0% 0%;
+    }
+    to {
+        -webkit-transform: perspective(1000px) rotateY(0deg);
+        -webkit-transform-origin: 0% 0%;
+    }
+}
+
+@-moz-keyframes close {
+    from {
+        -moz-transform: perspective(1000px) rotateY(-105deg);
+        -moz-transform-origin: 0% 0%;
+    }
+    to {
+        -moz-transform: perspective(1000px) rotateY(0deg);
+        -moz-transform-origin: 0% 0%;
+    }
+}
+
+@-ms-keyframes close {
+    from {
+        -ms-transform: perspective(1000px) rotateY(-105deg);
+        -ms-transform-origin: 0% 0%;
+    }
+    to {
+        -ms-transform: perspective(1000px) rotateY(0deg);
+        -ms-transform-origin: 0% 0%;
+    }
+}
+
+@-o-keyframes close {
+    from {
+        -o-transform: perspective(1000px) rotateY(-105deg);
+        -o-transform-origin: 0% 0%;
+    }
+    to {
+        -o-transform: perspective(1000px) rotateY(0deg);
+        -o-transform-origin: 0% 0%;
+    }
+}
+
+@keyframes close {
+    from {
+        transform: perspective(1000px) rotateY(-105deg);
+        transform-origin: 0% 0%;
+    }
+    to {
+        transform: perspective(1000px) rotateY(0deg);
+        transform-origin: 0% 0%;
+    }
+}
+
+/* Drum */
+.washingmachine .drum {
+    position: absolute;
+    top: 113px;
+    left: 50%;
+    margin-left: -74px;
+    width: 140px;
+    height: 140px;
+    border: 4px solid #97BDAF;
+    border-radius: 97px;
+    background: url(../assets/drum.png) no-repeat center;
+}
+
+.washingmachine:hover .drum:before {
+    opacity: 1;
+}
+
+/* Hinge */
+.washingmachine .drum:after {
+    position: absolute;
+    content: "";
+    top: 57px;
+    left: -26px;
+    width:10px;
+    height: 16px;
+    background-color: #6D8C81;
+    border-radius: 2px;
+}
+
+/* Handle */
+.washingmachine .door:before {
+    position: absolute;
+    content: "";
+    top: 55px;
+    right: -14px;
+    width: 18px;
+    height: 28px;
+    background-color: #6D8C81;
+    border-radius: 2px;
+}
+
+/* Tray */
+.washingmachine .tray {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 90px;
+    height: 25px;
+    border-top: 10px solid #C0D9D0;
+    background-color: #97BDAF;
+    border-radius: 2px;
+}
+
+/* Dial */
+.washingmachine .dial {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: #97BDAF;
+    border: 5px solid #C0D9D0;
+    border-radius: 15px;
+}
+
+/* Buttons */
+.washingmachine .buttons,
+.washingmachine .buttons:before,
+.washingmachine .buttons:after {
+    position: absolute;
+    top: 22px;
+    right: 60px;
+    width: 10px;
+    height: 15px;
+    background-color: #97BDAF;
+    border-radius: 2px;
+}
+
+.washingmachine .buttons:before,
+.washingmachine .buttons:after {
+    content: "";
+    top: 0;
+}
+
+.washingmachine .buttons:before { right: 15px; }
+.washingmachine .buttons:after { right: 30px; }
+
+/* Pilot light */
+.washingmachine .pilot {
+    position: absolute;
+    top: 28px;
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition:    all .5s ease-in-out;
+    -ms-transition:     all .5s ease-in-out;
+    transition:         all .5s ease-in-out;
+}
+
+.washingmachine .pilot-green {
+    right: 120px;
+    background-color: #4CAE4C;
+    box-shadow: 0 0 5px 1px rgba(80, 234, 80, 0.8);
+}
+
+.washingmachine .pilot-red {
+    right: 110px;
+    background-color: #9E0004;
+}
+
+.washingmachine:hover .pilot-green {
+    background-color: #2A8C2A;
+    box-shadow: none;
+}
+
+.washingmachine:hover .pilot-red {
+    background-color: #DB0006;
+    box-shadow: 0 0 5px 1px rgba(211, 5, 11, 0.4);
 }
