@@ -1,6 +1,10 @@
-h1. Badger !https://travis-ci.org/nohm/badger.png?branch=master!:https://travis-ci.org/nohm/badger
+h1. Badger
 
 This is a data storage project build for the company I work at, it's fully open source if you care for using it and should be easy to setup
+
+h2. Status
+!https://travis-ci.org/nohm/badger.png?branch=master!:https://travis-ci.org/nohm/badger
+!https://gemnasium.com/nohm/badger.png(Dependency Status)!:https://gemnasium.com/nohm/badger
 
 h2. Requirements
 
