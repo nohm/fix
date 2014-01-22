@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Badger" %></title>
+    <title><%= '<p><b>Test</b></p>' %></title>
     <%= favicon_link_tag 'favicon.ico' %>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Badger" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
@@ -26,8 +26,8 @@
               </div>
             </div>
           </div>
-        </div> <!--! end of .container -->
-      </div> <!--! end of #main -->
+        </div>
+      </div>
 
       <%= render 'layouts/footer' %>
 
