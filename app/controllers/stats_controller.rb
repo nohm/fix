@@ -52,7 +52,7 @@ class StatsController < ApplicationController
 			elsif entry.repaired == 1
 				entry_stats_status[entry.brand][entry.typenum][1] = entry_stats_status[entry.brand][entry.typenum][1] + 1
 				entry_stats_status_global[1] = entry_stats_status_global[1] + 1
-			elsif entry.test == 1
+			elsif (entry.test == 1 or (!entry.defect.nil? and entry.defect.length != 0))
 				entry_stats_status[entry.brand][entry.typenum][0] = entry_stats_status[entry.brand][entry.typenum][0] + 1
 				entry_stats_status_global[0] = entry_stats_status_global[0] + 1
 			end
