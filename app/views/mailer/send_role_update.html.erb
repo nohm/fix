@@ -3,15 +3,10 @@
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
-  <body>Role updated</h1>
-    <p>
-      Your role has been changed to: <%= @role %>
-    </p>
-    <p>
-      To login to the site, just follow this link: <%= @url %>.
-    </p>
-    <p>
-      Have a nice day.
-    </p>
+  <body>
+    <h1><%= t('mailer.role_update.title') %></h1>
+    <p><%= "#{t('mailer.role_update.new_role')} #{@role}" %></p>
+    <p><%= "#{t('mailer.role_update.site_link')} #{@url}" %></p>
+    <p><%= t('mailer.role_update.greet') %></p>
   </body>
 </html>

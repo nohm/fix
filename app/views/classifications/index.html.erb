@@ -1,14 +1,14 @@
-<% provide(:title, 'Badger - Class panel') %>
-<legend>Entries</legend>
+<% provide(:title, t('classes.index.title')) %>
+<legend><%= t('classes.index.legend') %></legend>
 
 <% if @classifications.length == 0 %>
-  <p>No classes here</p>
+  <p><%= t('classes.index.empty_list') %></p>
 <% else %>
 	<div class="table-responsive">
 	<table class="table table-condensed table-striped">
 	  <thead>
 	    <tr>
-	      <th>Name</th>
+	      <th><%= t('global.name') %></th>
 	      <th style="width:17px;"></th>
 	    </tr>
 	  </thead>
@@ -25,5 +25,5 @@
     <%= paginate @classifications %>
 <% end %>
 <div>
-  <%= link_to("Add classification", new_classification_path, :class => 'btn btn-mini btn-primary') %>
+  <%= link_to(t('classes.index.new_class'), new_classification_path, :class => 'btn btn-mini btn-primary') %>
 </div>

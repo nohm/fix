@@ -1,8 +1,0 @@
-<%= bootstrap_form_for(:user, :as => :user, :url => user_session_path, :html => { :class => 'navbar-form navbar-right navbar-signin' }, help: :block) do |f| %>
-
-  <%= f.email_field :email, hide_label: :true, placeholder: 'Email', :autofocus => true %>
-  <%= f.password_field :password, hide_label: :true, placeholder: 'Password' %>
-  <%= f.hidden_field :remember_me, :value => "1" %>
-
-  <%= f.submit 'Sign in', data: { disable_with: 'Signing in...' }, class: "btn btn-success" %>
-<% end %>

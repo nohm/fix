@@ -1,15 +1,15 @@
-<% provide(:title, 'Badger - User panel') %>
-<legend>Entries</legend>
+<% provide(:title, t('user.index.title')) %>
+<legend><%= t('user.index.legend') %></legend>
 
 <div class="table-responsive">
 <table class="table table-condensed table-striped table-hover">
   <thead>
     <tr>
       <th>#</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Registered</th>
-      <th>Role</th>
+      <th><%= t('global.username') %></th>
+      <th><%= t('global.email') %></th>
+      <th><%= t('user.index.registered') %></th>
+      <th><%= t('user.index.role') %></th>
       <th style="width:17px;"></th>
       <th style="width:17px;"></th>
       <th style="width:17px;"></th>

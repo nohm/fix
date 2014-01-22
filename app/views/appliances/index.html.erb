@@ -1,15 +1,15 @@
-<% provide(:title, 'Badger - Appliance panel') %>
-<legend>Entries</legend>
+<% provide(:title, t('appliance.index.title')) %>
+<legend><%= t('appliance.index.legend') %></legend>
 
 <% if @appliances.length == 0 %>
-  <p>No appliances here</p>
+  <p><%= t('appliance.index.empty_list') %></p>
 <% else %>
 	<div class="table-responsive">
 	<table class="table table-condensed table-striped">
 	  <thead>
 	    <tr>
-	      <th>Name</th>
-	      <th>Abbrevation</th>
+	      <th><%= t('global.name') %></th>
+	      <th><%= t('global.abbrevation') %></th>
 	      <th style="width:17px;"></th>
 	      <th style="width:17px;"></th>
 	    </tr>
@@ -28,5 +28,5 @@
     <%= paginate @appliances %>
 <% end %>
 <div>
-  <%= link_to("Add appliance", new_appliance_path, :class => 'btn btn-mini btn-primary') %>
+  <%= link_to(t('appliance.index.new_appliance'), new_appliance_path, :class => 'btn btn-mini btn-primary') %>
 </div>

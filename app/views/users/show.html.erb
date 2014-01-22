@@ -1,6 +1,4 @@
-<% provide(:title, 'Badger - User overview') %>
-
-<legend>User</legend>
+<% provide(:title, t('user.show.title')) %>
 
 <h2><%= @user.name %></h2>
 <h3><%= @user.roles.first.name.titleize %></h3>
@@ -14,19 +12,19 @@
           <td><%= @user.id %></td>
         </tr>
         <tr>
-          <td><h6>Email</h6></td>
+          <td><h6><%= t('global.email') %></h6></td>
           <td><%= @user.email %></td>
         </tr>
         <tr>
-          <td><h6>Registered</h6></td>
+          <td><h6><%= t('user.show.registered') %></h6></td>
           <td><%= @user.created_at.to_date %></td>
         </tr>
         <tr>
-          <td><h6>Last sign-in</h6></td>
+          <td><h6><%= t('user.show.last_signin') %></h6></td>
           <td><%= @user.last_sign_in_at %></td>
         </tr>
         <tr>
-          <td><h6>Sign-in count</h6></td>
+          <td><h6><%= t('user.show.signin_count') %></h6></td>
           <td><%= @user.sign_in_count %></td>
         </tr>
       </table>

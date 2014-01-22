@@ -1,16 +1,16 @@
-<% provide(:title, 'Badger - New appliance') %>
+<% provide(:title, t('appliance.new.title')) %>
 
 <%= bootstrap_form_for :appliance, :url => appliances_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
-  <%= f.alert_message "Please fix the errors below." %>
+  <%= f.alert_message t('global.errors') %>
   
-  <legend>New appliance</legend>
+  <legend><%= t('appliance.new.legend') %></legend>
   
-  <%= f.text_field :name %>
-  <%= f.text_field :abb, :label => 'Abbrevation' %>
+  <%= f.text_field :name, label: t('global.name') %>
+  <%= f.text_field :abb, label: t('global.abbrevation') %>
 
   <%= f.form_group do %>
-  	<%= f.submit 'Save appliance', data: { disable_with: 'Saving...' } %>
+  	<%= f.submit t('appliance.new.button'), data: { disable_with: t('appliance.new.button_send') } %>
   <% end %>
 <% end %>
 
-<%= link_to "Back", appliances_path %>
+<%= link_to t('global.back'), appliances_path %>

@@ -1,15 +1,15 @@
-<% provide(:title, 'Badger - New class') %>
+<% provide(:title, t('classes.new.title')) %>
 
 <%= bootstrap_form_for :classification, :url => classifications_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
-  <%= f.alert_message "Please fix the errors below." %>
+  <%= f.alert_message t('global.errors') %>
   
-  <legend>New classification</legend>
+  <legend><%= t('classes.new.legend') %></legend>
   
-  <%= f.text_field :name %>
+  <%= f.text_field :name, label: t('global.name') %>
 
   <%= f.form_group do %>
-  	<%= f.submit 'Save classification', data: { disable_with: 'Saving...' } %>
+  	<%= f.submit t('classes.new.button'), data: { disable_with: t('classes.new.button_send') } %>
   <% end %>
 <% end %>
 
-<%= link_to "Back", classifications_path %>
+<%= link_to t('global.back'), classifications_path %>

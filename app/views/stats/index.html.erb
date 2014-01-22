@@ -1,17 +1,17 @@
-<% provide(:title, 'Badger - Stats for ' + session[:company]) %>
+<% provide(:title, t('stats.index.title') + session[:company]) %>
 
 <div class="hero-unit center">
   <% if params[:type] == 'extended' %>
-    <%= link_to("Want simpler stats?", stats_path(company: params[:company]), :class => 'btn btn-primary btn-index stat-toggle') %>
+    <%= link_to(t('stats.index.simpler'), stats_path(company: params[:company]), :class => 'btn btn-primary btn-index stat-toggle') %>
   <% else %>
-    <%= link_to("Want fancier stats?", stats_path(company: params[:company], type: 'extended'), :class => 'btn btn-primary btn-index stat-toggle') %>
+    <%= link_to(t('stats.index.fancier'), stats_path(company: params[:company], type: 'extended'), :class => 'btn btn-primary btn-index stat-toggle') %>
   <% end %>
   <% @charts.each_pair do |key, array| %>
         <% if key == :global %>
-          <h4>Global status</h4>
+          <h4><%= t('stats.index.global_label') %></h4>
         <% end %>
 
-          <a href="#" class="btn btn-success btn-chart" onClick="$('#charts_<%= key.to_s %>').slideToggle();$(window).trigger('resize');" id="<%= key.to_s %>">Show/Hide <%= key.to_s.gsub('_', ' ') %></a><br/>
+          <a href="#" class="btn btn-success btn-chart" onClick="$('#charts_<%= key.to_s %>').slideToggle();$(window).trigger('resize');" id="<%= key.to_s %>"><%= t('stats.index.showhide') %><%= key.to_s.gsub('_', ' ') %></a><br/>
           <div class="row" id="charts_<%= key.to_s %>" <% unless key == :global %>style="display:none;"<% end %>>
             <% if params[:type] == 'extended' %>
               <div class="col-md-6 stat-chart">
@@ -31,7 +31,7 @@
           </div>
 
         <% if key == :global %>
-          <h4>Brand and type specific status</h4>
+          <h4><%= t('stats.index.brand_label') %></h4>
         <% end %>
   <% end %>
 </div>

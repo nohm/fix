@@ -1,23 +1,144 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+
+# globals, these are used more often
+  global: 
+    users: 'Users'
+    appliances: 'Appliances'
+    classes: 'Classes'
+    history: 'History'
+
+    errors: 'Please fix the errors below.'
+    close: 'Close'
+    back: 'Back'
+
+    name: 'Name'
+    username: 'Username'
+    abbrevatio: 'Abbrevation'
+    message: 'Message'
+    email: 'Email'
+    password: 'Password'
+    password_confirmation: 'Password confirmation'
+
+# app/views/kaminari
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "..."
+
+# app/views/layouts
+  layouts:
+    landing:
+      welcome: 'Welcome to this data storage.'
+      warning: 'Ohno, '
+      warning_msg: ' your browser is outdated and doesn''t support all the features this site offers!<br>You might want to upgrade to Internet Explorer 10, Firefox 24+, Chrome 20+ or Opera 12+</div>'
+      
+    header:
+      toggle: 'Toggle navigation'
+
+    footer:
+      copyright: 'Made and maintained by '
+      forgot_pass: 'Forgot your password?'
+
+    navigation:
+      edit: 'Edit account'
+      logout: 'Logout'
+
+    signin: 
+      button: 'Sign in'
+      button_send: 'Signing in...'
+
+    signup: 
+      button: 'Sign up'
+      button_send: 'Signing up...'
+
+    report:
+      button_large: 'Report a problem'
+      button: 'Send report'
+      button_send: 'Sending report...'
+
+# app/views/appliances
+  appliance:
+    index:
+      title: 'Badger - Appliance panel'
+      legend: 'Appliances'
+      empty_list: 'No appliances here'
+      new_appliance: 'Add appliance'
+    new: 
+      title: 'Badger - New appliance'
+      legend: 'New appliance'
+      button: 'Save'
+      button_send: 'Saving...'
+
+# app/views/classifications
+  classes:
+    index:
+      title: 'Badger - Class panel'
+      legend: 'Classes'
+      empty_list: 'No classes here'
+      new_class: 'Add class'
+    new: 
+      title: 'Badger - New class'
+      legend: 'New class'
+      button: 'Save'
+      button_send: 'Saving...'
+
+# app/views/history
+  history:
+    index:
+      title: 'Badger - History'
+      legend: 'History'
+      empty_list: 'No history here'
+      where: 'Where?'
+      who: 'Who?'
+      what: 'What?'
+      when: 'When?'
+
+# app/views/users
+  user:
+    user:
+      change: 'Change Role'
+    index:
+      title: 'Badger - User panel'
+      legend: 'Users'
+      registered: 'Registered'
+      role: 'Role'
+    show:
+      title: 'Badger - User overview'
+      registered: 'Registered'
+      last_signin: 'Last sign-in'
+      signin_count: 'Sign-in count'
+
+# app/views/stats
+  stats:
+    index:
+      title: 'Badger - Stats for '
+      simpler: 'Want simpler stats?'
+      fancier: 'Want fancier stats?'
+      global: 'Global'
+      global_label: 'Global status'
+      brand_label: 'Brand and type specific status'
+      showhide: 'Show/Hide '
+
+# app/views/mailer
+  mailer:
+    error_report:
+      title: 'Badger: Error report'
+      sender: 'A new error report has been submitted by: '
+      message: 'Their message:'
+    new_user:
+      title: 'New sign up for Badger'
+      message: 'A new person has signed up for Badger, their username is: '
+      site_link: 'To update their permissions, just follow this link: '
+    role_update:
+      title: 'Role updated'
+      new_role: 'Your role has been changed to: '
+      site_link: 'To login to the site, just follow this link: '
+      greet: 'Have a nice day.'
+    welcome_msg:
+      title: 'Welcome to Badger, '
+      message: 'You have successfully signed up to Badger, your username is: '
+      site_link: 'To login to the site, just follow this link: '
+      greet: 'Thanks for joining and have a great day!'

@@ -1,17 +1,17 @@
-<% provide(:title, 'Badger - History') %>
+<% provide(:title, t('history.index.title')) %>
 
-<legend>History</legend>
+<legend><%= t('history.index.legend') %></legend>
   <div>
     <% if @history.length == 0 %>
-      <p>No history here</p>
+      <p><%= t('history.index.empty_list') %></p>
     <% else %>
       <table class="table table-condensed table-striped">
         <thead>
             <tr>
-              <th>Where?</th>
-              <th>Who?</th>
-              <th>What?</th>
-              <th>When?</th>
+              <th><%= t('history.index.where') %></th>
+              <th><%= t('history.index.who') %></th>
+              <th><%= t('history.index.what') %></th>
+              <th><%= t('history.index.when') %></th>
             </tr>
           </thead>
           <tbody class="searchable">

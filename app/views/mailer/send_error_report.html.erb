@@ -4,15 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Badger: Error report</h1>
-    <p>
-      A new error report has been submitted by: <%= @user.email %>
-    </p>
-    <h3>
-      Their message:
-    </h3>
-    <p>
-      <%= @message %>
-    </p>
+    <h1><%= t('mailer.error_report.title') %></h1>
+    <p><%= "#{t('mailer.error_report.sender')} #{@user.email}" %></p>
+    <h3><%= t('mailer.error_report.message') %></h3>
+    <p><%= @message %></p>
   </body>
 </html>

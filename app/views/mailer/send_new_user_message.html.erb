@@ -4,13 +4,8 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>New sign up for Badger</h1>
-    <p>
-      A new person has signed up for Badger,
-      their username is: <%= @user.email %>.<br/>
-    </p>
-    <p>
-      To update their permissions, just follow this link: <%= @url %>.
-    </p>
+    <h1><%= t('mailer.new_user.title') %></h1>
+    <p><%= "#{t('mailer.new_user.message')} #{@user.email}" %><br/></p>
+    <p><%= "#{t('mailer.new_user.site_link')} #{url}" %></p>
   </body>
 </html>
