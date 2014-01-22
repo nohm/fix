@@ -90,6 +90,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (4.7.5)
+    modernizr-rails (2.7.1)
     multi_json (1.8.4)
     orm_adapter (0.5.0)
     paperclip (3.5.2)
@@ -174,6 +175,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   lazy_high_charts
+  modernizr-rails
   paperclip
   puma
   quiet_assets

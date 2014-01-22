@@ -19,3 +19,4 @@
 //= require bootstrap/transition
 //= require highcharts/highcharts
 //= require turbolinks
+//= require modernizr

@@ -17,6 +17,7 @@
 		<div>
 			<%= bootstrap_form_for(:user, :as => :user, :url => user_session_path, :html => { :class => 'navbar-form' }, help: :block) do |f| %>
 				<h2>Welcome to this data storage.</h2>
+				<div id="bm"></div>
 				<%= f.email_field :email, hide_label: :true, placeholder: 'Email', :autofocus => true %>
 		  		<%= f.password_field :password, hide_label: :true, placeholder: 'Password' %>
 	   			<%= f.hidden_field :remember_me, :value => "1" %>
@@ -24,8 +25,8 @@
             	<%= render 'layouts/signup/button' %>
 			<% end %>
 		</div>
-  </div><!-- /container -->
-</div><!-- /headerwrap -->
+  </div>
+</div>
 
 <!-- Report button with extra classes -->
 <a href="#" class="btn btn-warning btn-report" data-toggle="modal" data-target="#modal-report">
@@ -33,3 +34,7 @@
 </a>
 
 <%= render 'layouts/signup/form' %> 
+
+<script>
+	if(!Modernizr.canvas && !Modernizr.fontface){$('#bm')[0].innerHTML='<div class="alert alert-warning"><strong>Ohno, </strong> your browser is outdated and doesn\'t support all the features this site offers!<br>You might want to upgrade to Internet Explorer 10, Firefox 24+, Chrome 20+ or Opera 12+</div>'}
+</script>
