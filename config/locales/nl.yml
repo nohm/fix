@@ -1,0 +1,144 @@
+nl:
+
+# globals, these are used more often
+  global: 
+    users: 'Gebruikers'
+    appliances: 'Apparaten'
+    classes: 'Klassen'
+    history: 'Geschiedenis'
+
+    errors: 'Los alstublieft de ondestaande fouten op.'
+    close: 'S;uiten'
+    back: 'Terug'
+
+    name: 'Naam'
+    username: 'Gebruikersnaam'
+    abbrevatio: 'Afkorting'
+    message: 'Bericht'
+    email: 'Email'
+    password: 'Wachtwoord'
+    password_confirmation: 'Wachtwoord confirmatie'
+
+# app/views/kaminari
+  views:
+    pagination:
+      first: "&laquo; Errste"
+      last: "Laatste &raquo;"
+      previous: "&lsaquo; Vorige"
+      next: "Volgende &rsaquo;"
+      truncate: "..."
+
+# app/views/layouts
+  layouts:
+    landing:
+      welcome: 'Welkom bij deze data opslag.'
+      warning: 'O nee, '
+      warning_msg: ' je browser is verouderd en ondersteund niet alles wat deze website te bieden heeft!<br>Je zou kunnen updaten naar Internet Explorer 10, Firefox 24+, Chrome 20+ of Opera 12+</div>'
+      
+    header:
+      toggle: 'Wissel navigatie'
+
+    footer:
+      copyright: 'Gemaakt en onderhouden door '
+      forgot_pass: 'Wachtwoord vergeten?'
+
+    navigation:
+      edit: 'Wijzig account'
+      logout: 'Log uit'
+
+    signin: 
+      button: 'Log in'
+      button_send: 'Inloggen...'
+
+    signup: 
+      button: 'Meld aan'
+      button_send: 'Aanmelden...'
+
+    report:
+      button_large: 'Geef een probleem door'
+      button: 'Stuur bericht'
+      button_send: 'Versturen...'
+
+# app/views/appliances
+  appliance:
+    index:
+      title: 'Badger - Apparaten panel'
+      legend: 'Apparaten'
+      empty_list: 'Geen apparaten hier'
+      new_appliance: 'Voeg apparaat toe'
+    new: 
+      title: 'Badger - Nieuw apparaat'
+      legend: 'Nieuw apparaat'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+
+# app/views/classifications
+  classes:
+    index:
+      title: 'Badger - Klassen panel'
+      legend: 'Klassen'
+      empty_list: 'Geen klassen hier'
+      new_class: 'Voeg klasse toe'
+    new: 
+      title: 'Badger - Nieuwe klasse'
+      legend: 'Nieuwe klasse'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+
+# app/views/history
+  history:
+    index:
+      title: 'Badger - Geschiedenis'
+      legend: 'Geschiedenis'
+      empty_list: 'geen geschiedenis hier'
+      where: 'Waar?'
+      who: 'Wie?'
+      what: 'Wat?'
+      when: 'Wanneer'
+
+# app/views/users
+  user:
+    user:
+      change: 'Wijzig Rol'
+    index:
+      title: 'Badger - Gebruikers panel'
+      legend: 'Gebruikers'
+      registered: 'Aangemeld'
+      role: 'Rol'
+    show:
+      title: 'Badger - Gebruikers overzicht'
+      registered: 'Aangemeld'
+      last_signin: 'Laaste sign-in'
+      signin_count: 'Sign-in aantal'
+
+# app/views/stats
+  stats:
+    index:
+      title: 'Badger - Statistieken voor '
+      simpler: 'Wil je simpelere statistieken?'
+      fancier: 'Wil je uitgebreidere statistieken?'
+      global: 'Globaal'
+      global_label: 'Globale status'
+      brand_label: 'Merk en type specifieke status'
+      showhide: 'Weergeven/Verstoppen '
+
+# app/views/mailer
+  mailer:
+    error_report:
+      title: 'Badger: Probleem bericht'
+      sender: 'Er is een nieuw probleem bericht geplaatst door: '
+      message: 'Hun bericht:'
+    new_user:
+      title: 'Nieuwe aanmelding voor Badger'
+      message: 'Er is een nieuwe aanmelding voor Badger, hun gebruikersnaam is: '
+      site_link: 'Om hun permissies te wijzigen klik hier: '
+    role_update:
+      title: 'Badger: Rol gewijzigd'
+      new_role: 'Je rol is gewijzigd naar: '
+      site_link: 'Om in te loggen volg deze link: '
+      greet: 'Prettige dag verder.'
+    welcome_msg:
+      title: 'Welkom bij Badger, '
+      message: 'Je bent succesvol aangemeld bij Badger, je gebruikersnaam is: '
+      site_link: 'Om in te loggen volg deze link: '
+      greet: 'Bedankt voor de aanmelding en prettige dag verder!'

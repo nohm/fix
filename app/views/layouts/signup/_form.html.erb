@@ -11,7 +11,9 @@
         <div class="modal-body">
           <%= f.text_field :name, label: t('global.name') %>
 				  <%= f.email_field :email, label: t('global.email') %>
+          <%= f.select :language, @locales %>
 				  <%= f.password_field :password, label: t('global.password') %>
+          <br/>
 				  <%= f.password_field :password_confirmation, label: t('global.password_confirmation') %>
 				  
 				  <%= f.hidden_field :initial_role, :value => params[:initial_role] %>

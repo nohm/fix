@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def supplier?
-    self.has_role? :vitel or self..roles.first.name == "maxi-outlet" or self.has_role? :tronex or self.has_role? :ahead
+    self.has_role? :vitel or self.has_role? :maxioutlet or self.has_role? :tronex or self.has_role? :ahead
   end
 
   def guest?
