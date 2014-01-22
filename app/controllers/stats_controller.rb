@@ -18,7 +18,7 @@ class StatsController < ApplicationController
 		(0..6).each do |i| #0..'amount of statuses'
 			entry_stats_global[i] = 0
 		end
-		(0..2).each do |i| #0..'amount of statuses'
+		(0..3).each do |i| #0..'amount of statuses'
 			entry_stats_status_global[i] = 0
 		end
 		entries = Entry.where(company: session[:company])
@@ -37,7 +37,7 @@ class StatsController < ApplicationController
 				(0..6).each do |i| #0..'amount of statuses'
 					entry_stats[entry.brand][entry.typenum][i] = 0
 				end
-				(0..2).each do |i| #0..'amount of statuses'
+				(0..3).each do |i| #0..'amount of statuses'
 					entry_stats_status[entry.brand][entry.typenum][i] = 0
 				end
 			end
@@ -55,6 +55,9 @@ class StatsController < ApplicationController
 			elsif (entry.test == 1 or (!entry.defect.nil? and entry.defect.length != 0))
 				entry_stats_status[entry.brand][entry.typenum][0] = entry_stats_status[entry.brand][entry.typenum][0] + 1
 				entry_stats_status_global[0] = entry_stats_status_global[0] + 1
+			else
+				entry_stats_status[entry.brand][entry.typenum][3] = entry_stats_status[entry.brand][entry.typenum][3] + 1
+				entry_stats_status_global[3] = entry_stats_status_global[3] + 1
 			end
 		end
 

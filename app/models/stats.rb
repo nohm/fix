@@ -91,7 +91,7 @@ class Stats < ActiveRecord::Base
       ]
       build_chart(title, data)
     else
-      generate_bar_chart(['Tested','Repaired','Scrap'], 2, data)
+      generate_bar_chart(['Tested','Repaired','Scrap','Skipped'], 3, data)
     end
   end
 
