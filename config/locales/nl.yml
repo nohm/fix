@@ -1,23 +1,23 @@
 nl:
 
-# TODO > COMPLETE TRANSLATION
-
-# globals, these are used more often
+######################
+##     GLOBALS      ##
+######################
   global: 
     users: 'Gebruikers'
     appliances: 'Apparaten'
     classes: 'Klassen'
     history: 'Geschiedenis'
 
-    unauthorized: 'You''re not authorized for this.'
-    unauth_admin: 'Not authorized as an administrator.'
-    no_company: 'Please re-open the entry index'
+    unauthorized: 'Je bent hiervoor niet geautoriseerd.'
+    unauth_admin: 'Niet geautoriseerd als een beheerder.'
+    no_company: 'Heropen alstublieft de index'
     errors: 'Los alstublieft de ondestaande fouten op.'
 
     close: 'Sluiten'
     back: 'Terug'
-    delete: 'Delete'
-    sure: 'Are you sure?'
+    delete: 'Verwijder'
+    sure: 'Weet u het zeker?'
 
     name: 'Naam'
     username: 'Gebruikersnaam'
@@ -28,23 +28,23 @@ nl:
     password_confirmation: 'Wachtwoord confirmatie'
 
     status: 'Status'
-    number: 'Number'
-    appliance: 'Appliance'
-    brand: 'Brand'
+    number: 'Nummer'
+    appliance: 'Apparaat'
+    brand: 'Merk'
     typenum: 'Type'
-    serialnum: 'Serial'
-    defect: 'What''s broken?'
-    repair: 'What''s repaired?'
-    ordered: 'Parts ordered?'
-    testera: 'First tester'
-    testerb: 'Second tester'
+    serialnum: 'Serienummer'
+    defect: 'Wat is defect?'
+    repair: 'Wat is gerepareerd?'
+    ordered: 'Onderdelen besteld?'
+    testera: 'Eerste tester'
+    testerb: 'Tweede tester'
     test: 'Test OK'
-    repaired: 'Repaired'
-    ready: 'Ready'
-    scrap: 'Scrap'
+    repaired: 'Gerepareerd'
+    ready: 'Klaar'
+    scrap: 'Sloop'
     accessoires: 'Accessoires'
-    class: 'Class'
-    note: 'Note'
+    class: 'Klasse'
+    note: 'Notitie'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -95,134 +95,134 @@ nl:
 # app/views/entries
   entry:
     edit:
-      title: 'Badger - Edit entry'
-      legend: 'Edit entry'
-      message: 'First save the entry, then show it and there you can add images.'
+      title: 'Badger - Wijzig order'
+      legend: 'Wijzig order'
+      message: 'Sla de order eerst op en open deze daarna, hier kunt u bijlages wijzigen.'
       button: 'Update'
-      button_send: 'Updating...'
+      button_send: 'Updaten...'
     entryhistory:
-      title: 'Badger - History overview'
-      legend: 'History'
-      empty_list: 'No history here'
-      who: 'Who?'
-      what: 'What?'
-      when: 'When?'
+      title: 'Badger - Geschiedenis overzicht'
+      legend: 'Geschiedenis'
+      empty_list: 'Geen geschiedenis hier'
+      who: 'Wie?'
+      what: 'Wat?'
+      when: 'Wanneer?'
     index:
-      title: 'Badger - Entries for '
-      legend: 'Entries for '
-      empty_list: 'No entries here'
-      back: 'Back to overview'
-      add_entry: 'Add entry'
-      search: 'Search'
-      searchnum: 'Search number..'
-      searchbrand: 'Search brand..'
-      searchtype: 'Search type..'
-      searchserial: 'Search serial..'
+      title: 'Badger - Orders voor '
+      legend: 'Orders voor '
+      empty_list: 'Geen orders hier'
+      back: 'Terug naar overzicht'
+      add_entry: 'Order toevoegen'
+      search: 'Zoeken'
+      searchnum: 'Zoek nummer..'
+      searchbrand: 'Zoek merk..'
+      searchtype: 'Zoek type..'
+      searchserial: 'Zoek serienummer..'
     new:
-      title: 'Badger - New entry'
-      legend: 'New entry'
-      message: 'First save the entry, then show it and there you can add images.'
-      button: 'Save'
-      button_send: 'Saving...'
+      title: 'Badger - Nieuwe order'
+      legend: 'Nieuwe order'
+      message: 'Sla de order eerst op en open deze daarna, hier kunt u bijlages wijzigen.'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
     show:
-      title: 'Badger - Entry overview'
+      title: 'Badger - Order overzicht'
       barcode: 'Barcode'
-      sent: 'Sent?'
-      yes: 'Yes - '
-      no: 'No'
-      images: 'Images'
-      add_attachment: 'Add attachment'
-      select: 'Select a file..'
-      button: 'Save'
-      button_send: 'Saving...'
-      zip: 'Create zip'
-      sticker: 'Create sticker'
-      edit: 'Edit entry'
-      delete: 'Delete entry'
-      view: 'View history'
+      sent: 'Verzonden?'
+      yes: 'Ja - '
+      no: 'Nee'
+      images: 'Afbeeldingen'
+      add_attachment: 'Bijlage toevoegen'
+      select: 'Selecteer een bestand..'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+      zip: 'Zip maken'
+      sticker: 'Sticker maken'
+      edit: 'Order wijzigen'
+      delete: 'Order verwijderen'
+      view: 'Bekijk geschiedenis'
 
 # app/controllers/entries & model
     status:
-      new: 'New'
-      tested: 'Tested'
-      repaired: 'Repaired'
-      scrap: 'Scrap'
-      accessoires: 'Waiting for accessoires'
-      ready: 'Ready'
-      sent: 'Sent '
+      new: 'Nieuw'
+      tested: 'Getest'
+      repaired: 'Gerepareerd'
+      scrap: 'Sloop'
+      accessoires: 'Wacht op accessoires'
+      ready: 'Klaar'
+      sent: 'Verzonden '
     controller:
-       added: 'Entry added.'
-       updated: 'Entry updated.'
-       deleted: 'Entry deleted.'
-       images: 'images'
+       added: 'Order toegevoegd.'
+       updated: 'Order gewijzigd.'
+       deleted: 'Order verwijdert.'
+       images: 'afbeeldingen'
 
 # app/views/home
   home:
     batch:
-      title: 'Badger - Batch Update'
+      title: 'Badger - Batch update'
       legend: 'Batch update'
-      warning: 'Careful in here!'
-      warning_msg: ' You can easily mess a lot of stuff up!<br/>Enter numbers at top, enable the boxes next to the field you''d like to use, fill the fields and save.'
-      ordernumbers: 'Ordernumbers'
-      button: 'Update all entries'
-      button_send: 'Saving...'
-      enable: 'Enable'
+      warning: 'Pas hier op!'
+      warning_msg: ' Je kunt gemakkelijk ver verpesten hier!<br/>Voer bovenaan nummers in, vind de boxes naast de velden die u wilt gebruiken aan, vul de velden in en druk op opslaan.'
+      ordernumbers: 'Ordernummers'
+      button: 'Update alle orders'
+      button_send: 'Opslaan...'
+      enable: 'Inschakelen'
     index:
-      welcome: 'Welcome to this data storage.'
-      message: 'Sign in at the top.<br/>Sign up at the bottom.'
-      guest: 'Welcome guest!'
-      guest_msg: 'You will be able to use most functions a technician can use for managing this program, there are even more features but you''d have to be an admin for that, and that is something that''s off-limits to guests.'
-      entries: 'Entries'
-      invoices: 'Invoices'
-      stats: 'Stats'
+      welcome: 'Welkom bij deze data opslag.'
+      message: 'Log boven in.<br/>Meld beneden aan.'
+      guest: 'Welkom gast!'
+      guest_msg: 'U kunt hier de meeste functies van een medewerker gebruiken voor een paar testorders, er zijn nog meer functies maar die zijn niet geschikt en beschikbaar voor gasten.'
+      entries: 'Orders'
+      invoices: 'Facturen'
+      stats: 'Statistieken'
       batch: 'Batch'
-      no_company: 'You will be assigned to your respective company soon.<br>Can''t wait? Contact the admin '
-      no_company_anchor: 'here'
+      no_company: 'U wordt snel aan uw bedrijf toegevoegd..<br>Kunt u niet wachten? Neem contact op met de beheerder '
+      no_company_anchor: 'hier'
 
 # app/controllers/home & model
     controller:
       success: 'Batch updated'
-      success_end: 'items!'
-      error_exist: 'doesn''t exist!'
-      error_wrong: 'doesn''t belong to'
-      report_sent: 'Report sent.'
+      success_end: 'orders!'
+      error_exist: 'bestaat niet!'
+      error_wrong: 'behoort niet tot'
+      report_sent: 'Klacht verzonden.'
 
 # app/views/invoices
   invoice:
     index:
-      title: 'Badger - Invoices for '
-      legend: 'Invoices for '
-      empty_list: 'No invoices here'
-      items: 'Items'
-      date: 'Date'
-      add_invoice: 'Add invoice'
+      title: 'Badger - Facturen voor '
+      legend: 'Facturen voor '
+      empty_list: 'Geen facturen hier'
+      items: 'Orders'
+      date: 'Datum'
+      add_invoice: 'Factuur toevoegen'
     new:
-      title: 'Badger - New invoice'
-      legend: 'New invoice'
-      items: 'Items'
-      button: 'Save'
-      button_send: 'Saving...'
+      title: 'Badger - Nieuwe factuur'
+      legend: 'Nieuwe factuur'
+      items: 'Orders'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
     show:
-      title: 'Badger - Invoice'
-      legend: 'Invoice'
-      sender: 'Sender'
-      adressee: 'Adressee'
-      items: 'Items'
-      date: 'Date'
-      empty_list: 'No entries here' 
-      signature_sender: 'Signature sender'
-      signature_adressee: 'Signature adresse'
+      title: 'Badger - Factuur'
+      legend: 'Factuur'
+      sender: 'Afzender'
+      adressee: 'Ontvanger'
+      items: 'Orders'
+      date: 'Datum'
+      empty_list: 'Geen orders hier' 
+      signature_sender: 'Handtekening afzender'
+      signature_adressee: 'Handtekening ontvanger'
 
 # app/controllers/invoices & model
     controller:
-      tested: 'Tested'
-      repaired: 'Repaired'
-      scrapped: 'Scrapped'
-      deleted: 'Invoice deleted.'
-      added: 'Invoice added.'
-      no_exist: 'doesn''t exist!'
-      already_sent: 'was already sent!'
-      wrong_company: 'doesn''t belong to'
+      tested: 'Getest'
+      repaired: 'Gerepareerd'
+      scrapped: 'Gesloopt'
+      deleted: 'Factuur verwijdert.'
+      added: 'Factuur toegevoegd.'
+      no_exist: 'bestaat niet!'
+      already_sent: 'was al verzonden!'
+      wrong_company: 'behoort niet tot'
 
 # app/views/appliances
   appliance:
@@ -239,7 +239,7 @@ nl:
 
 # app/controllers/appliances & model
     controller:
-      notice_added: 'Appliance added.'
+      notice_added: 'Apparaat toegevoegd.'
 
 # app/views/classifications
   classes:
@@ -256,7 +256,7 @@ nl:
 
 # app/controllers/classifications & model
     controller:
-      notice_added: 'Class added.'
+      notice_added: 'Klasse toegevoegd.'
 
 # app/views/history
   history:
@@ -286,10 +286,10 @@ nl:
 
 # app/controllers/users & model
     controller:
-      update_success: 'User updated.'
-      update_fail: 'Unable to update user.'
-      delete_success: 'User deleted.'
-      delete_fail: 'Can''t delete yourself.'
+      update_success: 'Gebruiker geupdate.'
+      update_fail: 'Niet mogelijk gebruiker te updaten.'
+      delete_success: 'Gebruiker verwijdert.'
+      delete_fail: 'Je kunt jezelf niet verwijderen.'
 
 # app/views/stats
   stats:
@@ -304,17 +304,17 @@ nl:
 
 # app/controllers/stats & model
     status:
-      label: 'Status for '
-      amount: 'Amount'
-      new: 'New'
-      tested: 'Tested'
-      repaired: 'Repaired'
-      scrap: 'Scrap'
-      waiting: 'Waiting'
-      ready: 'Ready'
-      sent: 'Sent'
-      skipped: 'Skipped'
-      total: 'Total'
+      label: 'Status voor '
+      amount: 'Aantal'
+      new: 'Nieuw'
+      tested: 'Getest'
+      repaired: 'Gerepareerd'
+      scrap: 'Sloop'
+      waiting: 'Wachtend'
+      ready: 'Klaar'
+      sent: 'Verzonden'
+      skipped: 'Overgeslagen'
+      total: 'Totaal'
 
 # app/views/mailer
   mailer:
@@ -339,17 +339,3 @@ nl:
 ######################
 ##      /VIEWS      ##
 ######################
-
-# app/controllers/stats & model
-    status:
-      label: 'Status for '
-      amount: 'Amount'
-      new: 'New'
-      tested: 'Tested'
-      repaired: 'Repaired'
-      scrap: 'Scrap'
-      waiting: 'Waiting'
-      ready: 'Ready'
-      sent: 'Sent'
-      skipped: 'Skipped'
-      total: 'Total'
