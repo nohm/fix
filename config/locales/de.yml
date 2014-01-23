@@ -1,31 +1,33 @@
-nl:
+de:
 
-# TODO > COMPLETE TRANSLATION
+# TODO > TRANSLATE THIS
 
-# globals, these are used more often
+######################
+##     GLOBALS      ##
+######################
   global: 
-    users: 'Gebruikers'
-    appliances: 'Apparaten'
-    classes: 'Klassen'
-    history: 'Geschiedenis'
+    users: 'Users'
+    appliances: 'Appliances'
+    classes: 'Classes'
+    history: 'History'
 
     unauthorized: 'You''re not authorized for this.'
     unauth_admin: 'Not authorized as an administrator.'
     no_company: 'Please re-open the entry index'
-    errors: 'Los alstublieft de ondestaande fouten op.'
+    errors: 'Please fix the errors below.'
 
-    close: 'Sluiten'
-    back: 'Terug'
+    close: 'Close'
+    back: 'Back'
     delete: 'Delete'
     sure: 'Are you sure?'
 
-    name: 'Naam'
-    username: 'Gebruikersnaam'
-    abbrevatio: 'Afkorting'
-    message: 'Bericht'
+    name: 'Name'
+    username: 'Username'
+    abbrevatio: 'Abbrevation'
+    message: 'Message'
     email: 'Email'
-    password: 'Wachtwoord'
-    password_confirmation: 'Wachtwoord confirmatie'
+    password: 'Password'
+    password_confirmation: 'Password confirmation'
 
     status: 'Status'
     number: 'Number'
@@ -55,42 +57,42 @@ nl:
 # app/views/kaminari
   views:
     pagination:
-      first: "&laquo; Errste"
-      last: "Laatste &raquo;"
-      previous: "&lsaquo; Vorige"
-      next: "Volgende &rsaquo;"
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
       truncate: "..."
 
 # app/views/layouts
   layouts:
     landing:
-      welcome: 'Welkom bij deze data opslag.'
-      warning: 'O nee, '
-      warning_msg: ' je browser is verouderd en ondersteund niet alles wat deze website te bieden heeft!<br>Je zou kunnen updaten naar Internet Explorer 10, Firefox 24+, Chrome 20+ of Opera 12+</div>'
+      welcome: 'Welcome to this data storage.'
+      warning: 'Ohno, '
+      warning_msg: ' your browser is outdated and doesn''t support all the features this site offers!<br>You might want to upgrade to Internet Explorer 10, Firefox 24+, Chrome 20+ or Opera 12+</div>'
       
     header:
-      toggle: 'Wissel navigatie'
+      toggle: 'Toggle navigation'
 
     footer:
-      copyright: 'Gemaakt en onderhouden door '
-      forgot_pass: 'Wachtwoord vergeten?'
+      copyright: 'Made and maintained by '
+      forgot_pass: 'Forgot your password?'
 
     navigation:
-      edit: 'Wijzig account'
-      logout: 'Log uit'
+      edit: 'Edit account'
+      logout: 'Logout'
 
     signin: 
-      button: 'Log in'
-      button_send: 'Inloggen...'
+      button: 'Sign in'
+      button_send: 'Signing in...'
 
     signup: 
-      button: 'Meld aan'
-      button_send: 'Aanmelden...'
+      button: 'Sign up'
+      button_send: 'Signing up...'
 
     report:
-      button_large: 'Geef een probleem door'
-      button: 'Stuur bericht'
-      button_send: 'Versturen...'
+      button_large: 'Report a problem'
+      button: 'Send report'
+      button_send: 'Sending report...'
 
 # app/views/entries
   entry:
@@ -227,15 +229,15 @@ nl:
 # app/views/appliances
   appliance:
     index:
-      title: 'Badger - Apparaten panel'
-      legend: 'Apparaten'
-      empty_list: 'Geen apparaten hier'
-      new_appliance: 'Voeg apparaat toe'
+      title: 'Badger - Appliance panel'
+      legend: 'Appliances'
+      empty_list: 'No appliances here'
+      new_appliance: 'Add appliance'
     new: 
-      title: 'Badger - Nieuw apparaat'
-      legend: 'Nieuw apparaat'
-      button: 'Opslaan'
-      button_send: 'Opslaan...'
+      title: 'Badger - New appliance'
+      legend: 'New appliance'
+      button: 'Save'
+      button_send: 'Saving...'
 
 # app/controllers/appliances & model
     controller:
@@ -244,15 +246,15 @@ nl:
 # app/views/classifications
   classes:
     index:
-      title: 'Badger - Klassen panel'
-      legend: 'Klassen'
-      empty_list: 'Geen klassen hier'
-      new_class: 'Voeg klasse toe'
+      title: 'Badger - Class panel'
+      legend: 'Classes'
+      empty_list: 'No classes here'
+      new_class: 'Add class'
     new: 
-      title: 'Badger - Nieuwe klasse'
-      legend: 'Nieuwe klasse'
-      button: 'Opslaan'
-      button_send: 'Opslaan...'
+      title: 'Badger - New class'
+      legend: 'New class'
+      button: 'Save'
+      button_send: 'Saving...'
 
 # app/controllers/classifications & model
     controller:
@@ -261,28 +263,28 @@ nl:
 # app/views/history
   history:
     index:
-      title: 'Badger - Geschiedenis'
-      legend: 'Geschiedenis'
-      empty_list: 'geen geschiedenis hier'
-      where: 'Waar?'
-      who: 'Wie?'
-      what: 'Wat?'
-      when: 'Wanneer'
+      title: 'Badger - History'
+      legend: 'History'
+      empty_list: 'No history here'
+      where: 'Where?'
+      who: 'Who?'
+      what: 'What?'
+      when: 'When?'
 
 # app/views/users
   user:
     user:
-      change: 'Wijzig Rol'
+      change: 'Change Role'
     index:
-      title: 'Badger - Gebruikers panel'
-      legend: 'Gebruikers'
-      registered: 'Aangemeld'
-      role: 'Rol'
+      title: 'Badger - User panel'
+      legend: 'Users'
+      registered: 'Registered'
+      role: 'Role'
     show:
-      title: 'Badger - Gebruikers overzicht'
-      registered: 'Aangemeld'
-      last_signin: 'Laaste sign-in'
-      signin_count: 'Sign-in aantal'
+      title: 'Badger - User overview'
+      registered: 'Registered'
+      last_signin: 'Last sign-in'
+      signin_count: 'Sign-in count'
 
 # app/controllers/users & model
     controller:
@@ -294,14 +296,14 @@ nl:
 # app/views/stats
   stats:
     index:
-      title: 'Badger - Statistieken voor '
-      simpler: 'Wil je simpelere statistieken?'
-      fancier: 'Wil je uitgebreidere statistieken?'
-      global: 'Globaal'
-      global_label: 'Globale status'
-      brand_label: 'Merk en type specifieke status'
-      showhide: 'Weergeven/Verstoppen '
-
+      title: 'Badger - Stats for '
+      simpler: 'Want simpler stats?'
+      fancier: 'Want fancier stats?'
+      global: 'Global'
+      global_label: 'Global status'
+      brand_label: 'Brand and type specific status'
+      showhide: 'Show/Hide '
+      
 # app/controllers/stats & model
     status:
       label: 'Status for '
@@ -319,37 +321,23 @@ nl:
 # app/views/mailer
   mailer:
     error_report:
-      title: 'Badger: Probleem bericht'
-      sender: 'Er is een nieuw probleem bericht geplaatst door: '
-      message: 'Hun bericht:'
+      title: 'Badger: Error report'
+      sender: 'A new error report has been submitted by: '
+      message: 'Their message:'
     new_user:
-      title: 'Nieuwe aanmelding voor Badger'
-      message: 'Er is een nieuwe aanmelding voor Badger, hun gebruikersnaam is: '
-      site_link: 'Om hun permissies te wijzigen klik hier: '
+      title: 'New sign up for Badger'
+      message: 'A new person has signed up for Badger, their username is: '
+      site_link: 'To update their permissions, just follow this link: '
     role_update:
-      title: 'Badger: Rol gewijzigd'
-      new_role: 'Je rol is gewijzigd naar: '
-      site_link: 'Om in te loggen volg deze link: '
-      greet: 'Prettige dag verder.'
+      title: 'Role updated'
+      new_role: 'Your role has been changed to: '
+      site_link: 'To login to the site, just follow this link: '
+      greet: 'Have a nice day.'
     welcome_msg:
-      title: 'Welkom bij Badger, '
-      message: 'Je bent succesvol aangemeld bij Badger, je gebruikersnaam is: '
-      site_link: 'Om in te loggen volg deze link: '
-      greet: 'Bedankt voor de aanmelding en prettige dag verder!'
+      title: 'Welcome to Badger, '
+      message: 'You have successfully signed up to Badger, your username is: '
+      site_link: 'To login to the site, just follow this link: '
+      greet: 'Thanks for joining and have a great day!'
 ######################
 ##      /VIEWS      ##
 ######################
-
-# app/controllers/stats & model
-    status:
-      label: 'Status for '
-      amount: 'Amount'
-      new: 'New'
-      tested: 'Tested'
-      repaired: 'Repaired'
-      scrap: 'Scrap'
-      waiting: 'Waiting'
-      ready: 'Ready'
-      sent: 'Sent'
-      skipped: 'Skipped'
-      total: 'Total'

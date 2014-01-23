@@ -1,49 +1,49 @@
-<% provide(:title, 'Badger - New entry') %>
+<% provide(:title, t('entry.new.title')) %>
 
 <%= bootstrap_form_for(@entry, :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
-  <%= f.alert_message "Please fix the errors below." %>
+  <%= f.alert_message t('global.errors') %>
   
-  <legend>New entry</legend>
+  <legend><%= t('entry.new.legend') %></legend>
 
-  <%= f.select :appliance_id, @appliance_names %>
-  <%= f.text_field :brand %>
-  <%= f.text_field :typenum %>
-  <%= f.text_field :serialnum %>
+  <%= f.select :appliance_id, @appliance_names, label: t('global.appliance') %>
+  <%= f.text_field :brand, label: t('global.brand') %>
+  <%= f.text_field :typenum, label: t('global.typenum') %>
+  <%= f.text_field :serialnum, label: t('global.serialnum') %>
 
-  <%= f.text_field :defect, label: 'What\'s broken?' %>
-  <%= f.text_field :repair, label: 'What\'s repaired?' %>
-  <%= f.text_field :ordered, label: 'Parts ordered?' %>
+  <%= f.text_field :defect, label: t('global.defect') %>
+  <%= f.text_field :repair, label: t('global.repair') %>
+  <%= f.text_field :ordered, label: t('global.ordered') %>
 
-  <%= f.text_field :testera, label: 'First tester' %>
-  <%= f.text_field :testerb, label: 'Second tester' %>
+  <%= f.text_field :testera, label: t('global.testera') %>
+  <%= f.text_field :testerb, label: t('global.testerb') %>
 
   <%= f.form_group :test do %>
-    <%= f.check_box :test, label: 'Test OK' %>
+    <%= f.check_box :test, label: t('global.test') %>
   <% end %>
   <%= f.form_group :repaired do %>
-    <%= f.check_box :repaired, label: 'Repaired' %>
+    <%= f.check_box :repaired, label: t('global.repaired') %>
   <% end %>
   <%= f.form_group :ready do %>
-    <%= f.check_box :ready, label: 'Ready' %>
+    <%= f.check_box :ready, label: t('global.ready') %>
   <% end %>
   <%= f.form_group :scrap do %>
-    <%= f.check_box :scrap, label: 'Scrap' %>
+    <%= f.check_box :scrap, label: t('global.scrap') %>
   <% end %>
   <%= f.form_group :accessoires do %>
-    <%= f.check_box :accessoires, label: 'Accessoires' %>
+    <%= f.check_box :accessoires, label: t('global.accessoires') %>
   <% end %>
 
-  <%= f.select :class_id, @class_names %>
+  <%= f.select :class_id, @class_names, label: t('global.class') %>
 
-  <%= f.text_area :note %>
+  <%= f.text_area :note, label: t('global.note') %>
 
   <%= f.hidden_field :company, :value => session[:company] %>
 
-  <p>First save the entry, then show it and there you can add images.</p>
+  <p><%= t('entry.edit.message') %></p>
  
   <%= f.form_group do %>
-    <%= f.submit 'Save entry', data: { disable_with: 'Saving...' }, class: "btn btn-primary" %>
+    <%= f.submit t('enty.new.button'), data: { disable_with: t('entry.new.button_send') }, class: "btn btn-primary" %>
   <% end %>
 <% end %>
  
-<%= link_to 'Back', entries_path %>
+<%= link_to t('global.back'), entries_path %>

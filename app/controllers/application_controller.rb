@@ -26,14 +26,14 @@ class ApplicationController < ActionController::Base
   end
 
   def locale_list
-    @locales = {'English' => 'en', 'Dutch' => 'nl'}
+    @locales = {'English' => 'en', 'Nederlands' => 'nl', 'Deutsch' => 'de'}
   end
 
   before_action :set_locale
 
   def set_locale
     unless user_signed_in?
-      I18n.locale = I18n.default_locale
+      I18n.locale = params[:locale] || I18n.default_locale
     else
       I18n.locale = current_user.language || I18n.default_locale
     end

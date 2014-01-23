@@ -13,7 +13,7 @@ class HomeController < ApplicationController
       @appliance_names = Appliance.pluck(:name, :id)
       @class_names = Classifications.pluck(:name, :id)
     else
-      redirect_to root_path, :alert => "You\'re not authorized for this"
+      redirect_to root_path, :alert => I18n.t('global.unauthorized')
     end
   end
 
@@ -47,13 +47,13 @@ class HomeController < ApplicationController
           end
         end
       end
-      redirect_to root_path, :notice => "Batch updated #{items.lines.length} items!"
+      redirect_to root_path, :notice => "#{I18n.t('home.controller.success')} #{items.lines.length} #{I18n.t('home.controller.success_end')}"
     else
       non_existing.each do |item|
-        flash["alert #{item}"] = "#{item} doesn't exist!"
+        flash["alert #{item}"] = "#{item} #{I18n.t('home.controller.error_exist')}"
       end
       wrong_comp.each do |item|
-        flash["alert #{item}"] = "#{item} doesn't belong to #{session[:company]}!"
+        flash["alert #{item}"] = "#{item} #{I18n.t('home.controller.error_wrong')} #{session[:company]}!"
       end
 
       @appliance_names = Appliance.pluck(:name, :id)

@@ -1,32 +1,28 @@
-<% provide(:title, 'Badger - Invoice') %>
+<% provide(:title, t('invoice.show.title')) %>
 
-<legend>Invoice</legend>
+<legend><%= t('invoice.show.legend') %></legend>
 
 <div class="well well-large">
   <div style="overflow:auto">
     <div style="width:30%;float:left;margin-left:15%">
-      <strong>Sender</strong>
+      <strong><%= t('invoice.show.sender') %></strong>
       <p>
-        TVA Service Center<br>
-        Twentelaan 2<br>
-        7609 RE Almelo<br>
-        The Netherlands<br>
-        +31 546 851212
+        <%= raw @sender_data %>
       </p>
     </div>
     <div style="width:35%;float:right">
-      <strong>Adressee</strong>
+      <strong><%= t('invoice.show.adressee') %></strong>
       <p>
-        <%= raw @company_data %>
+        <%= raw @adressee_data %>
       </p>
     </div>
   </div>
   <dl class="dl-horizontal">
     <dt>ID</dt>
     <dd><%= @invoice.id %></dd>
-    <dt>Items</dt>
+    <dt><%= t('invoice.show.items') %></dt>
     <dd><%= @invoice.items %></dd>
-    <dt>Date</dt>
+    <dt><%= t('invoice.show.date') %></dt>
     <dd><%= @invoice.created_at.to_date %></dd>
   </dl>
 
@@ -51,16 +47,16 @@
 
 <div>
   <% if @entries.length == 0 %>
-    <p>No entries here</p>
+    <p><%= t('invoice.show.empty_list') %></p>
   <% else %>
     <table class="table table-condensed table-striped">
       <thead>
         <tr>
-          <th>Number</th>
-          <th>Appliance</th>
-          <th>Brand</th>
-          <th>Type</th>
-          <th>Serial</th>
+          <th><%= t('global.number') %></th>
+          <th><%= t('global.appliance') %></th>
+          <th><%= t('global.brand') %></th>
+          <th><%= t('global.type') %></th>
+          <th><%= t('global.serial') %></th>
           <th style="width:17px;"></th>
         </tr>
       </thead>
@@ -68,7 +64,7 @@
         <% @entry_data.each do |classdata| %>
           <% unless classdata.length == 0 %>
             <tr>
-              <td><strong>Class <%= @classes[classdata[0].class_id - 1].name %></strong></td>
+              <td><strong><%= "#{t('global.class')} #{@classes[classdata[0].class_id - 1].name}" %></strong></td>
               <td></td><td></td><td></td><td></td><td></td>
             </tr>
             <% classdata.each do |entry| %>
@@ -99,13 +95,13 @@
 <div class="well well-large">
   <div style="overflow:auto">
     <div style="width:30%;float:left;margin-left:15%">
-      <strong>Signature sender</strong>
+      <strong><%= t('invoice.show.signature_sender') %></strong>
       <p style="margin-top:50px">
         ____________________
       </p>
     </div>
     <div style="width:35%;float:right">
-      <strong>Signature adressee</strong>
+      <strong><%= t('invoice.show.signature_adressee') %></strong>
       <p style="margin-top:50px">
         ____________________
       </p>

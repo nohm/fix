@@ -34,11 +34,11 @@ class Stats < ActiveRecord::Base
       f.chart({:defaultSeriesType=>"pie"} )
       series = {
         :type=> 'pie',
-        :name=> 'Amount',
+        :name=> I18n.t('stats.status.amount'),
         :data=> data
       }
       f.series(series)
-      f.options[:title][:text] = 'Status for ' + title
+      f.options[:title][:text] = I18n.t('stats.status.label') + title
       f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
       f.plot_options(:pie=>{
         :allowPointSelect=>true, 
@@ -58,14 +58,14 @@ class Stats < ActiveRecord::Base
   def generate_chart title, subtitle, data, extended
     if extended
       data = [
-        [ 'New', data[0].to_f ],
-        [ 'Tested', data[1].to_f ],
-        [ 'Repaired', data[2].to_f ],
-        [ 'Scrap', data[3].to_f ],
-        [ 'Waiting', data[4].to_f ],
-        [ 'Ready', data[5].to_f ],
+        [ I18n.t('stats.status.new'), data[0].to_f ],
+        [ I18n.t('stats.status.tested'), data[1].to_f ],
+        [ I18n.t('stats.status.repaired'), data[2].to_f ],
+        [ I18n.t('stats.status.scrap'), data[3].to_f ],
+        [ I18n.t('stats.status.waiting'), data[4].to_f ],
+        [ I18n.t('stats.status.ready'), data[5].to_f ],
         {
-          :name=> 'Sent',    
+          :name=> I18n.t('stats.status.sent'),    
           :y=> data[6].to_f,
           :sliced=> true,
           :selected=> true
@@ -73,17 +73,17 @@ class Stats < ActiveRecord::Base
       ]
       build_chart(title, data)
     else
-      generate_bar_chart(['New','Tested','Repaired','Scrap','Waiting','Ready','Sent'], 6, data)
+      generate_bar_chart([I18n.t('stats.status.new'),I18n.t('stats.status.tested'),I18n.t('stats.status.repaired'),I18n.t('stats.status.scrap'),I18n.t('stats.status.waiting'),I18n.t('stats.status.ready'),I18n.t('stats.status.sent')], 6, data)
     end
   end
 
   def generate_chart_status title, subtitle, data, extended
     if extended
       data = [
-        [ 'Tested', data[0].to_f ],
-        [ 'Repaired', data[1].to_f ],
+        [ I18n.t('stats.status.tested'), data[0].to_f ],
+        [ I18n.t('stats.status.repaired'), data[1].to_f ],
         {
-          :name=> 'Scrap',    
+          :name=> I18n.t('stats.status.scrap'),    
           :y=> data[2].to_f,
           :sliced=> true,
           :selected=> true
@@ -91,7 +91,7 @@ class Stats < ActiveRecord::Base
       ]
       build_chart(title, data)
     else
-      generate_bar_chart(['Tested','Repaired','Scrap','Skipped'], 3, data)
+      generate_bar_chart([I18n.t('stats.status.tested'),I18n.t('stats.status.repaired'),I18n.t('stats.status.scrap'),I18n.t('stats.status.skipped')], 3, data)
     end
   end
 
@@ -109,7 +109,7 @@ class Stats < ActiveRecord::Base
       (0..length).each do |i|
         bar << build_label(((data[i].to_f / count.to_f) * 100.0).round(1).to_s, data[i].to_s, labels[i])
       end
-      bar << "<tr><td>100%</td><td>(#{count})</td><td>Total</td><td></td>"
+      bar << "<tr><td>100%</td><td>(#{count})</td><td>#{I18n.t('stats.status.total')}</td><td></td>"
       bar << '</table>'
   end
 

@@ -2,7 +2,7 @@ class AttachmentsController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    authorize! :create, Attachment, :message => 'You\'re not authorized for this.'
+    authorize! :create, Attachment, :message => I18n.t('global.unauthorized')
 
     @entry = Entry.find(params[:entry_id])
     @attachment = @entry.attachments.create(params[:attachment].permit(:attach))
@@ -10,7 +10,7 @@ class AttachmentsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, Attachment, :message => 'You\'re not authorized for this.'
+    authorize! :destroy, Attachment, :message => I18n.t('global.unauthorized')
 
     @entry = Entry.find(params[:entry_id])
     @attachment = @entry.attachments.find(params[:id])

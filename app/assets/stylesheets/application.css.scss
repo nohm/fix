@@ -79,6 +79,26 @@ a span:hover {
   position: relative;
 }
 
+.languageflag{
+  display:inline-block;
+  height:11px;
+  width:16px;
+  background: url(../assets/flags.png)  no-repeat;
+}
+
+.nlflag {
+  background-position: -48px -44px;
+}
+
+.enflag {
+  background-position: -16px -275px;
+}
+
+.deflag {
+  background-position: -16px -22px;
+}
+
+
 /* /stats charts get some bottom margin */
 .stat-chart {
   margin-top: 15px !important;
@@ -207,6 +227,24 @@ body {
   right: 10px;
 }
 
+.landingflag {
+  position: absolute;
+  top: 25px;
+}
+
+.landing .enflag {
+  left: 20px;
+}
+
+.landing .nlflag {
+  left: 45px;
+}
+
+.landing .deflag {
+  left: 70px;
+}
+
+/* Washing Machine CSS */
 .wrapper {
     position: absolute;
     z-index: 1;

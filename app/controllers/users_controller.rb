@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
+    authorize! :index, @user, :message => I18n.t('global.unauth_admin')
     @users = User.all.page(params[:page]).per(25)
   end
 
@@ -11,24 +11,24 @@ class UsersController < ApplicationController
   end
   
   def update
-    authorize! :update, @user, :message => 'Not authorized as an administrator.'
+    authorize! :update, @user, :message => I18n.t('global.unauth_admin')
     @user = User.find(params[:id])
     if @user.update_attributes(params.require(:user).permit(:role_ids))
       Mailer.send_role_update(@user).deliver!
-      redirect_to users_path, :notice => "User updated."
+      redirect_to users_path, :notice => I18n.t('user.controller.update_success')
     else
-      redirect_to users_path, :alert => "Unable to update user."
+      redirect_to users_path, :alert => I18n.t('user.controller.update_fail')
     end
   end
     
   def destroy
-    authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
+    authorize! :destroy, @user, :message => I18n.t('global.unauth_admin')
     user = User.find(params[:id])
     unless user == current_user
       user.destroy
-      redirect_to users_path, :notice => "User deleted."
+      redirect_to users_path, :notice => I18n.t('user.controller.delete_success')
     else
-      redirect_to users_path, :notice => "Can't delete yourself."
+      redirect_to users_path, :notice => I18n.t('user.controller.delete_fail')
     end
   end
 

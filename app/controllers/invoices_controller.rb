@@ -2,20 +2,20 @@ class InvoicesController < ApplicationController
   before_filter :authenticate_user!
 
   def new
-    authorize! :new, Invoice, :message => 'You\'re not authorized for this.'
+    authorize! :new, Invoice, :message => I18n.t('global.unauthorized')
 
     @invoice = Invoice.new
   end
 
   def show
-    authorize! :show, Invoice, :message => 'You\'re not authorized for this.'
+    authorize! :show, Invoice, :message => I18n.t('global.unauthorized')
 
     @invoice = Invoice.find(params[:id])
 
     @entries = Entry.where(invoice_id: params[:id])
 
     @classes = Classifications.all
-    @statuses = ['Tested', 'Repaired', 'Scrapped']
+    @statuses = [I18n.t('invoice.controller.tested'),I18n.t('invoice.controller.repaired'),I18n.t('invoice.controller.scrapped')]
     @entry_data = Array.new
     @entry_status = Array.new
     (0..@classes.length).each do |i|
@@ -36,11 +36,12 @@ class InvoicesController < ApplicationController
     end
 
     @appliances = Appliance.all
-    @company_data = eval(ENV["COMPANIES"])[Role.where(name: session[:company]).take.id - 5]
+    @sender_data = ENV["COMPANY"]
+    @adressee_data = eval(ENV["COMPANIES"])[Role.where(name: session[:company]).take.id - 5]
   end
 
   def index
-    authorize! :index, Invoice, :message => 'You\'re not authorized for this.'
+    authorize! :index, Invoice, :message => I18n.t('global.unauthorized')
 
     unless params[:company].nil?
       session[:company] = params[:company]
@@ -48,12 +49,12 @@ class InvoicesController < ApplicationController
     if !session[:company].nil? and (can? :create, Entry or current_user.roles.first.name == session[:company])
       @invoices = Invoice.where(company: session[:company]).page(params[:page]).per(25)
     else
-      redirect_to root_path, :alert => "You\'re not authorized for this"
+      redirect_to root_path, :alert => I18n.t('global.unauthorized')
     end
   end
 
   def destroy
-    authorize! :destroy, Invoice, :message => 'You\'re not authorized for this.'
+    authorize! :destroy, Invoice, :message => I18n.t('global.unauthorized')
 
     entries = Entry.where(invoice_id: params[:id])
     entries.each do |entry|
@@ -61,14 +62,14 @@ class InvoicesController < ApplicationController
       entry.update_attribute(:invoice_id, nil)
     end
     invoice.destroy
-    redirect_to invoices_path, :notice => "Invoice deleted."
+    redirect_to invoices_path, :notice => I18n.t('invoice.controller.deleted')
   end
 
   def create
-    authorize! :create, Invoice, :message => 'You\'re not authorized for this.'
+    authorize! :create, Invoice, :message => I18n.t('global.unauthorized')
 
     if session[:company].nil?
-      redirect_to root_path, :notice => 'Please re-open the entry index'
+      redirect_to root_path, :notice => I18n.t('global.no_company')
     end
 
     items = params[:invoice][:items]
@@ -99,16 +100,16 @@ class InvoicesController < ApplicationController
         entry.update_attribute(:sent, 1)
         entry.update_attribute(:invoice_id, @invoice.id)
       end
-      redirect_to invoices_path, :notice => "Invoice added."
+      redirect_to invoices_path, :notice => I18n.t('invoice.controller.added')
     else
       non_existing.each do |item|
-      	flash["alert #{item}"] = "#{item} doesn't exist!"
+      	flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.no_exist')}"
       end
       already_sent.each do |item|
-      	flash["alert #{item}"] = "#{item} was already sent!"
+      	flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.already_sent')}"
       end
       wrong_comp.each do |item|
-        flash["alert #{item}"] = "#{item} doesn't belong to #{session[:company]}!"
+        flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.wrong_company')} #{session[:company]}!"
       end
       render 'new'
     end

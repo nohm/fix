@@ -1,13 +1,13 @@
 class StatsController < ApplicationController
 	def index
-		authorize! :index, Stats, :message => 'You\'re not authorized for this.'
+		authorize! :index, Stats, :message => I18n.t('global.unauthorized')
 
 		# check if company is set
 	    unless params[:company].nil?
 	      session[:company] = params[:company]
 	    end
 	    if session[:company].nil?
-	      redirect_to root_path, :alert => "You\'re not authorized for this."
+	      redirect_to root_path, :alert => I18n.t('global.unauthorized')
 	    end
 
 		# Set it up

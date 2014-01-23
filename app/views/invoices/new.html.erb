@@ -1,17 +1,17 @@
-<% provide(:title, 'Badger - New invoice') %>
+<% provide(:title, t('invoice.new.title')) %>
 
 <%= bootstrap_form_for :invoice, :url => invoices_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
-  <%= f.alert_message "Please fix the errors below." %>
+  <%= f.alert_message t('global.errors') %>
   
-  <legend>New invoice</legend>
+  <legend><%= t('invoice.new.legend') %></legend>
 
-  <%= f.text_area :items %>
+  <%= f.text_area :items, label: t('invoice.new.items') %>
 
   <%= f.hidden_field :company, :value => session[:company] %>
 
   <%= f.form_group do %>
-    <%= f.submit 'Save invoice', data: { disable_with: 'Saving...' }, class: "btn btn-primary" %>
+    <%= f.submit t('invoice.new.button'), data: { disable_with: t('invoice.new.button_send') }, class: "btn btn-primary" %>
   <% end %>
 <% end %>
 
-<%= link_to "Back", invoices_path %>
+<%= link_to t('global.back'), invoices_path %>

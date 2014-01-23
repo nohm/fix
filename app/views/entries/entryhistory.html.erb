@@ -1,20 +1,20 @@
-<% provide(:title, 'Badger - History overview') %>
-<legend>History</legend>
+<% provide(:title, t('entry.entryhistory.title')) %>
+<legend><%= t('entry.entryhistory.legend') %></legend>
 
 <h2><%= @entry.company[0].upcase! + @appliance.abb + @entry.number %></h2>
 
 <div class="row">
   <div class="span6">
   	<% if @history.length == 0 %>
-      <p>No history here</p>
+      <p><%= t('entry.entryhistory.empty_list') %></p>
     <% else %>
 	    <div class="table-responsive">
 	      <table class="table table-condensed table-striped">
 			<thead>
 	          <tr>
-	            <th>Who?</th>
-	            <th>What?</th>
-	            <th>When?</th>
+	            <th><%= t('entryhistory.who') %></th>
+	            <th><%= t('entryhistory.what') %></th>
+	            <th><%= t('entryhistory.when') %></th>
 	          </tr>
 	        </thead>
 	        <tbody class="searchable">
@@ -36,4 +36,4 @@
   </div>
 </div>
 
-<%= link_to "Back", entry_path(@entry) %>
+<%= link_to t('global.back'), entry_path(@entry) %>

@@ -1,4 +1,4 @@
-<% provide(:title, 'Badger - Entry overview') %>
+<% provide(:title, t('entry.show.title')) %>
 <legend>Entry</legend>
 
 <h2><%= @entry.company[0].upcase! + @appliance.abb + @entry.number %></h2>
@@ -11,22 +11,22 @@
 
         <% if can? :create, Entry %>
           <tr>
-            <td><h6>Barcode</h6></td>
+            <td><h6><%= t('entry.show.barcode') %></h6></td>
             <td><%= @entry.get_barcode(@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s).html_safe %></td>
           </tr>
         <% end %>
 
         <tr>
-          <td><h6>Status</h6></td>
-          <td><%= @entry.status %></td>
+          <td><h6><%= t('global.status') %></h6></td>
+          <td><%= @entry.get_status_translated %></td>
         </tr>
 
         <tr>
-          <td><h6>Serial Number</h6></td>
+          <td><h6><%= t('global.serialnum') %></h6></td>
           <td><%= @entry.serialnum %></td>
         </tr>
         <tr>
-          <td><h6>Sent?</h6></td>
+          <td><h6><%= t('entry.show.sent') %></h6></td>
           <% unless @entry.invoice_id.nil? %>
             <td>Yes - <%= @invoice.created_at.to_date %></td>
               <% else %>
@@ -34,53 +34,53 @@
           <% end %>
         </tr>
         <tr>
-          <td><h6>Class</h6></td>
+          <td><h6><%= t('global.class') %></h6></td>
           <td><%= @classification.name.presence || '-' %></td>
         </tr>
 
         <% if can? :create, Entry %>
           <tr>
-            <td><h6>Defect</h6></td>
+            <td><h6><%= t('global.defect') %></h6></td>
             <td><%= @entry.defect.presence || '-' %></td>
           </tr>
           <tr>
-            <td><h6>Repair</h6></td>
+            <td><h6><%= t('global.repair') %></h6></td>
             <td><%= @entry.repair.presence || '-' %></td>
           </tr>
           <tr>
-            <td><h6>First tester</h6></td>
+            <td><h6><%= t('global.testera') %></h6></td>
             <td><%= @entry.testera.presence || '-' %></td>
           </tr>
           <tr>
-            <td><h6>Second tester</h6></td>
+            <td><h6><%= t('global.testerb') %></h6></td>
             <td><%= @entry.testerb.presence || '-' %></td>
           </tr>
           <tr>
-            <td><h6>Ordered</h6></td>
+            <td><h6><%= t('global.ordered') %></h6></td>
             <td><%= @entry.ordered.presence || '-' %></td>
           </tr>
           <tr>
-            <td><h6>Test OK</h6></td>
+            <td><h6><%= t('global.test') %></h6></td>
             <td><%= @entry.test == 1 ? 'Yes' : 'No' %></td>
           </tr>
           <tr>
-            <td><h6>Repaired</h6></td>
+            <td><h6><%= t('global.repaired') %></h6></td>
             <td><%= @entry.repaired == 1 ? 'Yes' : 'No'  %></td>
           </tr>
           <tr>
-            <td><h6>Ready</h6></td>
+            <td><h6><%= t('global.ready') %></h6></td>
             <td><%= @entry.ready == 1 ? 'Yes' : 'No'  %></td>
           </tr>
           <tr>
-            <td><h6>Scrap</h6></td>
+            <td><h6><%= t('global.scrap') %></h6></td>
             <td><%= @entry.scrap == 1 ? 'Yes' : 'No'  %></td>
           </tr>
           <tr>
-            <td><h6>Accessoires</h6></td>
+            <td><h6><%= t('global.accessoires') %></h6></td>
             <td><%= @entry.accessoires == 1 ? 'Yes' : 'No'  %></td>
           </tr>
           <tr>
-            <td><h6>Note</h6></td>
+            <td><h6><%= t('global.note') %></h6></td>
             <td><%= @entry.note.presence || '-' %></td>
           </tr>
         <% end %>
@@ -92,7 +92,7 @@
     <div class="table-responsive">
       <table class="table table-condensed table-striped">
         <tr>
-          <td><h6>Images</h6></td>
+          <td><h6><%= t('entry.show.images') %></h6></td>
           <td>
             <% if @entry.attachments.length == 0 %>
               -
@@ -104,7 +104,7 @@
                 <% end %>
                 <% if can? :destroy, Attachment %>
                   <br>
-                  <%= link_to 'Delete', entry_attachment_path(@entry.id, attachment), method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <%= link_to t('global.delete'), entry_attachment_path(@entry.id, attachment), method: :delete, data: { confirm: t('global.sure') } %>
                 <% end %>
               <% end %>
               </div>
@@ -117,7 +117,7 @@
       <% unless @entry.attachments.length >= 10 %>
         <!-- Button trigger modal -->
         <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal-attachment">
-          Add attachment
+          <%= t('entry.show.add_attachment') %>
         </button>
 
         <!-- Modal -->
@@ -127,14 +127,14 @@
               <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="modalLabel-attachment">Add attachment</h4>
+                  <h4 class="modal-title" id="modalLabel-attachment"><%= t('entry.show.add_attachment') %></h4>
                 </div>
                 <div class="modal-body">
-                  <%= f.file_field :attach, :label => 'Select a file..' %>
+                  <%= f.file_field :attach, :label => t('entry.show.select') %>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <%= f.submit 'Add image', data: { disable_with: 'Saving...' }, class: "btn btn-primary" %>
+                  <%= f.submit t('entry.show.button'), data: { disable_with: t('entry.show.button_send') }, class: "btn btn-primary" %>
                 </div>
               <% end %>
             </div><!-- /.modal-content -->
@@ -148,23 +148,23 @@
 <div style="margin-bottom:10px">
   <% if can? :zip, Entry %>
     <% unless @entry.attachments.length == 0 %>
-      <%= link_to("Create zip", zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
+      <%= link_to(t('entry.show.zip'), zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
     <% end %>
   <% end %>
   <div style="float:left;padding-right:4px" data-no-turbolink="true">
     <% if can? :create, Entry %>
-      <%= link_to("Create sticker", sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
+      <%= link_to(t('entry.show.sticker'), sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
     <% end %>
   </div>
   <% if can? :edit, Entry %>
-    <%= link_to("Edit entry", edit_entry_path(@entry), :class => 'btn btn-mini btn-primary') %>
+    <%= link_to(t('entry.show.edit'), edit_entry_path(@entry), :class => 'btn btn-mini btn-primary') %>
   <% end %>
   <% if can? :destroy, Entry %>
-    <%= link_to("Delete entry", entry_path(@entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
+    <%= link_to(t('entry.show.delete'), entry_path(@entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
   <% end %>
   <% if can? :entryhistory, Entry %>
-    <%= link_to("View history", entryhistory_path(@entry), :class => 'btn btn-mini btn-primary') %>
+    <%= link_to(t('entry.show.view'), entryhistory_path(@entry), :class => 'btn btn-mini btn-primary') %>
   <% end %>
 </div>
 
-<%= link_to "Back", entries_path %>
+<%= link_to t('global.back'), entries_path %>

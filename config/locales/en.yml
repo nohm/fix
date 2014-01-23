@@ -1,15 +1,23 @@
 en:
 
-# globals, these are used more often
+######################
+##     GLOBALS      ##
+######################
   global: 
     users: 'Users'
     appliances: 'Appliances'
     classes: 'Classes'
     history: 'History'
 
+    unauthorized: 'You''re not authorized for this.'
+    unauth_admin: 'Not authorized as an administrator.'
+    no_company: 'Please re-open the entry index'
     errors: 'Please fix the errors below.'
+
     close: 'Close'
     back: 'Back'
+    delete: 'Delete'
+    sure: 'Are you sure?'
 
     name: 'Name'
     username: 'Username'
@@ -19,6 +27,31 @@ en:
     password: 'Password'
     password_confirmation: 'Password confirmation'
 
+    status: 'Status'
+    number: 'Number'
+    appliance: 'Appliance'
+    brand: 'Brand'
+    typenum: 'Type'
+    serialnum: 'Serial'
+    defect: 'What''s broken?'
+    repair: 'What''s repaired?'
+    ordered: 'Parts ordered?'
+    testera: 'First tester'
+    testerb: 'Second tester'
+    test: 'Test OK'
+    repaired: 'Repaired'
+    ready: 'Ready'
+    scrap: 'Scrap'
+    accessoires: 'Accessoires'
+    class: 'Class'
+    note: 'Note'
+######################
+##     /GLOBALS     ##
+######################
+
+######################
+##      VIEWS       ##
+######################
 # app/views/kaminari
   views:
     pagination:
@@ -59,6 +92,138 @@ en:
       button: 'Send report'
       button_send: 'Sending report...'
 
+# app/views/entries
+  entry:
+    edit:
+      title: 'Badger - Edit entry'
+      legend: 'Edit entry'
+      message: 'First save the entry, then show it and there you can add images.'
+      button: 'Update'
+      button_send: 'Updating...'
+    entryhistory:
+      title: 'Badger - History overview'
+      legend: 'History'
+      empty_list: 'No history here'
+      who: 'Who?'
+      what: 'What?'
+      when: 'When?'
+    index:
+      title: 'Badger - Entries for '
+      legend: 'Entries for '
+      empty_list: 'No entries here'
+      back: 'Back to overview'
+      add_entry: 'Add entry'
+      search: 'Search'
+      searchnum: 'Search number..'
+      searchbrand: 'Search brand..'
+      searchtype: 'Search type..'
+      searchserial: 'Search serial..'
+    new:
+      title: 'Badger - New entry'
+      legend: 'New entry'
+      message: 'First save the entry, then show it and there you can add images.'
+      button: 'Save'
+      button_send: 'Saving...'
+    show:
+      title: 'Badger - Entry overview'
+      barcode: 'Barcode'
+      sent: 'Sent?'
+      yes: 'Yes - '
+      no: 'No'
+      images: 'Images'
+      add_attachment: 'Add attachment'
+      select: 'Select a file..'
+      button: 'Save'
+      button_send: 'Saving...'
+      zip: 'Create zip'
+      sticker: 'Create sticker'
+      edit: 'Edit entry'
+      delete: 'Delete entry'
+      view: 'View history'
+
+# app/controllers/entries & model
+    status:
+      new: 'New'
+      tested: 'Tested'
+      repaired: 'Repaired'
+      scrap: 'Scrap'
+      accessoires: 'Waiting for accessoires'
+      ready: 'Ready'
+      sent: 'Sent '
+    controller:
+       added: 'Entry added.'
+       updated: 'Entry updated.'
+       deleted: 'Entry deleted.'
+       images: 'images'
+
+# app/views/home
+  home:
+    batch:
+      title: 'Badger - Batch Update'
+      legend: 'Batch update'
+      warning: 'Careful in here!'
+      warning_msg: ' You can easily mess a lot of stuff up!<br/>Enter numbers at top, enable the boxes next to the field you''d like to use, fill the fields and save.'
+      ordernumbers: 'Ordernumbers'
+      button: 'Update all entries'
+      button_send: 'Saving...'
+      enable: 'Enable'
+    index:
+      welcome: 'Welcome to this data storage.'
+      message: 'Sign in at the top.<br/>Sign up at the bottom.'
+      guest: 'Welcome guest!'
+      guest_msg: 'You will be able to use most functions a technician can use for managing this program, there are even more features but you''d have to be an admin for that, and that is something that''s off-limits to guests.'
+      entries: 'Entries'
+      invoices: 'Invoices'
+      stats: 'Stats'
+      batch: 'Batch'
+      no_company: 'You will be assigned to your respective company soon.<br>Can''t wait? Contact the admin '
+      no_company_anchor: 'here'
+
+# app/controllers/home & model
+    controller:
+      success: 'Batch updated'
+      success_end: 'items!'
+      error_exist: 'doesn''t exist!'
+      error_wrong: 'doesn''t belong to'
+      report_sent: 'Report sent.'
+
+# app/views/invoices
+  invoice:
+    index:
+      title: 'Badger - Invoices for '
+      legend: 'Invoices for '
+      empty_list: 'No invoices here'
+      items: 'Items'
+      date: 'Date'
+      add_invoice: 'Add invoice'
+    new:
+      title: 'Badger - New invoice'
+      legend: 'New invoice'
+      items: 'Items'
+      button: 'Save'
+      button_send: 'Saving...'
+    show:
+      title: 'Badger - Invoice'
+      legend: 'Invoice'
+      sender: 'Sender'
+      adressee: 'Adressee'
+      items: 'Items'
+      date: 'Date'
+      empty_list: 'No entries here' 
+      signature_sender: 'Signature sender'
+      signature_adressee: 'Signature adresse'
+
+# app/controllers/invoices & model
+    controller:
+      tested: 'Tested'
+      repaired: 'Repaired'
+      scrapped: 'Scrapped'
+      deleted: 'Invoice deleted.'
+      added: 'Invoice added.'
+      no_exist: 'doesn''t exist!'
+      already_sent: 'was already sent!'
+      wrong_company: 'doesn''t belong to'
+
 # app/views/appliances
   appliance:
     index:
@@ -72,6 +237,10 @@ en:
       button: 'Save'
       button_send: 'Saving...'
 
+# app/controllers/appliances & model
+    controller:
+      notice_added: 'Appliance added.'
+
 # app/views/classifications
   classes:
     index:
@@ -84,6 +253,10 @@ en:
       legend: 'New class'
       button: 'Save'
       button_send: 'Saving...'
+
+# app/controllers/classifications & model
+    controller:
+      notice_added: 'Class added.'
 
 # app/views/history
   history:
@@ -111,6 +284,13 @@ en:
       last_signin: 'Last sign-in'
       signin_count: 'Sign-in count'
 
+# app/controllers/users & model
+    controller:
+      update_success: 'User updated.'
+      update_fail: 'Unable to update user.'
+      delete_success: 'User deleted.'
+      delete_fail: 'Can''t delete yourself.'
+
 # app/views/stats
   stats:
     index:
@@ -121,6 +301,20 @@ en:
       global_label: 'Global status'
       brand_label: 'Brand and type specific status'
       showhide: 'Show/Hide '
+      
+# app/controllers/stats & model
+    status:
+      label: 'Status for '
+      amount: 'Amount'
+      new: 'New'
+      tested: 'Tested'
+      repaired: 'Repaired'
+      scrap: 'Scrap'
+      waiting: 'Waiting'
+      ready: 'Ready'
+      sent: 'Sent'
+      skipped: 'Skipped'
+      total: 'Total'
 
 # app/views/mailer
   mailer:
@@ -142,3 +336,6 @@ en:
       message: 'You have successfully signed up to Badger, your username is: '
       site_link: 'To login to the site, just follow this link: '
       greet: 'Thanks for joining and have a great day!'
+######################
+##      /VIEWS      ##
+######################

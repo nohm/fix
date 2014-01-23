@@ -2,7 +2,7 @@ class HistoryController < ApplicationController
     before_filter :authenticate_user!
 
 	def index
-		authorize! :index, History, :message => 'You\'re not authorized for this.'
+		authorize! :index, History, :message => I18n.t('global.unauthorized')
 
 		@entries = Entry.all
     	@appliances = Appliance.all

@@ -1,36 +1,34 @@
 <div class="center">
   <h2>Badger</h2>
-  <p>Welcome to this data storage.</p>
+  <p><%= t('home.index.welcome') %></p>
   <% unless user_signed_in? %>
     <p>
-      Sign in at the top.<br/>
-      Sign up at the bottom.
+      <%= t('home.index.message') %>
     </p>
   <% else %>
     <% if can? :see_data, Entry %>
       <% if current_user.guest? %>   
         <div class="alert alert-success">
-          <Strong>Welcome guest!</strong>You will be able to use most functions a technician can use for managing this program, there are even more features but you'd have to be an admin for that, and that is something that's off-limits to guests.
+          <Strong><%= t('home.index.guest') %></strong><%= t('home.index.guest_msg') %>
         </div>
       <% end %>
       <% @roles.each do |role| %>
         <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' or (role.name == 'guest' and current_user.staff?) %>
           <div class="col-xs-6 col-sm-3">
             <h4><%= role.name.titleize %></h4>
-            <%= link_to("Entries", entries_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
-            <%= link_to("Invoices", invoices_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
+            <%= link_to(t('home.index.entries'), entries_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
+            <%= link_to(t('home.index.invoices'), invoices_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
             <% if can? :manage, Stats %>
-              <%= link_to("Stats", stats_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
+              <%= link_to(t('home.index.stats'), stats_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
             <% end %>
             <% if can? :create, Entry %>
-              <%= link_to("Batch", batch_path(company: role.name), :class => 'btn btn-primary btn-index') %>
+              <%= link_to(t('home.index.batch'), batch_path(company: role.name), :class => 'btn btn-primary btn-index') %>
             <% end %>
           </div>
         <% end %>
       <% end %>
     <% else %>
-      You will be assigned to your respective company soon.<br>
-      Can't wait? Contact the admin <a href="mailto:<%= ENV['ADMIN_EMAIL'] %>">here</a>
+      <%= "#{t('home.batch.no_company')}<a href=\"mailto:#{ENV['ADMIN_EMAIL']}\">#{t('home.batch.no_company_anchor')}</a>" %>
     <% end %>
   <% end %>
 </div>
