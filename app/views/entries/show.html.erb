@@ -1,5 +1,5 @@
 <% provide(:title, t('entry.show.title')) %>
-<legend>Entry</legend>
+<legend><%= t('entry.show.legend') %></legend>
 
 <h2><%= @entry.company[0].upcase! + @appliance.abb + @entry.number %></h2>
 <h3><%= @entry.brand + ' ' + @entry.typenum + ' ' + @appliance.name %></h3>
