@@ -126,6 +126,7 @@ nl:
       button_send: 'Opslaan...'
     show:
       title: 'Badger - Order overzicht'
+      legend: 'Order'
       barcode: 'Barcode'
       sent: 'Verzonden?'
       yes: 'Ja - '
