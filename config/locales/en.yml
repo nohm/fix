@@ -126,6 +126,7 @@ en:
       button_send: 'Saving...'
     show:
       title: 'Badger - Entry overview'
+      legend: 'Entry'
       barcode: 'Barcode'
       sent: 'Sent?'
       yes: 'Yes - '
