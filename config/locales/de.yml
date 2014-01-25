@@ -126,6 +126,7 @@ de:
       button_send: 'Speichern...'
     show:
       title: 'Badger - Eintrag überblick'
+      legend: 'Eintrag'
       barcode: 'Strichcode'
       sent: 'Gesendet?'
       yes: 'Ja - '
