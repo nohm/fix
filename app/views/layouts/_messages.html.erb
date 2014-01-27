@@ -17,7 +17,7 @@
     $.ajax({url: "/broadcast/retrieve"}).done(function(data) {
       var json = JSON.parse(data)
       $.each(json, function(key,value) {
-        $('#alert-box').append('<div class="alert alert-wrapper"><div class="alert alert-info"><a onclick="$.ajax({url:\'/broadcast/disable?id=' + (key+1) + '\'})" class="close" data-dismiss="alert">&#215;</a><div id="flash_' + value.title.replace(' ', '_') + '">' + value.text + '</div></div></div>');
+        $('#alert-box').append('<div class="alert alert-wrapper"><div class="alert alert-info"><a onclick="$.ajax({url:\'/broadcast/disable?id=' + value.id + '\'})" class="close" data-dismiss="alert">&#215;</a><div id="flash_' + value.title.replace(' ', '_') + '">' + value.text + '</div></div></div>');
       });
     });
   </script>

@@ -10,6 +10,7 @@
 	    <tr>
 	      <th>Title</th>
 	      <th>Text</th>
+	      <th style="width:17px;"></th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -17,6 +18,11 @@
 	    <tr>
 	      <td><%= broadcast.title %></td>
 	      <td><%= broadcast.text %></td>
+          <td>
+            <%= link_to(broadcast_path(broadcast), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %>
+          </td>
 	    </tr>
 	  <% end %>
 	  </tbody>

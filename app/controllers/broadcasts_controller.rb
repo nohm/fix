@@ -23,6 +23,14 @@ class BroadcastsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize! :destroy, Broadcast, :message => I18n.t('global.unauthorized')
+
+    broadcast = Broadcast.find(params[:id])
+    broadcast.destroy
+    redirect_to broadcasts_path, :notice => 'Broadcast deleted'
+  end
+
   def retrieve
   	authorize! :retrieve, Broadcast, :message => I18n.t('global.unauthorized')
 
@@ -30,7 +38,7 @@ class BroadcastsController < ApplicationController
   	to_send = Array.new
   	broadcasts.each do |broadcast|
   		if broadcast.user_ids.nil?
-  			to_send.append({title: broadcast.title, text: broadcast.text})
+  			to_send.append({id: broadcast.id, title: broadcast.title, text: broadcast.text})
   		else
   			found = false
   			broadcast.user_ids.split(':').each do |user|
@@ -39,7 +47,7 @@ class BroadcastsController < ApplicationController
   				end
   			end
   			unless found
-  				to_send.append({title: broadcast.title, text: broadcast.text})
+  				to_send.append({id: broadcast.id, title: broadcast.title, text: broadcast.text})
   			end
   		end
   	end

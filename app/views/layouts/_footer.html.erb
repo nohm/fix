@@ -19,6 +19,10 @@
               <li class="muted"> &middot; </li>
               <li><%= link_to(t('global.history'), history_index_path) %></li>
             <% end %>
+            <% if user_signed_in? and can? :manage, Broadcast %>
+              <li class="muted"> &middot; </li>
+              <li><%= link_to('Broadcasts', broadcasts_path) %></li>
+            <% end %>
         </ul>
       </div>
     </footer>
