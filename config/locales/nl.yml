@@ -21,7 +21,8 @@ nl:
 
     name: 'Naam'
     username: 'Gebruikersnaam'
-    abbrevatio: 'Afkorting'
+    abbrevation: 'Afkorting'
+    url: 'URL'
     message: 'Bericht'
     email: 'Email'
     password: 'Wachtwoord'
@@ -94,6 +95,8 @@ nl:
 
 # app/views/entries
   entry:
+    sticker: 'Sticker'
+    ticket: 'Bon'
     edit:
       title: 'Badger - Wijzig order'
       legend: 'Wijzig order'

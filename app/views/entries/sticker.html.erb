@@ -1,9 +1,10 @@
 <html>
   <head>
     <title>
-      Sticker: <%= @abb %><%= @number %>
+      <%= t('entry.ticket') %>: <%= @number %>
     </title>
     <style>
+      body { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
       p { margin-left:12px }
       h1 { margin-left:19px;font-size:25px;margin-top:-30px }
     </style>
@@ -14,7 +15,6 @@
   	    <%= @barcode %>
   	  </p>
   	  <h1>
-  	    <%= @abb %>
   	    <%= @number %>
   	  </h1>
   	</div>

@@ -27,8 +27,6 @@ $brand-info: #75b5aa;
 $brand-warning: #f4bf75;
 $brand-danger: #ac4142;
 
-$font-family-sans-serif: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
-
 @import "bootstrap";
 
 body {
@@ -112,6 +110,14 @@ table h6 {
 /* Give the 'add attachment' button some margin for mobile */
 .btn-images {
   margin-bottom: 5px;
+}
+
+/* Give the 'entries#index#print' buttons some margin */
+.btn-print {
+  width: 75px;
+  &:first-child {
+    margin-bottom: 5px;
+  }
 }
 
 /* Fix bootswatch alert colors

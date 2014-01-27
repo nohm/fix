@@ -21,7 +21,8 @@ de:
 
     name: 'Name'
     username: 'Nützername'
-    abbrevatio: 'Abkürzung'
+    abbrevation: 'Abkürzung'
+    url: 'URL'
     message: 'Nachricht'
     email: 'Email'
     password: 'Kennwort'
@@ -94,6 +95,8 @@ de:
 
 # app/views/entries
   entry:
+    sticker: 'Sticker'
+    ticket: 'Zettel'
     edit:
       title: 'Badger - Eintrag bearbeiten'
       legend: 'Eintrag bearbeiten'

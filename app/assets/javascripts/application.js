@@ -16,6 +16,8 @@
 //= require bootstrap/alert
 //= require bootstrap/button
 //= require bootstrap/collapse
+//= require bootstrap/tooltip
+//= require bootstrap/popover
 //= require bootstrap/transition
 //= require highcharts/highcharts
 //= require turbolinks

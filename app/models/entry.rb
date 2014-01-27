@@ -110,7 +110,4 @@ class Entry < ActiveRecord::Base
     end
   end
 
-  def generate_checkbox id
-    "<input name=\"entry[enable][#{id}]\" value=\"0\" type=\"hidden\"><input type=\"checkbox\" id=\"brand_enable\" name=\"entry[enable][#{id}]\" value=\"1\"></input>"
-  end
 end

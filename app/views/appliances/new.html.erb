@@ -7,6 +7,7 @@
   
   <%= f.text_field :name, label: t('global.name') %>
   <%= f.text_field :abb, label: t('global.abbrevation') %>
+  <%= f.text_field :preview, label: t('global.url') %>
 
   <%= f.form_group do %>
   	<%= f.submit t('appliance.new.button'), data: { disable_with: t('appliance.new.button_send') } %>
