@@ -18,6 +18,8 @@ nl:
     back: 'Terug'
     delete: 'Verwijder'
     sure: 'Weet u het zeker?'
+    y: 'Ja'
+    n: 'Nee'
 
     name: 'Naam'
     username: 'Gebruikersnaam'

@@ -18,6 +18,8 @@ de:
     back: 'Zurück'
     delete: 'Entfernen'
     sure: 'Bist du sicher?'
+    y: 'Ja'
+    n: 'Nee'
 
     name: 'Name'
     username: 'Nützername'

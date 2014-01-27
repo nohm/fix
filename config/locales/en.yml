@@ -18,6 +18,8 @@ en:
     back: 'Back'
     delete: 'Delete'
     sure: 'Are you sure?'
+    y: 'Yes'
+    n: 'No'
 
     name: 'Name'
     username: 'Username'

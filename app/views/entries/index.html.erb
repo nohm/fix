@@ -22,6 +22,7 @@
             <% if can? :edit, Entry %>
               <th style="width:17px;"></th>
               <th style="width:17px;"></th>
+              <th style="width:17px;"></th>
             <% end %>
             <% if can? :destroy, Entry %>
               <th style="width:17px;"></th>
@@ -53,7 +54,14 @@
               </td>
               <% if can? :edit, Entry %>
                 <td data-no-turbolink="true">
-                  <a href="#" role="button" data-placement="left" data-content="<a class='btn btn-primary btn-sm btn-print' href='<%= sticker_path(entry) %>'><%= t('entry.sticker') %></a><br><a class='btn btn-primary btn-sm btn-print' href='<%= ticket_path(entry) %>'><%= t('entry.ticket') %></a>" data-html="true"title="" data-original-title="" data-toggle="popover"><span class="glyphicon glyphicon-print"></span></a>
+                  <%= link_to sticker_path(entry) do %>
+                    <span class="glyphicon glyphicon-barcode"></span>
+                  <% end %>
+                </td>
+                <td data-no-turbolink="true">
+                  <%= link_to ticket_path(entry) do %>
+                    <span class="glyphicon glyphicon-print"></span>
+                  <% end %>
                 </td>
                 <td>
                   <%= link_to edit_entry_path(entry) do %>

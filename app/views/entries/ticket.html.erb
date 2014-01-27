@@ -37,11 +37,11 @@
           <li><strong><%= t('global.defect') %> </strong><br><%= @entry.defect.presence || '...' %></li>
           <li><strong><%= t('global.repair') %> </strong><br><%= @entry.repair.presence || '...' %></li>
           <hr/>
-          <li><strong><%= t('global.test') %>: </strong><%= @entry.test == 1 ? 'Yes' : 'No' %></li>
-          <li><strong><%= t('global.repaired') %>: </strong><%= @entry.repaired == 1 ? 'Yes' : 'No'  %></li>
-          <li><strong><%= t('global.ready') %>: </strong><%= @entry.ready == 1 ? 'Yes' : 'No'  %></li>
-          <li><strong><%= t('global.scrap') %>: </strong><%= @entry.scrap == 1 ? 'Yes' : 'No'  %></li>
-          <li><strong><%= t('global.accessoires') %>: </strong><%= @entry.accessoires == 1 ? 'Yes' : 'No'  %></li>
+          <li><strong><%= t('global.test') %>: </strong><%= @entry.test == 1 ? t('global.yes') : t('global.no') %></li>
+          <li><strong><%= t('global.repaired') %>: </strong><%= @entry.repaired == 1 ? t('global.yes') : t('global.no') %></li>
+          <li><strong><%= t('global.ready') %>: </strong><%= @entry.ready == 1 ? t('global.yes') : t('global.no') %></li>
+          <li><strong><%= t('global.scrap') %>: </strong><%= @entry.scrap == 1 ? t('global.yes') : t('global.no') %></li>
+          <li><strong><%= t('global.accessoires') %>: </strong><%= @entry.accessoires == 1 ? t('global.yes') : t('global.no') %></li>
           <hr/>
           <li><strong><%= t('global.note') %>:</strong><br><%= @entry.note %></li>
         </ul>
