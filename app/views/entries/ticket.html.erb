@@ -76,13 +76,13 @@
           <hr/>
           <li><strong>What's broken? </strong><br><%= @entry.defect %></li>
           <li><strong>What's repaired? </strong><br><%= @entry.repair %></li>
-          <hr>
-          <li><strong>Tested: </strong><%= @entry.test == 1 ? 'Yes' : 'No' %></li>
+          <hr/>
+          <li><strong>Test OK: </strong><%= @entry.test == 1 ? 'Yes' : 'No' %></li>
           <li><strong>Repaired: </strong><%= @entry.repaired == 1 ? 'Yes' : 'No'  %></li>
           <li><strong>Ready: </strong><%= @entry.ready == 1 ? 'Yes' : 'No'  %></li>
           <li><strong>Scrap: </strong><%= @entry.scrap == 1 ? 'Yes' : 'No'  %></li>
           <li><strong>Accessoires: </strong><%= @entry.accessoires == 1 ? 'Yes' : 'No'  %></li>
-          <hr>
+          <hr/>
           <li><strong>Note:</strong><br><%= @entry.note %></li>
         </ul>
       </div>

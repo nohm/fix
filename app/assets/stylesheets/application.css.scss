@@ -109,6 +109,11 @@ table h6 {
   min-width: 300px;
 }
 
+/* Give the 'add attachment' button some margin for mobile */
+.btn-images {
+  margin-bottom: 5px;
+}
+
 /* Fix bootswatch alert colors
    Also added a wrapper div in _messages */
 .alert-wrapper{

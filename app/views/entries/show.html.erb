@@ -116,7 +116,7 @@
     <% if can? :create, Attachment %>
       <% unless @entry.attachments.length >= 10 %>
         <!-- Button trigger modal -->
-        <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal-attachment">
+        <button class="btn btn-mini btn-primary btn-images" data-toggle="modal" data-target="#modal-attachment">
           <%= t('entry.show.add_attachment') %>
         </button>
 
