@@ -166,7 +166,7 @@ nl:
       title: 'Badger - Batch update'
       legend: 'Batch update'
       warning: 'Pas hier op!'
-      warning_msg: ' Je kunt gemakkelijk ver verpesten hier!<br/>Voer bovenaan nummers in, vind de boxes naast de velden die u wilt gebruiken aan, vul de velden in en druk op opslaan.'
+      warning_msg: ' Je kunt gemakkelijk ver verpesten hier! Voer bovenaan nummers in, vind de boxes naast de velden die u wilt gebruiken aan, vul de velden in en druk op opslaan.'
       ordernumbers: 'Ordernummers'
       button: 'Update alle orders'
       button_send: 'Opslaan...'

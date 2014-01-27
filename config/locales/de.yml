@@ -166,7 +166,7 @@ de:
       title: 'Badger - Stapel-aktualisierung'
       legend: 'Stapel-aktualisierung'
       warning: 'Warnung!'
-      warning_msg: ' Sie können hier einfach viele Fehler machen!<br/>Zahlen oben eingeben, ermöglichen die Boxen neben dem Feld den sie verwenden wollte, füllen sie den Felder un speichern.'
+      warning_msg: ' Sie können hier einfach viele Fehler machen! Zahlen oben eingeben, ermöglichen die Boxen neben dem Feld den sie verwenden wollte, füllen sie den Felder un speichern.'
       ordernumbers: 'Eintragnummern'
       button: 'Aktualisieren'
       button_send: 'Aktualisieren...'

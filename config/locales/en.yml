@@ -166,8 +166,7 @@ en:
       title: 'Badger - Batch Update'
       legend: 'Batch update'
       warning: 'Careful in here!'
-      warning_msg: |
-        You can easily mess a lot of stuff up! Enter numbers at top, enable the boxes next to the field you''d like to use, fill the fields and save.
+      warning_msg: 'You can easily mess a lot of stuff up! Enter numbers at top, enable the boxes next to the field you''d like to use, fill the fields and save.'
       ordernumbers: 'Ordernumbers'
       button: 'Update all entries'
       button_send: 'Saving...'
