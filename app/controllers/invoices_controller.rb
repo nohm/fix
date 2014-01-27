@@ -61,6 +61,7 @@ class InvoicesController < ApplicationController
       entry.update_attribute(:sent, 0)
       entry.update_attribute(:invoice_id, nil)
     end
+    invoice = Invoice.find(params[:id])
     invoice.destroy
     redirect_to invoices_path, :notice => I18n.t('invoice.controller.deleted')
   end
@@ -97,8 +98,8 @@ class InvoicesController < ApplicationController
         num = line.tr("\n","").tr("\r","")
         app = Appliance.where(abb: num[1]).take
         entry = Entry.where(company: session[:company], number: num[2..-1], appliance_id: app.id).take
-        entry.update_attribute(:sent, 1)
         entry.update_attribute(:invoice_id, @invoice.id)
+        entry.update_attribute(:sent, 1)
       end
       redirect_to invoices_path, :notice => I18n.t('invoice.controller.added')
     else
