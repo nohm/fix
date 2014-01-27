@@ -10,7 +10,7 @@
   <%= f.password_field :password, :help => '(leave blank if you don\'t want to change it)', :autocomplete => 'off' %>
   <%= f.password_field :password_confirmation %>
   <br/>
-  <%= f.password_field :current_password, :help => '(we need your current password to confirm your changes)' %>
+  <%= f.password_field :current_password, :help => 'We need your current password to confirm your changes.' %>
 
   <%= f.form_group do %>
   	<%= f.submit 'Update account', data: { disable_with: 'Updating account...' }, class: "btn btn-primary" %>

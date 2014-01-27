@@ -66,7 +66,7 @@ nl:
     landing:
       welcome: 'Welkom bij deze data opslag.'
       warning: 'O nee, '
-      warning_msg: ' je browser is verouderd en ondersteund niet alles wat deze website te bieden heeft!<br>Je zou kunnen updaten naar Internet Explorer 10, Firefox 24+, Chrome 20+ of Opera 12+</div>'
+      warning_msg: ' je browser is verouderd en ondersteund niet alles wat deze website te bieden heeft! Je zou kunnen updaten naar Internet Explorer 10, Firefox 24+, Chrome 20+ of Opera 12+</div>'
       
     header:
       toggle: 'Wissel navigatie'
@@ -170,14 +170,13 @@ nl:
       enable: 'Inschakelen'
     index:
       welcome: 'Welkom bij deze data opslag.'
-      message: 'Log boven in.<br/>Meld beneden aan.'
       guest: 'Welkom gast!'
       guest_msg: 'U kunt hier de meeste functies van een medewerker gebruiken voor een paar testorders, er zijn nog meer functies maar die zijn niet geschikt en beschikbaar voor gasten.'
       entries: 'Orders'
       invoices: 'Facturen'
       stats: 'Statistieken'
       batch: 'Batch'
-      no_company: 'U wordt snel aan uw bedrijf toegevoegd..<br>Kunt u niet wachten? Neem contact op met de beheerder '
+      no_company: 'U wordt snel aan uw bedrijf toegevoegd.. Kunt u niet wachten? Neem contact op met de beheerder '
       no_company_anchor: 'hier'
 
 # app/controllers/home & model

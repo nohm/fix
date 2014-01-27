@@ -1,48 +1,40 @@
-<div id="headerwrap">
-	<div class="container">
-		<h1>Badger</h1>
-		<div class="wrapper">
-			<div class="washingmachine">
-				<div class="drum"></div>
-				<div class="door"></div>
-				<div class="tray"></div>
-				<div class="dial"></div>
-				<div class="buttons"></div>
-				<div class="pilot pilot-green"></div>
-				<div class="pilot pilot-red"></div>
-			</div>
-		</div>
-		<br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br>
-		<div>
-			<%= bootstrap_form_for(:user, :as => :user, :url => user_session_path, :html => { :class => 'navbar-form' }, help: :block) do |f| %>
-				<h2><%= t('layouts.landing.welcome') %></h2>
-				<div id="bm"></div>
-				<%= f.email_field :email, hide_label: :true, placeholder: t('global.email'), :autofocus => true %>
-		  		<%= f.password_field :password, hide_label: :true, placeholder: t('global.password') %>
-	   			<%= f.hidden_field :remember_me, :value => "1" %>
-  				<%= f.submit t('layouts.signin.button'), data: { disable_with: t('layouts.signin.button_send') }, class: "btn btn-success" %>
-            	<%= render 'layouts/signup/button' %>
-			<% end %>
-		</div>
+<div class="panel panel-info center">
+  <div class="panel-heading panel-heading-landing">
+    <div class="panel-title">
+      <h1>Badger</h1>
+      <h2><%= t('layouts.landing.welcome') %></h2>
+    </div>
+
+    <div class="landing-languageflags">
+    <!-- Flags to switch languages -->
+    <%= link_to(root_path(locale: 'en')) do %>
+      <span class="languageflag enflag"></span>
+    <% end %>
+    <%= link_to(root_path(locale: 'nl')) do %>
+      <span class="languageflag nlflag"></span>
+    <% end %>
+    <%= link_to(root_path(locale: 'de')) do %>
+      <span class="languageflag deflag"></span>
+    <% end %>
+    </div>
+  </div>
+  <div class="panel-body">
+    <%= bootstrap_form_for(:user, :as => :user, :url => user_session_path, help: :block) do |f| %>
+        <div id="bm"></div>
+        <%= f.email_field :email, hide_label: :true, placeholder: t('global.email'), :autofocus => true %>
+        <%= f.password_field :password, hide_label: :true, placeholder: t('global.password') %>
+        <%= f.hidden_field :remember_me, :value => "1" %>
+        <div class="btn-group-landing">
+          <%= f.submit t('layouts.signin.button'), data: { disable_with: t('layouts.signin.button_send') }, class: "btn btn-success" %>
+          <%= render 'layouts/signup/button' %>
+          <!-- Report button with extra classes -->
+          <a href="#" class="btn btn-warning btn-report" data-toggle="modal" data-target="#modal-report">
+            <%= t('layouts.report.button_large') %>
+          </a>
+        </div>
+      <% end %>
   </div>
 </div>
-
-<!-- Flags to switch languages -->
-<%= link_to(root_path(locale: 'en')) do %>
-  <span class="languageflag landingflag enflag"></span>
-<% end %>
-<%= link_to(root_path(locale: 'nl')) do %>
-  <span class="languageflag landingflag nlflag"></span>
-<% end %>
-<%= link_to(root_path(locale: 'de')) do %>
-  <span class="languageflag landingflag deflag"></span>
-<% end %>
-
-<!-- Report button with extra classes -->
-<a href="#" class="btn btn-warning btn-report" data-toggle="modal" data-target="#modal-report">
-  <%= t('layouts.report.button_large') %>
-</a>
 
 <%= render 'layouts/signup/form' %> 
 

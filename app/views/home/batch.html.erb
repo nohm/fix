@@ -5,7 +5,7 @@
   
   <legend><%= t('home.batch.legend') %></legend>
   <div class="alert alert-danger">
-    <strong><%= t('home.batch.warning') %></strong><%= t('home.batch.warning_msg') %>
+    <strong><%= t('home.batch.warning') %></strong> <%= t('home.batch.warning_msg') %>
   </div>
 
   <%= f.text_area :ordernumbers, label: t('home.batch.ordernumbers') %>
@@ -51,7 +51,7 @@
   <% end %>
 <% end %>
 
-<%= link_to t('global.back'), invoices_path %>
+<%= link_to t('global.back'), root_path %>
 
 <script>
 	var inputs = $(".form-group");

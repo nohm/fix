@@ -23,6 +23,7 @@ Badger::Application.routes.draw do
 
   # Special routes for entries
   match 'entries/:id/sticker' => 'entries#sticker', :as => :sticker, :via => :get
+  match 'entries/:id/ticket' => 'entries#ticket', :as => :ticket, :via => :get
   match 'entries/:id/zip' => 'entries#zip', :as => :zip, :via => :get
   match 'entries/:id/entryhistory' => 'entries#entryhistory', :as => :entryhistory, :via => :get
 end

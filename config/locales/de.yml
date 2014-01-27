@@ -66,7 +66,7 @@ de:
     landing:
       welcome: 'Willkommen in diesen Datenbank.'
       warning: 'Oh nein, '
-      warning_msg: ' ihren Browser is verältert und unterstutzt nicht alle möchlichkeiten diese seite!<br>Sie meuchten vielleicht aktualisieren zu Internet Explorer 10, Firefox 24+, Chrome 20+ oder Opera 12+</div>'
+      warning_msg: ' ihren Browser is verältert und unterstutzt nicht alle möchlichkeiten diese seite! Sie meuchten vielleicht aktualisieren zu Internet Explorer 10, Firefox 24+, Chrome 20+ oder Opera 12+</div>'
       
     header:
       toggle: 'Schalt navigation'
@@ -170,14 +170,13 @@ de:
       enable: 'Ermöglichen'
     index:
       welcome: 'Willkommen in diesen Datenbank.'
-      message: 'Oben anmelden.<br/>Unten registrieren.'
       guest: 'Willkommen Gast!'
       guest_msg: 'Sie haben die meiste Functionen zur Verfügung die ein Techniker zum verwaltung braucht, es gibt mehrere Rechten aber dazu gebrauchen sie Verwaltungsrechte, und das steht Gästen leider nicht zur Verfügung.'
       entries: 'Einträge'
       invoices: 'Quittungen'
       stats: 'Statistik'
       batch: 'Stapel'
-      no_company: 'Sie werden bald wie möchlich bei ihren Firma zutrutt haben in dieses Programm.<br>Eile? Kontaktier den Verwalter '
+      no_company: 'Sie werden bald wie möchlich bei ihren Firma zutrutt haben in dieses Programm. Eile? Kontaktier den Verwalter '
       no_company_anchor: 'here'
 
 # app/controllers/home & model

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
-  before_filter :role_list, :is_landing, :locale_list
+  before_filter :role_list, :locale_list
 
   def role_list
   	unless current_user.nil?
@@ -17,12 +17,6 @@ class ApplicationController < ActionController::Base
 	    	@roles = Role.where(name: current_user.roles.first.name)
 	    end
 	  end
-  end
-
-  def is_landing
-    unless user_signed_in?
-      @landing = 'landing'
-    end
   end
 
   def locale_list

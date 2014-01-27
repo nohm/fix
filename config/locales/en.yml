@@ -66,7 +66,7 @@ en:
     landing:
       welcome: 'Welcome to this data storage.'
       warning: 'Ohno, '
-      warning_msg: ' your browser is outdated and doesn''t support all the features this site offers!<br>You might want to upgrade to Internet Explorer 10, Firefox 24+, Chrome 20+ or Opera 12+</div>'
+      warning_msg: ' your browser is outdated and doesn''t support all the features this site offers! You might want to upgrade to Internet Explorer 10, Firefox 24+, Chrome 20+ or Opera 12+</div>'
       
     header:
       toggle: 'Toggle navigation'
@@ -163,21 +163,21 @@ en:
       title: 'Badger - Batch Update'
       legend: 'Batch update'
       warning: 'Careful in here!'
-      warning_msg: ' You can easily mess a lot of stuff up!<br/>Enter numbers at top, enable the boxes next to the field you''d like to use, fill the fields and save.'
+      warning_msg: |
+        You can easily mess a lot of stuff up! Enter numbers at top, enable the boxes next to the field you''d like to use, fill the fields and save.
       ordernumbers: 'Ordernumbers'
       button: 'Update all entries'
       button_send: 'Saving...'
       enable: 'Enable'
     index:
       welcome: 'Welcome to this data storage.'
-      message: 'Sign in at the top.<br/>Sign up at the bottom.'
       guest: 'Welcome guest!'
       guest_msg: 'You will be able to use most functions a technician can use for managing this program, there are even more features but you''d have to be an admin for that, and that is something that''s off-limits to guests.'
       entries: 'Entries'
       invoices: 'Invoices'
       stats: 'Stats'
       batch: 'Batch'
-      no_company: 'You will be assigned to your respective company soon.<br>Can''t wait? Contact the admin '
+      no_company: 'You will be assigned to your respective company soon. Can''t wait? Contact the admin '
       no_company_anchor: 'here'
 
 # app/controllers/home & model

@@ -14,12 +14,12 @@
 <ul class="nav navbar-nav navbar-right">
   <li role="presentation">
     <%= link_to(edit_user_registration_path) do %>
-      <span class="glyphicon glyphicon-cog"></span><%= t('layouts.navigation.edit') %>
+      <%= t('layouts.navigation.edit') %>
     <% end %>
   </li>
   <li role="presentation">
     <%= link_to(destroy_user_session_path, :method => 'delete', :role => "menuitem", :tabindex => "-1") do %>
-      <span class="glyphicon glyphicon-off"></span><%= t('layouts.navigation.logout') %>
+      <%= t('layouts.navigation.logout') %>
     <% end %>
   </li>
 </ul>

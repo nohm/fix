@@ -1,11 +1,7 @@
 <div class="center">
   <h2>Badger</h2>
   <p><%= t('home.index.welcome') %></p>
-  <% unless user_signed_in? %>
-    <p>
-      <%= t('home.index.message') %>
-    </p>
-  <% else %>
+  <br>
     <% if can? :see_data, Entry %>
       <% if current_user.guest? %>   
         <div class="alert alert-success">
@@ -15,20 +11,25 @@
       <% @roles.each do |role| %>
         <% unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' or (role.name == 'guest' and current_user.staff?) %>
           <div class="col-xs-6 col-sm-3">
-            <h4><%= role.name.titleize %></h4>
-            <%= link_to(t('home.index.entries'), entries_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
-            <%= link_to(t('home.index.invoices'), invoices_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
-            <% if can? :manage, Stats %>
-              <%= link_to(t('home.index.stats'), stats_path(company: role.name), :class => 'btn btn-primary btn-index') %><br/>
-            <% end %>
-            <% if can? :create, Entry %>
-              <%= link_to(t('home.index.batch'), batch_path(company: role.name), :class => 'btn btn-primary btn-index') %>
-            <% end %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4><%= role.name.titleize %></h4>
+              </div>
+              <div class="list-group">
+                <%= link_to(t('home.index.entries'), entries_path(company: role.name), :class => 'list-group-item') %>
+                <%= link_to(t('home.index.invoices'), invoices_path(company: role.name), :class => 'list-group-item') %>
+                <% if can? :manage, Stats %>
+                  <%= link_to(t('home.index.stats'), stats_path(company: role.name), :class => 'list-group-item') %>
+                <% end %>
+                <% if can? :create, Entry %>
+                  <%= link_to(t('home.index.batch'), batch_path(company: role.name), :class => 'list-group-item') %>
+                <% end %>
+              </div>
+            </div>
           </div>
         <% end %>
       <% end %>
     <% else %>
       <%= "#{t('home.batch.no_company')}<a href=\"mailto:#{ENV['ADMIN_EMAIL']}\">#{t('home.batch.no_company_anchor')}</a>" %>
     <% end %>
-  <% end %>
 </div>

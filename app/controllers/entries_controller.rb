@@ -77,6 +77,15 @@ class EntriesController < ApplicationController
     render 'sticker', :layout => false
   end
 
+  def ticket
+    authorize! :ticket, Entry, :message => I18n.t('global.unauthorized')
+    @entry = Entry.find(params[:id])
+    @appliance = Appliance.find(@entry.appliance_id)
+    @number = @entry.company[0].upcase! + @appliance.abb + @entry.number.to_s
+    @barcode = @entry.get_barcode(@number).html_safe
+    render 'ticket', :layout => false
+  end
+
   def entryhistory
     authorize! :entryhistory, Entry, :message => I18n.t('global.unauthorized')
 

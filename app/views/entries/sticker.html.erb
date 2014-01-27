@@ -1,15 +1,19 @@
 <html>
   <head>
     <title>
-      <%= @abb %><%= @number %>
+      Sticker: <%= @abb %><%= @number %>
     </title>
+    <style>
+      p { margin-left:12px }
+      h1 { margin-left:19px;font-size:25px;margin-top:-30px }
+    </style>
   </head>
   <body onload="window.print()">
     <div>
-  	  <p style="margin-left:12px">
+  	  <p>
   	    <%= @barcode %>
   	  </p>
-  	  <h1 style="margin-left:19px;font-size:25px;margin-top:-30px">
+  	  <h1>
   	    <%= @abb %>
   	    <%= @number %>
   	  </h1>

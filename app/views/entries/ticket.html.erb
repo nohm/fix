@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <title>
+      Ticket: <%= @number %>
+    </title>
+    <style>
+      body {
+        font-size: 14px;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+      .ticket {
+        height: 536px;
+        width: 824px;
+        border: 1px solid #232323;
+        border-radius: 5px;
+      }
+      .col {
+        height: 536px;
+        width: 50%;
+      }
+      .left-col {
+        float: left;
+        margin-right: -1px;
+        border-right: 1px solid #232323;
+      }
+      .right-col {
+        float: right;
+      }
+      .row {
+        width: 402px;
+        border-bottom: 1px solid #232323
+      }
+      .barcode {
+        margin-top:-5px;
+      }
+      .number {
+        font-size: 25px;
+        font-weight: 700;
+        margin-top: -20px;
+        margin-left: 10px;
+      }
+      .image img {
+        width: 350px;
+        height: 350px;
+        margin: 0 20px;
+      }
+      ul {
+        margin: 0;
+        padding: 5px;
+        list-style-type: none;
+      }
+      ul li {
+        padding: 5px 0;
+      }
+      ul li:first-child {
+        padding-top: 0;
+      }
+    </style>
+  </head>
+  <!--<body onload="window.print()">-->
+  <body>
+    <div class="ticket">
+  	  <div class="col left-col">
+        <ul>
+          <li class="barcode"><%= @barcode %></li>
+          <li class="number"><%= @number %></li>
+          <hr/>
+          <li class="image"><img src="http://www.benscoloringpages.com/coloringpages/tv.jpg"/></li>
+        </ul>
+      </div>
+      <div class="col right-col">
+        <ul>
+          <li><strong>Brand: </strong><%= @entry.brand %></li>
+          <li><strong>Type: </strong><%= @entry.typenum %></li>
+          <li><strong>Serial: </strong><%= @entry.serialnum %></li>
+          <hr/>
+          <li><strong>What's broken? </strong><br><%= @entry.defect %></li>
+          <li><strong>What's repaired? </strong><br><%= @entry.repair %></li>
+          <hr>
+          <li><strong>Tested: </strong><%= @entry.test == 1 ? 'Yes' : 'No' %></li>
+          <li><strong>Repaired: </strong><%= @entry.repaired == 1 ? 'Yes' : 'No'  %></li>
+          <li><strong>Ready: </strong><%= @entry.ready == 1 ? 'Yes' : 'No'  %></li>
+          <li><strong>Scrap: </strong><%= @entry.scrap == 1 ? 'Yes' : 'No'  %></li>
+          <li><strong>Accessoires: </strong><%= @entry.accessoires == 1 ? 'Yes' : 'No'  %></li>
+          <hr>
+          <li><strong>Note:</strong><br><%= @entry.note %></li>
+        </ul>
+      </div>
+  	</div>
+	</body>
+</html>
