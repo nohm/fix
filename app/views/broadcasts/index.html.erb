@@ -1,0 +1,29 @@
+<% provide(:title, 'Badger - New broadcast') %>
+<legend>New broadcast</legend>
+
+<% if @broadcasts.length == 0 %>
+  <p>No broadcasts here</p>
+<% else %>
+	<div class="table-responsive">
+	<table class="table table-condensed table-striped">
+	  <thead>
+	    <tr>
+	      <th>Title</th>
+	      <th>Text</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  <% @broadcasts.each do |broadcast| %>
+	    <tr>
+	      <td><%= broadcast.title %></td>
+	      <td><%= broadcast.text %></td>
+	    </tr>
+	  <% end %>
+	  </tbody>
+	</table>
+	</div>
+
+<% end %>
+<div>
+  <%= link_to('New broadcast', new_broadcast_path, :class => 'btn btn-mini btn-primary') %>
+</div>

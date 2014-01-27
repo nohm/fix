@@ -1,0 +1,16 @@
+<% provide(:title, 'Badger - New broadcast') %>
+
+<%= bootstrap_form_for :broadcast, :url => broadcasts_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
+  <%= f.alert_message t('global.errors') %>
+  
+  <legend>New broadcast</legend>
+  
+  <%= f.text_field :title %>
+  <%= f.text_field :text %>
+
+  <%= f.form_group do %>
+  	<%= f.submit 'Save', data: { disable_with: 'Saving...' } %>
+  <% end %>
+<% end %>
+
+<%= link_to t('global.back'), broadcasts_path %>

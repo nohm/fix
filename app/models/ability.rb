@@ -9,7 +9,7 @@ class Ability
     elsif user.has_role? :manager
       can :see_data, :all
       can :see_history, :all
-      can :manage, [Entry, Invoice, Stats]
+      can :manage, [Entry, Invoice, Stats, Broadcast]
       can [:create, :destroy], [Attachment, Appliance, Classifications]
       can :index, History
 
@@ -18,18 +18,21 @@ class Ability
       can :manage, [Entry, Stats]
       cannot [:entryhistory, :destroy], Entry
       can [:create, :destroy], Attachment
+      can [:retrieve, :disable], Broadcast
 
     elsif user.has_role? :vitel or user.has_role? :maxioutlet or user.has_role? :tronex or user.has_role? :ahead
       can :see_data, :all
       can [:index, :show], [Entry, Invoice, Attachment]
       can :zip, Entry
       can :manage, Stats
+      can [:retrieve, :disable], Broadcast
 
     elsif user.has_role? :guest
       can :see_data, :all
       can :manage, [Entry, Stats]
       cannot [:entryhistory, :destroy], Entry
       can [:create, :destroy], Attachment
+      can [:retrieve, :disable], Broadcast
 
     elsif user.has_role? :user
       # ...

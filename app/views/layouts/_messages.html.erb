@@ -1,11 +1,24 @@
-<% flash.each do |name, msg| %>
-  <% if msg.is_a?(String) %>
-    <div class="alert alert-wrapper">
-      <div class="alert alert-<%= name == :notice ? "success" : "danger" %>">
-        <a class="close" data-dismiss="alert">&#215;</a>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-        <% flash.delete(name) %>
+<div id="alert-box">
+  <% flash.each do |name, msg| %>
+    <% if msg.is_a?(String) %>
+      <div class="alert alert-wrapper">
+        <div class="alert alert-<%= name == :notice ? "success" : "danger" %>">
+          <a class="close" data-dismiss="alert">&#215;</a>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <% flash.delete(name) %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
+</div>
+
+<% if user_signed_in? and can? :retrieve, Broadcast %>
+  <script>
+    $.ajax({url: "/broadcast/retrieve"}).done(function(data) {
+      var json = JSON.parse(data)
+      $.each(json, function(key,value) {
+        $('#alert-box').append('<div class="alert alert-wrapper"><div class="alert alert-info"><a onclick="$.ajax({url:\'/broadcast/disable?id=' + (key+1) + '\'})" class="close" data-dismiss="alert">&#215;</a><div id="flash_' + value.title.replace(' ', '_') + '">' + value.text + '</div></div></div>');
+      });
+    });
+  </script>
 <% end %>
