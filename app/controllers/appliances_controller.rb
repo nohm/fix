@@ -24,5 +24,29 @@ class AppliancesController < ApplicationController
       render 'new'
     end
   end
+
+  def update
+    authorize! :update, Appliance, :message => I18n.t('global.unauthorized')
+
+    appliance = Appliance.find(params[:id])
+    if appliance.update(params[:appliance].permit(:preview))
+      redirect_to appliances_path, :notice => 'Appliance updated.'
+    else
+      redirect_to appliances_path, :alert => 'Something went wrong updating.'
+    end
+  end
+
+  # Only destroys attachment
+  def destroy
+    authorize! :update, Appliance, :message => I18n.t('global.unauthorized')
+
+    appliance = Appliance.find(params[:id])
+    appliance.preview = nil
+    if appliance.save
+      redirect_to appliances_path, :notice => 'Attachment removed.'
+    else
+      redirect_to appliances_path, :alert => 'Something went wrong removing.'
+    end
+  end
   
 end

@@ -25,7 +25,7 @@
           <li class="barcode"><%= @barcode %></li>
           <li class="number"><%= @number %></li>
           <hr/>
-          <li class="image"><img src="<%= @appliance.preview %>"/></li>
+          <li class="image"><%= image_tag @appliance.preview.url %>"/></li>
         </ul>
       </div>
       <div class="col right-col">

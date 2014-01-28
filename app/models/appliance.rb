@@ -7,4 +7,5 @@ class Appliance < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_uniqueness_of :abb
 
+  has_attached_file :preview, :styles => { :thumb => "100x100>" }, :path => ':rails_root/public:url', :url => '/system/appliances/:id/:style/:filename'
 end

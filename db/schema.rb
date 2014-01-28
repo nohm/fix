@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127154741) do
+ActiveRecord::Schema.define(version: 20140128104137) do
 
   create_table "appliances", force: true do |t|
     t.string   "name"
     t.string   "abb"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "preview"
+    t.string   "preview_file_name"
+    t.string   "preview_content_type"
+    t.integer  "preview_file_size"
+    t.datetime "preview_updated_at"
   end
 
   create_table "attachments", force: true do |t|

@@ -11,8 +11,7 @@
 	      <th><%= t('global.name') %></th>
 	      <th><%= t('global.abbrevation') %></th>
 	      <th><%= t('global.url') %></th>
-	      <th style="width:17px;"></th>
-	      <th style="width:17px;"></th>
+	      <th></th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -21,13 +20,25 @@
 	      <td><%= appliance.name %></td>
 	      <td><%= appliance.abb %></td>
 	      <td><%= appliance.preview %></td>
+	      <td>
+          <% unless appliance.preview.file? %>
+            <%= bootstrap_form_for(appliance) do |f| %>
+              <%= f.file_field :preview, hide_label: true %>
+              <%= f.submit 'Save', data: { disable_with: 'Saving...' }, class: "btn btn-primary" %>
+            <% end %>
+          <% else %>
+            <%= link_to(appliance_path(appliance), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %>
+          <% end %>
+        </td>
 	    </tr>
 	  <% end %>
 	  </tbody>
 	</table>
 	</div>
 
-    <%= paginate @appliances %>
+  <%= paginate @appliances %>
 <% end %>
 <div>
   <%= link_to(t('appliance.index.new_appliance'), new_appliance_path, :class => 'btn btn-mini btn-primary') %>
