@@ -47,7 +47,7 @@
   <%= f.hidden_field :company, :value => session[:company] %>
 
   <%= f.form_group do %>
-    <%= f.submit t('home.batch.button'), data: { disable_with: t('home.batch.button_send') }, class: "btn btn-primary" %>
+    <%= f.submit t('home.batch.button'), data: { disable_with: t('home.batch.button_send') }, class: "btn btn-primary", 'onclick' => '$(\'.loading-spinner\').css(\'display\', \'inline-block\');' %>
   <% end %>
 <% end %>
 

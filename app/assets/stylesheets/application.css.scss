@@ -12,6 +12,8 @@
  *= require_tree .
 */
 
+@import "bourbon";
+
 $black: #232323;
 $white: #fafafa;
 
@@ -275,4 +277,32 @@ footer {
   .enflag { left: 10px; }
   .nlflag { left: 35px; }
   .deflag { left: 60px; }
+}
+
+$spinner-color:      $brand-info;
+$spinner-size:       100px;
+$spinner-speed:      1.25s;
+$spinner-thickness:  8px; // Odd numbers created a "wobble" effect.
+
+@mixin rotate-forever {
+  0%    { @include transform(rotate(0deg)); }
+  100%  { @include transform(rotate(360deg)); }
+}
+@-webkit-keyframes rotate-forever { @include rotate-forever; }
+   @-moz-keyframes rotate-forever { @include rotate-forever; }
+        @keyframes rotate-forever { @include rotate-forever; }
+
+.loading-spinner {
+  @include animation-duration($spinner-speed);
+  @include animation-iteration-count(infinite);
+  @include animation-name(rotate-forever);
+  @include animation-timing-function(linear);
+  @include size($spinner-size, $spinner-size);
+  border: $spinner-thickness solid $spinner-color;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: none;
+  @include position(fixed, 50% 0 0 50%);
+  margin: -50px 0 0 -50px; /* Spinner size /2 */
+  z-index: 10000;
 }
