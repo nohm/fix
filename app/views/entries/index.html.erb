@@ -115,28 +115,28 @@
           <div class="modal-body">
             <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
                 <p>  
-                  <%= text_field_tag :searchnum, params[:searchnum], :placeholder => t('entry.index.number') %>
+                  <%= text_field_tag :searchnum, params[:searchnum], :placeholder => t('entry.index.searchnum') %>
                   <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
                   <%= submit_tag t('entry.index.search'), :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
                 </p>  
               <% end %>
               <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
                 <p>  
-                  <%= text_field_tag :searchbrand, params[:searchbrand], :placeholder => t('entry.index.brand') %>
+                  <%= text_field_tag :searchbrand, params[:searchbrand], :placeholder => t('entry.index.searchbrand') %>
                   <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
                   <%= submit_tag t('entry.index.search'), :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
                 </p>  
               <% end %>
               <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
                 <p>  
-                  <%= text_field_tag :searchtype, params[:searchtype], :placeholder => t('entry.index.type') %>
+                  <%= text_field_tag :searchtype, params[:searchtype], :placeholder => t('entry.index.searchtype') %>
                   <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
                   <%= submit_tag t('entry.index.search'), :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
                 </p>  
               <% end %>
               <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
                 <p>  
-                  <%= text_field_tag :searchserial, params[:searchserial], :placeholder => t('entry.index.serial') %>
+                  <%= text_field_tag :searchserial, params[:searchserial], :placeholder => t('entry.index.searchserial') %>
                   <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
                   <%= submit_tag t('entry.index.search'), :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
                 </p>  
