@@ -21,6 +21,7 @@ gem 'rubyzip'
 gem 'kaminari'
 gem 'lazy_high_charts'
 gem 'modernizr-rails'
+gem 'bourbon'
 
 group :assets do
   gem 'therubyracer', :platform=>:ruby

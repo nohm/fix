@@ -37,6 +37,9 @@ GEM
     bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
     bootstrap_form (2.0.1)
+    bourbon (3.1.8)
+      sass (>= 3.2.0)
+      thor
     builder (3.1.4)
     cancan (1.6.10)
     climate_control (0.0.3)
@@ -166,6 +169,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (~> 3.0.3.0)
   bootstrap_form
+  bourbon
   cancan
   coffee-rails
   devise
