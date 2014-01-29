@@ -9,6 +9,8 @@ Bundler.require(:default, Rails.env)
 module Badger
   class Application < Rails::Application
 
+    config.middleware.use Rack::Deflater
+
     config.generators do |g|
       
     end
