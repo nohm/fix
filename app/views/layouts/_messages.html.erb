@@ -10,15 +10,16 @@
       </div>
     <% end %>
   <% end %>
-</div>
 
-<% if user_signed_in? and can? :retrieve, Broadcast %>
-  <script>
-    $.ajax({url: "<%= retrieve_broadcasts_path %>"}).done(function(data) {
-      var json = JSON.parse(data)
-      $.each(json, function(key,value) {
-        $('#alert-box').append('<div class="alert alert-wrapper"><div class="alert alert-info"><a onclick="$.ajax({url:\'<%= disable_broadcast_path %>?id=' + value.id + '\'})" class="close" data-dismiss="alert">&#215;</a><div id="flash_' + value.title.replace(' ', '_') + '"><strong>' + value.title + '</strong> ' + value.text + '</div></div></div>');
-      });
-    });
-  </script>
-<% end %>
+  <% @broadcasts.each do |broadcast| %>
+    <div class="alert alert-wrapper">
+      <div class="alert alert-info">
+        <a onclick="disableBroadcast('<%= disable_broadcast_path(broadcast[:id]) %>')" class="close" data-dismiss="alert">&#215;</a>
+        <div id="broadcast_<%= broadcast[:id] %>">
+          <strong><%= broadcast[:title] %></strong>
+          <%= raw(broadcast[:text]) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

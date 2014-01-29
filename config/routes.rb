@@ -16,8 +16,7 @@ Badger::Application.routes.draw do
   resources :stats
   resources :broadcasts
 
-  match 'broadcast/retrieve' => 'broadcasts#retrieve', :as => :retrieve_broadcasts, :via => :get
-  match 'broadcast/disable' => 'broadcasts#disable', :as => :disable_broadcast, :via => :get
+  match 'broadcast/disable/:id' => 'broadcasts#disable', :as => :disable_broadcast, :via => :get
 
   # Special routes for batch updating
   match 'batch' => 'home#batch', :as => :batch, :via => :get

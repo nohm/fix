@@ -51,23 +51,11 @@
       <%= f.hidden_field :company, :value => session[:company] %>
     </div>
     <div class="panel-footer">
-      <%= f.submit t('home.batch.button'), data: { disable_with: t('home.batch.button_send') }, class: "btn btn-primary", 'onclick' => '$(\'.loading-spinner\').css(\'display\', \'inline-block\');' %>
+      <%= f.submit t('home.batch.button'), data: { disable_with: t('home.batch.button_send') }, class: "btn btn-primary", 'onclick' => 'addLoadingSpinner()' %>
     </div>
   </div>
 <% end %>
 
 <%= link_to t('global.back'), root_path %>
 
-<script>
-	var inputs = $(".form-group");
-	for (var i = 1; i < inputs.length; i++) {
-		var input = inputs[i];
-		var which_input = input.children[1].children[0].id;
-		if (which_input != "") {
-			input.innerHTML = input.innerHTML + '<div class="checkbox col-sm-2 batch-update"><label for="' + which_input + '_enable"><input name="entry[enable][' + which_input + ']" value="0" type="hidden"><input id="' + which_input + '_enable" name="entry[enable][' + which_input + ']" value="1" type="checkbox"> <%= t('home.batch.enable') %></label></div>';
-		} else {
-			var which_input_checkbox = input.children[1].children[0].children[0].htmlFor;
-			input.innerHTML = input.innerHTML + '<div class="checkbox col-sm-2 batch-update"><label for="' + which_input_checkbox + '_enable"><input name="entry[enable][' + which_input_checkbox + ']" value="0" type="hidden"><input id="' + which_input_checkbox + '_enable" name="entry[enable][' + which_input_checkbox + ']" value="1" type="checkbox"> <%= t('home.batch.enable') %></label></div>';
-		}
-	}
-</script>
+<script>addCheckboxes('<%= t('home.batch.enable') %>')</script>

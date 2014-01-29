@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
-  before_filter :role_list, :locale_list
+  before_filter :role_list, :locale_list, :retrieve_broadcasts
 
   def role_list
   	unless current_user.nil?
@@ -21,6 +21,12 @@ class ApplicationController < ActionController::Base
 
   def locale_list
     @locales = {'English' => 'en', 'Nederlands' => 'nl', 'Deutsch' => 'de'}
+  end
+
+  def retrieve_broadcasts
+    if user_signed_in? and can? :retrieve, Broadcast
+      @broadcasts = Broadcast.new.retrieve_broadcasts(current_user)
+    end
   end
 
   before_action :set_locale

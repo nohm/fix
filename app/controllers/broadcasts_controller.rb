@@ -31,26 +31,6 @@ class BroadcastsController < ApplicationController
     redirect_to broadcasts_path, :notice => I18n.t('broadcast.controller.notice_deleted')
   end
 
-  def retrieve
-  	authorize! :retrieve, Broadcast, :message => I18n.t('global.unauthorized')
-
-  	broadcasts = Broadcast.all
-  	to_send = Array.new
-  	broadcasts.each do |broadcast|
-  		if broadcast.user_ids.nil?
-  			to_send.append({id: broadcast.id, title: broadcast.title, text: broadcast.text})
-  		else
-  			unless broadcast.user_ids.split(':').include?(current_user.id.to_s)
-  				to_send.append({id: broadcast.id, title: broadcast.title, text: broadcast.text})
-  			end
-  		end
-  	end
-
-  	respond_to do |format|
-  		format.js { render :json => to_send}
-  	end
-  end
-
   def disable
   	authorize! :disable, Broadcast, :message => I18n.t('global.unauthorized')
 
@@ -65,7 +45,7 @@ class BroadcastsController < ApplicationController
   	end
 
   	respond_to do |format|
-  		format.js { render :json => '202 OK'}
+  		format.js { render :json => '200 OK. Oh look, a badger!'}
   	end
   end
 

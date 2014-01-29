@@ -206,13 +206,13 @@ a span:hover {
 }
 
 .nlflag {
-  background-position: -48px -44px;
+  background-position:0 -2754px;
 }
 .enflag {
-  background-position: -16px -275px;
+  background-position: 0 -1458px;
 }
 .deflag {
-  background-position: -16px -22px;
+  background-position:0 -1154px;;
 }
 
 /* /stats charts get some bottom margin */
@@ -343,7 +343,7 @@ $spinner-thickness:  8px; // Odd numbers created a "wobble" effect.
   border: $spinner-thickness solid $spinner-color;
   border-right-color: transparent;
   border-radius: 50%;
-  display: none;
+  display: inline-block;
   @include position(fixed, 50% 0 0 50%);
   margin: -50px 0 0 -50px; /* Spinner size /2 */
   z-index: 10000;
