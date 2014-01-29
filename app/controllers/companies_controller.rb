@@ -17,13 +17,21 @@ class CompaniesController < ApplicationController
   def create
     authorize! :create, Company, :message => I18n.t('global.unauthorized')
 
-    @companies = Company.new(params[:company].permit(:title,:short,:abb,:adress))
+    @company = Company.new(params[:company].permit(:title,:short,:abb,:adress))
 
-    if @companies.save
+    if @company.save
       redirect_to companies_path, :notice => 'Added'
     else
       render 'new'
     end
+  end
+
+  def destroy
+    authorize! :destroy, Company, :message => I18n.t('global.unauthorized')
+
+    company = Company.find(params[:id])
+    company.destroy
+    redirect_to companies_path, :notice => 'Deleted'
   end
   
 end
