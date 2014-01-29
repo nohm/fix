@@ -12,29 +12,29 @@
  *= require_tree .
 */
 
-/* Import bourbon mixins */
+// Import bourbon mixins
 @import "bourbon";
 
-/* Switchly less obnoxious black and white */
+// Switchly less obnoxious black and white
 $black: #232323;
 $white: #fafafa;
 
-/* Different grayscales */
+// Different grayscales
 $gray-darker: #202020;
 $gray-dark: #303030;
 $gray: #505050;
 $gray-light: #b0b0b0;
 $gray-lighter: #e0e0e0;
 
-/* Colours from colourlovers.com */
-$brand-primary: #0B486B; /* adrift in dreams */
-$brand-success: #88A65E; /* hans wegner */
-$brand-info: #81A8B8; /* pacifica */
-$brand-warning: #F5B349; /* groviera moon */
-$brand-danger: #CC2A41; /* amaranth */
-$brand-custom: #556270; /* mighty slate */
+// Colours from colourlovers.com
+$brand-primary: #0B486B; // adrift in dreams
+$brand-success: #88A65E; // hans wegner
+$brand-info: #81A8B8; // pacifica
+$brand-warning: #F5B349; // groviera moon
+$brand-danger: #CC2A41; // amaranth
+$brand-custom: #556270; // mighty slate
 
-/* Apply colours to warning elements */
+// Apply colours to warning elements
 $input-border-focus: $brand-info;
 $state-success-text: $brand-success;
 $state-success-bg: lighten($brand-success, 30%);
@@ -49,17 +49,17 @@ $state-danger-text: $brand-danger;
 $state-danger-bg: lighten($brand-danger, 30%);
 $state-danger-border: lighten($brand-danger, 20%);
 
-/* Import bootstrap completely */
+// Import bootstrap completely
 @import "bootstrap";
 
-/* Bootstrap navbar */
+// Bootstrap navbar
 body {
   padding-top: 60px;
   color: $black;
   background-color: $white;
 }
 
-/* Sticky footer */
+// Sticky footer
 html, body {
   height: 100%;
   min-height: 100%;
@@ -67,18 +67,18 @@ html, body {
 #main {
   min-height: 100%;
   height: auto;
-  /* Negative indent footer by its height */
+  // Negative indent footer by its height
   margin: 0 auto -81px;
-  /* Pad bottom by footer height */
+  // Pad bottom by footer height
   padding: 0 0 81px;
 }
 
-/* Give icons some extra margin to the right */
+// Give icons some extra margin to the right
 .glyphicon {
   margin-right: 3px;
 }
 
-/* Completely center an object and its text */
+// Completely center an object and its text
 .center {
   text-align: center;
   margin-left: auto;
@@ -91,7 +91,7 @@ html, body {
   padding: 15px;
 }
 
-/* Recolour the navbar */
+// Recolour the navbar
 .navbar {
   background-color: $brand-custom;
   border-color: lighten($brand-custom, 15%);
@@ -128,7 +128,7 @@ html, body {
       border-color: lighten($brand-custom, 15%);
     }
   }
-  /* /navigation name/company label styled like an anchor */
+  // /navigation name/company label styled like an anchor
   .info-label {
     color: $gray-lighter;
     margin: 0 !important;
@@ -137,12 +137,12 @@ html, body {
   }
 }
 
-/* /invoices class titles need no margin */
+// /invoices class titles need no margin
 table h6 {
   margin: 0 !important
 }
 
-/* Remove margins and padding on tables inside panels */
+// Remove margins and padding on tables inside panels
 .panel-table {
   padding: 0 !important;
   .col-md-6 {
@@ -163,12 +163,12 @@ table h6 {
   }
 }
 
-/* Headroom.js styles */
+// Headroom.js styles
 .animated {position: fixed;top: 0;left: 0;right: 0;transition: all 0.8s ease-in-out;}
 .slideUp {top: -60px;}
 .slideDown {top: 0;}
 
-/* Give buttons some top margin and minimum width */
+// Give buttons some top margin and minimum width
 .btn-index, .btn-chart {
   min-width: 125px;
   margin-bottom: 5px !important;
@@ -177,19 +177,19 @@ table h6 {
   min-width: 300px;
 }
 
-/* Give the 'add attachment' button some margin for mobile */
+// Give the 'add attachment' button some margin for mobile
 .btn-images {
   margin: 5px;
 }
 
-/* Fix bootswatch alert colors
-   Also added a wrapper div in _messages */
+// Fix bootswatch alert colors
+   Also added a wrapper div in _messages
 .alert-wrapper{
   border: 0 !important;
   padding: 0 !important;
 }
 
-/* Give glyphicons in anchors same colors */
+// Give glyphicons in anchors same colors
 a span {
   color: #333
 }
@@ -197,7 +197,7 @@ a span:hover {
   color: #000
 }
 
-/* Languageflags */
+// Languageflags
 .languageflag{
   display:inline-block;
   height:11px;
@@ -215,7 +215,7 @@ a span:hover {
   background-position: -16px -22px;
 }
 
-/* /stats charts get some bottom margin */
+// /stats charts get some bottom margin
 .stat-chart {
   margin-top: 15px !important;
   margin-bottom: 30px !important;
@@ -225,7 +225,7 @@ a span:hover {
   margin-bottom: 30px !important;
 }
 
-/* Custom colours for stat progress bars */
+// Custom colours for stat progress bars
 .stat-colour-new {
   color: lighten($brand-success, 15%) !important;  
   background-color: lighten($brand-success, 15%) !important; 
@@ -259,7 +259,7 @@ a span:hover {
   background-color: transparent !important
 }
 
-/* Footer styling */
+// Footer styling
 footer {
   padding-top: 10px;
   margin-top: 10px;
@@ -289,9 +289,7 @@ footer {
   }
 }
 
-/* Landing page */
-
-/* Landing page buttons */
+// Landing page buttons
 .btn-signup,
 .btn-report {
   padding: 5px 12px !important;
@@ -306,7 +304,7 @@ footer {
   }
 }
 
-/* Landing page flags */
+//Landing page flags
 .panel-heading-landing {
   position: relative;
 }
@@ -321,6 +319,7 @@ footer {
   .deflag { left: 60px; }
 }
 
+// Loading spinner
 $spinner-color:      $brand-info;
 $spinner-size:       100px;
 $spinner-speed:      1.25s;
@@ -345,6 +344,6 @@ $spinner-thickness:  8px; // Odd numbers created a "wobble" effect.
   border-radius: 50%;
   display: inline-block;
   @include position(fixed, 50% 0 0 50%);
-  margin: -50px 0 0 -50px; /* Spinner size /2 */
+  margin: -50px 0 0 -50px; // Spinner size / 2
   z-index: 10000;
 }
