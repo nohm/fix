@@ -11,12 +11,13 @@ class CompaniesController < ApplicationController
     authorize! :index, Company, :message => I18n.t('global.unauthorized')
 
     @companies = Company.all.page(params[:page]).order('id ASC').per(25)
+
   end
 
   def create
     authorize! :create, Company, :message => I18n.t('global.unauthorized')
 
-    @companies = Company.new(params[:company].permit(:title,:short))
+    @companies = Company.new(params[:company].permit(:title,:short,:abb,:adress))
 
     if @companies.save
       redirect_to companies_path, :notice => 'Added'
