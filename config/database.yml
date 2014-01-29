@@ -35,6 +35,8 @@ development:
   host:     localhost
   schema_search_path: public
   min_messages: warning
+  allow_concurrency: true
+  pool: 10
 
 test:
   adapter: postgresql
@@ -46,6 +48,8 @@ test:
   host:     localhost
   schema_search_path: public
   min_messages: warning
+  allow_concurrency: true
+  pool: 10
 
 production:
   adapter: postgresql
@@ -57,3 +61,5 @@ production:
   host:     localhost
   schema_search_path: public
   min_messages: warning
+  allow_concurrency: true
+  pool: 10

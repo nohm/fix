@@ -14,21 +14,21 @@ class EntriesController < ApplicationController
     if !session[:company].nil? and (can? :index, Entry or current_user.roles.first.name == session[:company])
       if params[:searchnum]
         begin
-          @entries = Entry.where('appliance_id = ? AND number = ? AND company = ?', Appliance.where(abb: params[:searchnum][1].upcase).first.id, params[:searchnum][2..-1].to_i, session[:company])
+          @entries = Entry.includes(:attachments).where('appliance_id = ? AND number = ? AND company = ?', Appliance.where(abb: params[:searchnum][1].upcase).first.id, params[:searchnum][2..-1].to_i, session[:company])
           redirect_to entry_path(@entries.first.id)
         rescue
           redirect_to entries_path, :alert => "Entry not found with number #{params[:searchnum]}."
         end
       elsif params[:searchbrand]
-        @entries = Entry.where('brand LIKE ? AND company = ?', params[:searchbrand], session[:company])
+        @entries = Entry.includes(:attachments).where('brand LIKE ? AND company = ?', params[:searchbrand], session[:company])
       elsif params[:searchtype]
-        @entries = Entry.where('typenum LIKE ? AND company = ?', params[:searchtype], session[:company])
+        @entries = Entry.includes(:attachments).where('typenum LIKE ? AND company = ?', params[:searchtype], session[:company])
       elsif params[:searchserial]
-        @entries = Entry.where('serialnum LIKE ? AND company = ?', params[:searchserial], session[:company])
+        @entries = Entry.includes(:attachments).where('serialnum LIKE ? AND company = ?', params[:searchserial], session[:company])
       elsif params[:searchstatus]
-        @entries = Entry.where(status: params[:searchstatus], company: session[:company])
+        @entries = Entry.includes(:attachments).where(status: params[:searchstatus], company: session[:company])
       else
-        @entries = Entry.where(company: session[:company]).page(params[:page]).per(25)
+        @entries = Entry.includes(:attachments).where(company: session[:company]).page(params[:page]).per(25)
         @pagination = true
       end
       @appliances = Appliance.all
@@ -48,7 +48,7 @@ class EntriesController < ApplicationController
 
   def show
     authorize! :show, Entry, :message => I18n.t('global.unauthorized')
-    @entry = Entry.find(params[:id])
+    @entry = Entry.includes(:attachments).find(params[:id])
     @appliance = Appliance.find(@entry.appliance_id)
     @classification = Classifications.find(@entry.class_id)
     unless @entry.invoice_id.nil?
@@ -59,7 +59,7 @@ class EntriesController < ApplicationController
   def zip
     authorize! :zip, Entry, :message => I18n.t('global.unauthorized')
 
-    @entry = Entry.find(params[:id])
+    @entry = Entry.includes(:attachments).find(params[:id])
     @appliance = Appliance.find(@entry.appliance_id)
     temp_file  = Tempfile.new("#{@entry.id}-#{@entry.number}")
     @entry.zip_images(temp_file)

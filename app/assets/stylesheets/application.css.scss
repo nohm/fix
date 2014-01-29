@@ -163,6 +163,17 @@ table h6 {
   }
 }
 
+@media (min-width: 768px) {
+  .panel-table .col-md-6 {
+    &:nth-child(2n+2) {
+      padding-left: 15px !important;
+    }
+    &:nth-child(2n+1) {
+      padding-right: 15px !important;
+    }
+  }
+}
+
 // Headroom.js styles
 .animated {position: fixed;top: 0;left: 0;right: 0;transition: all 0.8s ease-in-out;}
 .slideUp {top: -60px;}
