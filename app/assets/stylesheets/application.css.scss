@@ -142,6 +142,10 @@ table h6 {
   margin: 0 !important
 }
 
+.panel-heading h4 {
+  margin-bottom: 0 !important;
+}
+
 // Remove margins and padding on tables inside panels
 .panel-table {
   padding: 0 !important;
@@ -217,6 +221,12 @@ a span:hover {
 }
 .deflag {
   background-position: -16px -22px;
+}
+
+// Simple home#index stats labels
+.simple_stats {
+  color: $gray-light;
+  font-style: italic;
 }
 
 // /stats charts get some bottom margin

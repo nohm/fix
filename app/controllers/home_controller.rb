@@ -1,6 +1,22 @@
 class HomeController < ApplicationController
   def index
    session[:company] = nil
+   unless current_user.nil?
+      if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin
+        roles = Role.all
+      else
+        roles = Role.where(name: current_user.roles.first.name)
+      end
+      @simple_stats = Array.new
+      roles.each_with_index do |role, index|
+        unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' or role.name == 'guest'
+          @simple_stats[index] = Array.new
+          invoices = Invoice.where(company: role.name).count
+          @simple_stats[index][0] = Entry.where(company: role.name).count
+          @simple_stats[index][1] = Invoice.where(company: role.name).count
+        end
+      end
+    end
   end
 
   # Batch function for updating multiple entries
