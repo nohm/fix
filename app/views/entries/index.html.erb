@@ -1,8 +1,8 @@
-<% provide(:title, t('entry.index.title') + session[:company]) %>
+<% provide(:title, t('entry.index.title') + @company.title) %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <div class="panel-title"><%= "#{t('entry.index.legend')} #{session[:company]}" %></div>
+    <div class="panel-title"><%= "#{t('entry.index.legend')} #{@company.title}" %></div>
   </div>
   <div class="panel-body panel-table">
     <% if @entries.length == 0 %>
@@ -35,7 +35,7 @@
           <tbody class="searchable">
             <% @entries.each do |entry| %>
               <tr>
-                <td><%= entry.company[0].upcase! + @appliances[entry.appliance_id - 1].abb + entry.number %></td>
+                <td><%= @company.abb + @appliances[entry.appliance_id - 1].abb + entry.number %></td>
                 <td><%= @appliances[entry.appliance_id - 1].name %></td>
                 <td><%= entry.brand %></td>
                 <td><%= entry.typenum %></td>
@@ -51,30 +51,30 @@
                   </td>
                 <% end %>
                 <td>
-                  <%= link_to entry_path(entry) do %>
+                  <%= link_to company_entry_path(entry.company_id, entry) do %>
                     <span class="glyphicon glyphicon-search"></span>
                   <% end %>
                 </td>
                <% if can? :edit, Entry %>
                   <td data-no-turbolink="true">
-                    <%= link_to sticker_path(entry) do %>
+                    <%= link_to sticker_path(entry.company_id, entry) do %>
                       <span class="glyphicon glyphicon-barcode"></span>
                     <% end %>
                   </td>
                   <td data-no-turbolink="true">
-                    <%= link_to ticket_path(entry) do %>
+                    <%= link_to ticket_path(entry.company_id, entry) do %>
                       <span class="glyphicon glyphicon-print"></span>
                     <% end %>
                   </td>
                   <td>
-                    <%= link_to edit_entry_path(entry) do %>
+                    <%= link_to edit_company_entry_path(entry.company_id, entry) do %>
                       <span class="glyphicon glyphicon-pencil"></span>
                     <% end %>
                   </td>
                 <% end %>
                 <% if can? :destroy, Entry %>
                   <td>
-                    <%= link_to(entry_path(entry), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
+                    <%= link_to(company_entry_path(entry.company_id, entry), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
                       <span class="glyphicon glyphicon-remove"></span>
                     <% end %>
                   </td>
@@ -92,12 +92,12 @@
       <% if @pagination %>
         <%= paginate @entries %>
       <% else %>
-        <%= link_to(t('entry.index.back'), entries_path(company: session[:company]), :class => 'btn btn-mini btn-primary') %>
+        <%= link_to(t('entry.index.back'), company_entries_path(@company), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     <% end %>
 
     <% if can? :create, Entry %>
-      <%= link_to(t('entry.index.add_entry'), new_entry_path, :class => 'btn btn-mini btn-primary') %>
+      <%= link_to(t('entry.index.add_entry'), new_company_entry_path(@company), :class => 'btn btn-mini btn-primary') %>
     <% end %>
 
     <% if @entries.length != 0 and @pagination %>
@@ -120,38 +120,33 @@
             <h4 class="modal-title" id="modalLabel-search"><%= t('entry.index.search') %></h4>
           </div>
           <div class="modal-body">
-            <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+            <%= form_tag company_entries_path(@company), :class => "navbar-form", :method => 'get' do %>
                 <p>  
                   <%= text_field_tag :searchnum, params[:searchnum], :placeholder => t('entry.index.searchnum') %>
-                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
                   <%= submit_tag t('entry.index.search'), :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
                 </p>  
               <% end %>
-              <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+              <%= form_tag company_entries_path(@company),:class => "navbar-form", :method => 'get' do %>
                 <p>  
                   <%= text_field_tag :searchbrand, params[:searchbrand], :placeholder => t('entry.index.searchbrand') %>
-                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
                   <%= submit_tag t('entry.index.search'), :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
                 </p>  
               <% end %>
-              <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+              <%= form_tag company_entries_path(@company),:class => "navbar-form", :method => 'get' do %>
                 <p>  
                   <%= text_field_tag :searchtype, params[:searchtype], :placeholder => t('entry.index.searchtype') %>
-                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
                   <%= submit_tag t('entry.index.search'), :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
                 </p>  
               <% end %>
-              <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+              <%= form_tag company_entries_path(@company),:class => "navbar-form", :method => 'get' do %>
                 <p>  
                   <%= text_field_tag :searchserial, params[:searchserial], :placeholder => t('entry.index.searchserial') %>
-                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
                   <%= submit_tag t('entry.index.search'), :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
                 </p>  
               <% end %>
-              <%= form_tag entries_path,:class => "navbar-form", :method => 'get' do %>
+              <%= form_tag company_entries_path(@company),:class => "navbar-form", :method => 'get' do %>
                 <p>  
                   <%= select_tag :searchstatus, options_for_select(@statuses) %>
-                  <input id="company" name="company" type="hidden" value="<%= params[:company] %>" />
                   <%= submit_tag t('entry.index.search'), :name => nil, :class => 'btn btn-mini btn-primary', :style => 'height:28px' %>  
                 </p>  
               <% end %>

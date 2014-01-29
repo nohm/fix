@@ -2,13 +2,7 @@ class StatsController < ApplicationController
 	def index
 		authorize! :index, Stats, :message => I18n.t('global.unauthorized')
 
-		# check if company is set
-	    unless params[:company].nil?
-	      session[:company] = params[:company]
-	    end
-	    if session[:company].nil?
-	      redirect_to root_path, :alert => I18n.t('global.unauthorized')
-	    end
+		@company = Company.find(params[:company_id])
 
 		# Set it up
 		entry_stats = Hash.new # brand and type sorted statuses
@@ -21,7 +15,7 @@ class StatsController < ApplicationController
 		(0..3).each do |i| #0..'amount of statuses'
 			entry_stats_status_global[i] = 0
 		end
-		entries = Entry.where(company: session[:company])
+		entries = @company.entries
 
 		# Process entry status codes
 		entries.each do |entry|
@@ -64,8 +58,8 @@ class StatsController < ApplicationController
 		# Generate chart data
 		@charts = Hash.new
 		@charts[:global] = Array.new
-		@charts[:global].append Stats.new.generate_chart(session[:company], entries.length.to_s, entry_stats_global, params[:type]) # global chart first
-		@charts[:global].append Stats.new.generate_chart_status(session[:company], entries.length.to_s, entry_stats_status_global, params[:type]) # global chart first
+		@charts[:global].append Stats.new.generate_chart(@company.short, entries.length.to_s, entry_stats_global, params[:type]) # global chart first
+		@charts[:global].append Stats.new.generate_chart_status(@company.short, entries.length.to_s, entry_stats_status_global, params[:type]) # global chart first
 		entry_stats.each_pair do |brand, brand_data|
 			brand_data.each_pair do |type, type_data|
 				type_total = 0

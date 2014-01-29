@@ -1,8 +1,8 @@
-<% provide(:title, t('invoice.index.title') + session[:company]) %>
+<% provide(:title, t('invoice.index.title') + @company.title) %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <div class="panel-title"><%= "#{t('invoice.index.legend')}#{session[:company]}" %></div>
+    <div class="panel-title"><%= "#{t('invoice.index.legend')}#{@company.title}" %></div>
   </div>
   <div class="panel-body panel-table">
     <% if @invoices.length == 0 %>
@@ -27,13 +27,13 @@
               <td><%= invoice.items %></td>
               <td><%= invoice.created_at.to_date %></td>
                 <td>
-                  <%= link_to invoice_path(invoice) do %>
+                  <%= link_to company_invoice_path(invoice.company_id, invoice) do %>
                     <span class="glyphicon glyphicon-search"></span>
                   <% end %>
                 </td>
                 <% if can? :destroy, Invoice %>
                 <td>
-                  <%= link_to(invoice_path(invoice), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
+                  <%= link_to(company_invoice_path(invoice.company_id, invoice), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
                     <span class="glyphicon glyphicon-remove"></span>
                   <% end %>
                 </td>
@@ -53,7 +53,7 @@
 
     <% if can? :create, Invoice %>
       <div>
-        <%= link_to(t('invoice.index.add_invoice'), new_invoice_path, :class => 'btn btn-mini btn-primary') %>
+        <%= link_to(t('invoice.index.add_invoice'), new_company_invoice_path(@company), :class => 'btn btn-mini btn-primary') %>
       </div>
     <% end %>
   </div>

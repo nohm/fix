@@ -1,6 +1,6 @@
 <% provide(:title, t('entry.new.title')) %>
 
-<%= bootstrap_form_for(@entry, :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
+<%= bootstrap_form_for(@entry, :url => company_entries_path(params[:company_id]), :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
   <%= f.alert_message t('global.errors') %>
   
   <div class="panel panel-default">
@@ -39,8 +39,6 @@
       <%= f.select :class_id, @class_names, label: t('global.class') %>
 
       <%= f.text_area :note, label: t('global.note') %>
-
-      <%= f.hidden_field :company, :value => session[:company] %>
     </div>
     <div class="panel-footer">
       <p><%= t('entry.edit.message') %></p>
@@ -49,4 +47,4 @@
   </div>
 <% end %>
 
-<%= link_to t('global.back'), entries_path %>
+<%= link_to t('global.back'), company_entries_path(params[:company_id]) %>

@@ -1,40 +1,29 @@
 class HomeController < ApplicationController
   def index
-   session[:company] = nil
-   unless current_user.nil?
-      if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin
-        roles = Role.all
-      else
-        roles = Role.where(name: current_user.roles.first.name)
-      end
+    session[:company] = nil
+    unless current_user.nil?
+      @companies = Company.all
       @simple_stats = Array.new
-      roles.each_with_index do |role, index|
-        unless role.name == 'user' or role.name == 'technician' or role.name == 'manager' or role.name == 'admin' or role.name == 'guest'
-          @simple_stats[index] = Array.new
-          invoices = Invoice.where(company: role.name).count
-          @simple_stats[index][0] = Entry.where(company: role.name).count
-          @simple_stats[index][1] = Invoice.where(company: role.name).count
-        end
+      @companies.each_with_index do |company, index|
+        @simple_stats[index] = Array.new
+        @simple_stats[index][0] = company.entries.length
+        @simple_stats[index][1] = company.invoices.length
       end
     end
   end
 
   # Batch function for updating multiple entries
   def batch
-    unless params[:company].nil?
-      session[:company] = params[:company]
-    end
+    authorize! :update, Entry, :message => I18n.t('global.unauthorized')
 
-    if !session[:company].nil?
-      @appliance_names = Appliance.pluck(:name, :id)
-      @class_names = Classifications.pluck(:name, :id)
-    else
-      redirect_to root_path, :alert => I18n.t('global.unauthorized')
-    end
+    @appliance_names = Appliance.pluck(:name, :id)
+    @class_names = Classifications.pluck(:name, :id)
   end
 
   # The post function that catches and handles batch updating the entries
   def batch_update
+    authorize! :update, Entry, :message => I18n.t('global.unauthorized')
+
     items = params[:entry][:ordernumbers]
 
     non_existing = Array.new
@@ -42,7 +31,7 @@ class HomeController < ApplicationController
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
       app = Appliance.where(abb: num[1]).take
-      entry = Entry.where(company: session[:company], number: num[2..-1], appliance_id: app.id).take
+      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], appliance_id: app.id).take
       if entry.nil?
         non_existing.push(num)
       elsif entry.company != session[:company]
@@ -54,7 +43,7 @@ class HomeController < ApplicationController
       items.lines do |line|
         num = line.tr("\n","").tr("\r","")
         app = Appliance.where(abb: num[1]).take
-        entry = Entry.where(company: session[:company], number: num[2..-1], appliance_id: app.id).take
+        entry = Entry.where(company_id: params[:company_id], number: num[2..-1], appliance_id: app.id).take
         params[:entry].each do |key, value|
           unless key == 'ordernumbers' or key == 'enable'
             if params[:entry][:enable]['entry_' + key] == '1'

@@ -3,34 +3,32 @@ class EntriesController < ApplicationController
 
   def index
     authorize! :index, Entry, :message => I18n.t('global.unauthorized')
-
-    unless params[:company].nil?
-      session[:company] = params[:company]
-    end
+    
     unless params[:page].nil?
       session[:page] = params[:page]
     end
 
-    if !session[:company].nil? and (can? :index, Entry or current_user.roles.first.name == session[:company])
+    if can? :index, Entry or current_user.roles.first.name == Company.find(params[:company_id].short)
       if params[:searchnum]
         begin
-          @entries = Entry.includes(:attachments).where('appliance_id = ? AND number = ? AND company = ?', Appliance.where(abb: params[:searchnum][1].upcase).first.id, params[:searchnum][2..-1].to_i, session[:company])
-          redirect_to entry_path(@entries.first.id)
+          @entries = Entry.includes(:attachments).where('appliance_id = ? AND number = ? AND company_id = ?', Appliance.where(abb: params[:searchnum][1].upcase).first.id, params[:searchnum][2..-1], params[:company_id])
+          redirect_to company_entry_path(params[:company_id], @entries.first.id)
         rescue
-          redirect_to entries_path, :alert => "Entry not found with number #{params[:searchnum]}."
+          redirect_to company_entries_path(params[:company_id]), :alert => "Entry not found with number #{params[:searchnum]}."
         end
       elsif params[:searchbrand]
-        @entries = Entry.includes(:attachments).where('brand LIKE ? AND company = ?', params[:searchbrand], session[:company])
+        @entries = Entry.includes(:attachments).where('brand ILIKE ? AND company_id = ?', params[:searchbrand], params[:company_id]).order('id ASC')
       elsif params[:searchtype]
-        @entries = Entry.includes(:attachments).where('typenum LIKE ? AND company = ?', params[:searchtype], session[:company])
+        @entries = Entry.includes(:attachments).where('typenum ILIKE ? AND company_id = ?', params[:searchtype], params[:company_id]).order('id ASC')
       elsif params[:searchserial]
-        @entries = Entry.includes(:attachments).where('serialnum LIKE ? AND company = ?', params[:searchserial], session[:company])
+        @entries = Entry.includes(:attachments).where('serialnum ILIKE ? AND company_id = ?', params[:searchserial], params[:company_id]).order('id ASC')
       elsif params[:searchstatus]
-        @entries = Entry.includes(:attachments).where(status: params[:searchstatus], company: session[:company])
+        @entries = Entry.includes(:attachments).where(status: params[:searchstatus], company_id: params[:company_id]).order('id ASC')
       else
-        @entries = Entry.includes(:attachments).where(company: session[:company]).page(params[:page]).per(25)
+        @entries = Entry.includes(:attachments).where(company_id: params[:company_id]).order('id ASC').page(params[:page]).per(25)
         @pagination = true
       end
+      @company = Company.find(params[:company_id])
       @appliances = Appliance.all
       @statuses = Entry.select("DISTINCT status").map(&:status).sort!
     else
@@ -49,6 +47,7 @@ class EntriesController < ApplicationController
   def show
     authorize! :show, Entry, :message => I18n.t('global.unauthorized')
     @entry = Entry.includes(:attachments).find(params[:id])
+    @company = Company.find(@entry.company_id)
     @appliance = Appliance.find(@entry.appliance_id)
     @classification = Classifications.find(@entry.class_id)
     unless @entry.invoice_id.nil?
@@ -59,11 +58,12 @@ class EntriesController < ApplicationController
   def zip
     authorize! :zip, Entry, :message => I18n.t('global.unauthorized')
 
-    @entry = Entry.includes(:attachments).find(params[:id])
-    @appliance = Appliance.find(@entry.appliance_id)
-    temp_file  = Tempfile.new("#{@entry.id}-#{@entry.number}")
-    @entry.zip_images(temp_file)
-    send_file temp_file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s}-#{I18n.t('entry.controller.images')}.zip"
+    entry = Entry.includes(:attachments).find(params[:id])
+    appliance = Appliance.find(entry.appliance_id)
+    company = Company.find(entry.company_id)
+    temp_file  = Tempfile.new("#{entry.id}-#{entry.number}")
+    entry.zip_images(temp_file)
+    send_file temp_file.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{company.abb + appliance.abb + entry.number.to_s}-#{I18n.t('entry.controller.images')}.zip"
     temp_file.close
   end
 
@@ -71,7 +71,8 @@ class EntriesController < ApplicationController
     authorize! :sticker, Entry, :message => I18n.t('global.unauthorized')
     entry = Entry.find(params[:id])
     appliance = Appliance.find(entry.appliance_id)
-    @number = entry.company[0].upcase! + appliance.abb + entry.number.to_s
+    company = Company.find(entry.company_id)
+    @number = company.abb + appliance.abb + entry.number.to_s
     @barcode = entry.get_barcode(@number).html_safe
     render 'sticker', :layout => false
   end
@@ -80,7 +81,8 @@ class EntriesController < ApplicationController
     authorize! :ticket, Entry, :message => I18n.t('global.unauthorized')
     @entry = Entry.find(params[:id])
     @appliance = Appliance.find(@entry.appliance_id)
-    @number = @entry.company[0].upcase! + @appliance.abb + @entry.number.to_s
+    company = Company.find(@entry.company_id)
+    @number = company.abb + @appliance.abb + @entry.number.to_s
     @barcode = @entry.get_barcode(@number).html_safe
     render 'ticket', :layout => false
   end
@@ -90,6 +92,7 @@ class EntriesController < ApplicationController
 
     @entry = Entry.find(params[:id])
     @appliance = Appliance.find(@entry.appliance_id)
+    @company = Company.find(@entry.company_id)
     @history = History.where(entry_id: params[:id])
     @users = User.all
   end
@@ -105,16 +108,14 @@ class EntriesController < ApplicationController
   def update
     authorize! :update, Entry, :message => I18n.t('global.unauthorized')
 
-    if session[:company].nil?
-      redirect_to root_path, :notice => I18n.t('global.no_company')
-    end
+    params[:entry][:company_id] = params[:company_id]
 
     @entry = Entry.find(params[:id])
 
     if @entry.appliance_id == params[:entry][:appliance_id].to_i
       params[:entry][:number] = @entry.number
     else
-      entries = Entry.where(appliance_id: params[:entry][:appliance_id])
+      entries = Entry.where(appliance_id: params[:entry][:appliance_id]).order('id ASC')
       if entries.length == 0
         params[:entry][:number] = 1
       else 
@@ -122,8 +123,8 @@ class EntriesController < ApplicationController
       end
     end
       
-    if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company,:status))
-      redirect_to entries_path(:page => session[:page]), :notice => I18n.t('entry.controller.updated')
+    if @entry.update(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:status,:company_id))
+      redirect_to company_entries_path(:company => params[:company_id], :page => session[:page]), :notice => I18n.t('entry.controller.updated')
     else
       @appliance_names = Appliance.pluck(:name, :id)
       @class_names = Classifications.pluck(:name, :id)
@@ -136,21 +137,19 @@ class EntriesController < ApplicationController
   def create
     authorize! :create, Entry, :message => I18n.t('global.unauthorized')
 
-    if session[:company].nil?
-      redirect_to root_path, :notice => I18n.t('global.no_company')
-    end
+    params[:entry][:company_id] = params[:company_id]
 
-    entries = Entry.where(appliance_id: params[:entry][:appliance_id])
+    entries = Entry.where(appliance_id: params[:entry][:appliance_id]).order('id ASC')
     if entries.length == 0
       params[:entry][:number] = 1
     else 
       params[:entry][:number] = entries.last.number.to_i + 1
     end
 
-    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:company,:status))
+    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:status,:company_id))
     
     if @entry.save
-      redirect_to entries_path(:page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
+      redirect_to company_entries_path(:company => params[:company_id], :page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
     else
       @appliance_names = Appliance.pluck(:name, :id)
       @class_names = Classifications.pluck(:name, :id)
@@ -165,7 +164,7 @@ class EntriesController < ApplicationController
 
     entry = Entry.find(params[:id])
     entry.destroy
-    redirect_to entries_path, :notice => I18n.t('entry.controller.deleted')
+    redirect_to company_entries_path(:company => params[:company_id]), :notice => I18n.t('entry.controller.deleted')
 
     History.new({:entry_id => 0, :user_id => current_user.id, :action => 'destroy'}).save
   end

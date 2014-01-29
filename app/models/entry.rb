@@ -1,4 +1,5 @@
 class Entry < ActiveRecord::Base
+  belongs_to :company
   has_many :attachments, dependent: :destroy
   
   validates :number, presence: true

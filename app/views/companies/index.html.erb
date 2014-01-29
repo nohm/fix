@@ -1,0 +1,44 @@
+<% provide(:title, 'Company') %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">'Company: index'</div>
+  </div>
+  <div class="panel-body panel-table">
+  	<% if @companies.length == 0 %>
+  	  <p class="empty_list">Empty list</p>
+  	<% else %>
+  		<div class="table-responsive">
+  			<table class="table table-condensed table-striped">
+  			  <thead>
+  			    <tr>
+  			      <th>Title</th>
+  			      <th>Short</th>
+              <th>Abbrevation</th>
+              <th>Adress</th>
+  			      <th style="width:17px;"></th>
+  			    </tr>
+  			  </thead>
+  			  <tbody>
+  			  <% @companies.each do |company| %>
+  			    <tr>
+  			      <td><%= company.title %></td>
+              <td><%= company.short %></td>
+              <td><%= company.abb %></td>
+              <td><%= company.adress %></td>
+  		          <td>
+  		            <%= link_to(company_path(company), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
+  		              <span class="glyphicon glyphicon-remove"></span>
+  		            <% end %>
+  		          </td>
+  			    </tr>
+  			  <% end %>
+  			  </tbody>
+  			</table>
+  		</div>
+  	<% end %>
+  </div>
+  <div class="panel-footer">
+    <%= link_to('New company', new_company_path, :class => 'btn btn-mini btn-primary') %>
+  </div>
+</div>

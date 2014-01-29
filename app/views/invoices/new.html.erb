@@ -1,6 +1,6 @@
 <% provide(:title, t('invoice.new.title')) %>
 
-<%= bootstrap_form_for :invoice, :url => invoices_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
+<%= bootstrap_form_for :invoice, :url => company_invoices_path(params[:company_id]), style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message t('global.errors') %>
   
   <div class="panel panel-default">
@@ -18,4 +18,4 @@
   </div>
 <% end %>
 
-<%= link_to t('global.back'), invoices_path %>
+<%= link_to t('global.back'), company_invoices_path(params[:company_id]) %>

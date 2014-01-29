@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140128104137) do
+ActiveRecord::Schema.define(version: 20140129162304) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "appliances", force: true do |t|
     t.string   "name"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140128104137) do
     t.datetime "attach_updated_at"
   end
 
-  add_index "attachments", ["entry_id"], name: "index_attachments_on_entry_id"
+  add_index "attachments", ["entry_id"], name: "index_attachments_on_entry_id", using: :btree
 
   create_table "broadcasts", force: true do |t|
     t.string   "title"
@@ -48,6 +51,15 @@ ActiveRecord::Schema.define(version: 20140128104137) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "companies", force: true do |t|
+    t.string   "title"
+    t.string   "short"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "abb"
+    t.string   "adress"
   end
 
   create_table "entries", force: true do |t|
@@ -75,7 +87,10 @@ ActiveRecord::Schema.define(version: 20140128104137) do
     t.string   "testerb"
     t.integer  "class_id"
     t.string   "status"
+    t.integer  "company_id"
   end
+
+  add_index "entries", ["company_id"], name: "index_entries_on_company_id", using: :btree
 
   create_table "histories", force: true do |t|
     t.integer  "entry_id"
@@ -90,7 +105,10 @@ ActiveRecord::Schema.define(version: 20140128104137) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "company"
+    t.integer  "company_id"
   end
+
+  add_index "invoices", ["company_id"], name: "index_invoices_on_company_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -100,8 +118,8 @@ ActiveRecord::Schema.define(version: 20140128104137) do
     t.datetime "updated_at"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-  add_index "roles", ["name"], name: "index_roles_on_name"
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "stats", force: true do |t|
     t.datetime "created_at"
@@ -125,14 +143,14 @@ ActiveRecord::Schema.define(version: 20140128104137) do
     t.string   "language",               default: "en"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: true do |t|
     t.integer "user_id"
     t.integer "role_id"
   end
 
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
 end

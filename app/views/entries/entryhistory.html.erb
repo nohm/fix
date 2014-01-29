@@ -1,10 +1,10 @@
 <% provide(:title, t('entry.entryhistory.title')) %>
-<legend><%= t('entry.entryhistory.legend') %></legend>
 
-<h2><%= @entry.company[0].upcase! + @appliance.abb + @entry.number %></h2>
-
-<div class="row">
-  <div class="span6">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title"><%= t('entry.entryhistory.legend') %> <%= @company.abb + @appliance.abb + @entry.number %></div>
+  </div>
+  <div class="panel-body panel-table">
   	<% if @history.length == 0 %>
       <p><%= t('entry.entryhistory.empty_list') %></p>
     <% else %>
@@ -36,4 +36,4 @@
   </div>
 </div>
 
-<%= link_to t('global.back'), entry_path(@entry) %>
+<%= link_to t('global.back'), company_entry_path(@company, @entry) %>

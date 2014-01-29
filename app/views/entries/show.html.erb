@@ -2,7 +2,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= @entry.company[0].upcase! + @appliance.abb + @entry.number %>
+    <%= @company.abb + @appliance.abb + @entry.number %>
     &middot;
     <%= @entry.brand + ' ' + @entry.typenum + ' ' + @appliance.name %>
   </div>
@@ -16,7 +16,7 @@
             <% if can? :create, Entry %>
               <tr>
                 <td><h6><%= t('entry.show.barcode') %></h6></td>
-                <td><%= @entry.get_barcode(@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s).html_safe %></td>
+                <td><%= @entry.get_barcode(@company.abb + @appliance.abb + @entry.number.to_s).html_safe %></td>
               </tr>
             <% end %>
 
@@ -108,7 +108,7 @@
                     <% end %>
                     <% if can? :destroy, Attachment %>
                       <br>
-                      <%= link_to t('global.delete'), entry_attachment_path(@entry.id, attachment), method: :delete, data: { confirm: t('global.sure') } %>
+                      <%= link_to t('global.delete'), company_entry_attachment_path(@entry.id, attachment), method: :delete, data: { confirm: t('global.sure') } %>
                     <% end %>
                   <% end %>
                   </div>
@@ -129,7 +129,7 @@
             <div class="modal fade" id="modal-attachment" tabindex="-1" role="dialog" aria-labelledby="modalLabel-attachment" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
+                  <%= bootstrap_form_for([@entry, @entry.attachments.build], :url => company_entry_attachment_path(params[:company_id], @entry, @entry.attachments)) do |f| %>
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                       <h4 class="modal-title" id="modalLabel-attachment"><%= t('entry.show.add_attachment') %></h4>
@@ -153,29 +153,29 @@
   <div class="panel-footer">
     <% if can? :zip, Entry %>
       <% unless @entry.attachments.length == 0 %>
-        <%= link_to(t('entry.show.zip'), zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
+        <%= link_to(t('entry.show.zip'), zip_path(@company, @entry), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     <% end %>
     <div style="float:left;padding-right:4px" data-no-turbolink="true">
       <% if can? :create, Entry %>
-        <%= link_to(t('entry.show.sticker'), sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
+        <%= link_to(t('entry.show.sticker'), sticker_path(@company, @entry), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     </div>
     <div style="float:left;padding-right:4px" data-no-turbolink="true">
       <% if can? :create, Entry %>
-        <%= link_to('Create ticket', ticket_path(@entry), :class => 'btn btn-mini btn-primary') %>
+        <%= link_to('Create ticket', ticket_path(@company, @entry), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     </div>
     <% if can? :edit, Entry %>
-      <%= link_to(t('entry.show.edit'), edit_entry_path(@entry), :class => 'btn btn-mini btn-primary') %>
+      <%= link_to(t('entry.show.edit'), edit_company_entry_path(@company, @entry), :class => 'btn btn-mini btn-primary') %>
     <% end %>
     <% if can? :destroy, Entry %>
-      <%= link_to(t('entry.show.delete'), entry_path(@entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
+      <%= link_to(t('entry.show.delete'), company_entry_path(@company, @entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
     <% end %>
     <% if can? :entryhistory, Entry %>
-      <%= link_to(t('entry.show.view'), entryhistory_path(@entry), :class => 'btn btn-mini btn-primary') %>
+      <%= link_to(t('entry.show.view'), entryhistory_path(@company, @entry), :class => 'btn btn-mini btn-primary') %>
     <% end %>
   </div>
 </div>
 
-<%= link_to t('global.back'), entries_path %>
+<%= link_to t('global.back'), company_entries_path(@company) %>

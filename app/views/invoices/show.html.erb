@@ -13,7 +13,7 @@
     <div style="width:35%;float:right">
       <strong><%= t('invoice.show.adressee') %></strong>
       <p>
-        <%= raw @adressee_data %>
+        <%= raw @company.adress %>
       </p>
     </div>
   </div>
@@ -69,7 +69,7 @@
             </tr>
             <% classdata.each do |entry| %>
               <tr>
-                <td><%= entry.company[0].upcase! + @appliances[entry.appliance_id - 1].abb + entry.number.to_s %></td>
+                <td><%= @company.abb + @appliances[entry.appliance_id - 1].abb + entry.number.to_s %></td>
                 <td><%= @appliances[entry.appliance_id - 1].name %></td>
                 <td><%= entry.brand %></td>
                 <td><%= entry.typenum %></td>

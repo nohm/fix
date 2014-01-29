@@ -11,8 +11,9 @@ class InvoicesController < ApplicationController
     authorize! :show, Invoice, :message => I18n.t('global.unauthorized')
 
     @invoice = Invoice.find(params[:id])
+    @company = Company.find(params[:company_id])
 
-    @entries = Entry.where(invoice_id: params[:id])
+    @entries = Entry.where(invoice_id: params[:id]).order('id ASC')
 
     @classes = Classifications.all
     @statuses = [I18n.t('invoice.controller.tested'),I18n.t('invoice.controller.repaired'),I18n.t('invoice.controller.scrapped')]
@@ -37,17 +38,15 @@ class InvoicesController < ApplicationController
 
     @appliances = Appliance.all
     @sender_data = ENV["COMPANY"]
-    @adressee_data = eval(ENV["COMPANIES"])[Role.where(name: session[:company]).take.id - 5]
   end
 
   def index
     authorize! :index, Invoice, :message => I18n.t('global.unauthorized')
 
-    unless params[:company].nil?
-      session[:company] = params[:company]
-    end
-    if !session[:company].nil? and (can? :create, Entry or current_user.roles.first.name == session[:company])
-      @invoices = Invoice.where(company: session[:company]).page(params[:page]).per(25)
+    @company = Company.find(params[:company_id])
+
+    if can? :create, Entry or current_user.roles.first.name == params[:company_id].short
+      @invoices = @company.invoices.order('id ASC').page(params[:page]).per(25)
     else
       redirect_to root_path, :alert => I18n.t('global.unauthorized')
     end
@@ -68,10 +67,6 @@ class InvoicesController < ApplicationController
 
   def create
     authorize! :create, Invoice, :message => I18n.t('global.unauthorized')
-
-    if session[:company].nil?
-      redirect_to root_path, :notice => I18n.t('global.no_company')
-    end
 
     items = params[:invoice][:items]
     params[:invoice][:items] = params[:invoice][:items].lines.length
@@ -101,7 +96,7 @@ class InvoicesController < ApplicationController
         entry.update_attribute(:invoice_id, @invoice.id)
         entry.update_attribute(:sent, 1)
       end
-      redirect_to invoices_path, :notice => I18n.t('invoice.controller.added')
+      redirect_to company_invoices_path(params[:company_id]), :notice => I18n.t('invoice.controller.added')
     else
       non_existing.each do |item|
       	flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.no_exist')}"
