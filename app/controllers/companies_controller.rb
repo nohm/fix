@@ -12,25 +12,15 @@ class CompaniesController < ApplicationController
 
     @companies = Company.all.page(params[:page]).order('id ASC').per(25)
 
-    entries = Entry.all
-    entries.each do |e|
-      if e[:company] == 'maxi-outlet'
-        company = 'maxioutlet'
-      else
-        company = e[:company]
+    @companies.each do |company|
+      entries = Entry.where(company: company.short)
+      entries.each do |entry|
+        entry.update_attribute(:company_id, company.id)
       end
-
-      e.update_attribute(:company_id, Company.where(short: company).take.id)
-    end
-
-    invoices = Invoice.all
-    invoices.each do |i|
-      if i[:company] == 'maxi-outlet'
-        company = 'maxioutlet'
-      else
-        company = i[:company]
+      invoices = Invoice.where(company: company.short)
+      invoices.each do |invoice|
+        invoice.update_attribute(:company_id, company.id)
       end
-      i.update_attribute(:company_id, Company.where(short: company).take.id)
     end
 
   end
