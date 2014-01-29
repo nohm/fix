@@ -3,14 +3,18 @@
 <%= bootstrap_form_for :broadcast, :url => broadcasts_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message t('global.errors') %>
   
-  <legend><%= t('broadcast.new.legend') %></legend>
-  
-  <%= f.text_field :title, label: t('broadcast.new.title_label') %>
-  <%= f.text_field :text, label: t('broadcast.new.text_label') %>
-
-  <%= f.form_group do %>
-  	<%= f.submit t('broadcast.new.button'), data: { disable_with: t('broadcast.new.button_send') } %>
-  <% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title"><%= t('broadcast.new.legend') %></div>
+    </div>
+    <div class="panel-body">
+      <%= f.text_field :title, label: t('broadcast.new.title_label') %>
+      <%= f.text_field :text, label: t('broadcast.new.text_label') %>
+    </div>
+    <div class="panel-footer">
+      <%= f.submit t('broadcast.new.button'), data: { disable_with: t('broadcast.new.button_send') } %>
+    </div>
+  </div>
 <% end %>
 
 <%= link_to t('global.back'), broadcasts_path %>
