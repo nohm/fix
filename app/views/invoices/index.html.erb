@@ -6,7 +6,7 @@
   </div>
   <div class="panel-body panel-table">
     <% if @invoices.length == 0 %>
-      <p><%= t('invoice.index.empty_list') %></p>
+      <p class="empty_list"><%= t('invoice.index.empty_list') %></p>
     <% else %>
       <table class="table table-condensed table-striped table-hover">
         <thead>

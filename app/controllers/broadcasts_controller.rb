@@ -17,7 +17,7 @@ class BroadcastsController < ApplicationController
     @broadcast = Broadcast.new(params[:broadcast].permit(:title,:text))
 
     if @broadcast.save
-      redirect_to broadcasts_path, :notice => I18n.t('notice_added')
+      redirect_to broadcasts_path, :notice => I18n.t('broadcast.controller.notice_added')
     else
       render 'new'
     end
@@ -28,7 +28,7 @@ class BroadcastsController < ApplicationController
 
     broadcast = Broadcast.find(params[:id])
     broadcast.destroy
-    redirect_to broadcasts_path, :notice => I18n.t('notice_deleted')
+    redirect_to broadcasts_path, :notice => I18n.t('broadcast.controller.notice_deleted')
   end
 
   def retrieve

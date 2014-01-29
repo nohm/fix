@@ -87,6 +87,10 @@ html, body {
   margin-top: auto;
 }
 
+.empty_list {
+  padding: 15px;
+}
+
 /* Recolour the navbar */
 .navbar {
   background-color: $brand-custom;
