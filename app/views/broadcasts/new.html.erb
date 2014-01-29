@@ -1,15 +1,15 @@
-<% provide(:title, 'Badger - New broadcast') %>
+<% provide(:title, t('broadcast.new.title')) %>
 
 <%= bootstrap_form_for :broadcast, :url => broadcasts_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message t('global.errors') %>
   
-  <legend>New broadcast</legend>
+  <legend><%= t('broadcast.new.legend') %></legend>
   
-  <%= f.text_field :title %>
-  <%= f.text_field :text %>
+  <%= f.text_field :title, label: t('broadcast.new.title_label') %>
+  <%= f.text_field :text, label: t('broadcast.new.text_label') %>
 
   <%= f.form_group do %>
-  	<%= f.submit 'Save', data: { disable_with: 'Saving...' } %>
+  	<%= f.submit t('broadcast.new.button'), data: { disable_with: t('broadcast.new.button_send') } %>
   <% end %>
 <% end %>
 

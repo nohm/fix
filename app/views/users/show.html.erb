@@ -1,33 +1,42 @@
 <% provide(:title, t('user.show.title')) %>
 
-<h2><%= @user.name %></h2>
-<h3><%= @user.roles.first.name.titleize %></h3>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      <%= @user.name %></h2>
+      &middot;
+      <%= @user.roles.first.name.titleize %>
+    </div>
+  </div>
+  <div class="panel-body panel-table">
 
-<div class="row">
-  <div class="span6">
-    <div class="table-responsive">
-      <table class="table table-condensed table-striped">
-        <tr>
-          <td><h6>#</h6></td>
-          <td><%= @user.id %></td>
-        </tr>
-        <tr>
-          <td><h6><%= t('global.email') %></h6></td>
-          <td><%= @user.email %></td>
-        </tr>
-        <tr>
-          <td><h6><%= t('user.show.registered') %></h6></td>
-          <td><%= @user.created_at.to_date %></td>
-        </tr>
-        <tr>
-          <td><h6><%= t('user.show.last_signin') %></h6></td>
-          <td><%= @user.last_sign_in_at %></td>
-        </tr>
-        <tr>
-          <td><h6><%= t('user.show.signin_count') %></h6></td>
-          <td><%= @user.sign_in_count %></td>
-        </tr>
-      </table>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-condensed table-striped">
+            <tr>
+              <td><h6>#</h6></td>
+              <td><%= @user.id %></td>
+            </tr>
+            <tr>
+              <td><h6><%= t('global.email') %></h6></td>
+              <td><%= @user.email %></td>
+            </tr>
+            <tr>
+              <td><h6><%= t('user.show.registered') %></h6></td>
+              <td><%= @user.created_at.to_date %></td>
+            </tr>
+            <tr>
+              <td><h6><%= t('user.show.last_signin') %></h6></td>
+              <td><%= @user.last_sign_in_at %></td>
+            </tr>
+            <tr>
+              <td><h6><%= t('user.show.signin_count') %></h6></td>
+              <td><%= @user.sign_in_count %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

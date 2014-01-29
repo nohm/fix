@@ -3,13 +3,17 @@
 <%= bootstrap_form_for :classification, :url => classifications_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message t('global.errors') %>
   
-  <legend><%= t('classes.new.legend') %></legend>
-  
-  <%= f.text_field :name, label: t('global.name') %>
-
-  <%= f.form_group do %>
-  	<%= f.submit t('classes.new.button'), data: { disable_with: t('classes.new.button_send') } %>
-  <% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title"><%= t('classes.new.legend') %></div>
+    </div>
+    <div class="panel-body">
+      <%= f.text_field :name, label: t('global.name') %>
+    </div>
+    <div class="panel-footer">
+  	  <%= f.submit t('classes.new.button'), data: { disable_with: t('classes.new.button_send') } %>
+    </div>
+  </div>
 <% end %>
 
 <%= link_to t('global.back'), classifications_path %>

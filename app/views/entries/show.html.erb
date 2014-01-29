@@ -1,175 +1,181 @@
 <% provide(:title, t('entry.show.title')) %>
-<legend><%= t('entry.show.legend') %></legend>
 
-<h2><%= @entry.company[0].upcase! + @appliance.abb + @entry.number %></h2>
-<h3><%= @entry.brand + ' ' + @entry.typenum + ' ' + @appliance.name %></h3>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= @entry.company[0].upcase! + @appliance.abb + @entry.number %>
+    &middot;
+    <%= @entry.brand + ' ' + @entry.typenum + ' ' + @appliance.name %>
+  </div>
+  <div class="panel-body panel-table">
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="table-responsive">
-      <table class="table table-condensed table-striped">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="table-responsive">
+          <table class="table table-condensed table-striped">
 
-        <% if can? :create, Entry %>
-          <tr>
-            <td><h6><%= t('entry.show.barcode') %></h6></td>
-            <td><%= @entry.get_barcode(@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s).html_safe %></td>
-          </tr>
-        <% end %>
+            <% if can? :create, Entry %>
+              <tr>
+                <td><h6><%= t('entry.show.barcode') %></h6></td>
+                <td><%= @entry.get_barcode(@entry.company[0].upcase! + @appliance.abb + @entry.number.to_s).html_safe %></td>
+              </tr>
+            <% end %>
 
-        <tr>
-          <td><h6><%= t('global.status') %></h6></td>
-          <td><%= @entry.get_status_translated %></td>
-        </tr>
+            <tr>
+              <td><h6><%= t('global.status') %></h6></td>
+              <td><%= @entry.get_status_translated %></td>
+            </tr>
 
-        <tr>
-          <td><h6><%= t('global.serialnum') %></h6></td>
-          <td><%= @entry.serialnum %></td>
-        </tr>
-        <tr>
-          <td><h6><%= t('entry.show.sent') %></h6></td>
-          <% unless @entry.invoice_id.nil? %>
-            <td>Yes - <%= @invoice.created_at.to_date %></td>
-              <% else %>
-            <td>No</td>
+            <tr>
+              <td><h6><%= t('global.serialnum') %></h6></td>
+              <td><%= @entry.serialnum %></td>
+            </tr>
+            <tr>
+              <td><h6><%= t('entry.show.sent') %></h6></td>
+              <% unless @entry.invoice_id.nil? %>
+                <td>Yes - <%= @invoice.created_at.to_date %></td>
+                  <% else %>
+                <td>No</td>
+              <% end %>
+            </tr>
+            <tr>
+              <td><h6><%= t('global.class') %></h6></td>
+              <td><%= @classification.name.presence || '-' %></td>
+            </tr>
+
+            <% if can? :create, Entry %>
+              <tr>
+                <td><h6><%= t('global.defect') %></h6></td>
+                <td><%= @entry.defect.presence || '-' %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.repair') %></h6></td>
+                <td><%= @entry.repair.presence || '-' %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.testera') %></h6></td>
+                <td><%= @entry.testera.presence || '-' %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.testerb') %></h6></td>
+                <td><%= @entry.testerb.presence || '-' %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.ordered') %></h6></td>
+                <td><%= @entry.ordered.presence || '-' %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.test') %></h6></td>
+                <td><%= @entry.test == 1 ? t('global.y') : t('global.n') %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.repaired') %></h6></td>
+                <td><%= @entry.repaired == 1 ? t('global.yes') : t('global.no') %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.ready') %></h6></td>
+                <td><%= @entry.ready == 1 ? t('global.yes') : t('global.no') %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.scrap') %></h6></td>
+                <td><%= @entry.scrap == 1 ? t('global.yes') : t('global.no') %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.accessoires') %></h6></td>
+                <td><%= @entry.accessoires == 1 ? t('global.yes') : t('global.no') %></td>
+              </tr>
+              <tr>
+                <td><h6><%= t('global.note') %></h6></td>
+                <td><%= @entry.note.presence || '-' %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="table-responsive">
+          <table class="table table-condensed table-striped">
+            <tr>
+              <td><h6><%= t('entry.show.images') %></h6></td>
+              <td>
+                <% if @entry.attachments.length == 0 %>
+                  -
+                <% else %>
+                  <% @entry.attachments.each do |attachment| %>
+                  <div>
+                    <%= link_to(attachment.attach.url) do %>
+                      <%= image_tag attachment.attach.url(:thumb) %>
+                    <% end %>
+                    <% if can? :destroy, Attachment %>
+                      <br>
+                      <%= link_to t('global.delete'), entry_attachment_path(@entry.id, attachment), method: :delete, data: { confirm: t('global.sure') } %>
+                    <% end %>
+                  <% end %>
+                  </div>
+                <% end %>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <% if can? :create, Attachment %>
+          <% unless @entry.attachments.length >= 10 %>
+            <!-- Button trigger modal -->
+            <button class="btn btn-mini btn-primary btn-images" data-toggle="modal" data-target="#modal-attachment">
+              <%= t('entry.show.add_attachment') %>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal-attachment" tabindex="-1" role="dialog" aria-labelledby="modalLabel-attachment" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="modalLabel-attachment"><%= t('entry.show.add_attachment') %></h4>
+                    </div>
+                    <div class="modal-body">
+                      <%= f.file_field :attach, :label => t('entry.show.select') %>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <%= f.submit t('entry.show.button'), data: { disable_with: t('entry.show.button_send') }, class: "btn btn-primary" %>
+                    </div>
+                  <% end %>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
           <% end %>
-        </tr>
-        <tr>
-          <td><h6><%= t('global.class') %></h6></td>
-          <td><%= @classification.name.presence || '-' %></td>
-        </tr>
-
-        <% if can? :create, Entry %>
-          <tr>
-            <td><h6><%= t('global.defect') %></h6></td>
-            <td><%= @entry.defect.presence || '-' %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.repair') %></h6></td>
-            <td><%= @entry.repair.presence || '-' %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.testera') %></h6></td>
-            <td><%= @entry.testera.presence || '-' %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.testerb') %></h6></td>
-            <td><%= @entry.testerb.presence || '-' %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.ordered') %></h6></td>
-            <td><%= @entry.ordered.presence || '-' %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.test') %></h6></td>
-            <td><%= @entry.test == 1 ? t('global.y') : t('global.n') %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.repaired') %></h6></td>
-            <td><%= @entry.repaired == 1 ? t('global.yes') : t('global.no') %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.ready') %></h6></td>
-            <td><%= @entry.ready == 1 ? t('global.yes') : t('global.no') %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.scrap') %></h6></td>
-            <td><%= @entry.scrap == 1 ? t('global.yes') : t('global.no') %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.accessoires') %></h6></td>
-            <td><%= @entry.accessoires == 1 ? t('global.yes') : t('global.no') %></td>
-          </tr>
-          <tr>
-            <td><h6><%= t('global.note') %></h6></td>
-            <td><%= @entry.note.presence || '-' %></td>
-          </tr>
         <% end %>
-      </table>
+      </div>
     </div>
   </div>
-
-  <div class="col-md-6">
-    <div class="table-responsive">
-      <table class="table table-condensed table-striped">
-        <tr>
-          <td><h6><%= t('entry.show.images') %></h6></td>
-          <td>
-            <% if @entry.attachments.length == 0 %>
-              -
-            <% else %>
-              <% @entry.attachments.each do |attachment| %>
-              <div>
-                <%= link_to(attachment.attach.url) do %>
-                  <%= image_tag attachment.attach.url(:thumb) %>
-                <% end %>
-                <% if can? :destroy, Attachment %>
-                  <br>
-                  <%= link_to t('global.delete'), entry_attachment_path(@entry.id, attachment), method: :delete, data: { confirm: t('global.sure') } %>
-                <% end %>
-              <% end %>
-              </div>
-            <% end %>
-          </td>
-      </table>
-    </div>
-
-    <% if can? :create, Attachment %>
-      <% unless @entry.attachments.length >= 10 %>
-        <!-- Button trigger modal -->
-        <button class="btn btn-mini btn-primary btn-images" data-toggle="modal" data-target="#modal-attachment">
-          <%= t('entry.show.add_attachment') %>
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="modal-attachment" tabindex="-1" role="dialog" aria-labelledby="modalLabel-attachment" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <%= bootstrap_form_for([@entry, @entry.attachments.build]) do |f| %>
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="modalLabel-attachment"><%= t('entry.show.add_attachment') %></h4>
-                </div>
-                <div class="modal-body">
-                  <%= f.file_field :attach, :label => t('entry.show.select') %>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <%= f.submit t('entry.show.button'), data: { disable_with: t('entry.show.button_send') }, class: "btn btn-primary" %>
-                </div>
-              <% end %>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+  <div class="panel-footer">
+    <% if can? :zip, Entry %>
+      <% unless @entry.attachments.length == 0 %>
+        <%= link_to(t('entry.show.zip'), zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     <% end %>
-  </div>
-</div>
-
-<div style="margin-bottom:10px">
-  <% if can? :zip, Entry %>
-    <% unless @entry.attachments.length == 0 %>
-      <%= link_to(t('entry.show.zip'), zip_path(@entry), :class => 'btn btn-mini btn-primary') %>
+    <div style="float:left;padding-right:4px" data-no-turbolink="true">
+      <% if can? :create, Entry %>
+        <%= link_to(t('entry.show.sticker'), sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
+      <% end %>
+    </div>
+    <div style="float:left;padding-right:4px" data-no-turbolink="true">
+      <% if can? :create, Entry %>
+        <%= link_to('Create ticket', ticket_path(@entry), :class => 'btn btn-mini btn-primary') %>
+      <% end %>
+    </div>
+    <% if can? :edit, Entry %>
+      <%= link_to(t('entry.show.edit'), edit_entry_path(@entry), :class => 'btn btn-mini btn-primary') %>
     <% end %>
-  <% end %>
-  <div style="float:left;padding-right:4px" data-no-turbolink="true">
-    <% if can? :create, Entry %>
-      <%= link_to(t('entry.show.sticker'), sticker_path(@entry), :class => 'btn btn-mini btn-primary') %>
+    <% if can? :destroy, Entry %>
+      <%= link_to(t('entry.show.delete'), entry_path(@entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
+    <% end %>
+    <% if can? :entryhistory, Entry %>
+      <%= link_to(t('entry.show.view'), entryhistory_path(@entry), :class => 'btn btn-mini btn-primary') %>
     <% end %>
   </div>
-  <div style="float:left;padding-right:4px" data-no-turbolink="true">
-    <% if can? :create, Entry %>
-      <%= link_to('Create ticket', ticket_path(@entry), :class => 'btn btn-mini btn-primary') %>
-    <% end %>
-  </div>
-  <% if can? :edit, Entry %>
-    <%= link_to(t('entry.show.edit'), edit_entry_path(@entry), :class => 'btn btn-mini btn-primary') %>
-  <% end %>
-  <% if can? :destroy, Entry %>
-    <%= link_to(t('entry.show.delete'), entry_path(@entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
-  <% end %>
-  <% if can? :entryhistory, Entry %>
-    <%= link_to(t('entry.show.view'), entryhistory_path(@entry), :class => 'btn btn-mini btn-primary') %>
-  <% end %>
 </div>
 
 <%= link_to t('global.back'), entries_path %>

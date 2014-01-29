@@ -30,9 +30,9 @@ class AppliancesController < ApplicationController
 
     appliance = Appliance.find(params[:id])
     if appliance.update(params[:appliance].permit(:preview))
-      redirect_to appliances_path, :notice => 'Appliance updated.'
+      redirect_to appliances_path, :notice => I18n.t('notice_updated')
     else
-      redirect_to appliances_path, :alert => 'Something went wrong updating.'
+      redirect_to appliances_path, :alert => I18n.t('notice_update_fail')
     end
   end
 
@@ -43,9 +43,9 @@ class AppliancesController < ApplicationController
     appliance = Appliance.find(params[:id])
     appliance.preview = nil
     if appliance.save
-      redirect_to appliances_path, :notice => 'Attachment removed.'
+      redirect_to appliances_path, :notice => I18n.t('notice_deleted')
     else
-      redirect_to appliances_path, :alert => 'Something went wrong removing.'
+      redirect_to appliances_path, :alert => I18n.t('notice_delete_fail')
     end
   end
   

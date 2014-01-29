@@ -3,15 +3,19 @@
 <%= bootstrap_form_for :appliance, :url => appliances_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message t('global.errors') %>
   
-  <legend><%= t('appliance.new.legend') %></legend>
-  
-  <%= f.text_field :name, label: t('global.name') %>
-  <%= f.text_field :abb, label: t('global.abbrevation') %>
-  <%= f.text_field :preview, label: t('global.url') %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title"><%= t('appliance.new.legend') %></div>
+    </div>
+    <div class="panel-body">
+      <%= f.text_field :name, label: t('global.name') %>
 
-  <%= f.form_group do %>
-  	<%= f.submit t('appliance.new.button'), data: { disable_with: t('appliance.new.button_send') } %>
-  <% end %>
+      <%= f.text_field :abb, label: t('global.abbrevation') %>
+    </div>
+    <div class="panel-footer">
+  	 <%= f.submit t('appliance.new.button'), data: { disable_with: t('appliance.new.button_send') } %>
+    </div>
+  </div>
 <% end %>
 
 <%= link_to t('global.back'), appliances_path %>

@@ -1,4 +1,8 @@
 de:
+# TODO: Finish translations:
+# > global#broadcasts
+# > appliance#controller#*
+# > broadcast#*
 
 ######################
 ##     GLOBALS      ##
@@ -8,6 +12,7 @@ de:
     appliances: 'Geräte'
     classes: 'Klassen'
     history: 'Geschichte'
+    broadcasts: 'Broadcasts'
 
     unauthorized: 'Du hast keine Genehmigung.'
     unauth_admin: 'Du hast keine Verwaltungsrechte.'
@@ -245,6 +250,10 @@ de:
 # app/controllers/appliances & model
     controller:
       notice_added: 'Gerät hinzugefügt.'
+      notice_updated: 'Appliance updated.'
+      notice_update_fail: 'Something went wrong updating.'
+      notice_deleted: 'Attachment removed.'
+      notice_delete_fail: 'Something went wrong removing.'
 
 # app/views/classifications
   classes:
@@ -320,6 +329,27 @@ de:
       sent: 'Gesendet'
       skipped: 'Übersprungen'
       total: 'Gesamt'
+
+# app/views/broadcasts
+  broadcast:
+    index:
+      title: 'Badger - Broadcast panel'
+      legend: 'Broadcasts'
+      empty_list: 'No broadcasts here'
+      title_label: 'Title'
+      text_label: 'Text'
+      new_broadcast: 'Add broadcast'
+    new:
+      title: 'Badger - New broadcast'
+      legend: 'New broadcast'
+      title_label: 'Title'
+      text_label: 'Text'
+      button: 'Save'
+      button_send: 'Saving...'
+# app/controllers/broadcasts & model
+    controller:
+      notice_added: 'Broadcast added'
+      notice_deleted: 'Broadcast deleted'
 
 # app/views/mailer
   mailer:

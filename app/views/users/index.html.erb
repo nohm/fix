@@ -1,48 +1,55 @@
 <% provide(:title, t('user.index.title')) %>
-<legend><%= t('user.index.legend') %></legend>
 
-<div class="table-responsive">
-<table class="table table-condensed table-striped table-hover">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th><%= t('global.username') %></th>
-      <th><%= t('global.email') %></th>
-      <th><%= t('user.index.registered') %></th>
-      <th><%= t('user.index.role') %></th>
-      <th style="width:17px;"></th>
-      <th style="width:17px;"></th>
-      <th style="width:17px;"></th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.id %></td>
-      <td><%= user.name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.created_at.to_date %></td>
-      <td><%= user.roles.first.name.titleize %></td>
-      <td>
-        <%= link_to(user) do %>
-          <span class="glyphicon glyphicon-search"></span>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title"><%= t('user.index.legend') %></div>
+  </div>
+  <div class="panel-body panel-table">
+    <div class="table-responsive">
+      <table class="table table-condensed table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th><%= t('global.username') %></th>
+            <th><%= t('global.email') %></th>
+            <th><%= t('user.index.registered') %></th>
+            <th><%= t('user.index.role') %></th>
+            <th style="width:17px;"></th>
+            <th style="width:17px;"></th>
+            <th style="width:17px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.created_at.to_date %></td>
+            <td><%= user.roles.first.name.titleize %></td>
+            <td>
+              <%= link_to(user) do %>
+                <span class="glyphicon glyphicon-search"></span>
+              <% end %>
+            </td>
+            <td>
+              <a href="#" data-toggle="modal" data-toggle="modal" data-target="#role-options-<%= user.id %>" type="button"><span class="glyphicon glyphicon-pencil"></span></a>
+              <%= render user %>
+            </td>
+            <td>
+              <% unless user.id == current_user.id %>
+                <%= link_to(user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
+                  <span class="glyphicon glyphicon-remove"></span>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
-      </td>
-      <td>
-        <a href="#" data-toggle="modal" data-toggle="modal" data-target="#role-options-<%= user.id %>" type="button"><span class="glyphicon glyphicon-pencil"></span></a>
-        <%= render user %>
-      </td>
-      <td>
-        <% unless user.id == current_user.id %>
-          <%= link_to(user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete) do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <%= paginate @users %>
+  </div>
 </div>
-
-<%= paginate @users %>

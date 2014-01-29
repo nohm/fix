@@ -20,3 +20,18 @@
 //= require highcharts/highcharts
 //= require turbolinks
 //= require modernizr
+//= require headroom
+//= require jQuery.headroom
+
+$(document).on('ready page:load', function () {
+	// Animated autohide navbar
+	$(".navbar").headroom({
+  		"tolerance": 0,
+  		"offset": 0,
+  		"classes": {
+    		"initial": "animated",
+    		"pinned": "slideDown",
+    		"unpinned": "slideUp"
+  		}
+	});
+});

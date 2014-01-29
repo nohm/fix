@@ -12,48 +12,68 @@
  *= require_tree .
 */
 
+/* Import bourbon mixins */
 @import "bourbon";
 
+/* Switchly less obnoxious black and white */
 $black: #232323;
 $white: #fafafa;
 
+/* Different grayscales */
 $gray-darker: #202020;
 $gray-dark: #303030;
 $gray: #505050;
 $gray-light: #b0b0b0;
 $gray-lighter: #e0e0e0;
 
-$brand-primary: #6a9fb5;
-$brand-success: #90a959;
-$brand-info: #75b5aa;
-$brand-warning: #f4bf75;
-$brand-danger: #ac4142;
+/* Colours from colourlovers.com */
+$brand-primary: #0B486B; /* adrift in dreams */
+$brand-success: #88A65E; /* hans wegner */
+$brand-info: #81A8B8; /* pacifica */
+$brand-warning: #F5B349; /* groviera moon */
+$brand-danger: #CC2A41; /* amaranth */
+$brand-custom: #556270; /* mighty slate */
 
+/* Apply colours to warning elements */
 $input-border-focus: $brand-info;
-
 $state-success-text: $brand-success;
 $state-success-bg: lighten($brand-success, 30%);
 $state-success-border: lighten($brand-success, 20%);
-
 $state-info-text: $brand-info;
 $state-info-bg: lighten($brand-info, 30%);
 $state-info-border: lighten($brand-info, 20%);
-
 $state-warning-text: $brand-warning;
 $state-warning-bg: lighten($brand-warning, 30%);
 $state-warning-border: lighten($brand-warning, 20%);
-
 $state-danger-text: $brand-danger;
 $state-danger-bg: lighten($brand-danger, 30%);
 $state-danger-border: lighten($brand-danger, 20%);
 
+/* Import bootstrap completely */
 @import "bootstrap";
 
+/* Bootstrap navbar */
 body {
   padding-top: 60px;
+  color: $black;
+  background-color: $white;
 }
 
-/* give icons some extra margin to the right */
+/* Sticky footer */
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+#main {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -81px;
+  /* Pad bottom by footer height */
+  padding: 0 0 81px;
+}
+
+/* Give icons some extra margin to the right */
 .glyphicon {
   margin-right: 3px;
 }
@@ -67,12 +87,13 @@ body {
   margin-top: auto;
 }
 
+/* Recolour the navbar */
 .navbar {
-  background-color: $brand-info;
-  border-color: lighten($brand-info, 15%);
+  background-color: $brand-custom;
+  border-color: lighten($brand-custom, 15%);
 
   .navbar-collapse {
-    border-color: lighten($brand-info, 15%);
+    border-color: lighten($brand-custom, 15%);
   }
   .navbar-brand {
     color: $white;
@@ -92,15 +113,15 @@ body {
     .active {
       a, a:hover {
         color: $white;
-        background-color: lighten($brand-info, 15%);
+        background-color: lighten($brand-custom, 15%);
       }
     }
   }
   .navbar-toggle {
-    border-color: $brand-info;
+    border-color: $brand-custom;
     &:hover {
-      background-color: lighten($brand-info, 15%);
-      border-color: lighten($brand-info, 15%);
+      background-color: lighten($brand-custom, 15%);
+      border-color: lighten($brand-custom, 15%);
     }
   }
   /* /navigation name/company label styled like an anchor */
@@ -117,6 +138,32 @@ table h6 {
   margin: 0 !important
 }
 
+/* Remove margins and padding on tables inside panels */
+.panel-table {
+  padding: 0 !important;
+  .col-md-6 {
+    &:nth-child(2n+2) {
+      padding-left: 0 !important;
+    }
+    &:nth-child(2n+1) {
+      padding-right: 0 !important;
+    }
+  }
+  table {
+    margin-bottom: 0 !important;
+    tr:first-child {
+      td {
+        border-top: 0 !important;
+      }
+    }
+  }
+}
+
+/* Headroom.js styles */
+.animated {position: fixed;top: 0;left: 0;right: 0;transition: all 0.8s ease-in-out;}
+.slideUp {top: -60px;}
+.slideDown {top: 0;}
+
 /* Give buttons some top margin and minimum width */
 .btn-index, .btn-chart {
   min-width: 125px;
@@ -128,15 +175,7 @@ table h6 {
 
 /* Give the 'add attachment' button some margin for mobile */
 .btn-images {
-  margin-bottom: 5px;
-}
-
-/* Give the 'entries#index#print' buttons some margin */
-.btn-print {
-  width: 75px;
-  &:first-child {
-    margin-bottom: 5px;
-  }
+  margin: 5px;
 }
 
 /* Fix bootswatch alert colors
@@ -219,12 +258,11 @@ a span:hover {
 /* Footer styling */
 footer {
   padding-top: 10px;
-  margin-top: 30px;
+  margin-top: 10px;
   background-color: lighten($gray-lighter, 7.5%);
   color: $gray;
   text-align: center;
   border-top: 1px solid $gray-lighter;
-  border-bottom: 1px solid $gray-lighter;
 }
 .footer-links {
   margin: 10px 0;

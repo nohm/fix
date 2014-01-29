@@ -3,15 +3,19 @@
 <%= bootstrap_form_for :invoice, :url => invoices_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message t('global.errors') %>
   
-  <legend><%= t('invoice.new.legend') %></legend>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title"><%= t('invoice.new.legend') %></div>
+    </div>
+    <div class="panel-body">
+      <%= f.text_area :items, label: t('invoice.new.items') %>
 
-  <%= f.text_area :items, label: t('invoice.new.items') %>
-
-  <%= f.hidden_field :company, :value => session[:company] %>
-
-  <%= f.form_group do %>
-    <%= f.submit t('invoice.new.button'), data: { disable_with: t('invoice.new.button_send') }, class: "btn btn-primary", 'onclick' => '$(\'.loading-spinner\').css(\'display\', \'inline-block\');' %>
-  <% end %>
+      <%= f.hidden_field :company, :value => session[:company] %>
+    </div>
+    <div class="panel-footer">
+      <%= f.submit t('invoice.new.button'), data: { disable_with: t('invoice.new.button_send') }, 'onclick' => '$(\'.loading-spinner\').css(\'display\', \'inline-block\');' %>
+    </div>
+  </div>
 <% end %>
 
 <%= link_to t('global.back'), invoices_path %>

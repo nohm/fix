@@ -1,7 +1,10 @@
 <% provide(:title, t('invoice.index.title') + session[:company]) %>
 
-<legend><%= "#{t('invoice.index.legend')}#{session[:company]}" %></legend>
-  <div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title"><%= "#{t('invoice.index.legend')}#{session[:company]}" %></div>
+  </div>
+  <div class="panel-body panel-table">
     <% if @invoices.length == 0 %>
       <p><%= t('invoice.index.empty_list') %></p>
     <% else %>
@@ -43,8 +46,15 @@
 
     <%= paginate @invoices %>
   </div>
-<% if can? :create, Invoice %>
-  <div>
-    <%= link_to(t('invoice.index.add_invoice'), new_invoice_path, :class => 'btn btn-mini btn-primary') %>
+  <div class="panel-footer">
+    <% unless @invoices.length == 0 %>
+      <%= paginate @invoices %>
+    <% end %>
+
+    <% if can? :create, Invoice %>
+      <div>
+        <%= link_to(t('invoice.index.add_invoice'), new_invoice_path, :class => 'btn btn-mini btn-primary') %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

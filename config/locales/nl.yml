@@ -8,6 +8,7 @@ nl:
     appliances: 'Apparaten'
     classes: 'Klassen'
     history: 'Geschiedenis'
+    broadcasts: 'Uitzendingen'
 
     unauthorized: 'Je bent hiervoor niet geautoriseerd.'
     unauth_admin: 'Niet geautoriseerd als een beheerder.'
@@ -245,6 +246,10 @@ nl:
 # app/controllers/appliances & model
     controller:
       notice_added: 'Apparaat toegevoegd.'
+      notice_updated: 'Apperaat geupdate.'
+      notice_update_fail: 'Er ging iets fout bij het updaten.'
+      notice_deleted: 'Bijlage verwijdert.'
+      notice_delete_fail: 'Er ging iets fout bij het verwijderen.'
 
 # app/views/classifications
   classes:
@@ -320,6 +325,27 @@ nl:
       sent: 'Verzonden'
       skipped: 'Overgeslagen'
       total: 'Totaal'
+
+# app/views/broadcasts
+  broadcast:
+    index:
+      title: 'Badger - Uitzendings panel'
+      legend: 'Uitzendingen'
+      empty_list: 'Geen uitzendingen hier'
+      title_label: 'Titel'
+      text_label: 'Tekst'
+      new_broadcast: 'Uitzending toevoegen'
+    new:
+      title: 'Badger - Nieuwe uitzending'
+      legend: 'Nieuwe uitzending'
+      title_label: 'Titel'
+      text_label: 'Tekst'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+# app/controllers/broadcasts & model
+    controller:
+      notice_added: 'Uitzending toegevoegd'
+      notice_deleted: 'Uitzending verwijdert'
 
 # app/views/mailer
   mailer:

@@ -17,7 +17,7 @@ class BroadcastsController < ApplicationController
     @broadcast = Broadcast.new(params[:broadcast].permit(:title,:text))
 
     if @broadcast.save
-      redirect_to broadcasts_path, :notice => 'Broadcast added'
+      redirect_to broadcasts_path, :notice => I18n.t('notice_added')
     else
       render 'new'
     end
@@ -28,7 +28,7 @@ class BroadcastsController < ApplicationController
 
     broadcast = Broadcast.find(params[:id])
     broadcast.destroy
-    redirect_to broadcasts_path, :notice => 'Broadcast deleted'
+    redirect_to broadcasts_path, :notice => I18n.t('notice_deleted')
   end
 
   def retrieve
@@ -40,13 +40,7 @@ class BroadcastsController < ApplicationController
   		if broadcast.user_ids.nil?
   			to_send.append({id: broadcast.id, title: broadcast.title, text: broadcast.text})
   		else
-  			found = false
-  			broadcast.user_ids.split(':').each do |user|
-  				if current_user.id == user.to_i
-  					found = true
-  				end
-  			end
-  			unless found
+  			unless broadcast.user_ids.split(':').include?(current_user.id.to_s)
   				to_send.append({id: broadcast.id, title: broadcast.title, text: broadcast.text})
   			end
   		end
@@ -61,22 +55,11 @@ class BroadcastsController < ApplicationController
   	authorize! :disable, Broadcast, :message => I18n.t('global.unauthorized')
 
   	broadcast = Broadcast.find(params[:id])
-  	unless broadcast.user_ids.nil?
-  		users = broadcast.user_ids.split(':')
-  	else
-  		users = Array.new
-  	end
-  	found = false
-  	users.each do |user|
-  		if current_user.id == user.to_i
-  			found = true
-  		end
-  	end
-  	unless found
-  		if broadcast.user_ids == '' or broadcast.user_ids.nil?
+  	unless !broadcast.user_ids.nil? and broadcast.user_ids.split(':').include?(current_user.id.to_s)
+  		if broadcast.user_ids.nil?
   			new_ids = current_user.id
   		else
-  			new_ids = broadcast.user_ids << ':' + current_user.id.to_s
+  			new_ids = "#{broadcast.user_ids}:#{current_user.id.to_s}"
   		end
   		broadcast.update_attribute(:user_ids, new_ids)
   	end

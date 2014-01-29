@@ -8,6 +8,7 @@ en:
     appliances: 'Appliances'
     classes: 'Classes'
     history: 'History'
+    broadcasts: 'Broadcasts'
 
     unauthorized: 'You''re not authorized for this.'
     unauth_admin: 'Not authorized as an administrator.'
@@ -236,6 +237,8 @@ en:
       legend: 'Appliances'
       empty_list: 'No appliances here'
       new_appliance: 'Add appliance'
+      button: 'Save'
+      button_send: 'Saving...'
     new: 
       title: 'Badger - New appliance'
       legend: 'New appliance'
@@ -245,6 +248,10 @@ en:
 # app/controllers/appliances & model
     controller:
       notice_added: 'Appliance added.'
+      notice_updated: 'Appliance updated.'
+      notice_update_fail: 'Something went wrong updating.'
+      notice_deleted: 'Attachment removed.'
+      notice_delete_fail: 'Something went wrong removing.'
 
 # app/views/classifications
   classes:
@@ -320,6 +327,27 @@ en:
       sent: 'Sent'
       skipped: 'Skipped'
       total: 'Total'
+
+# app/views/broadcasts
+  broadcast:
+    index:
+      title: 'Badger - Broadcast panel'
+      legend: 'Broadcasts'
+      empty_list: 'No broadcasts here'
+      title_label: 'Title'
+      text_label: 'Text'
+      new_broadcast: 'Add broadcast'
+    new:
+      title: 'Badger - New broadcast'
+      legend: 'New broadcast'
+      title_label: 'Title'
+      text_label: 'Text'
+      button: 'Save'
+      button_send: 'Saving...'
+# app/controllers/broadcasts & model
+    controller:
+      notice_added: 'Broadcast added'
+      notice_deleted: 'Broadcast deleted'
 
 # app/views/mailer
   mailer:

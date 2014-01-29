@@ -1,109 +1,116 @@
 <% provide(:title, t('entry.index.title') + session[:company]) %>
 
-<legend><%= "#{t('entry.index.legend')} #{session[:company]}" %></legend>
-  <div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title"><%= "#{t('entry.index.legend')} #{session[:company]}" %></div>
+  </div>
+  <div class="panel-body panel-table">
     <% if @entries.length == 0 %>
       <p><%= t('entry.index.empty_list') %></p>
     <% else %>
       <div class="table-responsive">
-      <table class="table table-condensed table-striped table-hover">
-        <thead>
-          <tr>
-            <th><%= t('global.number') %></th>
-            <th><%= t('global.appliance') %></th>
-            <th><%= t('global.brand') %></th>
-            <th><%= t('global.typenum') %></th>
-            <th><%= t('global.serialnum') %></th>
-            <th><%= t('global.status') %></th>
-            <th style="width:17px;"></th>
-            <% if can? :zip, Entry %>
-              <th style="width:17px;"></th>
-            <% end %>
-            <% if can? :edit, Entry %>
-              <th style="width:17px;"></th>
-              <th style="width:17px;"></th>
-              <th style="width:17px;"></th>
-            <% end %>
-            <% if can? :destroy, Entry %>
-              <th style="width:17px;"></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody class="searchable">
-          <% @entries.each do |entry| %>
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
             <tr>
-              <td><%= entry.company[0].upcase! + @appliances[entry.appliance_id - 1].abb + entry.number %></td>
-              <td><%= @appliances[entry.appliance_id - 1].name %></td>
-              <td><%= entry.brand %></td>
-              <td><%= entry.typenum %></td>
-              <td><%= entry.serialnum %></td>
-              <td><%= entry.get_status_translated %></td>
+              <th><%= t('global.number') %></th>
+              <th><%= t('global.appliance') %></th>
+              <th><%= t('global.brand') %></th>
+              <th><%= t('global.typenum') %></th>
+              <th><%= t('global.serialnum') %></th>
+              <th><%= t('global.status') %></th>
+              <th style="width:17px;"></th>
               <% if can? :zip, Entry %>
-                <td>
-                <% unless entry.attachments.length == 0 %>
-                  <%= link_to zip_path(entry) do %>
-                    <span class="glyphicon glyphicon-picture"></span>
-                  <% end %>
-                <% end %>
-                </td>
+                <th style="width:17px;"></th>
               <% end %>
-              <td>
-                <%= link_to entry_path(entry) do %>
-                  <span class="glyphicon glyphicon-search"></span>
-                <% end %>
-              </td>
               <% if can? :edit, Entry %>
-                <td data-no-turbolink="true">
-                  <%= link_to sticker_path(entry) do %>
-                    <span class="glyphicon glyphicon-barcode"></span>
-                  <% end %>
-                </td>
-                <td data-no-turbolink="true">
-                  <%= link_to ticket_path(entry) do %>
-                    <span class="glyphicon glyphicon-print"></span>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to edit_entry_path(entry) do %>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                  <% end %>
-                </td>
+                <th style="width:17px;"></th>
+                <th style="width:17px;"></th>
+                <th style="width:17px;"></th>
               <% end %>
               <% if can? :destroy, Entry %>
-                <td>
-                  <%= link_to(entry_path(entry), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
-                    <span class="glyphicon glyphicon-remove"></span>
-                  <% end %>
-                </td>
+                <th style="width:17px;"></th>
               <% end %>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody class="searchable">
+            <% @entries.each do |entry| %>
+              <tr>
+                <td><%= entry.company[0].upcase! + @appliances[entry.appliance_id - 1].abb + entry.number %></td>
+                <td><%= @appliances[entry.appliance_id - 1].name %></td>
+                <td><%= entry.brand %></td>
+                <td><%= entry.typenum %></td>
+                <td><%= entry.serialnum %></td>
+                <td><%= entry.get_status_translated %></td>
+                <% if can? :zip, Entry %>
+                  <td>
+                  <% unless entry.attachments.length == 0 %>
+                    <%= link_to zip_path(entry) do %>
+                      <span class="glyphicon glyphicon-picture"></span>
+                    <% end %>
+                  <% end %>
+                  </td>
+                <% end %>
+                <td>
+                  <%= link_to entry_path(entry) do %>
+                    <span class="glyphicon glyphicon-search"></span>
+                  <% end %>
+                </td>
+               <% if can? :edit, Entry %>
+                  <td data-no-turbolink="true">
+                    <%= link_to sticker_path(entry) do %>
+                      <span class="glyphicon glyphicon-barcode"></span>
+                    <% end %>
+                  </td>
+                  <td data-no-turbolink="true">
+                    <%= link_to ticket_path(entry) do %>
+                      <span class="glyphicon glyphicon-print"></span>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to edit_entry_path(entry) do %>
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    <% end %>
+                  </td>
+                <% end %>
+                <% if can? :destroy, Entry %>
+                  <td>
+                    <%= link_to(entry_path(entry), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
+                      <span class="glyphicon glyphicon-remove"></span>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
+    <% end %>
+  </div>
+  <div class="panel-footer">
 
+    <% unless @entries.length == 0 %>
       <% if @pagination %>
         <%= paginate @entries %>
+      <% else %>
+        <%= link_to(t('entry.index.back'), entries_path(company: session[:company]), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     <% end %>
 
-    <% unless @pagination %>
-      <%= link_to(t('entry.index.back'), entries_path(company: session[:company]), :class => 'btn btn-mini btn-primary') %>
-      <br>
-      <br>
+    <% if can? :create, Entry %>
+      <%= link_to(t('entry.index.add_entry'), new_entry_path, :class => 'btn btn-mini btn-primary') %>
     <% end %>
+
+    <% if @entries.length != 0 and @pagination %>
+      <!-- Button trigger modal -->
+      <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal-search">
+        <%= t('entry.index.search') %>
+      </button>
+    <% end %>
+
   </div>
-  <div>
-  <% if can? :create, Entry %>
-    <%= link_to(t('entry.index.add_entry'), new_entry_path, :class => 'btn btn-mini btn-primary') %>
-  <% end %>
+</div>
 
   <% if @pagination %>
-    <!-- Button trigger modal -->
-    <button class="btn btn-mini btn-primary" data-toggle="modal" data-target="#modal-search">
-      <%= t('entry.index.search') %>
-    </button>
-
     <!-- Modal -->
     <div class="modal fade" id="modal-search" tabindex="-1" role="dialog" aria-labelledby="modalLabel-search" aria-hidden="true">
       <div class="modal-dialog">
@@ -156,7 +163,3 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
   <% end %>
-
-<script>
-  $("[data-toggle=popover]").popover()
-</script>

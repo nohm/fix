@@ -1,35 +1,40 @@
-<% provide(:title, 'Badger - Broadcast Panel') %>
-<legend>New broadcast</legend>
+<% provide(:title, t('broadcast.index.title')) %>
 
-<% if @broadcasts.length == 0 %>
-  <p>No broadcasts here</p>
-<% else %>
-	<div class="table-responsive">
-	<table class="table table-condensed table-striped">
-	  <thead>
-	    <tr>
-	      <th>Title</th>
-	      <th>Text</th>
-	      <th style="width:17px;"></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  <% @broadcasts.each do |broadcast| %>
-	    <tr>
-	      <td><%= broadcast.title %></td>
-	      <td><%= broadcast.text %></td>
-          <td>
-            <%= link_to(broadcast_path(broadcast), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
-              <span class="glyphicon glyphicon-remove"></span>
-            <% end %>
-          </td>
-	    </tr>
-	  <% end %>
-	  </tbody>
-	</table>
-	</div>
-
-<% end %>
-<div>
-  <%= link_to('New broadcast', new_broadcast_path, :class => 'btn btn-mini btn-primary') %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title"><%= t('broadcast.index.legend') %></div>
+  </div>
+  <div class="panel-body panel-table">
+  	<% if @broadcasts.length == 0 %>
+  	  <p><%= t('broadcast.index.empty_list') %></p>
+  	<% else %>
+  		<div class="table-responsive">
+  			<table class="table table-condensed table-striped">
+  			  <thead>
+  			    <tr>
+  			      <th><%= t('broadcast.index.title_label') %></th>
+  			      <th><%= t('broadcast.index.text_label') %></th>
+  			      <th style="width:17px;"></th>
+  			    </tr>
+  			  </thead>
+  			  <tbody>
+  			  <% @broadcasts.each do |broadcast| %>
+  			    <tr>
+  			      <td><%= broadcast.title %></td>
+  			      <td><%= broadcast.text %></td>
+  		          <td>
+  		            <%= link_to(broadcast_path(broadcast), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
+  		              <span class="glyphicon glyphicon-remove"></span>
+  		            <% end %>
+  		          </td>
+  			    </tr>
+  			  <% end %>
+  			  </tbody>
+  			</table>
+  		</div>
+  	<% end %>
+  </div>
+  <div class="panel-footer">
+    <%= link_to(t('broadcast.index.new_broadcast'), new_broadcast_path, :class => 'btn btn-mini btn-primary') %>
+  </div>
 </div>

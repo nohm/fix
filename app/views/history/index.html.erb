@@ -1,7 +1,10 @@
 <% provide(:title, t('history.index.title')) %>
 
-<legend><%= t('history.index.legend') %></legend>
-  <div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title"><%= t('history.index.legend') %></div>
+  </div>
+  <div class="panel-body panel-table">
     <% if @history.length == 0 %>
       <p><%= t('history.index.empty_list') %></p>
     <% else %>
@@ -34,6 +37,8 @@
           </tbody>
       </table>
     <% end %>
-
+  </div>
+  <div class="panel-footer">
     <%= paginate @history %>
   </div>
+</div>
