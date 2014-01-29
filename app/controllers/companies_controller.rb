@@ -14,12 +14,23 @@ class CompaniesController < ApplicationController
 
     entries = Entry.all
     entries.each do |e|
-      e.update_attribute(:company_id, Company.where(short: e[:company]).id)
+      if e[:company] == 'maxi-outlet'
+        company = 'maxioutlet'
+      else
+        company = e[:company]
+      end
+
+      e.update_attribute(:company_id, Company.where(short: company).take.id)
     end
 
     invoices = Invoice.all
     invoices.each do |i|
-      i.update_attribute(:company_id, Company.where(short: e[:company]).id)
+      if i[:company] == 'maxi-outlet'
+        company = 'maxioutlet'
+      else
+        company = i[:company]
+      end
+      i.update_attribute(:company_id, Company.where(short: company).take.id)
     end
 
   end

@@ -44,7 +44,7 @@
                 <% if can? :zip, Entry %>
                   <td>
                   <% unless entry.attachments.length == 0 %>
-                    <%= link_to zip_path(entry) do %>
+                    <%= link_to zip_path(entry.company_id, entry) do %>
                       <span class="glyphicon glyphicon-picture"></span>
                     <% end %>
                   <% end %>
