@@ -92,11 +92,11 @@ class Entry < ActiveRecord::Base
 
   def get_barcode(number)
     require 'barby'
-    require 'barby/barcode/code_128'
+    require 'barby/barcode/code_39'
     require 'barby/outputter/svg_outputter'
 
-    barcode = Barby::Code128.new("#{number}", 'A')
-    barcode.to_svg(height: 60, xdim: 2)
+    barcode = Barby::Code39.new("#{number}")
+    barcode.to_svg(height: 60, xdim: 2.5)
   end
 
   def zip_images(temp_file)
