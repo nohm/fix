@@ -241,6 +241,8 @@ de:
       legend: 'Geräte'
       empty_list: 'Keine Geräte hier'
       new_appliance: 'Neuer Gerät'
+      button: 'Speichern'
+      button_send: 'Speichern...'
     new: 
       title: 'Badger - Neuer Gerät'
       legend: 'Neuer Gerät'

@@ -237,6 +237,8 @@ nl:
       legend: 'Apparaten'
       empty_list: 'Geen apparaten hier'
       new_appliance: 'Voeg apparaat toe'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
     new: 
       title: 'Badger - Nieuw apparaat'
       legend: 'Nieuw apparaat'
