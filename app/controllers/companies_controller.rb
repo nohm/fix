@@ -12,6 +12,16 @@ class CompaniesController < ApplicationController
 
     @companies = Company.all.page(params[:page]).order('id ASC').per(25)
 
+    entries = Entry.all
+    entries.each do |e|
+      e.update_attribute(:company_id, Company.where(:short, e.company).id)
+    end
+
+    invoices = Invoice.all
+    invoices.each do |i|
+      i.update_attribute(:company_id, Company.where(:short, e.company).id)
+    end
+
   end
 
   def create
