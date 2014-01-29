@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   def index
     session[:company] = nil
     unless current_user.nil?
-      @companies = Company.all
+      @companies = Company.all.order('id ASC')
       @simple_stats = Array.new
       @companies.each_with_index do |company, index|
         @simple_stats[index] = Array.new
