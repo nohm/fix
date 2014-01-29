@@ -15,11 +15,15 @@ class CompaniesController < ApplicationController
     @companies.each do |company|
       entries = Entry.where(company: company.short)
       entries.each do |entry|
-        entry.update_attribute(:company_id, company.id)
+        if entry.company_id.nil?
+          entry.update_attribute(:company_id, company.id)
+        end
       end
       invoices = Invoice.where(company: company.short)
       invoices.each do |invoice|
-        invoice.update_attribute(:company_id, company.id)
+        if invoice.company_id.nil?
+          invoice.update_attribute(:company_id, company.id)
+        end
       end
     end
 
