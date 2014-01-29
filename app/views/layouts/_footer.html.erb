@@ -23,7 +23,7 @@
               <li class="muted"> &middot; </li>
               <li><%= link_to(t('global.broadcasts'), broadcasts_path) %></li>
             <% end %>
-            <% if user_signed_in? and can? :manage, Companies %>
+            <% if user_signed_in? and can? :manage, Company %>
               <li class="muted"> &middot; </li>
               <li><%= link_to('Companies', companies_path) %></li>
             <% end %>
