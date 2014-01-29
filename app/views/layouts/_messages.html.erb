@@ -1,18 +1,15 @@
 <div id="alert-box">
   <% flash.each do |name, msg| %>
     <% if msg.is_a?(String) %>
-      <div class="alert alert-wrapper">
         <div class="alert alert-<%= name == :notice ? "success" : "danger" %>">
           <a class="close" data-dismiss="alert">&#215;</a>
           <%= content_tag :div, msg, :id => "flash_#{name}" %>
           <% flash.delete(name) %>
         </div>
-      </div>
     <% end %>
   <% end %>
 
   <% @broadcasts.each do |broadcast| %>
-    <div class="alert alert-wrapper">
       <div class="alert alert-info">
         <a onclick="disableBroadcast('<%= disable_broadcast_path(broadcast[:id]) %>')" class="close" data-dismiss="alert">&#215;</a>
         <div id="broadcast_<%= broadcast[:id] %>">
@@ -20,6 +17,5 @@
           <%= raw(broadcast[:text]) %>
         </div>
       </div>
-    </div>
   <% end %>
 </div>
