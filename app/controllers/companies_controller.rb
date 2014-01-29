@@ -14,12 +14,12 @@ class CompaniesController < ApplicationController
 
     entries = Entry.all
     entries.each do |e|
-      e.update_attribute(:company_id, Company.where(:short, e.company).id)
+      e.update_attribute(:company_id, Company.where(short: e.company).id)
     end
 
     invoices = Invoice.all
     invoices.each do |i|
-      i.update_attribute(:company_id, Company.where(:short, e.company).id)
+      i.update_attribute(:company_id, Company.where(short: e.company).id)
     end
 
   end
