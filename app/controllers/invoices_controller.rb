@@ -70,7 +70,8 @@ class InvoicesController < ApplicationController
 
     items = params[:invoice][:items]
     params[:invoice][:items] = params[:invoice][:items].lines.length
-    @invoice = Invoice.new(params[:invoice].permit(:items, :company))
+    params[:invoice][:company_id] = params[:company_id]
+    @invoice = Invoice.new(params[:invoice].permit(:items, :company_id))
 
     non_existing = Array.new
     already_sent = Array.new
@@ -78,7 +79,7 @@ class InvoicesController < ApplicationController
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
       app = Appliance.where(abb: num[1]).take
-      entry = Entry.where(company: session[:company], number: num[2..-1], appliance_id: app.id).take
+      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], appliance_id: app.id).take
       if entry.nil?
       	non_existing.push(num)
       elsif entry.sent.to_i == 1
@@ -92,7 +93,7 @@ class InvoicesController < ApplicationController
       items.lines do |line|
         num = line.tr("\n","").tr("\r","")
         app = Appliance.where(abb: num[1]).take
-        entry = Entry.where(company: session[:company], number: num[2..-1], appliance_id: app.id).take
+        entry = Entry.where(company_id: params[:company_id], number: num[2..-1], appliance_id: app.id).take
         entry.update_attribute(:invoice_id, @invoice.id)
         entry.update_attribute(:sent, 1)
       end

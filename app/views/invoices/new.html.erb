@@ -9,8 +9,6 @@
     </div>
     <div class="panel-body">
       <%= f.text_area :items, label: t('invoice.new.items') %>
-
-      <%= f.hidden_field :company, :value => session[:company] %>
     </div>
     <div class="panel-footer">
       <%= f.submit t('invoice.new.button'), data: { disable_with: t('invoice.new.button_send') }, 'onclick' => 'addLoadingSpinner()' %>
