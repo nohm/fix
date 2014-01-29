@@ -15,7 +15,6 @@ Badger::Application.routes.draw do
   end
   resources :appliances
   resources :classifications
-  resources :history
   resources :broadcasts
 
   match 'broadcast/disable/:id' => 'broadcasts#disable', :as => :disable_broadcast, :via => :get
@@ -32,5 +31,4 @@ Badger::Application.routes.draw do
   match 'companies/:company_id/entries/:id/sticker' => 'entries#sticker', :as => :sticker, :via => :get
   match 'companies/:company_id/entries/:id/ticket' => 'entries#ticket', :as => :ticket, :via => :get
   match 'companies/:company_id/entries/:id/zip' => 'entries#zip', :as => :zip, :via => :get
-  match 'companies/:company_id/entries/:id/entryhistory' => 'entries#entryhistory', :as => :entryhistory, :via => :get
 end

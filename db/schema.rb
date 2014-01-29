@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129162304) do
+ActiveRecord::Schema.define(version: 20140129214207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 20140129162304) do
     t.integer  "accessoires"
     t.integer  "test"
     t.integer  "sent"
-    t.string   "company"
     t.integer  "appliance_id"
     t.integer  "invoice_id"
     t.string   "repair"
@@ -92,19 +91,10 @@ ActiveRecord::Schema.define(version: 20140129162304) do
 
   add_index "entries", ["company_id"], name: "index_entries_on_company_id", using: :btree
 
-  create_table "histories", force: true do |t|
-    t.integer  "entry_id"
-    t.integer  "user_id"
-    t.string   "action"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "invoices", force: true do |t|
     t.string   "items"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "company"
     t.integer  "company_id"
   end
 

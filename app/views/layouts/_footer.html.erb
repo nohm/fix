@@ -16,8 +16,6 @@
               <li><%= link_to(t('global.appliances'), appliances_path) %></li>
               <li class="muted"> &middot; </li>
               <li><%= link_to(t('global.classes'), classifications_path) %></li>
-              <li class="muted"> &middot; </li>
-              <li><%= link_to(t('global.history'), history_index_path) %></li>
             <% end %>
             <% if user_signed_in? and can? :manage, Broadcast %>
               <li class="muted"> &middot; </li>

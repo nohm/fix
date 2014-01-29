@@ -172,9 +172,6 @@
     <% if can? :destroy, Entry %>
       <%= link_to(t('entry.show.delete'), company_entry_path(@company, @entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
     <% end %>
-    <% if can? :entryhistory, Entry %>
-      <%= link_to(t('entry.show.view'), entryhistory_path(@company, @entry), :class => 'btn btn-mini btn-primary') %>
-    <% end %>
   </div>
 </div>
 
