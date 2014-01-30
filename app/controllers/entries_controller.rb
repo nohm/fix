@@ -1,9 +1,21 @@
 class EntriesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter do
+    permission = false
+    unless current_user.nil? or params[:company_id].nil?
+      if current_user.staff? or Company.where(short: current_user.roles.first.name).take.id == params[:company_id].to_i
+        permission = true
+      end
+    end
+    unless permission
+      redirect_to root_path, :alert => I18n.t('global.unauthorized')
+    end
+  end
+
 
   def index
     authorize! :index, Entry, :message => I18n.t('global.unauthorized')
-    
+
     unless params[:page].nil?
       session[:page] = params[:page]
     end
@@ -130,8 +142,6 @@ class EntriesController < ApplicationController
       @class_names = Classifications.pluck(:name, :id)
       render 'edit'
     end
-
-    History.new({:entry_id => @entry.id, :user_id => current_user.id, :action => 'update'}).save
   end
  
   def create
@@ -149,14 +159,12 @@ class EntriesController < ApplicationController
     @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:brand,:typenum,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:class_id,:note,:status,:company_id))
     
     if @entry.save
-      redirect_to company_entries_path(:company => params[:company_id], :page => Entry.where(company: session[:company]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
+      redirect_to company_entries_path(:company => params[:company_id], :page => Entry.where(company_id: params[:company_id]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
     else
       @appliance_names = Appliance.pluck(:name, :id)
       @class_names = Classifications.pluck(:name, :id)
       render 'new'
     end
-
-    History.new({:entry_id => @entry.id, :user_id => current_user.id, :action => 'create'}).save
   end
 
   def destroy
@@ -165,8 +173,6 @@ class EntriesController < ApplicationController
     entry = Entry.find(params[:id])
     entry.destroy
     redirect_to company_entries_path(:company => params[:company_id]), :notice => I18n.t('entry.controller.deleted')
-
-    History.new({:entry_id => 0, :user_id => current_user.id, :action => 'destroy'}).save
   end
 
 end

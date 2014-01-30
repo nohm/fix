@@ -3,8 +3,8 @@
         <p class="text-muted info-label">
           <% if user_signed_in? %>
             <%= current_user.name %>
-            <% unless session[:company].nil? %>
-              <%= ' @ ' + session[:company].titleize %>
+            <% unless params[:company_id].nil? %>
+              <%= ' @ ' + Company.find(params[:company_id]).title %>
             <% end %>
             <span class="languageflag <%= I18n.locale.to_s %>flag"></span>
           <% end %>

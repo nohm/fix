@@ -1,8 +1,11 @@
 class HomeController < ApplicationController
   def index
-    session[:company] = nil
     unless current_user.nil?
-      @companies = Company.all.order('id ASC')
+      if current_user.staff?
+        @companies = Company.all.order('id ASC')
+      elsif current_user.supplier?
+        @companies = Company.where(short: current_user.roles.first.name)
+      end
       @simple_stats = Array.new
       @companies.each_with_index do |company, index|
         @simple_stats[index] = Array.new
@@ -58,7 +61,7 @@ class HomeController < ApplicationController
         flash["alert #{item}"] = "#{item} #{I18n.t('home.controller.error_exist')}"
       end
       wrong_comp.each do |item|
-        flash["alert #{item}"] = "#{item} #{I18n.t('home.controller.error_wrong')} #{session[:company]}!"
+        flash["alert #{item}"] = "#{item} #{I18n.t('home.controller.error_wrong')} #{Company.find(params[:company_id].title)}!"
       end
 
       @appliance_names = Appliance.pluck(:name, :id)

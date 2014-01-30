@@ -108,7 +108,7 @@
                     <% end %>
                     <% if can? :destroy, Attachment %>
                       <br>
-                      <%= link_to t('global.delete'), company_entry_attachment_path(@entry.id, attachment), method: :delete, data: { confirm: t('global.sure') } %>
+                      <%= link_to t('global.delete'), company_entry_attachment_path(@company.id, @entry.id, attachment), method: :delete, data: { confirm: t('global.sure') } %>
                     <% end %>
                   <% end %>
                   </div>

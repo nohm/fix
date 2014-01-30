@@ -1,5 +1,16 @@
 class InvoicesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter do
+    permission = false
+    unless current_user.nil? or params[:company_id].nil?
+      if current_user.staff? or Company.where(short: current_user.roles.first.name).take.id == params[:company_id].to_i
+        permission = true
+      end
+    end
+    unless permission
+      redirect_to root_path, :alert => I18n.t('global.unauthorized')
+    end
+  end
 
   def new
     authorize! :new, Invoice, :message => I18n.t('global.unauthorized')
@@ -106,7 +117,7 @@ class InvoicesController < ApplicationController
       	flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.already_sent')}"
       end
       wrong_comp.each do |item|
-        flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.wrong_company')} #{session[:company]}!"
+        flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.wrong_company')} #{Company.find(params[:company_id].title)}!"
       end
       render 'new'
     end
