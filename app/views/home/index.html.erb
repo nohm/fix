@@ -9,7 +9,7 @@
         </div>
       <% end %>
       <% @companies.each_with_index do |company, index| %>
-        <div class="col-xs-6 col-sm-3">
+        <div class="<%= @panelclass %>">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4><%= company.title %></h4>

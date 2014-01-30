@@ -3,8 +3,10 @@ class HomeController < ApplicationController
     unless current_user.nil?
       if current_user.staff?
         @companies = Company.all.order('id ASC')
+        @panelclass = 'col-xs-6 col-sm-3'
       elsif current_user.supplier?
         @companies = Company.where(short: current_user.roles.first.name)
+        @panelclass = 'col-md-4 col-md-offset-4'
       end
       @simple_stats = Array.new
       @companies.each_with_index do |company, index|
