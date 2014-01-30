@@ -25,6 +25,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     arel (4.0.1)
     atomic (1.1.14)
     barby (0.5.1)
@@ -84,9 +85,13 @@ GEM
     kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    launchy (2.4.2)
+      addressable (~> 2.3)
     lazy_high_charts (1.5.1)
       bundler (>= 1.0)
       hash-deep-merge
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     libv8 (3.16.14.3)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -179,6 +184,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   lazy_high_charts
+  letter_opener
   modernizr-rails
   paperclip
   pg
