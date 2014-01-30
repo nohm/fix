@@ -4,12 +4,6 @@ ruby '2.1.0'
 # Rails base
 gem 'rails', '4.0.2'
 gem 'turbolinks'
-gem 'capistrano', '~> 3.1.0'
-gem 'capistrano-bundler'
-gem 'capistrano-rails'
-# Server
-gem 'puma'
-gem 'foreman'
 # Database
 gem 'pg'
 # CSS
@@ -47,6 +41,9 @@ group :assets do
 end
 
 group :development do
+  # Server
+  gem 'puma'
+  gem 'foreman'
   # Error handling
   gem 'better_errors'
   gem 'binding_of_caller'
