@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Update the server-side database
+
+echo 'Handling git...'
+git add db/migrate/*
+git commit -m "Updating server database"
+git push
+
+echo 'Updating server...'
+ssh nohm@nohm.eu "cd /var/www/badger/ && git pull && rake db:migrate RAILS_ENV=production && touch tmp/restart.txt"

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# Commit the current changes to the server
+
+if (( ! $# )); then
+    echo "Update failed! Please add a commit message!"
+    return 1
+fi
+
+echo 'Handling git...'
+git add -A
+git commit -m "$*"
+git push
+
+echo 'Updating server...'
+ssh nohm@nohm.eu "cd /var/www/badger/ && git pull && bundle exec rake assets:precompile RAILS_ENV=production && touch tmp/restart.txt"

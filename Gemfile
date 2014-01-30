@@ -1,38 +1,56 @@
 source 'https://rubygems.org'
 ruby '2.1.0'
+
+# Rails base
 gem 'rails', '4.0.2'
-#gem 'sqlite3'
+gem 'turbolinks'
+gem 'capistrano', '~> 3.1.0'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
+# Server
+gem 'puma'
+gem 'foreman'
+# Database
 gem 'pg'
-#gem 'taps'
+# CSS
 gem 'sass-rails'
-gem 'uglifier'
+gem 'bootstrap-sass', '~> 3.0.3.0'
+gem 'bourbon'
+# Javascript
 gem 'coffee-rails'
 gem 'jquery-rails'
-gem 'turbolinks'
+gem 'lazy_high_charts'
+gem 'modernizr-rails'
+# Assets
+gem 'uglifier'
 gem 'jbuilder'
-gem 'bootstrap-sass', '~> 3.0.3.0'
+# Protection
 gem 'cancan'
 gem 'devise'
 gem 'figaro'
 gem 'rolify'
+# Attachments
 gem 'paperclip'
+# Better forms
 gem 'bootstrap_form'
+# Barcodes
 gem 'barby'
 gem 'has_barcode'
+# Zip files
 gem 'rubyzip'
+# Pagination
 gem 'kaminari'
-gem 'lazy_high_charts'
-gem 'modernizr-rails'
-gem 'bourbon'
 
 group :assets do
+  # Javascript engine
   gem 'therubyracer', :platform=>:ruby
 end
 
 group :development do
-  gem 'puma'
+  # Error handling
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'quiet_assets'
+  # Mail catcher
   gem 'letter_opener'
 end
