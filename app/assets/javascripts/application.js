@@ -42,13 +42,11 @@ function addLoadingSpinner() {
 }
 
 // Disables a broadcast
-// path: needs to include id
 function disableBroadcast(path) {
   $.ajax({url: path});
 }
 
 // Adds checkboxes to a form
-// label: the label for the checkboxes
 function addCheckboxes(label) {
   var inputs = $(".form-group");
   for (var i = 1; i < inputs.length; i++) {
