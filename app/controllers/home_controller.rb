@@ -34,7 +34,7 @@ class HomeController < ApplicationController
       entry = Entry.where(company_id: params[:company_id], number: num[2..-1], appliance_id: app.id).take
       if entry.nil?
         non_existing.push(num)
-      elsif entry.company != session[:company]
+      elsif entry.company_id != params[:company_id]
         wrong_comp.push(num)
       end
     end

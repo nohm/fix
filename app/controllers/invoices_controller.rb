@@ -84,7 +84,7 @@ class InvoicesController < ApplicationController
       	non_existing.push(num)
       elsif entry.sent.to_i == 1
       	already_sent.push(num)
-      elsif entry.company != session[:company]
+      elsif entry.company_id != params[:company_id]
         wrong_comp.push(num)
       end
     end
