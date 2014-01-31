@@ -31,6 +31,6 @@
           </div>
       <% end %>
     <% else %>
-      <%= "#{t('home.batch.no_company')}<a href=\"mailto:#{ENV['ADMIN_EMAIL']}\">#{t('home.batch.no_company_anchor')}</a>" %>
+      <%= t('home.index.no_company') %><a href=\"mailto:#{ENV['ADMIN_EMAIL']}\"><%= t('home.index.no_company_anchor') %></a>
     <% end %>
 </div>

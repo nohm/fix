@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    unless current_user.nil?
+    unless current_user.nil? or current_user.has_role? :user
       if current_user.staff?
         @companies = Company.all.order('id ASC')
         @panelclass = 'col-xs-6 col-sm-3'
