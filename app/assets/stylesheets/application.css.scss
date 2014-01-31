@@ -15,7 +15,10 @@
 // Import bourbon mixins
 @import "bourbon";
 
-// Switchly less obnoxious black and white
+// Height for sticky footer > inspect element for it and add 21 to that
+$footer-height: 101px;
+
+// Slightly less obnoxious black and white
 $black: #232323;
 $white: #fafafa;
 
@@ -67,10 +70,8 @@ html, body {
 #main {
   min-height: 100%;
   height: auto;
-  // Negative indent footer by its height
-  margin: 0 auto -81px;
-  // Pad bottom by footer height
-  padding: 0 0 81px;
+  margin: 0 auto 0-$footer-height;
+  padding: 0 0 $footer-height;
 }
 
 // Give icons some extra margin to the right
