@@ -28,8 +28,7 @@ Development
 Installation
 ------------
 
-Installation guide, development or production, you need PostgreSQL.
-After that you can follow specific guides.
+Installation guide, set up PostgreSQL, then the project.
 
 #### PostgreSQL
 
