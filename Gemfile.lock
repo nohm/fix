@@ -35,7 +35,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.0.3.0)
+    bootstrap-sass (3.1.0.0)
       sass (~> 3.2)
     bootstrap_form (2.0.1)
     bourbon (3.1.8)
@@ -160,7 +160,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.2.0)
+    turbolinks (2.2.1)
       coffee-rails
     tzinfo (0.3.38)
     uglifier (2.4.0)
@@ -176,7 +176,7 @@ DEPENDENCIES
   barby
   better_errors
   binding_of_caller
-  bootstrap-sass (~> 3.0.3.0)
+  bootstrap-sass (~> 3.1.0)
   bootstrap_form
   bourbon
   cancan

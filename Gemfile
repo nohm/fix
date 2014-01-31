@@ -8,7 +8,7 @@ gem 'turbolinks'
 gem 'pg'
 # CSS
 gem 'sass-rails'
-gem 'bootstrap-sass', '~> 3.0.3.0'
+gem 'bootstrap-sass', '~> 3.1.0'
 gem 'bourbon'
 # Javascript
 gem 'coffee-rails'
