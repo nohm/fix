@@ -19,9 +19,9 @@
 //= require bootstrap/transition
 //= require highcharts/highcharts
 //= require turbolinks
-//= require modernizr
-//= require headroom
-//= require jQuery.headroom
+//= require plugins/modernizr
+//= require plugins/headroom
+//= require plugins/jQuery.headroom
 
 $(document).on('ready page:load', function () {
 	// Animated autohide navbar

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
     self.manager? or self.has_role? :technician
   end
 
+  # Add any company that exists here as a supplier
   def supplier?
     self.has_role? :vitel or self.has_role? :maxioutlet or self.has_role? :tronex or self.has_role? :ahead
   end

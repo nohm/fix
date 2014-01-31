@@ -20,6 +20,7 @@ class Ability
       can [:create, :destroy], Attachment
       can [:retrieve, :disable], Broadcast
 
+    # Add any company that exists here as a role
     elsif user.has_role? :vitel or user.has_role? :maxioutlet or user.has_role? :tronex or user.has_role? :ahead
       can :see_data, :all
       can [:index, :show], [Entry, Invoice, Attachment]

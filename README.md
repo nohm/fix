@@ -46,6 +46,7 @@ createdb -Obadger -Eutf8 badger_test
 ```
 cd <where-you-want-the-project>
 git clone git@github.com:nohm/badger.git
+cd badger
 ```
 * Install dependencies, create database tables and initialize routes
 ```
@@ -53,11 +54,16 @@ bundle install
 rake db:migrate
 rake routes
 ```
+* Fill in the config file *config/application.yml*
+```
+<your-text-editor> config/application.yml
+```
 * Start the server and work on it!
 ```
 sh script/server_dev
 ```
 Alternatively, you can also install Passenger on your server and run it through there, there are plenty of guides to explain how to do that.
+Note about companies, 4 are already declared in *app/models/ability.rb* and *app/models/user.rb* these can be added to *config/application.yml* roles to behave as companies. If you add them as companies that is. Change these lines otherwise to respect your personal choices
 
 
 Contributing
@@ -73,4 +79,4 @@ If you make improvements to this application, please share with others.
 License
 -------
 
-MIT License
+MIT
