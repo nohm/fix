@@ -1,20 +1,20 @@
-<% provide(:title, 'Company') %>
+<% provide(:title, t('company.new.title')) %>
 
 <%= bootstrap_form_for :company, :url => companies_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
   <%= f.alert_message t('global.errors') %>
   
   <div class="panel panel-default">
     <div class="panel-heading">
-      <div class="panel-title">Company: new</div>
+      <div class="panel-title"><%= t('company.new.legend') %></div>
     </div>
     <div class="panel-body">
-      <%= f.text_field :title %>
-      <%= f.text_field :short %>
-      <%= f.text_field :abb %>
-      <%= f.text_field :adress, :help => 'Replace all the \'enters\' by <br>' %>
+      <%= f.text_field :title, label: t('global.title') %>
+      <%= f.text_field :short, label: t('global.short') %>
+      <%= f.text_field :abb, label: t('global.abbrevation') %>
+      <%= f.text_field :adress, :help => 'Replace all the \'enters\' by <br>', label: t('global.adress') %>
     </div>
     <div class="panel-footer">
-  	 <%= f.submit 'Save', data: { disable_with: 'Saving' } %>
+  	 <%= f.submit t('company.new.button'), data: { disable_with: t('company.new.button_send') } %>
     </div>
   </div>
 <% end %>

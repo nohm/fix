@@ -1,30 +1,31 @@
 <footer>
-      <div class="container">
-        <p><%= t('layouts.footer.copyright') %><a href="mailto:info@nohm.eu">nohm</a></p>
-        <ul class="footer-links">
-            <% unless user_signed_in? %>
-              <li><%= render 'layouts/signup/button' %></li>
-              <li class="muted"> &middot; </li>
-              <li><%= link_to t('layouts.footer.forgot_pass'), new_password_path(:user) %></li>
-              <li class="muted"> &middot; </li>
-            <% end %>
-            <li><%= render 'layouts/report/button' %></li>
-            <% if user_signed_in? and can? :manage, User %>
-              <li class="muted"> &middot; </li>
-              <li><%= link_to(t('global.users'), users_path) %></li>
-              <li class="muted"> &middot; </li>
-              <li><%= link_to(t('global.appliances'), appliances_path) %></li>
-              <li class="muted"> &middot; </li>
-              <li><%= link_to(t('global.classes'), classifications_path) %></li>
-            <% end %>
-            <% if user_signed_in? and can? :manage, Broadcast %>
-              <li class="muted"> &middot; </li>
-              <li><%= link_to(t('global.broadcasts'), broadcasts_path) %></li>
-            <% end %>
-            <% if user_signed_in? and can? :manage, Company %>
-              <li class="muted"> &middot; </li>
-              <li><%= link_to('Companies', companies_path) %></li>
-            <% end %>
-        </ul>
-      </div>
-    </footer>
+  <div class="container">
+    <p><%= t('layouts.footer.copyright') %><a href="mailto:info@nohm.eu">nohm</a></p>
+    <p><%= t('layouts.footer.license') %><a href="https://github.com/nohm/badger/blob/master/LICENSE">MIT</a></p>
+    <ul class="footer-links">
+      <% unless user_signed_in? %>
+        <li><%= render 'layouts/signup/button' %></li>
+        <li class="muted"> &middot; </li>
+        <li><%= link_to t('layouts.footer.forgot_pass'), new_password_path(:user) %></li>
+        <li class="muted"> &middot; </li>
+      <% end %>
+      <li><%= render 'layouts/report/button' %></li>
+      <% if user_signed_in? and can? :manage, User %>
+        <li class="muted"> &middot; </li>
+        <li><%= link_to(t('global.users'), users_path) %></li>
+        <li class="muted"> &middot; </li>
+        <li><%= link_to(t('global.appliances'), appliances_path) %></li>
+        <li class="muted"> &middot; </li>
+        <li><%= link_to(t('global.classes'), classifications_path) %></li>
+      <% end %>
+      <% if user_signed_in? and can? :manage, Broadcast %>
+        <li class="muted"> &middot; </li>
+        <li><%= link_to(t('global.broadcasts'), broadcasts_path) %></li>
+      <% end %>
+      <% if user_signed_in? and can? :manage, Company %>
+        <li class="muted"> &middot; </li>
+        <li><%= link_to(t('global.companies'), companies_path) %></li>
+      <% end %>
+    </ul>
+  </div>
+</footer>

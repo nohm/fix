@@ -9,6 +9,7 @@ nl:
     classes: 'Klassen'
     history: 'Geschiedenis'
     broadcasts: 'Uitzendingen'
+    companies: 'Bedrijven'
 
     unauthorized: 'Je bent hiervoor niet geautoriseerd.'
     unauth_admin: 'Niet geautoriseerd als een beheerder.'
@@ -28,6 +29,9 @@ nl:
     url: 'URL'
     message: 'Bericht'
     email: 'Email'
+    title: 'Titel'
+    short: 'Kort'
+    adress: 'Afkorting'
     password: 'Wachtwoord'
     password_confirmation: 'Wachtwoord confirmatie'
 
@@ -77,6 +81,7 @@ nl:
 
     footer:
       copyright: 'Gemaakt en onderhouden door '
+      license: 'Code gelicenseerd onder '
       forgot_pass: 'Wachtwoord vergeten?'
 
     navigation:
@@ -95,6 +100,23 @@ nl:
       button_large: 'Geef een probleem door'
       button: 'Stuur bericht'
       button_send: 'Versturen...'
+
+# app/views/companies
+  company:
+    index:
+      title: 'Badger - Bedrijven panel'
+      legend: 'Bedrijven'
+      empty_list: 'Geen bedrijven hier'
+      new_company: 'Nieuw bedrijf'
+    new:
+      title: 'Badger - Nieuw bedrijf'
+      legend: 'Nieuw bedrijf'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+# app/controller/companies & model
+    controller:
+      company_added: 'Bedrijf toegevoegd.'
+      company_deleted: 'Bedrijf verwijdert.'
 
 # app/views/entries
   entry:

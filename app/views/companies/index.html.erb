@@ -1,21 +1,21 @@
-<% provide(:title, 'Company') %>
+<% provide(:title, t('company.index.title')) %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <div class="panel-title">'Company: index'</div>
+    <div class="panel-title"><%= t('company.index.legend') %></div>
   </div>
   <div class="panel-body panel-table">
   	<% if @companies.length == 0 %>
-  	  <p class="empty_list">Empty list</p>
+  	  <p class="empty_list"><%= t('company.index.empty_list') %></p>
   	<% else %>
   		<div class="table-responsive">
   			<table class="table table-condensed table-striped">
   			  <thead>
   			    <tr>
-  			      <th>Title</th>
-  			      <th>Short</th>
-              <th>Abbrevation</th>
-              <th>Adress</th>
+  			      <th><%= t('global.title') %></th>
+  			      <th><%= t('global.short') %></th>
+              <th><%= t('global.abbrevation') %></th>
+              <th><%= t('global.adress') %></th>
   			      <th style="width:17px;"></th>
   			    </tr>
   			  </thead>
@@ -39,6 +39,6 @@
   	<% end %>
   </div>
   <div class="panel-footer">
-    <%= link_to('New company', new_company_path, :class => 'btn btn-mini btn-primary') %>
+    <%= link_to(t('company.index.new_company'), new_company_path, :class => 'btn btn-mini btn-primary') %>
   </div>
 </div>

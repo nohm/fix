@@ -9,6 +9,7 @@ en:
     classes: 'Classes'
     history: 'History'
     broadcasts: 'Broadcasts'
+    companies: 'Companies'
 
     unauthorized: 'You''re not authorized for this.'
     unauth_admin: 'Not authorized as an administrator.'
@@ -28,6 +29,9 @@ en:
     url: 'URL'
     message: 'Message'
     email: 'Email'
+    title: 'Title'
+    short: 'Short'
+    adress: 'Adress'
     password: 'Password'
     password_confirmation: 'Password confirmation'
 
@@ -77,6 +81,7 @@ en:
 
     footer:
       copyright: 'Made and maintained by '
+      license: 'Code licensed under '
       forgot_pass: 'Forgot your password?'
 
     navigation:
@@ -95,6 +100,23 @@ en:
       button_large: 'Report a problem'
       button: 'Send report'
       button_send: 'Sending report...'
+
+# app/views/companies
+  company:
+    index:
+      title: 'Badger - Company panel'
+      legend: 'Companies'
+      empty_list: 'No companies here'
+      new_company: 'New company'
+    new:
+      title: 'Badger - New company'
+      legend: 'New company'
+      button: 'Save'
+      button_send: 'Saving...'
+# app/controller/companies & model
+    controller:
+      company_added: 'Company added.'
+      company_deleted: 'Company deleted.'
 
 # app/views/entries
   entry:

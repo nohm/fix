@@ -3,6 +3,8 @@ de:
 # > global#broadcasts
 # > appliance#controller#*
 # > broadcast#*
+# > global#title/short/adress
+# > company#*
 
 ######################
 ##     GLOBALS      ##
@@ -13,6 +15,7 @@ de:
     classes: 'Klassen'
     history: 'Geschichte'
     broadcasts: 'Broadcasts'
+    companies: 'Geschäfte'
 
     unauthorized: 'Du hast keine Genehmigung.'
     unauth_admin: 'Du hast keine Verwaltungsrechte.'
@@ -32,6 +35,9 @@ de:
     url: 'URL'
     message: 'Nachricht'
     email: 'Email'
+    title: 'Title'
+    short: 'Short'
+    adress: 'Adress'
     password: 'Kennwort'
     password_confirmation: 'Kennwort bestätigung'
 
@@ -81,6 +87,7 @@ de:
 
     footer:
       copyright: 'Hergestellt und gepflegt von '
+      license: 'Code licensed under '
       forgot_pass: 'Kennwort vergessen?'
 
     navigation:
@@ -99,6 +106,23 @@ de:
       button_large: 'Melde ein Problem'
       button: 'Sende nachricht'
       button_send: 'Gesendet worden...'
+
+# app/views/companies
+  company:
+    index:
+      title: 'Badger - Company panel'
+      legend: 'Companies'
+      empty_list: 'No companies here'
+      new_company: 'New company'
+    new:
+      title: 'Badger - New company'
+      legend: 'New company'
+      button: 'Save'
+      button_send: 'Saving...'
+# app/controller/companies & model
+    controller:
+      company_added: 'Company added.'
+      company_deleted: 'Company deleted.'
 
 # app/views/entries
   entry:

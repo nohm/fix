@@ -281,6 +281,9 @@ footer {
   color: $gray;
   text-align: center;
   border-top: 1px solid $gray-lighter;
+  p {
+    margin-bottom: 0;
+  }
 }
 .footer-links {
   margin: 10px 0;
@@ -290,15 +293,6 @@ footer {
     padding: 0 2px;
     &:first-child {
       padding-left: 0;
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  footer {
-    text-align: left;
-    p {
-      margin-bottom: 0;
     }
   }
 }

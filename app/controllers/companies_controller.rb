@@ -19,7 +19,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(params[:company].permit(:title,:short,:abb,:adress))
 
     if @company.save
-      redirect_to companies_path, :notice => 'Added'
+      redirect_to companies_path, :notice => I18n.t('company.model.company_added')
     else
       render 'new'
     end
@@ -30,7 +30,7 @@ class CompaniesController < ApplicationController
 
     company = Company.find(params[:id])
     company.destroy
-    redirect_to companies_path, :notice => 'Deleted'
+    redirect_to companies_path, :notice => I18n.t('company.model.compan_deleted')
   end
   
 end
