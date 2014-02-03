@@ -50,4 +50,6 @@ group :development do
   gem 'quiet_assets'
   # Mail catcher
   gem 'letter_opener'
+  # UML Diagrams
+  gem 'railroady'
 end

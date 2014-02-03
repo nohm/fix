@@ -1,54 +1,58 @@
 <% provide(:title, t('invoice.show.title')) %>
 
-<legend><%= t('invoice.show.legend') %></legend>
+<legend><%= "#{t('invoice.show.legend')} #{@invoice.id}" %></legend>
 
 <div class="well well-large">
-  <div style="overflow:auto">
-    <div style="width:30%;float:left;margin-left:15%">
+  <div class="row">
+    <div class="col-xs-6 col-md-4 col-md-offset-2">
       <strong><%= t('invoice.show.sender') %></strong>
       <p>
         <%= raw @sender_data %>
       </p>
     </div>
-    <div style="width:35%;float:right">
+    <div class="col-xs-6 col-md-4 col-md-offset-2">
       <strong><%= t('invoice.show.adressee') %></strong>
       <p>
         <%= raw @company.adress %>
       </p>
     </div>
   </div>
-  <dl class="dl-horizontal">
-    <dt>ID</dt>
-    <dd><%= @invoice.id %></dd>
-    <dt><%= t('invoice.show.items') %></dt>
-    <dd><%= @invoice.items %></dd>
-    <dt><%= t('invoice.show.date') %></dt>
-    <dd><%= @invoice.created_at.to_date %></dd>
-  </dl>
 
-  <dl class="dl-horizontal">
-    <% @entry_data.each do |classdata| %>
-      <% unless classdata.length == 0 %>
-        <dt><%= @classes[classdata[0].class_id - 1].name %></dt>
-        <dd><%= classdata.length %></dd>
-      <% end %>
-    <% end %>
-  </dl>
+  <hr>
 
-  <dl class="dl-horizontal">
-    <% @entry_status.each_with_index do |statusdata, index| %>
-      <% unless statusdata == 0 %>
-        <dt><%= @statuses[index] %></dt>
-        <dd><%= statusdata %></dd>
-      <% end %>
-    <% end %>
-  </dl>
+  <div class="row">
+    <div class="col-md-6">
+      <dl class="dl-horizontal">
+        <dt><%= t('invoice.show.date') %></dt>
+        <dd><%= @invoice.created_at.to_date %></dd>
+      </dl>
+
+      <dl class="dl-horizontal">
+        <% @entry_classes.each_pair do |key, value| %>
+          <% unless value.length == 0 %>
+            <dt><%= key %></dt>
+            <dd><%= value.length %></dd>
+          <% end %>
+        <% end %>
+      </dl>
+    </div>
+
+    <div class="col-md-6">
+      <dl class="dl-horizontal">
+        <% @price_type_total.each do |key, value| %>
+          <dt><%= key.gsub('_',' ') %></dt><dd></dd>
+          <% value.each do |status, price| %>
+            <dt><%= status %></dt>
+            <dd><%= "#{number_to_currency(price[1], unit: '€')} (#{price[0]}x)" %></dd>
+          <% end %>
+          <br>
+        <% end %>
+      </dl>
+    </div>
+  </div>
 </div>
 
 <div>
-  <% if @entries.length == 0 %>
-    <p><%= t('invoice.show.empty_list') %></p>
-  <% else %>
     <table class="table table-condensed table-striped">
       <thead>
         <tr>
@@ -61,18 +65,18 @@
         </tr>
       </thead>
       <tbody>
-        <% @entry_data.each do |classdata| %>
-          <% unless classdata.length == 0 %>
+        <% @entry_classes.each do |klass, entries| %>
+          <% unless entries.length == 0 %>
             <tr>
-              <td><strong><%= "#{t('global.class')} #{@classes[classdata[0].class_id - 1].name}" %></strong></td>
+              <td><strong><%= "#{t('global.class')} #{klass}" %></strong></td>
               <td></td><td></td><td></td><td></td><td></td>
             </tr>
-            <% classdata.each do |entry| %>
+            <% entries.each do |entry| %>
               <tr>
-                <td><%= @company.abb + @appliances[entry.appliance_id - 1].abb + entry.number.to_s %></td>
-                <td><%= @appliances[entry.appliance_id - 1].name %></td>
-                <td><%= entry.brand %></td>
-                <td><%= entry.typenum %></td>
+                <td><%= entry.company.abb + entry.type.appliance.abb + entry.number.to_s %></td>
+                <td><%= entry.type.appliance.name %></td>
+                <td><%= entry.type.brand %></td>
+                <td><%= entry.type.typenum %></td>
                 <td><%= entry.serialnum %></td>
                 <% if entry.scrap == 1 %>
                   <td><span class="glyphicon glyphicon-trash"></span></td>
@@ -89,18 +93,17 @@
         <% end %>
       </tbody>
     </table>
-  <% end %>
 </div>
 
 <div class="well well-large">
-  <div style="overflow:auto">
-    <div style="width:30%;float:left;margin-left:15%">
+  <div class="row">
+    <div class="col-xs-6 col-md-4 col-md-offset-2">
       <strong><%= t('invoice.show.signature_sender') %></strong>
       <p style="margin-top:50px">
         ____________________
       </p>
     </div>
-    <div style="width:35%;float:right">
+    <div class="col-xs-6 col-md-4 col-md-offset-2">
       <strong><%= t('invoice.show.signature_adressee') %></strong>
       <p style="margin-top:50px">
         ____________________

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129214207) do
+ActiveRecord::Schema.define(version: 20140201120228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,20 +79,22 @@ ActiveRecord::Schema.define(version: 20140129214207) do
     t.integer  "accessoires"
     t.integer  "test"
     t.integer  "sent"
-    t.integer  "appliance_id"
     t.integer  "invoice_id"
     t.string   "repair"
     t.string   "testera"
     t.string   "testerb"
-    t.integer  "class_id"
+    t.integer  "classifications_id"
     t.string   "status"
     t.integer  "company_id"
+    t.integer  "type_id"
   end
 
+  add_index "entries", ["classifications_id"], name: "index_entries_on_classifications_id", using: :btree
   add_index "entries", ["company_id"], name: "index_entries_on_company_id", using: :btree
+  add_index "entries", ["invoice_id"], name: "index_entries_on_invoice_id", using: :btree
+  add_index "entries", ["type_id"], name: "index_entries_on_type_id", using: :btree
 
   create_table "invoices", force: true do |t|
-    t.string   "items"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
@@ -115,6 +117,21 @@ ActiveRecord::Schema.define(version: 20140129214207) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "types", force: true do |t|
+    t.string   "brand"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+    t.string   "typenum"
+    t.decimal  "test_price",   precision: 5, scale: 2
+    t.decimal  "repair_price", precision: 5, scale: 2
+    t.decimal  "scrap_price",  precision: 5, scale: 2
+    t.integer  "appliance_id"
+  end
+
+  add_index "types", ["appliance_id"], name: "index_types_on_appliance_id", using: :btree
+  add_index "types", ["company_id"], name: "index_types_on_company_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",   null: false

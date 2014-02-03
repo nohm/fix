@@ -22,6 +22,7 @@ nl:
     sure: 'Weet u het zeker?'
     y: 'Ja'
     n: 'Nee'
+    total: 'Total'
 
     name: 'Naam'
     username: 'Gebruikersnaam'
@@ -53,6 +54,9 @@ nl:
     accessoires: 'Accessoires'
     class: 'Klasse'
     note: 'Notitie'
+    test_price: 'Testprijs'
+    repair_price: 'Reparatieprijs'
+    scrap_price: 'Sloopprijs'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -204,6 +208,7 @@ nl:
       invoices: 'Facturen'
       stats: 'Statistieken'
       batch: 'Batch'
+      type: 'Types'
       no_company: 'U wordt snel aan uw bedrijf toegevoegd.. Kunt u niet wachten? Neem contact op met de beheerder '
       no_company_anchor: 'hier'
 
@@ -235,8 +240,8 @@ nl:
       legend: 'Factuur'
       sender: 'Afzender'
       adressee: 'Ontvanger'
-      items: 'Orders'
       date: 'Datum'
+      all_types: 'Alle types'
       empty_list: 'Geen orders hier' 
       signature_sender: 'Handtekening afzender'
       signature_adressee: 'Handtekening ontvanger'
@@ -292,16 +297,29 @@ nl:
     controller:
       notice_added: 'Klasse toegevoegd.'
 
-# app/views/history
-  history:
+# app/views/types
+  type:
     index:
-      title: 'Badger - Geschiedenis'
-      legend: 'Geschiedenis'
-      empty_list: 'geen geschiedenis hier'
-      where: 'Waar?'
-      who: 'Wie?'
-      what: 'Wat?'
-      when: 'Wanneer'
+      title: 'Badger - Types voor '
+      legend: 'Types voor '
+      empty_list: 'Geen types hier'
+      add_type: 'Type toevoegen'
+    new:
+      title: 'Badger - Nieuw type'
+      legend: 'Nieuw type'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+    edit:
+      title: 'Badger - Type wijzigen'
+      legend: 'Type wijzigen'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+
+# app/controllers/types & model
+    controller:
+      type_added: 'Type toegevoegd.'
+      type_updated: 'Type gewijzigd.'
+      type_deleted: 'Type verwijdert.'
 
 # app/views/users
   user:

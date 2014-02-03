@@ -5,8 +5,9 @@ Badger::Application.routes.draw do
   resources :users
 
   resources :companies, :only => [:index, :new, :create, :destroy] do
+    resources :types, :only => [:index, :new, :create, :edit, :update, :destroy]
     resources :stats, :only => :index
-    resources :invoices, :only => [:index, :new, :create, :destroy]
+    resources :invoices, :only => [:index, :show, :new, :create, :destroy]
     resources :entries do
   	  resources :attachments, :only => [:create, :destroy]
     end

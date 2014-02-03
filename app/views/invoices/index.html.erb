@@ -21,10 +21,10 @@
           </tr>
         </thead>
         <tbody class="searchable">
-          <% @invoices.each do |invoice| %>
+          <% @invoices.each_with_index do |invoice, index| %>
             <tr>
               <td><%= invoice.id %></td>
-              <td><%= invoice.items %></td>
+              <td><%= invoice.entries.length %></td>
               <td><%= invoice.created_at.to_date %></td>
                 <td>
                   <%= link_to company_invoice_path(invoice.company_id, invoice) do %>

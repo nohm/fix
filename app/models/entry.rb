@@ -1,20 +1,20 @@
 class Entry < ActiveRecord::Base
   belongs_to :company
+  belongs_to :type
+  belongs_to :classifications
+  belongs_to :invoice
+  
   has_many :attachments, dependent: :destroy
   
   validates :number, presence: true
-  validates :appliance_id, presence: true
-  validates :brand, presence: true
-  validates :typenum, presence: true
+  validates :type_id, presence: true
   validates :serialnum, presence: true
-  validates :company, presence: true
+  validates :company_id, presence: true
 
   before_save :format_input
   after_save :update_status
 
   def format_input
-    self.brand = self.brand.titleize #stupid missing bang
-    self.typenum.upcase!
     self.serialnum.upcase!
   end
 

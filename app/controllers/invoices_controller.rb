@@ -24,30 +24,60 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @company = Company.find(params[:company_id])
 
-    @entries = Entry.where(invoice_id: params[:id]).order('id ASC')
-
     @classes = Classifications.all
-    @statuses = [I18n.t('invoice.controller.tested'),I18n.t('invoice.controller.repaired'),I18n.t('invoice.controller.scrapped')]
-    @entry_data = Array.new
-    @entry_status = Array.new
-    (0..@classes.length).each do |i|
-      @entry_data[i] = Array.new
-    end
-    (0..2).each do |i|
-      @entry_status[i] = 0
-    end
-    @entries.each do |entry|
-      @entry_data[entry.class_id].append(entry)
-      if entry.scrap == 1
-        @entry_status[2] = @entry_status[2] + 1
-      elsif entry.repaired == 1
-        @entry_status[1] = @entry_status[1] + 1
-      elsif entry.test == 1
-        @entry_status[0] = @entry_status[0] + 1
-      end
+    @statuses = [I18n.t('invoice.controller.tested'),I18n.t('invoice.controller.repaired'),I18n.t('invoice.controller.scrapped'),I18n.t('invoice.controller.skipped')]
+
+    @entry_classes = Hash.new(Array.new)
+    @classes.each do |klass|
+      @entry_classes[klass.name] = Entry.includes(:type,:company).where(classifications_id: klass.id, invoice_id: @invoice.id).order('id ASC')
     end
 
-    @appliances = Appliance.all
+    @price_type_total = Hash.new
+    price_global_total = { I18n.t('invoice.controller.tested') => [0,0], I18n.t('invoice.controller.repaired') => [0,0], I18n.t('invoice.controller.scrapped') => [0,0], I18n.t('invoice.controller.skipped') => [0,0] }
+
+    @types = Type.find(Entry.where(invoice_id: @invoice.id).select("DISTINCT type_id").map(&:type_id).sort!)
+    @types.each_with_index do |type, index|
+      price_total = { I18n.t('invoice.controller.tested') => [0,0], I18n.t('invoice.controller.repaired') => [0,0], I18n.t('invoice.controller.scrapped') => [0,0], I18n.t('invoice.controller.skipped') => [0,0] }
+
+      Entry.where(invoice_id: @invoice.id, type_id: type.id).each do |entry|
+
+        if entry.scrap == 1
+          s = 2
+          p = type.scrap_price
+        elsif entry.repaired == 1
+          s = 1
+          p = type.repair_price
+        elsif entry.test == 1
+          s = 0
+          p = type.test_price
+        else
+          s = 3
+          p = 0
+        end
+
+        price_total[@statuses[s]][0] += 1
+        price_total[@statuses[s]][1] += p
+        price_global_total[@statuses[s]][0] += 1
+        price_global_total[@statuses[s]][1] += p
+      end
+
+      total_temp = [0,0]
+      price_total.each do |key, value|
+        total_temp[0] += value[0]
+        total_temp[1] += value[1]      
+      end
+      price_total[t('global.total')] = total_temp
+      @price_type_total[type.brand_type] = price_total
+    end
+
+    total_temp = [0,0]
+    @price_type_total.each do |key, value|
+      total_temp[0] += value[t('global.total')][0]
+      total_temp[1] += value[t('global.total')][1]
+    end
+    price_global_total[t('global.total')] = total_temp
+    @price_type_total[I18n.t('global.total')] = price_global_total
+
     @sender_data = ENV["COMPANY"]
   end
 
@@ -80,9 +110,10 @@ class InvoicesController < ApplicationController
     authorize! :create, Invoice, :message => I18n.t('global.unauthorized')
 
     items = params[:invoice][:items]
-    params[:invoice][:items] = params[:invoice][:items].lines.length
     params[:invoice][:company_id] = params[:company_id]
-    @invoice = Invoice.new(params[:invoice].permit(:items, :company_id))
+    @invoice = Invoice.new(params[:invoice].permit(:company_id))
+
+    entries = Array.new
 
     non_existing = Array.new
     already_sent = Array.new
@@ -90,7 +121,9 @@ class InvoicesController < ApplicationController
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
       app = Appliance.where(abb: num[1]).take
-      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], appliance_id: app.id).take
+      types = Type.where(appliance_id: app.id).ids
+      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], type_id: types).take
+      entries.append(entry)
       if entry.nil?
       	non_existing.push(num)
       elsif entry.sent.to_i == 1
@@ -101,10 +134,7 @@ class InvoicesController < ApplicationController
     end
 
     if non_existing.length == 0 and already_sent.length == 0 and wrong_comp.length == 0 and @invoice.save
-      items.lines do |line|
-        num = line.tr("\n","").tr("\r","")
-        app = Appliance.where(abb: num[1]).take
-        entry = Entry.where(company_id: params[:company_id], number: num[2..-1], appliance_id: app.id).take
+      entries.each do |entry|
         entry.update_attribute(:invoice_id, @invoice.id)
         entry.update_attribute(:sent, 1)
       end

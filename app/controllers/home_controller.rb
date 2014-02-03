@@ -2,10 +2,10 @@ class HomeController < ApplicationController
   def index
     unless current_user.nil? or current_user.has_role? :user
       if current_user.staff?
-        @companies = Company.all.order('id ASC')
+        @companies = Company.all.includes(:entries,:invoices).order('id ASC')
         @panelclass = 'col-xs-6 col-sm-3'
       elsif current_user.supplier?
-        @companies = Company.where(short: current_user.roles.first.name)
+        @companies = Company.includes(:entries,:invoices).where(short: current_user.roles.first.name)
         @panelclass = 'col-md-4 col-md-offset-4'
       end
       @simple_stats = Array.new
@@ -23,6 +23,10 @@ class HomeController < ApplicationController
 
     @appliance_names = Appliance.pluck(:name, :id)
     @class_names = Classifications.pluck(:name, :id)
+    @type_names = Array.new
+    Type.pluck(:brand, :typenum, :id).each do |type|
+      @type_names.append(["#{type[0]} #{type[1]}", type[2]])
+    end
   end
 
   # The post function that catches and handles batch updating the entries
@@ -31,24 +35,25 @@ class HomeController < ApplicationController
 
     items = params[:entry][:ordernumbers]
 
+    entries = Array.new
+
     non_existing = Array.new
     wrong_comp = Array.new
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
       app = Appliance.where(abb: num[1]).take
-      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], appliance_id: app.id).take
+      types = Type.where(appliance_id: app.id).ids
+      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], type_id: types).take
+      entries.append(entry)
       if entry.nil?
         non_existing.push(num)
-      elsif entry.company_id != params[:company_id]
+      elsif entry.company_id != params[:company_id].to_i
         wrong_comp.push(num)
       end
     end
 
     if non_existing.length == 0 and wrong_comp.length == 0
-      items.lines do |line|
-        num = line.tr("\n","").tr("\r","")
-        app = Appliance.where(abb: num[1]).take
-        entry = Entry.where(company_id: params[:company_id], number: num[2..-1], appliance_id: app.id).take
+      entries.each do |entry|
         params[:entry].each do |key, value|
           unless key == 'ordernumbers' or key == 'enable'
             if params[:entry][:enable]['entry_' + key] == '1'
@@ -63,11 +68,15 @@ class HomeController < ApplicationController
         flash["alert #{item}"] = "#{item} #{I18n.t('home.controller.error_exist')}"
       end
       wrong_comp.each do |item|
-        flash["alert #{item}"] = "#{item} #{I18n.t('home.controller.error_wrong')} #{Company.find(params[:company_id].title)}!"
+        flash["alert #{item}"] = "#{item} #{I18n.t('home.controller.error_wrong')} #{Company.find(params[:company_id]).title}!"
       end
 
       @appliance_names = Appliance.pluck(:name, :id)
       @class_names = Classifications.pluck(:name, :id)
+      @type_names = Array.new
+      Type.pluck(:brand, :typenum, :id).each do |type|
+        @type_names.append(["#{type[0]} #{type[1]}", type[2]])
+      end
       render 'batch'
     end
   end

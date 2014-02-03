@@ -4,90 +4,51 @@ class StatsController < ApplicationController
 
 		@company = Company.find(params[:company_id])
 
-		# Set it up
-		entry_stats = Hash.new # brand and type sorted statuses
-		entry_stats_global = Array.new # global statuses
-		entry_stats_status = Hash.new # test/repair/scrap statuses
-		entry_stats_status_global = Array.new # test/repair/scrap global statuses
-		(0..6).each do |i| #0..'amount of statuses'
-			entry_stats_global[i] = 0
-		end
-		(0..3).each do |i| #0..'amount of statuses'
-			entry_stats_status_global[i] = 0
-		end
-		entries = @company.entries
+		type_global_all = Array.new(7) {0}
+		type_global_min = Array.new(4) {0}
 
-		# Process entry status codes
-		entries.each do |entry|
-			# unknown brand
-			unless entry_stats.has_key? entry.brand
-				entry_stats[entry.brand] = Hash.new
-				entry_stats_status[entry.brand] = Hash.new
-			end
-			# unknown type
-			unless entry_stats[entry.brand].has_key? entry.typenum
-				entry_stats[entry.brand][entry.typenum] = Array.new
-				entry_stats_status[entry.brand][entry.typenum] = Array.new
-				(0..6).each do |i| #0..'amount of statuses'
-					entry_stats[entry.brand][entry.typenum][i] = 0
-				end
-				(0..3).each do |i| #0..'amount of statuses'
-					entry_stats_status[entry.brand][entry.typenum][i] = 0
-				end
-			end
-
-			entry_status = Stats.new.process_status(entry)
-			entry_stats[entry.brand][entry.typenum][entry_status] = entry_stats[entry.brand][entry.typenum][entry_status] + 1
-			entry_stats_global[entry_status] = entry_stats_global[entry_status] + 1
-
-			if entry.scrap == 1
-				entry_stats_status[entry.brand][entry.typenum][2] = entry_stats_status[entry.brand][entry.typenum][2] + 1
-				entry_stats_status_global[2] = entry_stats_status_global[2] + 1
-			elsif entry.repaired == 1
-				entry_stats_status[entry.brand][entry.typenum][1] = entry_stats_status[entry.brand][entry.typenum][1] + 1
-				entry_stats_status_global[1] = entry_stats_status_global[1] + 1
-			elsif (entry.test == 1 or (!entry.defect.nil? and entry.defect.length != 0))
-				entry_stats_status[entry.brand][entry.typenum][0] = entry_stats_status[entry.brand][entry.typenum][0] + 1
-				entry_stats_status_global[0] = entry_stats_status_global[0] + 1
-			else
-				entry_stats_status[entry.brand][entry.typenum][3] = entry_stats_status[entry.brand][entry.typenum][3] + 1
-				entry_stats_status_global[3] = entry_stats_status_global[3] + 1
-			end
-		end
-
-		# Generate chart data
 		@charts = Hash.new
 		@charts[:global] = Array.new
-		@charts[:global].append Stats.new.generate_chart(@company.short, entries.length.to_s, entry_stats_global, params[:type]) # global chart first
-		@charts[:global].append Stats.new.generate_chart_status(@company.short, entries.length.to_s, entry_stats_status_global, params[:type]) # global chart first
-		entry_stats.each_pair do |brand, brand_data|
-			brand_data.each_pair do |type, type_data|
-				type_total = 0
-				type_data.each do |i|
-					type_total += i
-				end
-				unless @charts.has_key? (brand + '_' + type.gsub(' ', '_'))
-					@charts[brand + '_'  + type.gsub(' ', '_')] = Array.new
-				end
-			    @charts[brand + '_'  + type.gsub(' ', '_')].append Stats.new.generate_chart(brand + ' ' + type, type_total.to_s, type_data, params[:type]) # each brand and type sorted chart after
-			end
-		end
-		entry_stats_status.each_pair do |brand, brand_data|
-			brand_data.each_pair do |type, type_data|
-				unless ((type_data[0] + type_data[1] + type_data[2]) == 0)
-					type_total = 0
-					type_data.each do |i|
-						type_total += i
-					end
-			    	@charts[brand + '_'  + type.gsub(' ', '_')].append Stats.new.generate_chart_status(brand + ' ' + type, type_total.to_s, type_data, params[:type]) # each brand and type sorted chart after
+
+		@company.types.each do |type|
+			type_all = Array.new(7) {0}
+			type_min = Array.new(4) {0}
+			type_total_all = 0
+			type_total_min = 0
+
+			type.entries.each do |entry|
+				if entry.scrap == 1
+					s = 2
+				elsif entry.repaired == 1
+					s = 1
+				elsif entry.test == 1
+					s = 0
 				else
-					if params[:type] == 'extended'
-						@charts[brand + '_'  + type.gsub(' ', '_')].append LazyHighCharts::HighChart.new('pie')
-					else
-						@charts[brand + '_'  + type.gsub(' ', '_')].append ''
-					end
+					s = 3
+				end
+
+				type_min[s] += 1
+				type_global_min[s] += 1
+
+				status = Stats.new.process_status(entry)
+				type_all[status] += 1
+				type_global_all[status] += 1
+			end
+
+			@charts[type.brand_type] = Array.new
+			@charts[type.brand_type].append Stats.new.generate_chart(type.brand_type.gsub('_',''), type.entries.length, type_all, params[:type])
+			unless type_min[0] + type_min[1] + type_min[2] + type_min[3] == 0
+				@charts[type.brand_type].append Stats.new.generate_chart_status(type.brand_type.gsub('_',''), type.entries.length, type_min, params[:type])
+			else
+				if params[:type] == 'extended'
+					@charts[type.brand_type].append LazyHighCharts::HighChart.new('pie')
+				else
+					@charts[type.brand_type].append ''
 				end
 			end
 		end
+
+		@charts[:global].append Stats.new.generate_chart(@company.short, @company.entries.length, type_global_all, params[:type])
+		@charts[:global].append Stats.new.generate_chart_status(@company.short, @company.entries.length, type_global_min, params[:type])
 	end
 end

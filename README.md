@@ -9,6 +9,8 @@ Requirements
 * Ruby 2.1.0 or newer
 * Rails 4.0.2 or newer
 * PostgreSQL 9.1 or newer
+* ImageMagick
+* Graphviz
 * Git
 
 Database

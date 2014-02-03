@@ -22,6 +22,7 @@ en:
     sure: 'Are you sure?'
     y: 'Yes'
     n: 'No'
+    total: 'Total'
 
     name: 'Name'
     username: 'Username'
@@ -53,6 +54,9 @@ en:
     accessoires: 'Accessoires'
     class: 'Class'
     note: 'Note'
+    test_price: 'Test price'
+    repair_price: 'Repair price'
+    scrap_price: 'Scrap price'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -204,6 +208,7 @@ en:
       invoices: 'Invoices'
       stats: 'Stats'
       batch: 'Batch'
+      type: 'Types'
       no_company: 'You will be assigned to your respective company soon. Can''t wait? Contact the admin '
       no_company_anchor: 'here'
 
@@ -235,8 +240,8 @@ en:
       legend: 'Invoice'
       sender: 'Sender'
       adressee: 'Adressee'
-      items: 'Items'
       date: 'Date'
+      all_types: 'All types'
       empty_list: 'No entries here' 
       signature_sender: 'Signature sender'
       signature_adressee: 'Signature adresse'
@@ -246,6 +251,7 @@ en:
       tested: 'Tested'
       repaired: 'Repaired'
       scrapped: 'Scrapped'
+      skipped: 'Skipped'
       deleted: 'Invoice deleted.'
       added: 'Invoice added.'
       no_exist: 'doesn''t exist!'
@@ -292,16 +298,29 @@ en:
     controller:
       notice_added: 'Class added.'
 
-# app/views/history
-  history:
+# app/views/types
+  type:
     index:
-      title: 'Badger - History'
-      legend: 'History'
-      empty_list: 'No history here'
-      where: 'Where?'
-      who: 'Who?'
-      what: 'What?'
-      when: 'When?'
+      title: 'Badger - Types for '
+      legend: 'Types for '
+      empty_list: 'No types here'
+      add_type: 'Add type'
+    new:
+      title: 'Badger - New type'
+      legend: 'New type'
+      button: 'Save'
+      button_send: 'Saving...'
+    edit:
+      title: 'Badger - Edit type'
+      legend: 'Edit type'
+      button: 'Save'
+      button_send: 'Saving...'
+
+# app/controllers/types & model
+    controller:
+      type_added: 'Type added.'
+      type_updated: 'Type updated.'
+      type_deleted: 'Type deleted.'
 
 # app/views/users
   user:

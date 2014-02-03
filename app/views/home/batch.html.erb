@@ -16,9 +16,7 @@
 
       <hr/>
 
-      <%= f.select :appliance_id, @appliance_names, label: t('global.appliance') %>
-      <%= f.text_field :brand, label: t('global.brand') %>
-      <%= f.text_field :typenum, label: t('global.typenum') %>
+      <%= f.select :type_id, @type_names, label: t('global.type') %>
       <%= f.text_field :serialnum, label: t('global.serialnum') %>
 
       <%= f.text_field :defect, label: t('global.defect') %>

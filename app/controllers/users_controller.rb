@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     authorize! :index, @user, :message => I18n.t('global.unauth_admin')
-    @users = User.all.page(params[:page]).per(25)
+    @users = User.all.order('id ASC').page(params[:page]).per(25)
   end
 
   def show

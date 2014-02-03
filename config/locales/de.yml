@@ -5,6 +5,9 @@ de:
 # > broadcast#*
 # > global#title/short/adress
 # > company#*
+# > home#index#type
+# > invoice#show#all_types
+# > global#test_price/repair_price/scrap_price
 
 ######################
 ##     GLOBALS      ##
@@ -28,6 +31,7 @@ de:
     sure: 'Bist du sicher?'
     y: 'Ja'
     n: 'Nee'
+    total: 'Total'
 
     name: 'Name'
     username: 'Nützername'
@@ -59,6 +63,9 @@ de:
     accessoires: 'Zubehör'
     class: 'Klasse'
     note: 'Notiz'
+    test_price: 'Test price'
+    repair_price: 'Repair price'
+    scrap_price: 'Scrap price'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -210,6 +217,7 @@ de:
       invoices: 'Quittungen'
       stats: 'Statistik'
       batch: 'Stapel'
+      type: 'Types'
       no_company: 'Sie werden bald wie möchlich bei ihren Firma zutrutt haben in dieses Programm. Eile? Kontaktier den Verwalter '
       no_company_anchor: 'here'
 
@@ -241,8 +249,8 @@ de:
       legend: 'Quittung'
       sender: 'Absender'
       adressee: 'Empfänger'
-      items: 'Artikel'
       date: 'Datum'
+      all_types: 'All types'
       empty_list: 'Kein Einträge hier' 
       signature_sender: 'Unterschrift Absender'
       signature_adressee: 'Unterschrift Empfänger'
@@ -298,16 +306,29 @@ de:
     controller:
       notice_added: 'Klasse hinzugefügt.'
 
-# app/views/history
-  history:
+# app/views/types
+  type:
     index:
-      title: 'Badger - Geschichte'
-      legend: 'Geschichte'
-      empty_list: 'Keine Geschichte hier'
-      where: 'Wo?'
-      who: 'Wem?'
-      what: 'Was?'
-      when: 'Wann?'
+      title: 'Badger - Types for '
+      legend: 'Types for '
+      empty_list: 'No types here'
+      add_type: 'Add type'
+    new:
+      title: 'Badger - New type'
+      legend: 'New type'
+      button: 'Save'
+      button_send: 'Saving...'
+    edit:
+      title: 'Badger - Edit type'
+      legend: 'Edit type'
+      button: 'Save'
+      button_send: 'Saving...'
+
+# app/controllers/types & model
+    controller:
+      type_added: 'Type added.'
+      type_updated: 'Type updated.'
+      type_deleted: 'Type deleted.'
 
 # app/views/users
   user:
