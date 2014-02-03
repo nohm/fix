@@ -8,4 +8,4 @@ git commit -m "Updating server-side routes"
 git push
 
 echo 'Updating server...'
-ssh nohm@nohm.eu "cd /var/www/badger/ && git pull && rake routes && bundle exec rake assets:precompile RAILS_ENV=production && touch tmp/restart.txt"
+ssh nohm@nohm.eu "cd /var/www/badger/ && git pull && rake routes && touch tmp/restart.txt"

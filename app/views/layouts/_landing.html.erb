@@ -1,42 +1,41 @@
-<div class="panel panel-info center">
-  <div class="panel-heading panel-heading-landing">
-    <div class="panel-title">
-      <h1>Badger</h1>
-      <h2><%= t('layouts.landing.welcome') %></h2>
-    </div>
-
-    <div class="landing-languageflags">
-    <!-- Flags to switch languages -->
-    <%= link_to(root_path(locale: 'en')) do %>
-      <span class="languageflag enflag"></span>
-    <% end %>
-    <%= link_to(root_path(locale: 'nl')) do %>
-      <span class="languageflag nlflag"></span>
-    <% end %>
-    <%= link_to(root_path(locale: 'de')) do %>
-      <span class="languageflag deflag"></span>
-    <% end %>
-    </div>
+<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+  <div class="landing-heading">
+    <h1>Badger</h1>
+    <h2><%= t('layouts.landing.welcome') %></h2>
   </div>
-  <div class="panel-body">
+
+  <div class="landing-content">
     <%= bootstrap_form_for(:user, :as => :user, :url => user_session_path, help: :block) do |f| %>
-        <div id="bm"></div>
-        <%= f.email_field :email, hide_label: :true, placeholder: t('global.email'), :autofocus => true %>
-        <%= f.password_field :password, hide_label: :true, placeholder: t('global.password') %>
-        <%= f.hidden_field :remember_me, :value => "1" %>
-        <div class="btn-group-landing">
-          <%= f.submit t('layouts.signin.button'), data: { disable_with: t('layouts.signin.button_send') }, class: "btn btn-success" %>
-          <%= render 'layouts/signup/button' %>
-          <!-- Report button with extra classes -->
-          <a href="#" class="btn btn-warning btn-report" data-toggle="modal" data-target="#modal-report">
-            <%= t('layouts.report.button_large') %>
-          </a>
-        </div>
+      <div id="bm"></div>
+      <%= f.email_field :email, hide_label: :true, placeholder: t('global.email'), :autofocus => true %>
+      <%= f.password_field :password, hide_label: :true, placeholder: t('global.password') %>
+      <%= f.hidden_field :remember_me, :value => "1" %>
+      <%= f.submit t('layouts.signin.button'), data: { disable_with: t('layouts.signin.button_send') }, class: "btn btn-success btn-signin" %>
+    <% end %>
+  </div>
+
+  <div class="landing-footer">
+    <div class="landing-languageflags">
+      <!-- Flags to switch languages -->
+      <%= link_to(root_path(locale: 'en')) do %>
+        <span class="languageflag enflag"></span>
       <% end %>
+      <%= link_to(root_path(locale: 'nl')) do %>
+        <span class="languageflag nlflag"></span>
+      <% end %>
+      <%= link_to(root_path(locale: 'de')) do %>
+        <span class="languageflag deflag"></span>
+      <% end %>
+    </div>
+    <div class="landing-buttons">
+      <%= render 'layouts/signup/button' %>
+      <%= render 'layouts/password/button' %>
+    </div>
   </div>
 </div>
 
 <%= render 'layouts/signup/form' %> 
+<%= render 'layouts/password/form' %> 
 
 <script>
 	if(!Modernizr.canvas && !Modernizr.fontface){$('#bm')[0].innerHTML='<div class="alert alert-warning"><strong><%= t('layouts.landing.warning') %></strong> <%= t('layouts.landing.warning_msg') %></div>'}

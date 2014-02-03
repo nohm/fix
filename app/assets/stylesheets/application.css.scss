@@ -22,6 +22,10 @@ $footer-height: 101px;
 $black: #232323;
 $white: #fafafa;
 
+// Transparent black and white
+$black-transparent: rgba(0, 0, 0, 0.6);
+$white-transparent: rgba(255, 255, 255, 0.6);
+
 // Different grayscales
 $gray-darker: #202020;
 $gray-dark: #303030;
@@ -298,34 +302,42 @@ footer {
   }
 }
 
-// Landing page buttons
-.btn-signup,
-.btn-report {
-  padding: 5px 12px !important;
-}
-.btn-group-landing {
-  width: 100%;
-  .btn {
-    width: 100%;
-    &:not(:first-child) {
-      margin-top: 5px;
+// Landing page
+.landing {
+  background-color: $gray-lighter;
+  .landing-heading {
+    color: $white;
+    text-align: center;
+    text-shadow: 2px 2px 3px $black-transparent;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $white-transparent;
+    h1 {
+      margin: 0;
+      font-size: 5em;
+    }
+    h2 {
+      margin: 0;
+      padding-top: 5px;
+      font-size: 1.5em;
     }
   }
-}
-
-//Landing page flags
-.panel-heading-landing {
-  position: relative;
-}
-
-.landing-languageflags {
-  .languageflag {
-    position: absolute;
-    top: 10px;
+  .landing-content {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $white-transparent;
+    .btn-signin {
+      width: 100%;
+    }
   }
-  .enflag { left: 10px; }
-  .nlflag { left: 35px; }
-  .deflag { left: 60px; }
+  .landing-footer {
+    text-align: center;
+    .landing-buttons {
+      a {
+        display: block;
+      }
+    }    
+  }
 }
 
 // Loading spinner

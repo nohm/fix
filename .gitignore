@@ -17,13 +17,7 @@
 /tmp/restart.txt
 
 # compiled assets
-/public/assets/application-*.css
-/public/assets/application-*.css.gz
-/public/assets/application-*.js
-/public/assets/application-*.js.gz
-/public/assets/favicon-*.ico
-/public/assets/glyphicons-halflings-*.png
-/public/assets/manifest-*.json
+/public/assets/*
 
 # bundler state
 /.bundle

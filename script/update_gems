@@ -8,4 +8,4 @@ git commit -m "Updating server-side gems"
 git push
 
 echo 'Updating server...'
-ssh nohm@nohm.eu "cd /var/www/badger/ && git pull && bundle update && bundle exec rake assets:precompile RAILS_ENV=production && touch tmp/restart.txt"
+ssh nohm@nohm.eu "cd /var/www/badger/ && git pull && bundle update && gem clean && bundle exec rake assets:precompile RAILS_ENV=production && touch tmp/restart.txt"
