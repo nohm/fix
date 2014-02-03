@@ -6,7 +6,6 @@
             <% unless params[:company_id].nil? %>
               <%= ' @ ' + Company.find(params[:company_id]).title %>
             <% end %>
-            <span class="languageflag <%= I18n.locale.to_s %>flag"></span>
           <% end %>
         </p>
     </li>

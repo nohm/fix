@@ -92,6 +92,7 @@ html, body {
   margin-top: auto;
 }
 
+// Empty tables
 .empty_list {
   padding: 15px;
 }
@@ -106,8 +107,13 @@ html, body {
   }
   .navbar-brand {
     color: $white;
+    padding: 5px 15px;
     &:hover {
       color: $gray-lighter;
+    }
+    img {
+      height: 40px;
+      width: 40px;
     }
   }
   .navbar-nav {
@@ -312,6 +318,10 @@ footer {
     margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid $white-transparent;
+    .landing-logo {
+      height: 200px;
+      width: 200px;
+    }
     h1 {
       margin: 0;
       font-size: 5em;
