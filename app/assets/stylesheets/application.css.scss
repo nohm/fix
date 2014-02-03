@@ -107,13 +107,13 @@ html, body {
   }
   .navbar-brand {
     color: $white;
-    padding: 5px 15px;
+    margin-left: 0px !important;
+    padding-left: 45px;
+    background: url("../images/logo-tiny.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: left center;
     &:hover {
       color: $gray-lighter;
-    }
-    img {
-      height: 40px;
-      width: 40px;
     }
   }
   .navbar-nav {
