@@ -13,8 +13,10 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4><%= company.title %></h4>
-                <div class="simple_stats">
-                <%= "#{@simple_stats[index][0]} #{'entry'.pluralize(@simple_stats[index][0])}, #{@simple_stats[index][1]} #{'invoice'.pluralize(@simple_stats[index][1])}"%>
+                <div class="simple-stats">
+                <%= "#{@simple_stats[index][0]} #{'entry'.pluralize(@simple_stats[index][0])}" %>
+                <br>
+                <%= "#{@simple_stats[index][1]} #{'invoice'.pluralize(@simple_stats[index][1])}"%>
                 </div>
               </div>
               <div class="list-group">

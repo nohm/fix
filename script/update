@@ -13,4 +13,4 @@ git commit -m "$*"
 git push
 
 echo 'Updating server...'
-ssh nohm@nohm.eu "cd /var/www/badger/ && git pull && bundle exec rake assets:precompile RAILS_ENV=production && touch tmp/restart.txt"
+ssh nohm@nohm.eu "cd /var/www/badger/ && git pull && rake assets:precompile RAILS_ENV=production && rake assets:clean && touch tmp/restart.txt"

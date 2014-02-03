@@ -34,7 +34,7 @@ $gray-light: #b0b0b0;
 $gray-lighter: #e0e0e0;
 
 // Colours from colourlovers.com
-$brand-primary: #0B486B; // adrift in dreams
+$brand-primary: #5967B2; // periwinky
 $brand-success: #88A65E; // hans wegner
 $brand-info: #81A8B8; // pacifica
 $brand-warning: #F5B349; // groviera moon
@@ -210,26 +210,26 @@ a span:hover {
   color: #000
 }
 
-// Languageflags
+// Languageflags, generated with flag-sprites.com
 .languageflag{
   display:inline-block;
   height:11px;
   width:16px;
-  background: url(../images/flags.png)  no-repeat;
+  background: url(../images/flags.png) no-repeat;
 }
 
 .nlflag {
-  background-position: -48px -44px;
+  background-position: -16px -11px;
 }
 .enflag {
-  background-position: -16px -275px;
+  background-position: 0 -11px;
 }
 .deflag {
-  background-position: -16px -22px;
+  background-position: -16px 0;
 }
 
 // Simple home#index stats labels
-.simple_stats {
+.simple-stats {
   color: $gray-light;
   font-style: italic;
 }
