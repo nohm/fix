@@ -111,7 +111,7 @@ class EntriesController < ApplicationController
 
     @entry = Entry.find(params[:id])
 
-    if @entry.type_id == params[:entry][:type_id].to_i
+    if @entry.type.appliance_id == Type.find(params[:entry][:type_id]).appliance_id
       params[:entry][:number] = @entry.number
     else
       highest_id = 0
