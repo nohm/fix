@@ -108,12 +108,12 @@ en:
 # app/views/companies
   company:
     index:
-      title: 'Badger - Company panel'
+      title: 'Badger · Company panel'
       legend: 'Companies'
       empty_list: 'No companies here'
       new_company: 'New company'
     new:
-      title: 'Badger - New company'
+      title: 'Badger · New company'
       legend: 'New company'
       button: 'Save'
       button_send: 'Saving...'
@@ -127,20 +127,20 @@ en:
     sticker: 'Sticker'
     ticket: 'Ticket'
     edit:
-      title: 'Badger - Edit entry'
+      title: 'Badger · Edit entry'
       legend: 'Edit entry'
       message: 'First save the entry, then show it and there you can add images.'
       button: 'Update'
       button_send: 'Updating...'
     entryhistory:
-      title: 'Badger - History overview'
+      title: 'Badger · History overview'
       legend: 'History'
       empty_list: 'No history here'
       who: 'Who?'
       what: 'What?'
       when: 'When?'
     index:
-      title: 'Badger - Entries for '
+      title: 'Badger · Entries for '
       legend: 'Entries for '
       empty_list: 'No entries here'
       back: 'Back to overview'
@@ -151,13 +151,13 @@ en:
       searchtype: 'Search type..'
       searchserial: 'Search serial..'
     new:
-      title: 'Badger - New entry'
+      title: 'Badger · New entry'
       legend: 'New entry'
       message: 'First save the entry, then show it and there you can add images.'
       button: 'Save'
       button_send: 'Saving...'
     show:
-      title: 'Badger - Entry overview'
+      title: 'Badger · Entry overview'
       legend: 'Entry'
       barcode: 'Barcode'
       sent: 'Sent?'
@@ -192,7 +192,7 @@ en:
 # app/views/home
   home:
     batch:
-      title: 'Badger - Batch Update'
+      title: 'Badger · Batch Update'
       legend: 'Batch update'
       warning: 'Careful in here!'
       warning_msg: 'You can easily mess a lot of stuff up! Enter numbers at top, enable the boxes next to the field you''d like to use, fill the fields and save.'
@@ -223,20 +223,20 @@ en:
 # app/views/invoices
   invoice:
     index:
-      title: 'Badger - Invoices for '
+      title: 'Badger · Invoices for '
       legend: 'Invoices for '
       empty_list: 'No invoices here'
       items: 'Items'
       date: 'Date'
       add_invoice: 'Add invoice'
     new:
-      title: 'Badger - New invoice'
+      title: 'Badger · New invoice'
       legend: 'New invoice'
       items: 'Items'
       button: 'Save'
       button_send: 'Saving...'
     show:
-      title: 'Badger - Invoice'
+      title: 'Badger · Invoice'
       legend: 'Invoice'
       sender: 'Sender'
       adressee: 'Adressee'
@@ -261,14 +261,14 @@ en:
 # app/views/appliances
   appliance:
     index:
-      title: 'Badger - Appliance panel'
+      title: 'Badger · Appliance panel'
       legend: 'Appliances'
       empty_list: 'No appliances here'
       new_appliance: 'Add appliance'
       button: 'Save'
       button_send: 'Saving...'
     new: 
-      title: 'Badger - New appliance'
+      title: 'Badger · New appliance'
       legend: 'New appliance'
       button: 'Save'
       button_send: 'Saving...'
@@ -284,12 +284,12 @@ en:
 # app/views/classifications
   classes:
     index:
-      title: 'Badger - Class panel'
+      title: 'Badger · Class panel'
       legend: 'Classes'
       empty_list: 'No classes here'
       new_class: 'Add class'
     new: 
-      title: 'Badger - New class'
+      title: 'Badger · New class'
       legend: 'New class'
       button: 'Save'
       button_send: 'Saving...'
@@ -301,17 +301,17 @@ en:
 # app/views/types
   type:
     index:
-      title: 'Badger - Types for '
+      title: 'Badger · Types for '
       legend: 'Types for '
       empty_list: 'No types here'
       add_type: 'Add type'
     new:
-      title: 'Badger - New type'
+      title: 'Badger · New type'
       legend: 'New type'
       button: 'Save'
       button_send: 'Saving...'
     edit:
-      title: 'Badger - Edit type'
+      title: 'Badger · Edit type'
       legend: 'Edit type'
       button: 'Save'
       button_send: 'Saving...'
@@ -327,12 +327,12 @@ en:
     user:
       change: 'Change Role'
     index:
-      title: 'Badger - User panel'
+      title: 'Badger · User panel'
       legend: 'Users'
       registered: 'Registered'
       role: 'Role'
     show:
-      title: 'Badger - User overview'
+      title: 'Badger · User overview'
       registered: 'Registered'
       last_signin: 'Last sign-in'
       signin_count: 'Sign-in count'
@@ -347,7 +347,7 @@ en:
 # app/views/stats
   stats:
     index:
-      title: 'Badger - Stats for '
+      title: 'Badger · Stats for '
       simpler: 'Want simpler stats?'
       fancier: 'Want fancier stats?'
       global: 'Global'
@@ -372,14 +372,14 @@ en:
 # app/views/broadcasts
   broadcast:
     index:
-      title: 'Badger - Broadcast panel'
+      title: 'Badger · Broadcast panel'
       legend: 'Broadcasts'
       empty_list: 'No broadcasts here'
       title_label: 'Title'
       text_label: 'Text'
       new_broadcast: 'Add broadcast'
     new:
-      title: 'Badger - New broadcast'
+      title: 'Badger · New broadcast'
       legend: 'New broadcast'
       title_label: 'Title'
       text_label: 'Text'

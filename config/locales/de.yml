@@ -117,12 +117,12 @@ de:
 # app/views/companies
   company:
     index:
-      title: 'Badger - Company panel'
+      title: 'Badger · Company panel'
       legend: 'Companies'
       empty_list: 'No companies here'
       new_company: 'New company'
     new:
-      title: 'Badger - New company'
+      title: 'Badger · New company'
       legend: 'New company'
       button: 'Save'
       button_send: 'Saving...'
@@ -136,20 +136,20 @@ de:
     sticker: 'Sticker'
     ticket: 'Zettel'
     edit:
-      title: 'Badger - Eintrag bearbeiten'
+      title: 'Badger · Eintrag bearbeiten'
       legend: 'Eintrag bearbeiten'
       message: 'Zuerst die Eintrag speichern, dann zeiche es und dort können Bilder hinzufügen.'
       button: 'Aktualisieren'
       button_send: 'Aktualisieren...'
     entryhistory:
-      title: 'Badger - Geschichte überblick'
+      title: 'Badger · Geschichte überblick'
       legend: 'Geschichte'
       empty_list: 'Keine Geschichte hier'
       who: 'Wem?'
       what: 'Was?'
       when: 'Wann?'
     index:
-      title: 'Badger - Einträge für '
+      title: 'Badger · Einträge für '
       legend: 'Einträge für '
       empty_list: 'Keine Einträge hier'
       back: 'Zurück zum überblick'
@@ -160,13 +160,13 @@ de:
       searchtype: 'Suche Modell..'
       searchserial: 'Suche Seriennummer..'
     new:
-      title: 'Badger - Neuer Eintrag'
+      title: 'Badger · Neuer Eintrag'
       legend: 'Neuer Eintrag'
       message: 'Zuerst die Eintrag speichern, dann zeiche es und dort können Bilder hinzufügen.'
       button: 'Speichern'
       button_send: 'Speichern...'
     show:
-      title: 'Badger - Eintrag überblick'
+      title: 'Badger · Eintrag überblick'
       legend: 'Eintrag'
       barcode: 'Strichcode'
       sent: 'Gesendet?'
@@ -201,7 +201,7 @@ de:
 # app/views/home
   home:
     batch:
-      title: 'Badger - Stapel-aktualisierung'
+      title: 'Badger · Stapel-aktualisierung'
       legend: 'Stapel-aktualisierung'
       warning: 'Warnung!'
       warning_msg: ' Sie können hier einfach viele Fehler machen! Zahlen oben eingeben, ermöglichen die Boxen neben dem Feld den sie verwenden wollte, füllen sie den Felder un speichern.'
@@ -232,20 +232,20 @@ de:
 # app/views/invoices
   invoice:
     index:
-      title: 'Badger - Quittungen für '
+      title: 'Badger · Quittungen für '
       legend: 'Quittungen für '
       empty_list: 'Keine Quittungen hier'
       items: 'Artikel'
       date: 'Datum'
       add_invoice: 'Neuer Quittung'
     new:
-      title: 'Badger - Neuer Quittung'
+      title: 'Badger · Neuer Quittung'
       legend: 'Neuer Quittung'
       items: 'Artikel'
       button: 'Speichern'
       button_send: 'Speichern...'
     show:
-      title: 'Badger - Quittung'
+      title: 'Badger · Quittung'
       legend: 'Quittung'
       sender: 'Absender'
       adressee: 'Empfänger'
@@ -269,14 +269,14 @@ de:
 # app/views/appliances
   appliance:
     index:
-      title: 'Badger - Geräte Tafel'
+      title: 'Badger · Geräte Tafel'
       legend: 'Geräte'
       empty_list: 'Keine Geräte hier'
       new_appliance: 'Neuer Gerät'
       button: 'Speichern'
       button_send: 'Speichern...'
     new: 
-      title: 'Badger - Neuer Gerät'
+      title: 'Badger · Neuer Gerät'
       legend: 'Neuer Gerät'
       button: 'Speichern'
       button_send: 'Speichern...'
@@ -292,12 +292,12 @@ de:
 # app/views/classifications
   classes:
     index:
-      title: 'Badger - Klasse Tafel'
+      title: 'Badger · Klasse Tafel'
       legend: 'Klasse'
       empty_list: 'Keine Klassen hier'
       new_class: 'Neuer Klasse'
     new: 
-      title: 'Badger - Neuer Klasse'
+      title: 'Badger · Neuer Klasse'
       legend: 'Neuer Klasse'
       button: 'Speichern'
       button_send: 'Speichern...'
@@ -309,17 +309,17 @@ de:
 # app/views/types
   type:
     index:
-      title: 'Badger - Types for '
+      title: 'Badger · Types for '
       legend: 'Types for '
       empty_list: 'No types here'
       add_type: 'Add type'
     new:
-      title: 'Badger - New type'
+      title: 'Badger · New type'
       legend: 'New type'
       button: 'Save'
       button_send: 'Saving...'
     edit:
-      title: 'Badger - Edit type'
+      title: 'Badger · Edit type'
       legend: 'Edit type'
       button: 'Save'
       button_send: 'Saving...'
@@ -335,12 +335,12 @@ de:
     user:
       change: 'Function ändern'
     index:
-      title: 'Badger - Nützer Tafel'
+      title: 'Badger · Nützer Tafel'
       legend: 'Nützer'
       registered: 'Registriert'
       role: 'Function'
     show:
-      title: 'Badger - Nützer überblick'
+      title: 'Badger · Nützer überblick'
       registered: 'Registriert'
       last_signin: 'Letzte Anmeldung'
       signin_count: 'Anmeldungszahl'
@@ -355,7 +355,7 @@ de:
 # app/views/stats
   stats:
     index:
-      title: 'Badger - Statsitik für '
+      title: 'Badger · Statsitik für '
       simpler: 'Möchte einfachere Statistik?'
       fancier: 'Möchte schönere Statistik?'
       global: 'Global'
@@ -380,14 +380,14 @@ de:
 # app/views/broadcasts
   broadcast:
     index:
-      title: 'Badger - Broadcast panel'
+      title: 'Badger · Broadcast panel'
       legend: 'Broadcasts'
       empty_list: 'No broadcasts here'
       title_label: 'Title'
       text_label: 'Text'
       new_broadcast: 'Add broadcast'
     new:
-      title: 'Badger - New broadcast'
+      title: 'Badger · New broadcast'
       legend: 'New broadcast'
       title_label: 'Title'
       text_label: 'Text'

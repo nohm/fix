@@ -108,12 +108,12 @@ nl:
 # app/views/companies
   company:
     index:
-      title: 'Badger - Bedrijven panel'
+      title: 'Badger · Bedrijven panel'
       legend: 'Bedrijven'
       empty_list: 'Geen bedrijven hier'
       new_company: 'Nieuw bedrijf'
     new:
-      title: 'Badger - Nieuw bedrijf'
+      title: 'Badger · Nieuw bedrijf'
       legend: 'Nieuw bedrijf'
       button: 'Opslaan'
       button_send: 'Opslaan...'
@@ -127,20 +127,20 @@ nl:
     sticker: 'Sticker'
     ticket: 'Bon'
     edit:
-      title: 'Badger - Wijzig order'
+      title: 'Badger · Wijzig order'
       legend: 'Wijzig order'
       message: 'Sla de order eerst op en open deze daarna, hier kunt u bijlages wijzigen.'
       button: 'Update'
       button_send: 'Updaten...'
     entryhistory:
-      title: 'Badger - Geschiedenis overzicht'
+      title: 'Badger · Geschiedenis overzicht'
       legend: 'Geschiedenis'
       empty_list: 'Geen geschiedenis hier'
       who: 'Wie?'
       what: 'Wat?'
       when: 'Wanneer?'
     index:
-      title: 'Badger - Orders voor '
+      title: 'Badger · Orders voor '
       legend: 'Orders voor '
       empty_list: 'Geen orders hier'
       back: 'Terug naar overzicht'
@@ -151,13 +151,13 @@ nl:
       searchtype: 'Zoek type..'
       searchserial: 'Zoek serienummer..'
     new:
-      title: 'Badger - Nieuwe order'
+      title: 'Badger · Nieuwe order'
       legend: 'Nieuwe order'
       message: 'Sla de order eerst op en open deze daarna, hier kunt u bijlages wijzigen.'
       button: 'Opslaan'
       button_send: 'Opslaan...'
     show:
-      title: 'Badger - Order overzicht'
+      title: 'Badger · Order overzicht'
       legend: 'Order'
       barcode: 'Barcode'
       sent: 'Verzonden?'
@@ -192,7 +192,7 @@ nl:
 # app/views/home
   home:
     batch:
-      title: 'Badger - Batch update'
+      title: 'Badger · Batch update'
       legend: 'Batch update'
       warning: 'Pas hier op!'
       warning_msg: ' Je kunt gemakkelijk ver verpesten hier! Voer bovenaan nummers in, vind de boxes naast de velden die u wilt gebruiken aan, vul de velden in en druk op opslaan.'
@@ -223,20 +223,20 @@ nl:
 # app/views/invoices
   invoice:
     index:
-      title: 'Badger - Facturen voor '
+      title: 'Badger · Facturen voor '
       legend: 'Facturen voor '
       empty_list: 'Geen facturen hier'
       items: 'Orders'
       date: 'Datum'
       add_invoice: 'Factuur toevoegen'
     new:
-      title: 'Badger - Nieuwe factuur'
+      title: 'Badger · Nieuwe factuur'
       legend: 'Nieuwe factuur'
       items: 'Orders'
       button: 'Opslaan'
       button_send: 'Opslaan...'
     show:
-      title: 'Badger - Factuur'
+      title: 'Badger · Factuur'
       legend: 'Factuur'
       sender: 'Afzender'
       adressee: 'Ontvanger'
@@ -260,14 +260,14 @@ nl:
 # app/views/appliances
   appliance:
     index:
-      title: 'Badger - Apparaten panel'
+      title: 'Badger · Apparaten panel'
       legend: 'Apparaten'
       empty_list: 'Geen apparaten hier'
       new_appliance: 'Voeg apparaat toe'
       button: 'Opslaan'
       button_send: 'Opslaan...'
     new: 
-      title: 'Badger - Nieuw apparaat'
+      title: 'Badger · Nieuw apparaat'
       legend: 'Nieuw apparaat'
       button: 'Opslaan'
       button_send: 'Opslaan...'
@@ -283,12 +283,12 @@ nl:
 # app/views/classifications
   classes:
     index:
-      title: 'Badger - Klassen panel'
+      title: 'Badger · Klassen panel'
       legend: 'Klassen'
       empty_list: 'Geen klassen hier'
       new_class: 'Voeg klasse toe'
     new: 
-      title: 'Badger - Nieuwe klasse'
+      title: 'Badger · Nieuwe klasse'
       legend: 'Nieuwe klasse'
       button: 'Opslaan'
       button_send: 'Opslaan...'
@@ -300,17 +300,17 @@ nl:
 # app/views/types
   type:
     index:
-      title: 'Badger - Types voor '
+      title: 'Badger · Types voor '
       legend: 'Types voor '
       empty_list: 'Geen types hier'
       add_type: 'Type toevoegen'
     new:
-      title: 'Badger - Nieuw type'
+      title: 'Badger · Nieuw type'
       legend: 'Nieuw type'
       button: 'Opslaan'
       button_send: 'Opslaan...'
     edit:
-      title: 'Badger - Type wijzigen'
+      title: 'Badger · Type wijzigen'
       legend: 'Type wijzigen'
       button: 'Opslaan'
       button_send: 'Opslaan...'
@@ -326,12 +326,12 @@ nl:
     user:
       change: 'Wijzig Rol'
     index:
-      title: 'Badger - Gebruikers panel'
+      title: 'Badger · Gebruikers panel'
       legend: 'Gebruikers'
       registered: 'Aangemeld'
       role: 'Rol'
     show:
-      title: 'Badger - Gebruikers overzicht'
+      title: 'Badger · Gebruikers overzicht'
       registered: 'Aangemeld'
       last_signin: 'Laaste sign-in'
       signin_count: 'Sign-in aantal'
@@ -346,7 +346,7 @@ nl:
 # app/views/stats
   stats:
     index:
-      title: 'Badger - Statistieken voor '
+      title: 'Badger · Statistieken voor '
       simpler: 'Wil je simpelere statistieken?'
       fancier: 'Wil je uitgebreidere statistieken?'
       global: 'Globaal'
@@ -371,14 +371,14 @@ nl:
 # app/views/broadcasts
   broadcast:
     index:
-      title: 'Badger - Uitzendings panel'
+      title: 'Badger · Uitzendings panel'
       legend: 'Uitzendingen'
       empty_list: 'Geen uitzendingen hier'
       title_label: 'Titel'
       text_label: 'Tekst'
       new_broadcast: 'Uitzending toevoegen'
     new:
-      title: 'Badger - Nieuwe uitzending'
+      title: 'Badger · Nieuwe uitzending'
       legend: 'Nieuwe uitzending'
       title_label: 'Titel'
       text_label: 'Tekst'
