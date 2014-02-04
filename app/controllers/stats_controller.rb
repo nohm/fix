@@ -19,9 +19,9 @@ class StatsController < ApplicationController
 			type.entries.each do |entry|
 				if entry.scrap == 1
 					s = 2
-				elsif entry.repaired == 1
+				elsif entry.repaired == 1 or (!entry.repair.nil? and entry.repair != '')
 					s = 1
-				elsif entry.test == 1
+				elsif entry.test == 1 or (!entry.defect.nil? and entry.defect != '')
 					s = 0
 				else
 					s = 3
