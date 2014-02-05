@@ -1,20 +1,25 @@
-# Add account credentials and API keys here.
-# See http://railsapps.github.io/rails-environment-variables.html
-# This file should be listed in .gitignore to keep your settings secret!
-# Each entry sets a local environment variable and overrides ENV variables in the Unix shell.
-# For example, setting:
-# GMAIL_USERNAME: Your_Gmail_Username
-# makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
-# Add application configuration variables here, as shown below.
-#
+# These are all available as ENV['NAME'] eg. ENV['DEV_NAME'] returns DEV_NAME
+
+# Mailer info
 GMAIL_USERNAME: ...
 GMAIL_PASSWORD: ...
 
+# Admin info
 ADMIN_NAME: ...
 ADMIN_EMAIL: ...
 ADMIN_PASSWORD: ...
 
-# Add any company you make in here as a role
-ROLES: [admin, manager, technician, user, guest]
+# Developer name (GitHub)
+DEV_NAME: ...
+DEV_MAIL: ...
 
-COMPANY: '...'
+# Database info
+DATABASE_USER: badger
+DATABASE_PASS: ...
+
+# Roles for users and suppliers
+ROLES: [admin, manager, technician, user, guest]
+SUPPLIERS: [] #All the suppliers
+
+# The main company info
+COMPANY: ''

@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   # Add any company that exists here as a supplier
   def supplier?
-    self.has_role? :vitel or self.has_role? :maxioutlet or self.has_role? :tronex or self.has_role? :ahead
+    YAML.load(ENV["SUPPLIERS"]).include?(self.roles.first.name)
   end
 
   def guest?

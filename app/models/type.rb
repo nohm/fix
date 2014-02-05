@@ -13,12 +13,13 @@ class Type < ActiveRecord::Base
 
   before_save :format_input
 
-  def format_input
-    self.brand = self.brand.titleize #stupid missing bang
-    self.typenum.upcase!
-  end
-
   def brand_type
     "#{self.brand}_#{self.typenum}".gsub(' ', '_')
   end
+
+  private
+    def format_input
+      self.brand = self.brand.titleize #stupid missing bang
+      self.typenum.upcase!
+    end
 end

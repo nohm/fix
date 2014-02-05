@@ -1,6 +1,6 @@
 <footer>
   <div class="container">
-    <p><%= t('layouts.footer.copyright') %><a href="mailto:info@nohm.eu">nohm</a></p>
+    <p><%= t('layouts.footer.copyright') %><a href="mailto:<%= ENV['DEV_MAIL'] %>"><%= ENV['DEV_NAME'] %></a></p>
     <p><%= t('layouts.footer.license') %><a href="https://github.com/nohm/badger/blob/master/LICENSE">MIT</a> &middot; Currently <%= %x(git tag | sort -n | tail -1) %></p>
     <ul class="footer-links">
       <% unless user_signed_in? %>

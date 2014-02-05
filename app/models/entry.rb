@@ -14,17 +14,6 @@ class Entry < ActiveRecord::Base
   before_save :format_input
   after_save :update_status
 
-  def format_input
-    self.serialnum.upcase!
-  end
-
-  def update_status
-    new_status = get_status
-    unless new_status == self.status
-      self.update_attribute(:status, new_status)
-    end
-  end
-
   def get_status
     status = 'New'
 
@@ -111,4 +100,15 @@ class Entry < ActiveRecord::Base
     end
   end
 
+  private
+    def format_input
+      self.serialnum.upcase!
+    end
+
+    def update_status
+      new_status = get_status
+      unless new_status == self.status
+        self.update_attribute(:status, new_status)
+      end
+    end
 end

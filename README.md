@@ -39,7 +39,7 @@ Installation guide, set up PostgreSQL, then the project.
 createuser badger -d -s
 createdb -Obadger -Eutf8 badger_development (only needed for development)
 createdb -Obadger -Eutf8 badger_production (only needed for production)
-createdb -Obadger -Eutf8 badger_test
+createdb -Obadger -Eutf8 badger_test (only needed for development)
 ```
 
 #### Project
@@ -50,23 +50,25 @@ cd <where-you-want-the-project>
 git clone git@github.com:nohm/badger.git
 cd badger
 ```
-* Install dependencies, create database tables and initialize routes
+* Install dependencies
 ```
 bundle install
-rake db:migrate
-rake routes
 ```
 * Fill in the config file *config/application.yml*
 ```
 <your-text-editor> config/application.yml
+```
+* Create database tables and base data and initialize routes
+```
+rake db:migrate
+rake db:seed
+rake routes
 ```
 * Start the server and work on it!
 ```
 sh script/server_dev
 ```
 Alternatively, you can also install Passenger on your server and run it through there, there are plenty of guides to explain how to do that.
-Note about companies, 4 are already declared in *app/models/ability.rb* and *app/models/user.rb* these can be added to *config/application.yml* roles to behave as companies. If you add them as companies that is. Change these lines otherwise to respect your personal choices
-
 
 Contributing
 ------------

@@ -29,9 +29,8 @@ development:
   adapter: postgresql
   encoding: unicode
   database: badger_development
-  pool: 5
-  username: badger
-  password: imabadgerwoo
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASS"] %>
   host:     localhost
   schema_search_path: public
   min_messages: warning
@@ -42,9 +41,8 @@ test:
   adapter: postgresql
   encoding: unicode
   database: badger_test
-  pool: 5
-  username: badger
-  password: imabadgerwoo
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASS"] %>
   host:     localhost
   schema_search_path: public
   min_messages: warning
@@ -55,9 +53,8 @@ production:
   adapter: postgresql
   encoding: unicode
   database: badger_production
-  pool: 5
-  username: badger
-  password: imabadgerwoo
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASS"] %>
   host:     localhost
   schema_search_path: public
   min_messages: warning
