@@ -400,16 +400,21 @@ de:
 
 # app/views/mailer
   mailer:
+    base:
+      welcome: 'Willkommen beim Badger, '
+      new_user: 'Neue registrierung für Badger'
+      error_report: 'Badger: Fehlerbericht'
+      role_update: 'Badger: Function aktualisiert'
     error_report:
       title: 'Badger: Fehlerbericht'
       sender: 'Ein neue Fehlerbericht is fertiggestellt von: '
       message: 'Ihren Bericht:'
     new_user:
-      title: 'Neue registrieren für Badger'
+      title: 'Neue registrierung für Badger'
       message: 'Eine neue Person hat sich registriert für Badger, ihren Nützername ist: '
       site_link: 'Zum aktualisieren ihre Genehmigung, folgen sie bitte diese Link: '
     role_update:
-      title: 'Function aktualisiert'
+      title: 'Badger: Function aktualisiert'
       new_role: 'Ihre Function ist geändert worden in: '
       site_link: 'Um and zu melden, folgen sie bitte diese Link: '
       greet: 'Wir wünschen sie einen wunderschönen Tag.'

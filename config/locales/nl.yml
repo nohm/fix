@@ -391,6 +391,11 @@ nl:
 
 # app/views/mailer
   mailer:
+    base:
+      welcome: 'Welkom Badger, '
+      new_user: 'Nieuwe aanmelding voor Badger'
+      error_report: 'Badger: Probleem bericht'
+      role_update: 'Badger: Rol gewijzigd'
     error_report:
       title: 'Badger: Probleem bericht'
       sender: 'Er is een nieuw probleem bericht geplaatst door: '

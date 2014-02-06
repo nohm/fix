@@ -392,6 +392,11 @@ en:
 
 # app/views/mailer
   mailer:
+    base:
+      welcome: 'Welcome to Badger, '
+      new_user: 'New sign up for Badger'
+      error_report: 'Badger: Error report'
+      role_update: 'Badger: Role updated'
     error_report:
       title: 'Badger: Error report'
       sender: 'A new error report has been submitted by: '
