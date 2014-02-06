@@ -21,7 +21,7 @@
               </div>
               <div class="list-group">
                 <%= link_to(t('home.index.entries'), company_entries_path(company.id), :class => 'list-group-item') %>
-                <%= if can :index, Invoices %>
+                <% if can? :index, Invoice %>
                   <%= link_to(t('home.index.invoices'), company_invoices_path(company.id), :class => 'list-group-item') %>
                 <% end %>
                 <% if can? :manage, Stats %>
