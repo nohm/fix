@@ -21,6 +21,10 @@ class InvoicesController < ApplicationController
   def show
     authorize! :show, Invoice, :message => I18n.t('global.unauthorized')
 
+    if params[:slip] == 'slip' and cannot? :slip, Invoice
+      redirect to root_path, :notice => I18n.t('global.unauthorized')
+    end
+
     @invoice = Invoice.find(params[:id])
     @company = Company.find(params[:company_id])
 

@@ -44,10 +44,14 @@
           <% value.each do |status, price| %>
             <dt><%= status %></dt>
             <dd>
-              <% unless price[2] == -1 %>
-                <%= "#{price[0]} x #{number_to_currency(price[2], unit: '€')} = #{number_to_currency(price[1], unit: '€')}" %>
+              <% unless params[:type] == 'slip' %>
+                <% unless price[2] == -1 %>
+                  <%= "#{price[0]} x #{number_to_currency(price[2], unit: '€')} = #{number_to_currency(price[1], unit: '€')}" %>
+                <% else %>
+                  <%= "#{number_to_currency(price[1], unit: '€')} (#{price[0]}x)" %>
+                <% end %>
               <% else %>
-                <%= "#{number_to_currency(price[1], unit: '€')} (#{price[0]}x)" %>
+                <%= "#{price[0]}x" %>
               <% end %>
             </dd>
           <% end %>
@@ -58,62 +62,64 @@
   </div>
 </div>
 
-<div>
-    <table class="table table-condensed table-striped">
-      <thead>
-        <tr>
-          <th><%= t('global.number') %></th>
-          <th><%= t('global.appliance') %></th>
-          <th><%= t('global.brand') %></th>
-          <th><%= t('global.type') %></th>
-          <th><%= t('global.serial') %></th>
-          <th style="width:17px;"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @entry_classes.each do |klass, entries| %>
-          <% unless entries.length == 0 %>
-            <tr>
-              <td><strong><%= "#{t('global.class')} #{klass}" %></strong></td>
-              <td></td><td></td><td></td><td></td><td></td>
-            </tr>
-            <% entries.each do |entry| %>
+<% if params[:type] == 'slip' %>
+  <div>
+      <table class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th><%= t('global.number') %></th>
+            <th><%= t('global.appliance') %></th>
+            <th><%= t('global.brand') %></th>
+            <th><%= t('global.type') %></th>
+            <th><%= t('global.serial') %></th>
+            <th style="width:17px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @entry_classes.each do |klass, entries| %>
+            <% unless entries.length == 0 %>
               <tr>
-                <td><%= entry.company.abb + entry.type.appliance.abb + entry.number.to_s %></td>
-                <td><%= entry.type.appliance.name %></td>
-                <td><%= entry.type.brand %></td>
-                <td><%= entry.type.typenum %></td>
-                <td><%= entry.serialnum %></td>
-                <% if entry.scrap == 1 %>
-                  <td><span class="glyphicon glyphicon-trash"></span></td>
-                <% elsif entry.repaired == 1 %>
-                  <td><span class="glyphicon glyphicon-wrench"></span></td>
-                <% elsif entry.test == 1 %>
-                  <td><span class="glyphicon glyphicon-ok"></span></td>
-                <% else %>
-                  <td></td>
-                <% end %>
+                <td><strong><%= "#{t('global.class')} #{klass}" %></strong></td>
+                <td></td><td></td><td></td><td></td><td></td>
               </tr>
+              <% entries.each do |entry| %>
+                <tr>
+                  <td><%= entry.company.abb + entry.type.appliance.abb + entry.number.to_s %></td>
+                  <td><%= entry.type.appliance.name %></td>
+                  <td><%= entry.type.brand %></td>
+                  <td><%= entry.type.typenum %></td>
+                  <td><%= entry.serialnum %></td>
+                  <% if entry.scrap == 1 %>
+                    <td><span class="glyphicon glyphicon-trash"></span></td>
+                  <% elsif entry.repaired == 1 %>
+                    <td><span class="glyphicon glyphicon-wrench"></span></td>
+                  <% elsif entry.test == 1 %>
+                    <td><span class="glyphicon glyphicon-ok"></span></td>
+                  <% else %>
+                    <td></td>
+                  <% end %>
+                </tr>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
-</div>
+        </tbody>
+      </table>
+  </div>
 
-<div class="well well-large">
-  <div class="row">
-    <div class="col-xs-6 col-md-4 col-md-offset-2">
-      <strong><%= t('invoice.show.signature_sender') %></strong>
-      <p style="margin-top:50px">
-        ____________________
-      </p>
-    </div>
-    <div class="col-xs-6 col-md-4 col-md-offset-2">
-      <strong><%= t('invoice.show.signature_addressee') %></strong>
-      <p style="margin-top:50px">
-        ____________________
-      </p>
+  <div class="well well-large">
+    <div class="row">
+      <div class="col-xs-6 col-md-4 col-md-offset-2">
+        <strong><%= t('invoice.show.signature_sender') %></strong>
+        <p style="margin-top:50px">
+          ____________________
+        </p>
+      </div>
+      <div class="col-xs-6 col-md-4 col-md-offset-2">
+        <strong><%= t('invoice.show.signature_addressee') %></strong>
+        <p style="margin-top:50px">
+          ____________________
+        </p>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

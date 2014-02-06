@@ -382,3 +382,10 @@ $spinner-thickness:  8px; // Odd numbers created a "wobble" effect.
   margin: -50px 0 0 -50px; // Spinner size / 2
   z-index: 10000;
 }
+
+#invoices.show {
+  padding-top: 140px;
+  footer {
+    display: none;
+  } 
+}

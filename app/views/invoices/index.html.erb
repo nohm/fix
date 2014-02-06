@@ -15,6 +15,7 @@
             <th><%= t('invoice.index.items') %></th>
             <th><%= t('invoice.index.date') %></th>
             <th style="width:17px;"></th>
+            <th style="width:17px;"></th>
             <% if can? :destroy, Invoice %>
               <th style="width:17px;"></th>
             <% end %>
@@ -26,9 +27,16 @@
               <td><%= invoice.id %></td>
               <td><%= invoice.entries.length %></td>
               <td><%= invoice.created_at.to_date %></td>
+                <% if can? :slip, Invoice %>
+                  <td>
+                    <%= link_to company_invoice_path(invoice.company_id, invoice, :type => 'slip') do %>
+                      <span class="glyphicon glyphicon-send"></span>
+                    <% end %>
+                  </td>
+                <% end %>
                 <td>
                   <%= link_to company_invoice_path(invoice.company_id, invoice) do %>
-                    <span class="glyphicon glyphicon-search"></span>
+                    <span class="glyphicon glyphicon-euro"></span>
                   <% end %>
                 </td>
                 <% if can? :destroy, Invoice %>
