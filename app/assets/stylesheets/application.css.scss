@@ -388,4 +388,28 @@ $spinner-thickness:  8px; // Odd numbers created a "wobble" effect.
   footer {
     display: none;
   }
+  .dl-horizontal dt {
+    float: left;
+    width: 160px;
+    clear: left;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dl-misc dt,
+  .dl-type dt:not(:first-child) {
+    width: 80px;
+  }
+  .dl-misc dd,
+  .dl-type dd {
+    margin-left: 100px;
+  }
+  .dl-horizontal dd:after {
+    clear: both;
+  }
+  .dl-horizontal dd:before, .dl-horizontal dd:after {
+      content: " ";
+      display: table;
+  }
 }

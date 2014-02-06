@@ -22,12 +22,12 @@
 
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4">
-      <dl class="dl-horizontal">
+      <dl class="dl-horizontal dl-misc">
         <dt><%= t('invoice.show.date') %></dt>
         <dd><%= @invoice.created_at.to_date %></dd>
       </dl>
 
-      <dl class="dl-horizontal">
+      <dl class="dl-horizontal dl-misc">
         <% @entry_classes.each_pair do |key, value| %>
           <% unless value.length == 0 %>
             <dt><%= key %></dt>
@@ -39,7 +39,7 @@
     
     <% @price_type_total.each do |key, value| %>
       <div class="col-xs-6 col-sm-6 col-md-4">
-        <dl class="dl-horizontal">
+        <dl class="dl-horizontal dl-type">
 
             <dt><%= key.gsub('_',' ') %></dt><dd></dd>
             <% value.each do |status, price| %>
