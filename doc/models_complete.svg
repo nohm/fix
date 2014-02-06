@@ -59,7 +59,7 @@
 <text text-anchor="start" x="208.594" y="-820.4" font-family="Times Roman,serif" font-size="14.00">created_at :datetime</text>
 <text text-anchor="start" x="208.594" y="-802.4" font-family="Times Roman,serif" font-size="14.00">updated_at :datetime</text>
 <text text-anchor="start" x="208.594" y="-784.4" font-family="Times Roman,serif" font-size="14.00">abb :string</text>
-<text text-anchor="start" x="208.594" y="-766.4" font-family="Times Roman,serif" font-size="14.00">adress :string</text>
+<text text-anchor="start" x="208.594" y="-766.4" font-family="Times Roman,serif" font-size="14.00">address :string</text>
 </g>
 <!-- Company&#45;&gt;Invoice -->
 <g id="edge8" class="edge"><title>Company&#45;&gt;Invoice</title>

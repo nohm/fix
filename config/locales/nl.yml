@@ -32,7 +32,7 @@ nl:
     email: 'Email'
     title: 'Titel'
     short: 'Kort'
-    adress: 'Afkorting'
+    address: 'Adres'
     password: 'Wachtwoord'
     password_confirmation: 'Wachtwoord confirmatie'
 
@@ -239,12 +239,12 @@ nl:
       title: 'Badger · Factuur'
       legend: 'Factuur'
       sender: 'Afzender'
-      adressee: 'Ontvanger'
+      addressee: 'Ontvanger'
       date: 'Datum'
       all_types: 'Alle types'
       empty_list: 'Geen orders hier' 
       signature_sender: 'Handtekening afzender'
-      signature_adressee: 'Handtekening ontvanger'
+      signature_addressee: 'Handtekening ontvanger'
 
 # app/controllers/invoices & model
     controller:

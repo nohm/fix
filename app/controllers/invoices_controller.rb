@@ -33,11 +33,11 @@ class InvoicesController < ApplicationController
     end
 
     @price_type_total = Hash.new
-    price_global_total = { I18n.t('invoice.controller.tested') => [0,0], I18n.t('invoice.controller.repaired') => [0,0], I18n.t('invoice.controller.scrapped') => [0,0], I18n.t('invoice.controller.skipped') => [0,0] }
+    price_global_total = { I18n.t('invoice.controller.tested') => [0,0,-1], I18n.t('invoice.controller.repaired') => [0,0,-1], I18n.t('invoice.controller.scrapped') => [0,0,-1], I18n.t('invoice.controller.skipped') => [0,0,-1] }
 
     @types = Type.find(Entry.where(invoice_id: @invoice.id).select("DISTINCT type_id").map(&:type_id).sort!)
     @types.each_with_index do |type, index|
-      price_total = { I18n.t('invoice.controller.tested') => [0,0], I18n.t('invoice.controller.repaired') => [0,0], I18n.t('invoice.controller.scrapped') => [0,0], I18n.t('invoice.controller.skipped') => [0,0] }
+      price_total = { I18n.t('invoice.controller.tested') => [0,0,type.test_price], I18n.t('invoice.controller.repaired') => [0,0,type.repair_price], I18n.t('invoice.controller.scrapped') => [0,0,type.scrap_price], I18n.t('invoice.controller.skipped') => [0,0,0] }
 
       Entry.where(invoice_id: @invoice.id, type_id: type.id).each do |entry|
 
@@ -61,7 +61,7 @@ class InvoicesController < ApplicationController
         price_global_total[@statuses[s]][1] += p
       end
 
-      total_temp = [0,0]
+      total_temp = [0,0,-1]
       price_total.each do |key, value|
         total_temp[0] += value[0]
         total_temp[1] += value[1]      
@@ -70,7 +70,7 @@ class InvoicesController < ApplicationController
       @price_type_total[type.brand_type] = price_total
     end
 
-    total_temp = [0,0]
+    total_temp = [0,0,-1]
     @price_type_total.each do |key, value|
       total_temp[0] += value[t('global.total')][0]
       total_temp[1] += value[t('global.total')][1]

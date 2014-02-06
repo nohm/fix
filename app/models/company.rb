@@ -6,5 +6,5 @@ class Company < ActiveRecord::Base
 	validates :title, presence: true
   	validates :short, presence: true
   	validates :abb, presence: true
-  	validates :adress, presence: true
+  	validates :address, presence: true
 end

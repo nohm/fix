@@ -3,7 +3,7 @@ de:
 # > global#broadcasts
 # > appliance#controller#*
 # > broadcast#*
-# > global#title/short/adress
+# > global#title/short/address
 # > company#*
 # > home#index#type
 # > invoice#show#all_types
@@ -41,7 +41,7 @@ de:
     email: 'Email'
     title: 'Title'
     short: 'Short'
-    adress: 'Adress'
+    address: 'Address'
     password: 'Kennwort'
     password_confirmation: 'Kennwort bestätigung'
 
@@ -248,12 +248,12 @@ de:
       title: 'Badger · Quittung'
       legend: 'Quittung'
       sender: 'Absender'
-      adressee: 'Empfänger'
+      addressee: 'Empfänger'
       date: 'Datum'
       all_types: 'All types'
       empty_list: 'Kein Einträge hier' 
       signature_sender: 'Unterschrift Absender'
-      signature_adressee: 'Unterschrift Empfänger'
+      signature_addressee: 'Unterschrift Empfänger'
 
 # app/controllers/invoices & model
     controller:

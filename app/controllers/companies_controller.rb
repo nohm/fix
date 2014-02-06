@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
   def create
     authorize! :create, Company, :message => I18n.t('global.unauthorized')
 
-    @company = Company.new(params[:company].permit(:title,:short,:abb,:adress))
+    @company = Company.new(params[:company].permit(:title,:short,:abb,:address))
 
     if @company.save
       redirect_to companies_path, :notice => I18n.t('company.model.company_added')

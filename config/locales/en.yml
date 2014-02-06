@@ -32,7 +32,7 @@ en:
     email: 'Email'
     title: 'Title'
     short: 'Short'
-    adress: 'Adress'
+    address: 'Address'
     password: 'Password'
     password_confirmation: 'Password confirmation'
 
@@ -239,12 +239,12 @@ en:
       title: 'Badger · Invoice'
       legend: 'Invoice'
       sender: 'Sender'
-      adressee: 'Adressee'
+      addressee: 'Addressee'
       date: 'Date'
       all_types: 'All types'
       empty_list: 'No entries here' 
       signature_sender: 'Signature sender'
-      signature_adressee: 'Signature adresse'
+      signature_addressee: 'Signature addressee'
 
 # app/controllers/invoices & model
     controller:

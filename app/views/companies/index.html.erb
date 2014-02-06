@@ -15,7 +15,7 @@
   			      <th><%= t('global.title') %></th>
   			      <th><%= t('global.short') %></th>
               <th><%= t('global.abbrevation') %></th>
-              <th><%= t('global.adress') %></th>
+              <th><%= t('global.address') %></th>
   			      <th style="width:17px;"></th>
   			    </tr>
   			  </thead>
@@ -25,7 +25,7 @@
   			      <td><%= company.title %></td>
               <td><%= company.short %></td>
               <td><%= company.abb %></td>
-              <td><%= company.adress %></td>
+              <td><%= company.address %></td>
   		          <td>
   		            <%= link_to(company_path(company), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
   		              <span class="glyphicon glyphicon-remove"></span>

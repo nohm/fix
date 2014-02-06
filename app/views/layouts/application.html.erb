@@ -12,6 +12,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Badger" %></title>
 
     <%= favicon_link_tag 'favicon.ico' %>
+    <link rel="author" href="humans.txt" />
     <link rel="fluid-icon" href="<%= image_path('logo.png') %>" title="Badger" />
     <link rel="apple-touch-icon" sizes="57x57" href="<%= image_path('logo-small.png') %>" />
     <link rel="apple-touch-icon" sizes="72x72" href="<%= image_path('logo-small.png') %>" />
