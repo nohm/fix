@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     authorize! :update, @user, :message => I18n.t('global.unauth_admin')
     @user = User.find(params[:id])
     if @user.update_attributes(params.require(:user).permit(:role_ids))
-      Mailer.send_role_update(@user).deliver!
+      MailJob.new.async.perform(4, {'role' => @user.roles.first.name})
       redirect_to users_path, :notice => I18n.t('user.controller.update_success')
     else
       redirect_to users_path, :alert => I18n.t('user.controller.update_fail')

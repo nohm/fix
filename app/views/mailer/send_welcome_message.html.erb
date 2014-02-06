@@ -4,8 +4,8 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1><%= "#{t('mailer.welcome_msg.title')} #{@user.name}" %></h1>
-    <p><%= "#{t('mailer.welcome_msg.message')} #{@user.email}" %></p>
+    <h1><%= "#{t('mailer.welcome_msg.title')} #{@name}" %></h1>
+    <p><%= "#{t('mailer.welcome_msg.message')} #{@email}" %></p>
     <p><%= "#{t('mailer.welcome_msg.site_link')} #{@url}" %></p>
     <p><%= t('mailer.welcome_msg.greet') %></p>
   </body>

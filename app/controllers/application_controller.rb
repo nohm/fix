@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def role_list
   	unless current_user.nil?
-	    if current_user.has_role? :technician or current_user.has_role? :manager or current_user.has_role? :admin
+	    if current_user.staff?
 	    	@roles = Role.all
 	    else
 	    	@roles = Role.where(name: current_user.roles.first.name)

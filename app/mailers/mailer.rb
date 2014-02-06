@@ -1,28 +1,28 @@
 class Mailer < ActionMailer::Base
-  default from: 'noreply@nohm.eu'
+  default from: 'administrator@nohm.eu'
  
-  def send_welcome_message(user)
-  	@user = user
-  	@url = "http://nohm.eu/badger"
-    mail(to: user.email, subject: 'Welcome to Badger, ' + user.name)
+  def send_welcome_message(name, email)
+    @name = name
+    @email = email
+    @url = "#{ENV['BASE_URL']}/badger"
+    mail(to: email, subject: 'Welcome to Badger, ' + name)
   end
 
-  def send_new_user_message(user)
-  	@user = user
-  	@url = "http://nohm.eu/badger/users"
+  def send_new_user_message(email)
+    @email = email
+    @url = "#{ENV['BASE_URL']}/badger/users"
     mail(to: ENV["GMAIL_USERNAME"], subject: 'New sign up for Badger')
   end
 
-  def send_error_report(user, message)
-    @user = user
+  def send_error_report(email, message)
+    @email = email
     @message = message
     mail(to: ENV["GMAIL_USERNAME"], subject: 'Badger: Error report')
   end
 
-
-  def send_role_update(user)
-    @role = user.roles.first.name
-    @url = "http://nohm.eu/badger"
-    mail(to: user.email, subject: 'Badger: Role updated')
+  def send_role_update(role)
+    @role = role
+    @url = "#{ENV['BASE_URL']}/badger"
+    mail(to: email, subject: 'Badger: Role updated')
   end
 end

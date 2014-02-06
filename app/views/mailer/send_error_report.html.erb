@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1><%= t('mailer.error_report.title') %></h1>
-    <p><%= "#{t('mailer.error_report.sender')} #{@user.email}" %></p>
+    <p><%= "#{t('mailer.error_report.sender')} #{@email}" %></p>
     <h3><%= t('mailer.error_report.message') %></h3>
     <p><%= @message %></p>
   </body>

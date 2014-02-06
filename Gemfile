@@ -34,6 +34,10 @@ gem 'has_barcode'
 gem 'rubyzip'
 # Pagination
 gem 'kaminari'
+# Async worker
+gem 'sucker_punch'
+# Error reporting
+gem 'party_foul'
 
 group :assets do
   # Javascript engine

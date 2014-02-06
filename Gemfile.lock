@@ -43,6 +43,8 @@ GEM
       thor
     builder (3.1.4)
     cancan (1.6.10)
+    celluloid (0.15.2)
+      timers (~> 1.1.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -65,6 +67,8 @@ GEM
     dotenv (0.9.0)
     erubis (2.7.0)
     execjs (2.0.2)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -104,12 +108,17 @@ GEM
     minitest (4.7.5)
     modernizr-rails (2.7.1)
     multi_json (1.8.4)
+    multipart-post (2.0.0)
+    octokit (2.7.1)
+      sawyer (~> 0.5.2)
     orm_adapter (0.5.0)
     paperclip (4.0.0)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    party_foul (1.5.2)
+      octokit (~> 2.7)
     pg (0.17.1)
     polyglot (0.3.3)
     puma (2.7.1)
@@ -142,6 +151,9 @@ GEM
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
+    sawyer (0.5.3)
+      addressable (~> 2.3.5)
+      faraday (~> 0.8, < 0.10)
     sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -151,6 +163,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    sucker_punch (1.0.2)
+      celluloid (~> 0.15.1)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -158,6 +172,7 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    timers (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -193,6 +208,7 @@ DEPENDENCIES
   letter_opener
   modernizr-rails
   paperclip
+  party_foul
   pg
   puma
   quiet_assets
@@ -201,6 +217,7 @@ DEPENDENCIES
   rolify
   rubyzip
   sass-rails
+  sucker_punch
   therubyracer
   turbolinks
   uglifier

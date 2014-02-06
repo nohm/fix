@@ -36,10 +36,10 @@ class User < ActiveRecord::Base
     end
 
     def welcome_mail
-      Mailer.send_welcome_message(self).deliver!
+      MailJob.new.async.perform(1, {'name' => self.name, 'email' => self.email})
     end
 
     def notify_admin
-      Mailer.send_new_user_message(self).deliver!
+      MailJob.new.async.perform(2, {'email' => self.email})
     end
 end

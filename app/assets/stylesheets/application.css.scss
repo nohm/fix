@@ -280,8 +280,12 @@ a span:hover {
   color: darken($brand-danger, 15%) !important;
   background-color: darken($brand-danger, 15%) !important;
 }
-.stat-colour-none {
-  background-color: transparent !important
+.stat-colour-circle {
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  border-radius: 14px;
+  margin-top: 4px;
 }
 
 // Footer styling

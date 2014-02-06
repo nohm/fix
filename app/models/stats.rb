@@ -118,6 +118,6 @@ class Stats < ActiveRecord::Base
   end
 
   def build_label width, count, label
-    "<tr><td>#{width}%</td><td>(#{count})</td><td>#{label}</td><td><span class=\"stat-colour-#{label.downcase} stat-colour-none\">&#11044;</span></td></tr>"
+    "<tr><td>#{width}%</td><td>(#{count})</td><td>#{label}</td><td><span class=\"stat-colour-#{label.downcase} stat-colour-circle\">-</span></td></tr>"
   end
 end
