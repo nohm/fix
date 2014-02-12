@@ -1,0 +1,50 @@
+// Recolour the navbar
+.navbar {
+  background-color: $brand-custom;
+  border-color: lighten($brand-custom, 15%);
+
+  .navbar-collapse {
+    border-color: lighten($brand-custom, 15%);
+  }
+  .navbar-brand {
+    color: $white;
+    margin-left: 0px !important;
+    padding-left: 45px;
+    background: url("../images/logo-tiny.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: left center;
+    &:hover {
+      color: $gray-lighter;
+    }
+  }
+  .navbar-nav {
+    li {
+      a {
+        color: $gray-lighter;
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+    .active {
+      a, a:hover {
+        color: $white;
+        background-color: lighten($brand-custom, 15%);
+      }
+    }
+  }
+  .navbar-toggle {
+    border-color: $brand-custom;
+    &:hover {
+      background-color: lighten($brand-custom, 15%);
+      border-color: lighten($brand-custom, 15%);
+    }
+  }
+  // /navigation name/company label styled like an anchor
+  .info-label {
+    color: $gray-lighter;
+    margin: 0 !important;
+    padding: 15px;
+    position: relative;
+  }
+}

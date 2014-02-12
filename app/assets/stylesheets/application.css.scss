@@ -9,62 +9,25 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
 */
 
 // Import bourbon mixins
 @import "bourbon";
 
-// Height for sticky footer > inspect element for it and add 21 to that
-$footer-height: 101px;
-
-// Slightly less obnoxious black and white
-$black: #232323;
-$white: #fafafa;
-
-// Transparent black and white
-$black-transparent: rgba(0, 0, 0, 0.6);
-$white-transparent: rgba(255, 255, 255, 0.6);
-
-// Different grayscales
-$gray-darker:  #202020;
-$gray-dark:    #303030;
-$gray:         #505050;
-$gray-light:   #b0b0b0;
-$gray-lighter: #e0e0e0;
-
-// Colours from colourlovers.com
-$brand-primary: #5967B2; // periwinky
-$brand-success: #88A65E; // hans wegner
-$brand-info:    #81A8B8; // pacifica
-$brand-warning: #F5B349; // groviera moon
-$brand-danger:  #CC2A41; // amaranth
-$brand-custom:  #556270; // mighty slate
-
-// Apply colours to warning elements
-$input-border-focus:   $brand-info;
-$state-success-text:   $brand-success;
-$state-success-bg:     lighten($brand-success, 30%);
-$state-success-border: lighten($brand-success, 20%);
-$state-info-text:      $brand-info;
-$state-info-bg:        lighten($brand-info, 30%);
-$state-info-border:    lighten($brand-info, 20%);
-$state-warning-text:   $brand-warning;
-$state-warning-bg:     lighten($brand-warning, 30%);
-$state-warning-border: lighten($brand-warning, 20%);
-$state-danger-text:    $brand-danger;
-$state-danger-bg:      lighten($brand-danger, 30%);
-$state-danger-border:  lighten($brand-danger, 20%);
-
-// Add Open-Sans to the serif font-queue
-$font-family-sans-serif: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+@import "variables";
 
 // Import bootstrap completely
 @import "bootstrap";
 
-// Bootstrap navbar
+@import "navbar";
+@import "stats";
+@import "invoices";
+@import "spinner";
+@import "landing";
+@import "footer";
+
 body {
-  padding-top: 60px;
+  padding-top: 60px; // Bootstrap navbar
   color: $black;
   background-color: $white;
 }
@@ -98,57 +61,6 @@ html, body {
 // Empty tables
 .empty_list {
   padding: 15px;
-}
-
-// Recolour the navbar
-.navbar {
-  background-color: $brand-custom;
-  border-color: lighten($brand-custom, 15%);
-
-  .navbar-collapse {
-    border-color: lighten($brand-custom, 15%);
-  }
-  .navbar-brand {
-    color: $white;
-    margin-left: 0px !important;
-    padding-left: 45px;
-    background: url("../images/logo-tiny.png") no-repeat;
-    background-size: 40px 40px;
-    background-position: left center;
-    &:hover {
-      color: $gray-lighter;
-    }
-  }
-  .navbar-nav {
-    li {
-      a {
-        color: $gray-lighter;
-        &:hover {
-          color: $white;
-        }
-      }
-    }
-    .active {
-      a, a:hover {
-        color: $white;
-        background-color: lighten($brand-custom, 15%);
-      }
-    }
-  }
-  .navbar-toggle {
-    border-color: $brand-custom;
-    &:hover {
-      background-color: lighten($brand-custom, 15%);
-      border-color: lighten($brand-custom, 15%);
-    }
-  }
-  // /navigation name/company label styled like an anchor
-  .info-label {
-    color: $gray-lighter;
-    margin: 0 !important;
-    padding: 15px;
-    position: relative;
-  }
 }
 
 // /invoices class titles need no margin
@@ -237,60 +149,6 @@ a span:hover {
   background-position: -16px 0;
 }
 
-// Simple home#index stats labels
-.simple-stats {
-  color: $gray-light;
-  font-style: italic;
-}
-
-// /stats charts get some bottom margin
-.stat-chart {
-  margin-top: 15px !important;
-  margin-bottom: 30px !important;
-}
-
-.stat-toggle {
-  margin-bottom: 30px !important;
-}
-
-// Custom colours for stat progress bars
-.stat-colour-new {
-  color: lighten($brand-success, 15%) !important;  
-  background-color: lighten($brand-success, 15%) !important; 
-}
-.stat-colour-tested {
-  color: $brand-success !important;
-  background-color: $brand-success !important;
-}
-.stat-colour-repaired {
-  color: $brand-info !important;
-  background-color: $brand-info !important;
-}
-.stat-colour-scrap {
-  color: $brand-primary !important;
-  background-color: $brand-primary !important;
-}
-.stat-colour-waiting,
-.stat-colour-skipped {
-  color: $brand-warning !important;
-  background-color: $brand-warning !important;
-}
-.stat-colour-ready {
-  color: $brand-danger !important;
-  background-color: $brand-danger !important;
-}
-.stat-colour-sent {
-  color: darken($brand-danger, 15%) !important;
-  background-color: darken($brand-danger, 15%) !important;
-}
-.stat-colour-circle {
-  display: inline-block;
-  height: 14px;
-  width: 14px;
-  border-radius: 14px;
-  margin-top: 4px;
-}
-
 // Footer styling
 footer {
   padding-top: 10px;
@@ -312,109 +170,5 @@ footer {
     &:first-child {
       padding-left: 0;
     }
-  }
-}
-
-// Landing page
-.landing {
-  background-color: $gray-lighter;
-  .landing-heading {
-    color: $white;
-    text-align: center;
-    text-shadow: 2px 2px 3px $black-transparent;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid $white-transparent;
-    .landing-logo {
-      height: 200px;
-      width: 200px;
-    }
-    h1 {
-      margin: 0;
-      font-size: 5em;
-    }
-    h2 {
-      margin: 0;
-      padding-top: 5px;
-      font-size: 1.5em;
-    }
-  }
-  .landing-content {
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid $white-transparent;
-    .btn-signin {
-      width: 100%;
-    }
-  }
-  .landing-footer {
-    text-align: center;
-    .landing-buttons {
-      a {
-        display: block;
-      }
-    }    
-  }
-}
-
-// Loading spinner
-$spinner-color:      $brand-info;
-$spinner-size:       100px;
-$spinner-speed:      1.25s;
-$spinner-thickness:  8px; // Odd numbers created a "wobble" effect.
-
-@mixin rotate-forever {
-  0%    { @include transform(rotate(0deg)); }
-  100%  { @include transform(rotate(360deg)); }
-}
-@-webkit-keyframes rotate-forever { @include rotate-forever; }
-   @-moz-keyframes rotate-forever { @include rotate-forever; }
-        @keyframes rotate-forever { @include rotate-forever; }
-
-.loading-spinner {
-  @include animation-duration($spinner-speed);
-  @include animation-iteration-count(infinite);
-  @include animation-name(rotate-forever);
-  @include animation-timing-function(linear);
-  @include size($spinner-size, $spinner-size);
-  border: $spinner-thickness solid $spinner-color;
-  border-right-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  @include position(fixed, 50% 0 0 50%);
-  margin: -50px 0 0 -50px; // Spinner size / 2
-  z-index: 10000;
-}
-
-// Remove and re-align some stuff we want different on invoices
-// The padding-top is ONLY for our personal printing paper
-#invoices.show {
-  padding-top: 160px;
-  footer {
-    display: none;
-  }
-  .dl-horizontal dt {
-    float: left;
-    width: 160px;
-    clear: left;
-    text-align: right;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .dl-misc dt,
-  .dl-type dt:not(:first-child) {
-    width: 80px;
-  }
-  .dl-misc dd,
-  .dl-type dd {
-    margin-left: 100px;
-  }
-  .dl-horizontal dd:after {
-    clear: both;
-  }
-  .dl-horizontal dd:before, .dl-horizontal dd:after {
-      content: " ";
-      display: table;
   }
 }

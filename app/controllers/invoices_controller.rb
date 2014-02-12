@@ -124,7 +124,7 @@ class InvoicesController < ApplicationController
     wrong_comp = Array.new
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
-      app = Appliance.where(abb: num[1]).take
+      app = Appliance.where(abb: num[1].upcase).take
       types = Type.where(appliance_id: app.id).ids
       entry = Entry.where(company_id: params[:company_id], number: num[2..-1], type_id: types).take
       entries.append(entry)

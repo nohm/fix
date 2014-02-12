@@ -1,0 +1,53 @@
+// Simple home#index stats labels
+.simple-stats {
+  color: $gray-light;
+  font-style: italic;
+}
+
+// /stats charts get some bottom margin
+.stat-chart {
+  margin-top: 15px !important;
+  margin-bottom: 30px !important;
+}
+
+.stat-toggle {
+  margin-bottom: 30px !important;
+}
+
+// Custom colours for stat progress bars
+.stat-colour-new {
+  color: lighten($brand-success, 15%) !important;  
+  background-color: lighten($brand-success, 15%) !important; 
+}
+.stat-colour-tested {
+  color: $brand-success !important;
+  background-color: $brand-success !important;
+}
+.stat-colour-repaired {
+  color: $brand-info !important;
+  background-color: $brand-info !important;
+}
+.stat-colour-scrap {
+  color: $brand-primary !important;
+  background-color: $brand-primary !important;
+}
+.stat-colour-waiting,
+.stat-colour-skipped {
+  color: $brand-warning !important;
+  background-color: $brand-warning !important;
+}
+.stat-colour-ready {
+  color: $brand-danger !important;
+  background-color: $brand-danger !important;
+}
+.stat-colour-sent {
+  color: darken($brand-danger, 15%) !important;
+  background-color: darken($brand-danger, 15%) !important;
+}
+.stat-colour-circle {
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  border-radius: 14px;
+  margin-top: 4px;
+}

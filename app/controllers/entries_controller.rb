@@ -23,8 +23,8 @@ class EntriesController < ApplicationController
     if can? :index, Entry or current_user.roles.first.name == Company.find(params[:company_id].short)
       if params[:searchnum]
         begin
-          type = Type.where(appliance_id: Appliance.where(abb: params[:searchnum][1].upcase).first.id).first
-          entries = Entry.includes(:attachments).where('type_id = ? AND number = ? AND company_id = ?', type.id, params[:searchnum][2..-1], params[:company_id])
+          types = Type.where(appliance_id: Appliance.where(abb: params[:searchnum][1].upcase).first.id).ids
+          entries = Entry.includes(:attachments).where(type_id: types, number: params[:searchnum][2..-1], company_id: params[:company_id])
           redirect_to company_entry_path(params[:company_id], entries.first.id)
         rescue
           redirect_to company_entries_path(params[:company_id]), :alert => "Entry not found with number #{params[:searchnum]}."
