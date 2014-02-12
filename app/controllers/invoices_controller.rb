@@ -132,7 +132,7 @@ class InvoicesController < ApplicationController
       	non_existing.push(num)
       elsif entry.sent.to_i == 1
       	already_sent.push(num)
-      elsif entry.company_id != params[:company_id]
+      elsif entry.company_id != params[:company_id].to_i
         wrong_comp.push(num)
       end
     end
@@ -151,7 +151,7 @@ class InvoicesController < ApplicationController
       	flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.already_sent')}"
       end
       wrong_comp.each do |item|
-        flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.wrong_company')} #{Company.find(params[:company_id].title)}!"
+        flash["alert #{item}"] = "#{item} #{I18n.t('invoice.controller.wrong_company')} #{Company.find(params[:company_id]).title}!"
       end
       render 'new'
     end
