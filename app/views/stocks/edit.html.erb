@@ -1,0 +1,25 @@
+<% provide(:title, 'Edit stock') %>
+
+<%= bootstrap_form_for(@stock, method: :patch, :url => company_type_stock_path(params[:company_id], params[:type_id], @stock.id), :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
+  <%= f.alert_message t('global.errors') %>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">Edit stock</div>
+    </div>
+    <div class="panel-body">
+      <%= f.text_field :name %>
+      <%= f.text_field :amount %>
+      <%= f.text_field :amount_per_app %>
+      <%= f.text_field :minimum %>
+      <%= f.form_group :send_mail do %>
+        <%= f.check_box :send_mail %>
+      <% end %>
+    </div>
+    <div class="panel-footer">
+      <%= f.submit 'Save', data: { disable_with: 'Saving' } %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t('global.back'), company_type_stocks_path(params[:company_id], params[:type_id]) %>

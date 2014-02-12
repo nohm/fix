@@ -11,6 +11,8 @@ class MailJob
     	Mailer.send_error_report(data['email'], data['message']).deliver!
     when 4 # Role update towards user
     	Mailer.send_role_update(data['role']).deliver!
+    when 5 # Stock shortage towards supplier
+      Mailer.send_stock_request(data['type'], data['stock'], data['email']).deliver!
     end
   end
 end

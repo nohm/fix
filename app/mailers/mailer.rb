@@ -25,4 +25,10 @@ class Mailer < ActionMailer::Base
     @url = "#{ENV['BASE_URL']}/badger"
     mail(to: email, subject: t('mailer.base.role_update'))
   end
+
+  def send_stock_shortage(type, stock, email)
+    @type = type
+    @stock = stock
+    mail(to: email, subject: 'Stock shortage for ' + type)
+  end
 end

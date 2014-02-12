@@ -1,11 +1,11 @@
-<% provide(:title, t('company.new.title')) %>
+<% provide(:title, t('company.edit.title')) %>
 
-<%= bootstrap_form_for :company, :url => companies_path, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block do |f| %>
+<%= bootstrap_form_for(@company, method: :patch, :url => company_path, :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-6", help: :block) do |f| %>
   <%= f.alert_message t('global.errors') %>
   
   <div class="panel panel-default">
     <div class="panel-heading">
-      <div class="panel-title"><%= t('company.new.legend') %></div>
+      <div class="panel-title"><%= t('company.edit.legend') %></div>
     </div>
     <div class="panel-body">
       <%= f.text_field :title, label: t('global.title') %>
@@ -15,7 +15,7 @@
       <%= f.text_field :mail, label: t('global.email') %>
     </div>
     <div class="panel-footer">
-  	 <%= f.submit t('company.new.button'), data: { disable_with: t('company.new.button_send') } %>
+  	 <%= f.submit t('company.edit.button'), data: { disable_with: t('company.edit.button_send') } %>
     </div>
   </div>
 <% end %>

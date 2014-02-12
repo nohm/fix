@@ -128,7 +128,7 @@ class EntriesController < ApplicationController
     end
       
     if @entry.update(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id))
-      redirect_to company_entries_path(:company => params[:company_id], :page => session[:page]), :notice => I18n.t('entry.controller.updated')
+      redirect_to company_entries_path(params[:company_id], :page => session[:page]), :notice => I18n.t('entry.controller.updated')
     else
       @type_names = Array.new
       Type.pluck(:brand, :typenum, :id).each do |type|
@@ -159,7 +159,7 @@ class EntriesController < ApplicationController
     @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id))
     
     if @entry.save
-      redirect_to company_entries_path(:company => params[:company_id], :page => Entry.where(company_id: params[:company_id]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
+      redirect_to company_entries_path(params[:company_id], :page => Entry.where(company_id: params[:company_id]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
     else
       @type_names = Array.new
       Type.pluck(:brand, :typenum, :id).each do |type|
@@ -175,7 +175,7 @@ class EntriesController < ApplicationController
 
     entry = Entry.find(params[:id])
     entry.destroy
-    redirect_to company_entries_path(:company => params[:company_id]), :notice => I18n.t('entry.controller.deleted')
+    redirect_to company_entries_path(params[:company_id]), :notice => I18n.t('entry.controller.deleted')
   end
 
 end

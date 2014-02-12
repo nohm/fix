@@ -24,7 +24,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body id="<%= controller_name %>" class="<%= action_name %> <% unless user_signed_in? %>landing<% end %>">
+  <body data-controller="<%= controller_name %>" data-action="<% unless user_signed_in? %>landing<% else %><%= action_name%><% end %>" id="<%= controller_name %>" class="<%= action_name %> <% unless user_signed_in? %>landing<% end %>">
   
     <% if user_signed_in? %>
       <%= render 'layouts/header' %>

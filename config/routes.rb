@@ -4,8 +4,10 @@ Badger::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "users/registrations"}
   resources :users
 
-  resources :companies, :only => [:index, :new, :create, :destroy] do
-    resources :types, :only => [:index, :new, :create, :edit, :update, :destroy]
+  resources :companies, :only => [:index, :new, :create, :edit, :update, :destroy] do
+    resources :types, :only => [:index, :new, :create, :edit, :update, :destroy] do
+      resources :stocks, :only => [:index, :new, :create, :edit, :update, :destroy]
+    end
     resources :stats, :only => :index
     resources :invoices, :only => [:index, :show, :new, :create, :destroy]
     resources :entries do

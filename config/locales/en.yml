@@ -117,9 +117,15 @@ en:
       legend: 'New company'
       button: 'Save'
       button_send: 'Saving...'
+    edit:
+      title: 'Badger · Edit company'
+      legend: 'Edit company'
+      button: 'Save'
+      button_send: 'Saving...'
 # app/controller/companies & model
     controller:
       company_added: 'Company added.'
+      company_updated: 'Company updated.'
       company_deleted: 'Company deleted.'
 
 # app/views/entries

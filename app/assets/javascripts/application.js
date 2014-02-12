@@ -19,9 +19,13 @@
 //= require bootstrap/transition
 //= require highcharts/highcharts
 //= require turbolinks
-//= require plugins/modernizr
-//= require plugins/headroom
-//= require plugins/jQuery.headroom
+
+//= require framework
+//= require init
+//= require_self
+//= require_tree
+
+app.init();
 
 $(document).on('ready page:load', function () {
 	// Animated autohide navbar
@@ -44,24 +48,4 @@ function addLoadingSpinner() {
 // Disables a broadcast
 function disableBroadcast(path) {
   $.ajax({url: path});
-}
-
-// Adds checkboxes to a form
-function addCheckboxes(label) {
-  var inputs = $(".form-group");
-  for (var i = 1; i < inputs.length; i++) {
-    var input = inputs[i];
-    try {
-      var which_input = input.children[1].children[0].id;
-      if (which_input != "") {
-        input.innerHTML = input.innerHTML + '<div class="checkbox col-sm-2 batch-update"><label for="' + which_input + '_enable"><input name="entry[enable][' + which_input + ']" value="0" type="hidden"><input id="' + which_input + '_enable" name="entry[enable][' + which_input + ']" value="1" type="checkbox"> ' + label + '</label></div>';
-      } else {
-        var which_input_checkbox = input.children[1].children[0].children[0].htmlFor;
-        input.innerHTML = input.innerHTML + '<div class="checkbox col-sm-2 batch-update"><label for="' + which_input_checkbox + '_enable"><input name="entry[enable][' + which_input_checkbox + ']" value="0" type="hidden"><input id="' + which_input_checkbox + '_enable" name="entry[enable][' + which_input_checkbox + ']" value="1" type="checkbox"> ' + label + '</label></div>';
-      }
-    }
-    catch(e) {
-      // Don't do anything with errors as I know how bad this is, it still works properly
-    }
-  }
 }

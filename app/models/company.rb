@@ -7,4 +7,5 @@ class Company < ActiveRecord::Base
   	validates :short, presence: true
   	validates :abb, presence: true
   	validates :address, presence: true
+  	validates :mail, presence: true
 end

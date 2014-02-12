@@ -11,7 +11,7 @@ class Entry < ActiveRecord::Base
   validates :serialnum, presence: true
   validates :company_id, presence: true
 
-  before_save :format_input
+  before_save :format_input, :update_stock
   after_save :update_status
 
   def get_status
@@ -110,5 +110,9 @@ class Entry < ActiveRecord::Base
       unless new_status == self.status
         self.update_attribute(:status, new_status)
       end
+    end
+
+    def update_stock
+      Stock.new.update_stock(self)
     end
 end

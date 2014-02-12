@@ -1,0 +1,64 @@
+<% provide(:title, 'Stock for ' + @type.brand + ' ' + @type.typenum) %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">Stock for <%= @type.brand + ' ' + @type.typenum %></div>
+  </div>
+  <div class="panel-body panel-table">
+    <% if @stocks.length == 0 %>
+      <p class="empty_list">No stock here</p>
+    <% else %>
+      <div class="table-responsive">
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Amount per app</th>
+              <th>Minimum</th>
+              <th>Send mail?</th>
+              <% if can? :edit, Stock %>
+                <th style="width:17px;"></th>
+              <% end %>
+              <% if can? :destroy, Stock %>
+                <th style="width:17px;"></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody class="searchable">
+            <% @stocks.each do |stock| %>
+              <tr>
+                <td><%= stock.name %></td>
+                <td><%= stock.amount %></td>
+                <td><%= stock.amount_per_app %></td>
+                <td><%= stock.minimum %></td>
+                <td><%= stock.send_mail == 1 ? 'Yes' : 'No' %></td>
+               <% if can? :edit, Stock %>
+                  <td>
+                    <%= link_to edit_company_type_stock_path(params[:company_id], stock.type_id, stock) do %>
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    <% end %>
+                  </td>
+                <% end %>
+                <% if can? :destroy, Stock %>
+                  <td>
+                    <%= link_to(company_type_stock_path(params[:company_id], stock.type_id, stock), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
+                      <span class="glyphicon glyphicon-remove"></span>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+  <div class="panel-footer">
+
+    <% if can? :create, Stock %>
+      <%= link_to('Add stock', new_company_type_stock_path(params[:company_id], params[:type_id]), :class => 'btn btn-mini btn-primary') %>
+    <% end %>
+
+  </div>
+</div>

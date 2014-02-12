@@ -34,7 +34,7 @@ class TypesController < ApplicationController
 
     @type = Type.new(params[:type].permit(:appliance_id,:brand,:typenum,:test_price,:repair_price,:scrap_price,:company_id))
     if @type.save
-      redirect_to company_types_path(:company => params[:company_id]), :notice => I18n.t('type.controller.type_added')
+      redirect_to company_types_path(params[:company_id]), :notice => I18n.t('type.controller.type_added')
     else
       @appliance_names = Appliance.pluck(:name, :id)
       render 'new'
@@ -55,7 +55,7 @@ class TypesController < ApplicationController
 
     params[:type][:company_id] = params[:company_id]
     if @type.update(params[:type].permit(:appliance_id,:brand,:typenum,:test_price,:repair_price,:scrap_price,:company_id))
-      redirect_to company_types_path(:company => params[:company_id]), :notice => I18n.t('type.controller.type_updated')
+      redirect_to company_types_path(params[:company_id]), :notice => I18n.t('type.controller.type_updated')
     else
       @appliance_names = Appliance.pluck(:name, :id)
       render 'edit'
@@ -67,6 +67,6 @@ class TypesController < ApplicationController
 
     type = Type.find(params[:id])
     type.destroy
-    redirect_to company_types_path(:company => params[:company_id]), :notice => I18n.t('type.controller.type_deleted')
+    redirect_to company_types_path(params[:company_id]), :notice => I18n.t('type.controller.type_deleted')
   end
 end

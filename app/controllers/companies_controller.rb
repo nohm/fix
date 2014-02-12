@@ -16,10 +16,10 @@ class CompaniesController < ApplicationController
   def create
     authorize! :create, Company, :message => I18n.t('global.unauthorized')
 
-    @company = Company.new(params[:company].permit(:title,:short,:abb,:address))
+    @company = Company.new(params[:company].permit(:title,:short,:abb,:address,:mail))
 
     if @company.save
-      redirect_to companies_path, :notice => I18n.t('company.model.company_added')
+      redirect_to companies_path, :notice => I18n.t('company.controller.company_added')
     else
       render 'new'
     end
@@ -30,7 +30,25 @@ class CompaniesController < ApplicationController
 
     company = Company.find(params[:id])
     company.destroy
-    redirect_to companies_path, :notice => I18n.t('company.model.compan_deleted')
+    redirect_to companies_path, :notice => I18n.t('company.controller.company_deleted')
+  end
+
+  def edit
+    authorize! :edit, Company, :message => I18n.t('global.unauthorized')
+
+    @company = Company.find(params[:id])
+  end
+
+  def update
+    authorize! :update, Company, :message => I18n.t('global.unauthorized')
+
+    @company = Company.find(params[:id])
+
+    if @company.update(params[:company].permit(:title,:short,:abb,:address,:mail))
+      redirect_to companies_path, :notice => I18n.t('company.controller.company_updated')
+    else
+      render 'edit'
+    end
   end
   
 end
