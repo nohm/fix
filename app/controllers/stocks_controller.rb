@@ -21,7 +21,7 @@ class StocksController < ApplicationController
 
     @stock = Stock.new(params[:stock].permit(:type_id,:name,:amount,:amount_per_app,:minimum,:send_mail))
     if @stock.save
-      redirect_to company_type_stocks_path(params[:company_id], params[:type_id]), :notice => 'Stock added.'
+      redirect_to company_type_stocks_path(params[:company_id], params[:type_id]), :notice => I18n.t('stock.controller.stock_added')
     else
       render 'new'
     end
@@ -40,7 +40,7 @@ class StocksController < ApplicationController
 
     params[:stock][:type_id] = params[:type_id]
     if @stock.update(params[:stock].permit(:type_id,:name,:amount,:amount_per_app,:minimum,:send_mail))
-      redirect_to company_type_stocks_path(params[:company_id], params[:type_id]), :notice => 'Stock updated.'
+      redirect_to company_type_stocks_path(params[:company_id], params[:type_id]), :notice => I18n.t('stock.controller.stock_updated')
     else
       render 'edit'
     end
@@ -51,6 +51,6 @@ class StocksController < ApplicationController
 
     stock = Stock.find(params[:id])
     stock.destroy
-    redirect_to company_type_stocks_path(params[:company_id], params[:type_id]), :notice => 'Stock deleted.'
+    redirect_to company_type_stocks_path(params[:company_id], params[:type_id]), :notice => I18n.t('stock.controller.stock_deleted')
   end
 end

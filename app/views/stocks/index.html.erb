@@ -1,8 +1,8 @@
-<% provide(:title, 'Stock for ' + @type.brand + ' ' + @type.typenum) %>
+<% provide(:title, t('stock.index.title') + @type.brand + ' ' + @type.typenum) %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <div class="panel-title">Stock for <%= @type.brand + ' ' + @type.typenum %></div>
+    <div class="panel-title"><%= t('stock.index.legend') + @type.brand + ' ' + @type.typenum %></div>
   </div>
   <div class="panel-body panel-table">
     <% if @stocks.length == 0 %>
@@ -12,11 +12,11 @@
         <table class="table table-condensed table-striped table-hover">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Amount</th>
-              <th>Amount per app</th>
-              <th>Minimum</th>
-              <th>Send mail?</th>
+              <th><%= t('global.name') %></th>
+              <th><%= t('global.amount') %></th>
+              <th><%= t('global.amount_per_app') %></th>
+              <th><%= t('global.minimum') %></th>
+              <th><%= t('global.send_mail') %></th>
               <% if can? :edit, Stock %>
                 <th style="width:17px;"></th>
               <% end %>
@@ -32,7 +32,7 @@
                 <td><%= stock.amount %></td>
                 <td><%= stock.amount_per_app %></td>
                 <td><%= stock.minimum %></td>
-                <td><%= stock.send_mail == 1 ? 'Yes' : 'No' %></td>
+                <td><%= stock.send_mail == 1 ? t('global.y') : t('global.n') %></td>
                <% if can? :edit, Stock %>
                   <td>
                     <%= link_to edit_company_type_stock_path(params[:company_id], stock.type_id, stock) do %>
@@ -57,7 +57,7 @@
   <div class="panel-footer">
 
     <% if can? :create, Stock %>
-      <%= link_to('Add stock', new_company_type_stock_path(params[:company_id], params[:type_id]), :class => 'btn btn-mini btn-primary') %>
+      <%= link_to(t('stock.index.add_stock'), new_company_type_stock_path(params[:company_id], params[:type_id]), :class => 'btn btn-mini btn-primary') %>
     <% end %>
 
   </div>

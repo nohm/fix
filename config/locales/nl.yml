@@ -57,6 +57,11 @@ nl:
     test_price: 'Testprijs'
     repair_price: 'Reparatieprijs'
     scrap_price: 'Sloopprijs'
+    name: 'Naam'
+    amount: 'Hoeveelheid'
+    amount_per_app: 'Hoeveelheid per app'
+    minimum: 'Minimum'
+    send_mail: 'Stuur email?'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -325,6 +330,30 @@ nl:
       type_added: 'Type toegevoegd.'
       type_updated: 'Type gewijzigd.'
       type_deleted: 'Type verwijdert.'
+
+# app/views/stocks
+  stock:
+    index:
+      title: 'Badger · Voorraad voor '
+      legend: 'Voorraad voor '
+      empty_list: 'Geen voorraad hier'
+      add_stock: 'Voorraad toevoegen'
+    new:
+      title: 'Badger · Nieuwe voorraad'
+      legend: 'Nieuwe voorraad'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+    edit:
+      title: 'Badger · Voorraad wijzigen'
+      legend: 'Voorraad wijzigen'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+
+# app/controllers/stocks & model
+    controller:
+      stock_added: 'Voorraad toegevoegd.'
+      stock_updated: 'Voorraad gewijzigd.'
+      stock_deleted: 'Voorraad verwijdert.'
 
 # app/views/users
   user:

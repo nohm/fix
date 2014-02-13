@@ -1,13 +1,5 @@
 de:
-# TODO: Finish translations:
-# > global#broadcasts
-# > appliance#controller#*
-# > broadcast#*
-# > global#title/short/address
-# > company#*
-# > home#index#type
-# > invoice#show#all_types
-# > global#test_price/repair_price/scrap_price
+# TODO: Finish translations
 
 ######################
 ##     GLOBALS      ##
@@ -66,6 +58,11 @@ de:
     test_price: 'Test price'
     repair_price: 'Repair price'
     scrap_price: 'Scrap price'
+    name: 'Name'
+    amount: 'Amount'
+    amount_per_app: 'Amount per app'
+    minimum: 'Minimum'
+    send_mail: 'Send mail?'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -334,6 +331,30 @@ de:
       type_added: 'Type added.'
       type_updated: 'Type updated.'
       type_deleted: 'Type deleted.'
+
+# app/views/stocks
+  stock:
+    index:
+      title: 'Badger · Stock for '
+      legend: 'Stock for '
+      empty_list: 'No stock here'
+      add_stock: 'Add stock'
+    new:
+      title: 'Badger · New stock'
+      legend: 'New stock'
+      button: 'Save'
+      button_send: 'Saving...'
+    edit:
+      title: 'Badger · Edit stock'
+      legend: 'Edit stock'
+      button: 'Save'
+      button_send: 'Saving...'
+
+# app/controllers/stocks & model
+    controller:
+      stock_added: 'Stock added.'
+      stock_updated: 'Stock updated.'
+      stock_deleted: 'Stock deleted.'
 
 # app/views/users
   user:
