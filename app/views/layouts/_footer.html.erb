@@ -1,7 +1,7 @@
 <footer>
   <div class="container">
     <p><%= t('layouts.footer.copyright') %><a href="mailto:<%= ENV['DEV_MAIL'] %>"><%= ENV['DEV_NAME'] %></a></p>
-    <p><%= t('layouts.footer.license') %><a href="https://github.com/nohm/badger/blob/master/LICENSE">MIT</a> &middot; Currently <%= %x(git tag | sort -n | tail -1) %></p>
+    <p><%= t('layouts.footer.license') %><a href="https://github.com/nohm/badger/blob/master/LICENSE">MIT</a></p>
     <ul class="footer-links">
       <% unless user_signed_in? %>
         <li><%= render 'layouts/signup/button' %></li>

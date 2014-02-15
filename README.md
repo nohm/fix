@@ -72,7 +72,7 @@ sh script/server
 
 ###### Production
 * You can use the development guide if you want, but to deploy your own version use this
-* First follow the development version for your local environment, then in that folder
+* First follow the development version for your local environment, then in that folder;
 * Configure *config/deploy.rb*
 ```
 <your-text-editor> config/deploy.rb
@@ -93,8 +93,8 @@ OR
 ```
 mina deploy
 ```
-* If you use *Passenger Phusion* the server will be running now
-* If you don't you'll have to edit *config/deploy.rb* to start the server
+* If you use *Passenger Phusion* the application will be running now
+* If you don't you'll have to edit *config/deploy.rb* to start the server, or use your own solution
 
 Contributing
 ------------

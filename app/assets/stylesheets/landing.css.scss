@@ -1,19 +1,25 @@
 // Landing page
 .landing {
-  background-color: $gray-lighter;
-  .landing-heading {
-    color: $white;
+  background-color: lighten($brand-success, 30%);
+  .landing-logo-wrapper {
     text-align: center;
-    text-shadow: 2px 2px 3px $black-transparent;
     margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid $white-transparent;
     .landing-logo {
       height: 200px;
       width: 200px;
     }
+  }
+  .landing-panel {
+    border-radius: 6px;
+  }
+  .landing-heading {
+    color: $black;
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
     h1 {
       margin: 0;
+      margin-top: -10px;
       font-size: 5em;
     }
     h2 {
@@ -23,9 +29,6 @@
     }
   }
   .landing-content {
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid $white-transparent;
     .btn-signin {
       width: 100%;
     }

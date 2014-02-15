@@ -1,6 +1,11 @@
 <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+  <div class="landing-logo-wrapper">
+  <%= image_tag("logo-small.png", class: "landing-logo") %>
+  </div>
+
+  <div class="panel panel-default landing-panel">
+  <div class="panel-body">
   <div class="landing-heading">
-    <%= image_tag("logo-small.png", class: "landing-logo") %>
     <h1>Badger</h1>
     <h2><%= t('layouts.landing.welcome') %></h2>
   </div>
@@ -14,6 +19,7 @@
       <%= f.submit t('layouts.signin.button'), data: { disable_with: t('layouts.signin.button_send') }, class: "btn btn-success btn-signin" %>
     <% end %>
   </div>
+</div></div>
 
   <div class="landing-footer">
     <div class="landing-languageflags">

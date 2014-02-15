@@ -10,6 +10,7 @@ module Badger
   class Application < Rails::Application
 
     config.middleware.use Rack::Deflater
+    config.i18n.enforce_available_locales = true
 
     config.generators do |g|
       
