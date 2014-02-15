@@ -64,9 +64,20 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      queue "touch #{deploy_to}/tmp/restart.txt"
+      queue %[echo "-----> Restarting Phusion Passenger"]
+      queue "touch #{deploy_to}/current/tmp/restart.txt"
     end
   end
+end
+
+task :restart => :environment do
+  queue %[echo "-----> Restarting Phusion Passenger"]
+  queue "touch #{deploy_to}/current/tmp/restart.txt"
+end
+
+task :log => :environment do
+  queue %[echo "-----> Last 50 lines from production.log"]
+  queue %[tail -n 50 #{deploy_to!}/shared/log/production.log]
 end
 
 # For help in making your deploy script, see the Mina documentation:

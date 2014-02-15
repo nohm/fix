@@ -55,7 +55,7 @@ cd badger
 ```
 bundle install
 ```
-* Fill in the config file *config/application.yml*
+* Fill in the config file `config/application.yml`
 ```
 <your-text-editor> config/application.yml
 ```
@@ -73,15 +73,15 @@ sh script/server
 ###### Production
 * You can use the development guide if you want, but to deploy your own version use this
 * First follow the development version for your local environment, then in that folder;
-* Configure *config/deploy.rb*
+* Configure `config/deploy.rb`
 ```
 <your-text-editor> config/deploy.rb
 ```
-* Prepare your server using *mina*
+* Prepare your server using `mina`
 ```
 mina setup
 ```
-* Copy over or edit  *config/application.yml* and *config/database.yml*
+* Copy over or edit  `config/application.yml` and `config/database.yml`
 ```
 scp config/application.yml <user>@<server>:<deploy-location>/shared/config/
 scp config/database.yml <user>@<server>:<deploy-location>/shared/config/
@@ -89,12 +89,12 @@ OR
 <your-text-editor> <deploy-location>/shared/config/application.yml
 <your-text-editor> <deploy-location>/shared/config/database.yml
 ```
-* Deploy to your server using *mina*
+* Deploy to your server using `mina`
 ```
 mina deploy
 ```
-* If you use *Passenger Phusion* the application will be running now
-* If you don't you'll have to edit *config/deploy.rb* to start the server, or use your own solution
+* If you use `Passenger Phusion` the application will be running now
+* If you don't you'll have to edit `config/deploy.rb` to start the server, or use your own solution
 
 Contributing
 ------------

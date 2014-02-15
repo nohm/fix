@@ -4,7 +4,7 @@ ruby '2.1.0'
 # Rails base
 gem 'rails', '4.0.2'
 gem 'turbolinks'
-
+# Deployment
 gem 'mina'
 # Database
 gem 'pg'
