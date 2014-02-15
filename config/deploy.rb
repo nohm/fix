@@ -65,6 +65,7 @@ task :deploy => :environment do
 
     to :launch do
       queue %[echo "-----> Restarting Phusion Passenger"]
+      queue "mkdir -p #{deploy_to}/current/tmp"
       queue "touch #{deploy_to}/current/tmp/restart.txt"
     end
   end
@@ -72,6 +73,7 @@ end
 
 task :restart => :environment do
   queue %[echo "-----> Restarting Phusion Passenger"]
+  queue "mkdir -p #{deploy_to}/current/tmp"
   queue "touch #{deploy_to}/current/tmp/restart.txt"
 end
 
