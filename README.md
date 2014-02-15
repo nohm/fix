@@ -44,6 +44,7 @@ createdb -Obadger -Eutf8 badger_test (only needed for development)
 
 #### Project
 
+###### Development
 * Pick a folder you'd like to use and clone the git repository in there
 ```
 cd <where-you-want-the-project>
@@ -66,9 +67,34 @@ rake routes
 ```
 * Start the server and work on it!
 ```
-sh script/server_dev
+sh script/server
 ```
-Alternatively, you can also install Passenger on your server and run it through there, there are plenty of guides to explain how to do that.
+
+###### Production
+* You can use the development guide if you want, but to deploy your own version use this
+* First follow the development version for your local environment, then in that folder
+* Configure *config/deploy.rb*
+```
+<your-text-editor> config/deploy.rb
+```
+* Prepare your server using *mina*
+```
+mina setup
+```
+* Copy over or edit  *config/application.yml* and *config/database.yml*
+```
+scp config/application.yml <user>@<server>:<deploy-location>/shared/config/
+scp config/database.yml <user>@<server>:<deploy-location>/shared/config/
+OR
+<your-text-editor> <deploy-location>/shared/config/application.yml
+<your-text-editor> <deploy-location>/shared/config/database.yml
+```
+* Deploy to your server using *mina*
+```
+mina deploy
+```
+* If you use *Passenger Phusion* the server will be running now
+* If you don't you'll have to edit *config/deploy.rb* to start the server
 
 Contributing
 ------------

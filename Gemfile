@@ -4,6 +4,8 @@ ruby '2.1.0'
 # Rails base
 gem 'rails', '4.0.2'
 gem 'turbolinks'
+
+gem 'mina'
 # Database
 gem 'pg'
 # CSS

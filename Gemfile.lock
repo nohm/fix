@@ -105,12 +105,16 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mina (0.3.0)
+      open4
+      rake
     minitest (4.7.5)
     modernizr-rails (2.7.1)
     multi_json (1.8.4)
     multipart-post (2.0.0)
     octokit (2.7.1)
       sawyer (~> 0.5.2)
+    open4 (1.3.1)
     orm_adapter (0.5.0)
     paperclip (4.0.0)
       activemodel (>= 3.0.0)
@@ -206,6 +210,7 @@ DEPENDENCIES
   kaminari
   lazy_high_charts
   letter_opener
+  mina
   modernizr-rails
   paperclip
   party_foul
