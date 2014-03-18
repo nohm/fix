@@ -21,6 +21,11 @@
             <% end %>
 
             <tr>
+              <td><h6>Shipment</h6></td>
+              <td><%= @entry.shipment.number %></td>
+            </tr>
+
+            <tr>
               <td><h6><%= t('global.status') %></h6></td>
               <td><%= @entry.get_status_translated %></td>
             </tr>
@@ -108,7 +113,7 @@
                     <% end %>
                     <% if can? :destroy, Attachment %>
                       <br>
-                      <%= link_to t('global.delete'), company_entry_attachment_path(@company.id, @entry.id, attachment), method: :delete, data: { confirm: t('global.sure') } %>
+                      <%= link_to t('global.delete'), company_shipment_entry_attachment_path(params[:company_id], params[:shipment_id], @entry.id, attachment), method: :delete, data: { confirm: t('global.sure') } %>
                     <% end %>
                   <% end %>
                   </div>
@@ -129,7 +134,7 @@
             <div class="modal fade" id="modal-attachment" tabindex="-1" role="dialog" aria-labelledby="modalLabel-attachment" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <%= bootstrap_form_for([@entry, @entry.attachments.build], :url => company_entry_attachment_path(params[:company_id], @entry, @entry.attachments)) do |f| %>
+                  <%= bootstrap_form_for([@entry, @entry.attachments.build], :url => company_shipment_entry_attachment_path(params[:company_id], params[:shipment_id], @entry, @entry.attachments)) do |f| %>
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                       <h4 class="modal-title" id="modalLabel-attachment"><%= t('entry.show.add_attachment') %></h4>
@@ -153,26 +158,26 @@
   <div class="panel-footer">
     <% if can? :zip, Entry %>
       <% unless @entry.attachments.length == 0 %>
-        <%= link_to(t('entry.show.zip'), zip_path(@entry.company, @entry), :class => 'btn btn-mini btn-primary') %>
+        <%= link_to(t('entry.show.zip'), zip_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     <% end %>
     <div style="float:left;padding-right:4px" data-no-turbolink="true">
       <% if can? :create, Entry %>
-        <%= link_to(t('entry.show.sticker'), sticker_path(@entry.company, @entry), :class => 'btn btn-mini btn-primary') %>
+        <%= link_to(t('entry.show.sticker'), sticker_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     </div>
     <div style="float:left;padding-right:4px" data-no-turbolink="true">
       <% if can? :create, Entry %>
-        <%= link_to('Create ticket', ticket_path(@entry.company, @entry), :class => 'btn btn-mini btn-primary') %>
+        <%= link_to('Create ticket', ticket_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     </div>
     <% if can? :edit, Entry %>
-      <%= link_to(t('entry.show.edit'), edit_company_entry_path(@entry.company, @entry), :class => 'btn btn-mini btn-primary') %>
+      <%= link_to(t('entry.show.edit'), edit_company_shipment_entry_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary') %>
     <% end %>
     <% if can? :destroy, Entry %>
-      <%= link_to(t('entry.show.delete'), company_entry_path(@entry.company, @entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
+      <%= link_to(t('entry.show.delete'), company_shipment_entry_path(@entry.company, @entry.shipment, @entry), :data => { :confirm => "Are you sure?" }, :class => 'btn btn-mini btn-primary', :method => :delete) %>
     <% end %>
   </div>
 </div>
 
-<%= link_to t('global.back'), company_entries_path(@entry.company) %>
+<%= link_to t('global.back'), company_shipment_entries_path(@entry.company, @entry.shipment) %>

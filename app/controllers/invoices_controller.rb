@@ -29,11 +29,14 @@ class InvoicesController < ApplicationController
     @company = Company.find(params[:company_id])
 
     @classes = Classifications.all
+    @shipments = Shipment.all
     @statuses = [I18n.t('invoice.controller.tested'),I18n.t('invoice.controller.repaired'),I18n.t('invoice.controller.scrapped'),I18n.t('invoice.controller.skipped')]
 
-    @entry_classes = Hash.new(Array.new)
-    @classes.each do |klass|
-      @entry_classes[klass.name] = Entry.includes(:type,:company).where(classifications_id: klass.id, invoice_id: @invoice.id).order('id ASC')
+    @entry_classes = Array.new(@shipments.count) {Array.new(@classes.length) {Array.new}}
+    @class_count = Array.new(@classes.length) {0}
+    @invoice.entries.each do |entry|
+      @class_count[entry.classifications_id - 1] += 1
+      @entry_classes[entry.shipment_id - 1][entry.classifications_id - 1].append(entry)
     end
 
     @price_type_total = Hash.new

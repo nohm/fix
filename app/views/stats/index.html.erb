@@ -1,10 +1,10 @@
-<% provide(:title, t('stats.index.title') + @company.title) %>
+<% provide(:title, t('stats.index.title') + @company.title + ' shipment ' + @shipment.number) %>
 
 <div class="hero-unit center">
   <% if params[:type] == 'extended' %>
-    <%= link_to(t('stats.index.simpler'), company_stats_path(@company), :class => 'btn btn-primary btn-index stat-toggle') %>
+    <%= link_to(t('stats.index.simpler'), company_shipment_stats_path(@shipment, @company), :class => 'btn btn-primary btn-index stat-toggle') %>
   <% else %>
-    <%= link_to(t('stats.index.fancier'), company_stats_path(@company, type: 'extended'), :class => 'btn btn-primary btn-index stat-toggle') %>
+    <%= link_to(t('stats.index.fancier'), company_shipment_stats_path(@shipment, @company, type: 'extended'), :class => 'btn btn-primary btn-index stat-toggle') %>
   <% end %>
         <div class="panel-group" id="accordion">
   <% @charts.each_pair do |key, array| %>

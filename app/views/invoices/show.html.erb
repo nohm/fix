@@ -28,10 +28,10 @@
       </dl>
 
       <dl class="dl-horizontal dl-misc">
-        <% @entry_classes.each_pair do |key, value| %>
-          <% unless value.length == 0 %>
-            <dt><%= key %></dt>
-            <dd><%= value.length %></dd>
+        <% @class_count.each_with_index do |value, index| %>
+          <% unless value == 0 %>
+            <dt><%= @classes[index].name %></dt>
+            <dd><%= value %></dd>
           <% end %>
         <% end %>
       </dl>
@@ -77,29 +77,37 @@
           </tr>
         </thead>
         <tbody>
-          <% @entry_classes.each do |klass, entries| %>
-            <% unless entries.length == 0 %>
+          <% @entry_classes.each_with_index do |klasses, index| %>
+            <% unless klasses.length == 0 %>
               <tr>
-                <td><strong><%= "#{t('global.class')} #{klass}" %></strong></td>
+                <td><strong>Shipment <%= @shipments[index].number %></strong></td>
                 <td></td><td></td><td></td><td></td><td></td>
               </tr>
-              <% entries.each do |entry| %>
-                <tr>
-                  <td><%= entry.company.abb + entry.type.appliance.abb + entry.number.to_s %></td>
-                  <td><%= entry.type.appliance.name %></td>
-                  <td><%= entry.type.brand %></td>
-                  <td><%= entry.type.typenum %></td>
-                  <td><%= entry.serialnum %></td>
-                  <% if entry.scrap == 1 %>
-                    <td><span class="glyphicon glyphicon-trash"></span></td>
-                  <% elsif entry.repaired == 1 %>
-                    <td><span class="glyphicon glyphicon-wrench"></span></td>
-                  <% elsif entry.test == 1 %>
-                    <td><span class="glyphicon glyphicon-ok"></span></td>
-                  <% else %>
-                    <td></td>
+              <% klasses.each_with_index do |entries, index| %>
+                <% unless entries.length == 0 %>
+                  <tr>
+                    <td><strong><%= "#{t('global.class')} #{@classes[index].name}" %></strong></td>
+                    <td></td><td></td><td></td><td></td><td></td>
+                  </tr>
+                  <% entries.each do |entry| %>
+                    <tr>
+                      <td><%= entry.company.abb + entry.type.appliance.abb + entry.number.to_s %></td>
+                      <td><%= entry.type.appliance.name %></td>
+                      <td><%= entry.type.brand %></td>
+                      <td><%= entry.type.typenum %></td>
+                      <td><%= entry.serialnum %></td>
+                      <% if entry.scrap == 1 %>
+                        <td><span class="glyphicon glyphicon-trash"></span></td>
+                      <% elsif entry.repaired == 1 %>
+                        <td><span class="glyphicon glyphicon-wrench"></span></td>
+                      <% elsif entry.test == 1 %>
+                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                      <% else %>
+                        <td></td>
+                      <% end %>
+                    </tr>
                   <% end %>
-                </tr>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>

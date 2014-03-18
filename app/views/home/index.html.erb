@@ -17,15 +17,14 @@
                 <%= "#{@simple_stats[index][0]} #{'entry'.pluralize(@simple_stats[index][0])}" %>
                 <br>
                 <%= "#{@simple_stats[index][1]} #{'invoice'.pluralize(@simple_stats[index][1])}"%>
+                <br>
+                <%= "#{@simple_stats[index][2]} #{'shipment'.pluralize(@simple_stats[index][2])}"%>
                 </div>
               </div>
               <div class="list-group">
-                <%= link_to(t('home.index.entries'), company_entries_path(company.id), :class => 'list-group-item') %>
+                <%= link_to('Shipments', company_shipments_path(company.id), :class => 'list-group-item') %>
                 <% if can? :index, Invoice %>
                   <%= link_to(t('home.index.invoices'), company_invoices_path(company.id), :class => 'list-group-item') %>
-                <% end %>
-                <% if can? :manage, Stats %>
-                  <%= link_to(t('home.index.stats'), company_stats_path(company.id), :class => 'list-group-item') %>
                 <% end %>
                 <% if can? :create, Entry %>
                   <%= link_to(t('home.index.batch'), batch_path(company.id), :class => 'list-group-item') %>

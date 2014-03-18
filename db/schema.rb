@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208150343) do
+ActiveRecord::Schema.define(version: 20140222113642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,11 +86,13 @@ ActiveRecord::Schema.define(version: 20140208150343) do
     t.string   "status"
     t.integer  "company_id"
     t.integer  "type_id"
+    t.integer  "shipment_id"
   end
 
   add_index "entries", ["classifications_id"], name: "index_entries_on_classifications_id", using: :btree
   add_index "entries", ["company_id"], name: "index_entries_on_company_id", using: :btree
   add_index "entries", ["invoice_id"], name: "index_entries_on_invoice_id", using: :btree
+  add_index "entries", ["shipment_id"], name: "index_entries_on_shipment_id", using: :btree
   add_index "entries", ["type_id"], name: "index_entries_on_type_id", using: :btree
 
   create_table "invoices", force: true do |t|
@@ -111,6 +113,14 @@ ActiveRecord::Schema.define(version: 20140208150343) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "shipments", force: true do |t|
+    t.string   "number"
+    t.string   "expectance"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stats", force: true do |t|
     t.datetime "created_at"

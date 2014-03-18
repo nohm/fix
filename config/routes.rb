@@ -8,10 +8,12 @@ Badger::Application.routes.draw do
     resources :types, :only => [:index, :new, :create, :edit, :update, :destroy] do
       resources :stocks, :only => [:index, :new, :create, :edit, :update, :destroy]
     end
-    resources :stats, :only => :index
     resources :invoices, :only => [:index, :show, :new, :create, :destroy]
-    resources :entries do
-  	  resources :attachments, :only => [:create, :destroy]
+    resources :shipments do
+      resources :stats, :only => :index
+      resources :entries do
+        resources :attachments, :only => [:create, :destroy]
+      end
     end
   end
 
@@ -20,9 +22,9 @@ Badger::Application.routes.draw do
   match 'companies/:company_id/batch' => 'home#batch_update', :as => :batch_update, :via => :post
 
   # Special routes for entries
-  match 'companies/:company_id/entries/:id/sticker' => 'entries#sticker', :as => :sticker, :via => :get
-  match 'companies/:company_id/entries/:id/ticket' => 'entries#ticket', :as => :ticket, :via => :get
-  match 'companies/:company_id/entries/:id/zip' => 'entries#zip', :as => :zip, :via => :get
+  match 'companies/:company_id/shipments/:shipment_id/entries/:id/sticker' => 'entries#sticker', :as => :sticker, :via => :get
+  match 'companies/:company_id/shipments/:shipment_id/entries/:id/ticket' => 'entries#ticket', :as => :ticket, :via => :get
+  match 'companies/:company_id/shipments/:shipment_id/entries/:id/zip' => 'entries#zip', :as => :zip, :via => :get
 
   resources :appliances, :only => [:index, :new, :create, :destroy]
   resources :classifications, :only => [:index, :new, :create]

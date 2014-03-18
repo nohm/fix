@@ -7,9 +7,10 @@ en:
     users: 'Users'
     appliances: 'Appliances'
     classes: 'Classes'
-    history: 'History'
     broadcasts: 'Broadcasts'
     companies: 'Companies'
+    entries: 'Entries'
+    stats: 'Stats'
 
     unauthorized: 'You''re not authorized for this.'
     unauth_admin: 'Not authorized as an administrator.'
@@ -62,6 +63,9 @@ en:
     amount_per_app: 'Amount per app'
     minimum: 'Minimum'
     send_mail: 'Send mail?'
+    shipment: 'shipment'
+    expectance: 'Delivered'
+    current: 'Currently entered'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -332,6 +336,23 @@ en:
       type_added: 'Type added.'
       type_updated: 'Type updated.'
       type_deleted: 'Type deleted.'
+
+# app/views/shipments
+  shipment:
+    index:
+      title: 'Badger · Shipments for '
+      legend: 'Shipments for '
+      empty_list: 'No shipments here'
+      add_stock: 'Add shipment'
+    new:
+      title: 'Badger · New shipment'
+      legend: 'New shipment'
+      button: 'Save'
+      button_send: 'Saving...'
+
+# app/controllers/shipments & model
+    controller:
+      shipment_added: 'Shipment added.'
 
 # app/views/stocks
   stock:

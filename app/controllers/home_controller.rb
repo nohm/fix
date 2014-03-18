@@ -13,6 +13,7 @@ class HomeController < ApplicationController
         @simple_stats[index] = Array.new
         @simple_stats[index][0] = company.entries.length
         @simple_stats[index][1] = company.invoices.length
+        @simple_stats[index][2] = company.shipments.length
       end
     end
   end

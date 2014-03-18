@@ -3,6 +3,7 @@ class Entry < ActiveRecord::Base
   belongs_to :type
   belongs_to :classifications
   belongs_to :invoice
+  belongs_to :shipment
   
   has_many :attachments, dependent: :destroy
   

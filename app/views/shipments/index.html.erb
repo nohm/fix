@@ -1,0 +1,54 @@
+<% provide(:title, t('shipment.index.title') + @company.title) %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title"><%= "#{t('shipment.index.legend')} #{@company.title}" %></div>
+  </div>
+  <div class="panel-body panel-table">
+    <% if @shipments.length == 0 %>
+      <p class="empty_list"><%= t('shipment.index.empty_list') %></p>
+    <% else %>
+      <div class="table-responsive">
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th><%= t('global.number') %></th>
+              <th><%= t('global.date') %></th>
+              <th><%= t('global.expectance') %></th>
+              <th><%= t('global.current') %></th>
+              <th style="width:17px;"></th>
+              <th style="width:17px;"></th>
+            </tr>
+          </thead>
+          <tbody class="searchable">
+            <% @shipments.each_with_index do |shipment, index| %>
+              <tr>
+                <td><%= shipment.number %></td>
+                <td><%= shipment.created_at.to_date.to_s %></td>
+                <td><%= shipment.expectance %></td>
+                <td>
+                  <% @current_status[index - 1].each_pair do |key, value| %>
+                    <%= "#{value} x #{key.gsub('_', ' ')}" %><br>
+                  <% end %>
+                </td>
+                <td>
+                	<%= link_to(t('global.entries'), company_shipment_entries_path(params[:company_id], shipment.id), :class => 'btn btn-primary btn-xs') %>
+                </td>
+                <td>
+                	<%= link_to(t('global.stats'), company_shipment_stats_path(params[:company_id], shipment.id), :class => 'btn btn-primary btn-xs') %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+  <div class="panel-footer">
+
+    <% if can? :create, Shipment %>
+      <%= link_to('New shipment', new_company_shipment_path(params[:company_id]), :class => 'btn btn-mini btn-primary') %>
+    <% end %>
+
+  </div>
+</div>

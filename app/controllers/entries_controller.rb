@@ -25,26 +25,27 @@ class EntriesController < ApplicationController
         begin
           types = Type.where(appliance_id: Appliance.where(abb: params[:searchnum][1].upcase).first.id).ids
           entries = Entry.includes(:attachments).where(type_id: types, number: params[:searchnum][2..-1], company_id: params[:company_id])
-          redirect_to company_entry_path(params[:company_id], entries.first.id)
+          redirect_to company_shipment_entry_path(params[:company_id], params[:shipment_id], entries.first.id)
         rescue
-          redirect_to company_entries_path(params[:company_id]), :alert => "Entry not found with number #{params[:searchnum]}."
+          redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id]), :alert => "Entry not found with number #{params[:searchnum]}."
         end
       elsif params[:searchbrand]
         types = Type.where('brand ILIKE ?', params[:searchbrand]).ids
-        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(type_id: types, company_id: params[:company_id]).order('id ASC')
+        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(type_id: types, company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC')
       elsif params[:searchtype]
         types = Type.where('typenum ILIKE ?', params[:searchtype]).ids
-        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(type_id: types, company_id: params[:company_id]).order('id ASC')
+        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(type_id: types, company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC')
       elsif params[:searchserial]
-        @entries = Entry.includes(:attachments,:type,:company,:classifications).where('serialnum ILIKE ? AND company_id = ?', params[:searchserial], params[:company_id]).order('id ASC')
+        @entries = Entry.includes(:attachments,:type,:company,:classifications).where('serialnum ILIKE ? AND company_id = ? AND shipment_id = ?', params[:searchserial], params[:company_id], params[:shipment_id]).order('id ASC')
       elsif params[:searchstatus]
-        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(status: params[:searchstatus], company_id: params[:company_id]).order('id ASC')
+        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(status: params[:searchstatus], company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC')
       else
-        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(company_id: params[:company_id]).order('id ASC').page(params[:page]).per(25)
+        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC').page(params[:page]).per(25)
         @pagination = true
       end
 
       @company = Company.find(params[:company_id])
+      @shipment = Shipment.find(params[:shipment_id])
       @statuses = Entry.select("DISTINCT status").map(&:status).sort!
     else
       redirect_to root_path, :alert => I18n.t('global.unauthorized')
@@ -108,6 +109,7 @@ class EntriesController < ApplicationController
     authorize! :update, Entry, :message => I18n.t('global.unauthorized')
 
     params[:entry][:company_id] = params[:company_id]
+    params[:entry][:shipment_id] = params[:shipment_id]
 
     @entry = Entry.find(params[:id])
 
@@ -127,8 +129,8 @@ class EntriesController < ApplicationController
       params[:entry][:number] = highest_id + 1
     end
       
-    if @entry.update(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id))
-      redirect_to company_entries_path(params[:company_id], :page => session[:page]), :notice => I18n.t('entry.controller.updated')
+    if @entry.update(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
+      redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id], :page => session[:page]), :notice => I18n.t('entry.controller.updated')
     else
       @type_names = Array.new
       Type.pluck(:brand, :typenum, :id).each do |type|
@@ -143,6 +145,7 @@ class EntriesController < ApplicationController
     authorize! :create, Entry, :message => I18n.t('global.unauthorized')
 
     params[:entry][:company_id] = params[:company_id]
+    params[:entry][:shipment_id] = params[:shipment_id]
 
     highest_id = 0
     Type.where(company_id: params[:company_id]).each do |type|
@@ -156,10 +159,10 @@ class EntriesController < ApplicationController
 
     params[:entry][:number] = highest_id + 1
 
-    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id))
+    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
     
     if @entry.save
-      redirect_to company_entries_path(params[:company_id], :page => Entry.where(company_id: params[:company_id]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
+      redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id], :page => Entry.where(company_id: params[:company_id]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
     else
       @type_names = Array.new
       Type.pluck(:brand, :typenum, :id).each do |type|
@@ -175,7 +178,7 @@ class EntriesController < ApplicationController
 
     entry = Entry.find(params[:id])
     entry.destroy
-    redirect_to company_entries_path(params[:company_id]), :notice => I18n.t('entry.controller.deleted')
+    redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id]), :notice => I18n.t('entry.controller.deleted')
   end
 
 end

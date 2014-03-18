@@ -3,6 +3,7 @@ class StatsController < ApplicationController
 		authorize! :index, Stats, :message => I18n.t('global.unauthorized')
 
 		@company = Company.find(params[:company_id])
+		@shipment = Shipment.find(params[:shipment_id])
 
 		type_global_all = Array.new(7) {0}
 		type_global_min = Array.new(4) {0}
@@ -16,7 +17,8 @@ class StatsController < ApplicationController
 			type_total_all = 0
 			type_total_min = 0
 
-			type.entries.each do |entry|
+			type_entries = @shipment.entries.where(type_id: type.id)
+			type_entries.each do |entry|
 				if entry.scrap == 1
 					s = 2
 				elsif entry.repaired == 1
@@ -35,20 +37,22 @@ class StatsController < ApplicationController
 				type_global_all[status] += 1
 			end
 
-			@charts[type.brand_type] = Array.new
-			@charts[type.brand_type].append Stats.new.generate_chart(type.brand_type.gsub('_',''), type.entries.length, type_all, params[:type])
-			unless type_min[0] + type_min[1] + type_min[2] + type_min[3] == 0
-				@charts[type.brand_type].append Stats.new.generate_chart_status(type.brand_type.gsub('_',''), type.entries.length, type_min, params[:type])
-			else
-				if params[:type] == 'extended'
-					@charts[type.brand_type].append LazyHighCharts::HighChart.new('pie')
+			unless type_entries.length == 0
+				@charts[type.brand_type] = Array.new
+				@charts[type.brand_type].append Stats.new.generate_chart(type.brand_type.gsub('_',''), type.entries.length, type_all, params[:type])
+				unless type_min[0] + type_min[1] + type_min[2] + type_min[3] == 0
+					@charts[type.brand_type].append Stats.new.generate_chart_status(type.brand_type.gsub('_',''), type.entries.length, type_min, params[:type])
 				else
-					@charts[type.brand_type].append ''
+					if params[:type] == 'extended'
+						@charts[type.brand_type].append LazyHighCharts::HighChart.new('pie')
+					else
+						@charts[type.brand_type].append ''
+					end
 				end
 			end
 		end
 
-		@charts[:global].append Stats.new.generate_chart(@company.short, @company.entries.length, type_global_all, params[:type])
-		@charts[:global].append Stats.new.generate_chart_status(@company.short, @company.entries.length, type_global_min, params[:type])
+		@charts[:global].append Stats.new.generate_chart(@company.short, @shipment.entries.length, type_global_all, params[:type])
+		@charts[:global].append Stats.new.generate_chart_status(@company.short, @shipment.entries.length, type_global_min, params[:type])
 	end
 end

@@ -7,9 +7,10 @@ nl:
     users: 'Gebruikers'
     appliances: 'Apparaten'
     classes: 'Klassen'
-    history: 'Geschiedenis'
     broadcasts: 'Uitzendingen'
     companies: 'Bedrijven'
+    entries: 'Orders'
+    stats: 'Statistieken'
 
     unauthorized: 'Je bent hiervoor niet geautoriseerd.'
     unauth_admin: 'Niet geautoriseerd als een beheerder.'
@@ -62,6 +63,9 @@ nl:
     amount_per_app: 'Hoeveelheid per app'
     minimum: 'Minimum'
     send_mail: 'Stuur email?'
+    shipment: 'levering'
+    expectance: 'Geleverd'
+    current: 'Nu ingevoerd'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -330,6 +334,23 @@ nl:
       type_added: 'Type toegevoegd.'
       type_updated: 'Type gewijzigd.'
       type_deleted: 'Type verwijdert.'
+
+# app/views/shipments
+  shipment:
+    index:
+      title: 'Badger · Leveringen voor '
+      legend: 'Leveringen voor '
+      empty_list: 'Geen leveringen hier'
+      add_stock: 'Levering toevoegen'
+    new:
+      title: 'Badger · Nieuwe levering'
+      legend: 'Nieuwe levering'
+      button: 'Opslaan'
+      button_send: 'Opslaan...'
+
+# app/controllers/shipments & model
+    controller:
+      shipment_added: 'Levering toegevoegd.'
 
 # app/views/stocks
   stock:
