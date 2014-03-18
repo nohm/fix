@@ -9,12 +9,12 @@ class Ability
     elsif user.has_role? :manager
       can :see_data, :all
       can :see_history, :all
-      can :manage, [Company, Type, Entry, Invoice, Stats, Broadcast, Stock]
+      can :manage, [Company, Type, Entry, Invoice, Stats, Broadcast, Stock, Shipment]
       can [:create, :destroy], [Attachment, Appliance, Classifications]
 
     elsif user.has_role? :technician
       can :see_data, :all
-      can :manage, [Entry, Stats]
+      can :manage, [Entry, Stats, Shipment]
       cannot [:destroy], Entry
       can [:create, :destroy], Attachment
       can [:retrieve, :disable], Broadcast
