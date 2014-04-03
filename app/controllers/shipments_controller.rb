@@ -4,9 +4,9 @@ class ShipmentsController < ApplicationController
    def index
     authorize! :index, Shipment, :message => I18n.t('global.unauthorized')
 
-    @shipments = Shipment.where(company_id: params[:company_id])
+    @shipments = Shipment.where(company_id: params[:company_id]).page(params[:page]).per(10)
 
-    @current_status = Array.new(@shipments.length)
+    @current_status = Array.new
     @shipments.each do |shipment|
       shipment_status = Hash.new
       type_count = Entry.where(shipment_id: shipment.id).group(:type_id).uniq.count.sort

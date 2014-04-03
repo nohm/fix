@@ -27,7 +27,7 @@
                 <td><%= shipment.created_at.to_date.to_s %></td>
                 <td><%= shipment.expectance %></td>
                 <td>
-                  <% @current_status[index - 1].each_pair do |key, value| %>
+                  <% @current_status[index].each_pair do |key, value| %>
                     <%= "#{value} x #{key.gsub('_', ' ')}" %><br>
                   <% end %>
                 </td>
@@ -45,6 +45,10 @@
     <% end %>
   </div>
   <div class="panel-footer">
+
+    <% unless @shipments.length == 0 %>
+      <%= paginate @shipments %>
+    <% end %>
 
     <% if can? :create, Shipment %>
       <%= link_to('New shipment', new_company_shipment_path(params[:company_id]), :class => 'btn btn-mini btn-primary') %>
