@@ -11,6 +11,7 @@ nl:
     companies: 'Bedrijven'
     entries: 'Orders'
     stats: 'Statistieken'
+    shipment_cap: 'Levering'
 
     unauthorized: 'Je bent hiervoor niet geautoriseerd.'
     unauth_admin: 'Niet geautoriseerd als een beheerder.'
@@ -24,6 +25,7 @@ nl:
     y: 'Ja'
     n: 'Nee'
     total: 'Total'
+    add: 'Toevoegen'
 
     name: 'Naam'
     username: 'Gebruikersnaam'
@@ -223,6 +225,7 @@ nl:
       stats: 'Statistieken'
       batch: 'Batch'
       type: 'Types'
+      stock: 'Voorraad'
       no_company: 'U wordt snel aan uw bedrijf toegevoegd.. Kunt u niet wachten? Neem contact op met de beheerder '
       no_company_anchor: 'hier'
 
@@ -375,6 +378,8 @@ nl:
       stock_added: 'Voorraad toegevoegd.'
       stock_updated: 'Voorraad gewijzigd.'
       stock_deleted: 'Voorraad verwijdert.'
+      stock_added_type: 'Voorraad toegevoegd aan type.'
+      stock_deleted_type: 'Voorraad verwijdert van type.'
 
 # app/views/users
   user:

@@ -32,6 +32,9 @@
                 <% if can? :index, Type %>
                   <%= link_to(t('home.index.type'), company_types_path(company.id), :class => 'list-group-item') %>
                 <% end %>
+                <% if can? :index, Stock %>
+                  <%= link_to(t('home.index.stock'), company_stocks_path(company.id), :class => 'list-group-item') %>
+                <% end %>
               </div>
             </div>
           </div>

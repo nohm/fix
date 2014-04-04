@@ -1,8 +1,8 @@
-<% provide(:title, t('stock.index.title') + @company.title) %>
+<% provide(:title, t('stock.index.title') + @type.brand + ' ' + @type.typenum) %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <div class="panel-title"><%= t('stock.index.legend') + @company.title %></div>
+    <div class="panel-title"><%= t('stock.index.legend') + @type.brand + ' ' + @type.typenum %></div>
   </div>
   <div class="panel-body panel-table">
     <% if @stocks.length == 0 %>
@@ -42,7 +42,7 @@
                 <% end %>
                 <% if can? :destroy, Stock %>
                   <td>
-                    <%= link_to(company_stock_path(params[:company_id], stock), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
+                    <%= link_to(type_stock_remove_path(params[:company_id], params[:type_id], stock), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
                       <span class="glyphicon glyphicon-remove"></span>
                     <% end %>
                   </td>
@@ -57,7 +57,7 @@
   <div class="panel-footer">
 
     <% if can? :create, Stock %>
-      <%= link_to(t('stock.index.add_stock'), new_company_stock_path(params[:company_id]), :class => 'btn btn-mini btn-primary') %>
+      <%= link_to(t('stock.index.add_stock'), type_stock_index_path(params[:company_id], params[:type_id]), :class => 'btn btn-mini btn-primary') %>
     <% end %>
 
   </div>

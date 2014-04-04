@@ -18,7 +18,9 @@
               <th><%= t('global.test_price') %></th>
               <th><%= t('global.repair_price') %></th>
               <th><%= t('global.scrap_price') %></th>
-              <th style="width:17px;"></th>
+              <% if can? :type_stock, Stock %>
+                <th style="width:17px;"></th>
+              <% end %>
               <% if can? :edit, Type %>
                 <th style="width:17px;"></th>
               <% end %>
@@ -36,11 +38,13 @@
                 <td><%= number_to_currency(type.test_price, unit: '€') %></td>
                 <td><%= number_to_currency(type.repair_price, unit: '€') %></td>
                 <td><%= number_to_currency(type.scrap_price, unit: '€') %></td>
-                <td>
-                  <%= link_to company_type_stocks_path(type.company_id, type) do %>
-                    <span class="glyphicon glyphicon-gift"></span>
-                  <% end %>
-                </td>
+                <% if can? :type_stock, Stock %>
+                  <td>
+                    <%= link_to type_stock_path(type.company_id, type) do %>
+                      <span class="glyphicon glyphicon-gift"></span>
+                    <% end %>
+                  </td>
+                <% end %>
                 <% if can? :edit, Type %>
                   <td>
                     <%= link_to edit_company_type_path(type.company_id, type) do %>

@@ -3,7 +3,7 @@ class Type < ActiveRecord::Base
   belongs_to :appliance
 
   has_many :entries
-  has_many :stocks
+  has_and_belongs_to_many :stocks
 
   validates :appliance_id, presence: true
   validates :brand, presence: true

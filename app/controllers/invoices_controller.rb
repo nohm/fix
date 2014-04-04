@@ -110,7 +110,7 @@ class InvoicesController < ApplicationController
     end
     invoice = Invoice.find(params[:id])
     invoice.destroy
-    redirect_to invoices_path, :notice => I18n.t('invoice.controller.deleted')
+    redirect_to company_invoices_path(params[:company_id]), :notice => I18n.t('invoice.controller.deleted')
   end
 
   def create

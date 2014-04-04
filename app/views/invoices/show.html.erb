@@ -79,12 +79,14 @@
         <tbody>
           <% @entry_classes.each_with_index do |klasses, index| %>
             <% unless klasses.length == 0 %>
-              <tr>
-                <td><strong>Shipment <%= @shipments[index].number %></strong></td>
-                <td></td><td></td><td></td><td></td><td></td>
-              </tr>
               <% klasses.each_with_index do |entries, index| %>
                 <% unless entries.length == 0 %>
+                  <% if index == 1 %>
+                    <tr>
+                      <td><strong><%= t('global.shipment_cap') %> <%= @shipments[index].number %></strong></td>
+                      <td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                  <% end %>
                   <tr>
                     <td><strong><%= "#{t('global.class')} #{@classes[index].name}" %></strong></td>
                     <td></td><td></td><td></td><td></td><td></td>

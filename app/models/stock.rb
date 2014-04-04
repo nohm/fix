@@ -1,7 +1,7 @@
 class Stock < ActiveRecord::Base
-	belongs_to :type
+	has_and_belongs_to_many :type
 
-  validates :type_id, presence: true
+  validates :company_id, presence: true
   validates :name, presence: true
   validates :amount, presence: true
   validates :amount_per_app, presence: true
@@ -9,7 +9,7 @@ class Stock < ActiveRecord::Base
   validates :send_mail, presence: true
 
 	def update_stock(entry)
-    stocks = Stock.where(type_id: entry.type_id)
+    stocks = entry.type.stocks
     stocks.each do |stock|
       diff = 0
 

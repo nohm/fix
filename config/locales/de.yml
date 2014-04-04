@@ -12,6 +12,7 @@ de:
     companies: 'Geschäfte'
     entries: 'Entries'
     stats: 'Stats'
+    shipment_cap: 'Shipment'
 
     unauthorized: 'Du hast keine Genehmigung.'
     unauth_admin: 'Du hast keine Verwaltungsrechte.'
@@ -25,6 +26,7 @@ de:
     y: 'Ja'
     n: 'Nee'
     total: 'Total'
+    add: 'Add'
 
     name: 'Name'
     username: 'Nützername'
@@ -224,6 +226,7 @@ de:
       stats: 'Statistik'
       batch: 'Stapel'
       type: 'Types'
+      stock: 'Stock'
       no_company: 'Sie werden bald wie möchlich bei ihren Firma zutrutt haben in dieses Programm. Eile? Kontaktier den Verwalter '
       no_company_anchor: 'here'
 
@@ -376,6 +379,8 @@ de:
       stock_added: 'Stock added.'
       stock_updated: 'Stock updated.'
       stock_deleted: 'Stock deleted.'
+      stock_added_type: 'Stock added to type.'
+      stock_deleted_type: 'Stock deleted from type.'
 
 # app/views/users
   user:

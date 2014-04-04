@@ -66,6 +66,7 @@ class TypesController < ApplicationController
     authorize! :destroy, Type, :message => I18n.t('global.unauthorized')
 
     type = Type.find(params[:id])
+    type.stocks.destroy
     type.destroy
     redirect_to company_types_path(params[:company_id]), :notice => I18n.t('type.controller.type_deleted')
   end

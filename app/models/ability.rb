@@ -11,6 +11,7 @@ class Ability
       can :see_history, :all
       can :manage, [Company, Type, Entry, Invoice, Stats, Broadcast, Stock, Shipment]
       can [:create, :destroy], [Attachment, Appliance, Classifications]
+      can :type_stock, Stock
 
     elsif user.has_role? :technician
       can :see_data, :all
@@ -19,6 +20,7 @@ class Ability
       can [:create, :destroy], Attachment
       can [:retrieve, :disable], Broadcast
       can :index, [Type, Stock]
+      can :type_stock, Stock
 
     # Add any company that exists here as a role
     elsif user.has_role? :vitel or user.has_role? :maxioutlet or user.has_role? :tronex or user.has_role? :ahead

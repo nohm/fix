@@ -1,6 +1,6 @@
 <% provide(:title, t('stock.new.title')) %>
 
-<%= bootstrap_form_for(@stock, :url => company_type_stocks_path(params[:company_id], params[:type_id]), :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
+<%= bootstrap_form_for(@stock, :url => company_stocks_path(params[:company_id]), :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
   <%= f.alert_message t('global.errors') %>
   
   <div class="panel panel-default">
@@ -22,4 +22,4 @@
   </div>
 <% end %>
 
-<%= link_to t('global.back'), company_type_stocks_path(params[:company_id], params[:type_id]) %>
+<%= link_to t('global.back'), company_stocks_path(params[:company_id]) %>

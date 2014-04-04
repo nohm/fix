@@ -11,6 +11,7 @@ en:
     companies: 'Companies'
     entries: 'Entries'
     stats: 'Stats'
+    shipment_cap: 'Shipment'
 
     unauthorized: 'You''re not authorized for this.'
     unauth_admin: 'Not authorized as an administrator.'
@@ -24,6 +25,7 @@ en:
     y: 'Yes'
     n: 'No'
     total: 'Total'
+    add: 'Add'
 
     name: 'Name'
     username: 'Username'
@@ -224,6 +226,7 @@ en:
       stats: 'Stats'
       batch: 'Batch'
       type: 'Types'
+      stock: 'Stock'
       no_company: 'You will be assigned to your respective company soon. Can''t wait? Contact the admin '
       no_company_anchor: 'here'
 
@@ -377,6 +380,8 @@ en:
       stock_added: 'Stock added.'
       stock_updated: 'Stock updated.'
       stock_deleted: 'Stock deleted.'
+      stock_added_type: 'Stock added to type.'
+      stock_deleted_type: 'Stock deleted from type.'
 
 # app/views/users
   user:
