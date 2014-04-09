@@ -8,12 +8,12 @@ class Stock < ActiveRecord::Base
   validates :minimum, presence: true
   validates :send_mail, presence: true
 
-	def update_stock(entry)
+  def update_stock(entry)
     stocks = entry.type.stocks
     stocks.each do |stock|
       diff = 0
 
-      unless entry.status.start_with? 'Sent' or entry.get_status.start_with? 'Sent'
+      unless entry.status.nil? or entry.status.start_with? 'Sent' or entry.get_status.start_with? 'Sent'
         if entry.status != 'Ready' and entry.get_status == 'Ready'
           diff = -stock.amount_per_app
         elsif entry.status == 'Ready' and entry.get_status != 'Ready'

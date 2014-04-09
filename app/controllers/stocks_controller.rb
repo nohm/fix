@@ -4,7 +4,7 @@ class StocksController < ApplicationController
   def index
     authorize! :index, Stock, :message => I18n.t('global.unauthorized')
 
-    @stocks = Stock.where(company_id: params[:company_id])
+    @stocks = Stock.where(company_id: params[:company_id]).order('id ASC')
     @company = Company.find(params[:company_id])
   end
 
@@ -64,7 +64,7 @@ class StocksController < ApplicationController
   def type_stock_index
     authorize! :type_stock, Stock, :message => I18n.t('global.unauthorized')
 
-    stock_ids = Type.find(params[:type_id]).stock_ids
+    stock_ids = Type.find(params[:type_id]).stock_ids.sort
     all_stocks = Stock.where(company_id: params[:company_id])
 
     stocks = Array.new

@@ -162,7 +162,7 @@ class EntriesController < ApplicationController
     @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
     
     if @entry.save
-      redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id], :page => Entry.where(company_id: params[:company_id]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
+      redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id], :page => Entry.where(company_id: params[:company_id], shipment_id: params[:shipment_id]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
     else
       @type_names = Array.new
       Type.pluck(:brand, :typenum, :id).each do |type|

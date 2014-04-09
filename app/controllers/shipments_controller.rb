@@ -4,7 +4,7 @@ class ShipmentsController < ApplicationController
    def index
     authorize! :index, Shipment, :message => I18n.t('global.unauthorized')
 
-    @shipments = Shipment.where(company_id: params[:company_id]).page(params[:page]).per(10)
+    @shipments = Shipment.where(company_id: params[:company_id]).order('id ASC').page(params[:page]).per(10)
 
     @current_status = Array.new
     @shipments.each do |shipment|
