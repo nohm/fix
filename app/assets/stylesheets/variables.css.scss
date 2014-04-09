@@ -39,5 +39,5 @@ $state-danger-text:    $brand-danger;
 $state-danger-bg:      lighten($brand-danger, 30%);
 $state-danger-border:  lighten($brand-danger, 20%);
 
-// Add Open-Sans to the serif font-queue
-$font-family-sans-serif: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+// Global font
+$font-family-sans-serif: 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;

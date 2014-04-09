@@ -1,5 +1,6 @@
-<ul class="nav navbar-nav">
-    <li role="presentation">
+
+<ul class="nav navbar-nav navbar-right">
+<li role="presentation">
         <p class="text-muted info-label">
           <% if user_signed_in? %>
             <%= current_user.name %>
@@ -9,16 +10,14 @@
           <% end %>
         </p>
     </li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
   <li role="presentation">
     <%= link_to(edit_user_registration_path) do %>
-      <%= t('layouts.navigation.edit') %>
+      <span class="glyphicon glyphicon-inverse glyphicon-cog"></span>
     <% end %>
   </li>
   <li role="presentation">
     <%= link_to(destroy_user_session_path, :method => 'delete', :role => "menuitem", :tabindex => "-1") do %>
-      <%= t('layouts.navigation.logout') %>
+      <span class="glyphicon glyphicon-inverse glyphicon-briefcase"></span>
     <% end %>
   </li>
 </ul>

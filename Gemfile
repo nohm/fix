@@ -8,6 +8,8 @@ gem 'turbolinks'
 gem 'mina'
 # Database
 gem 'pg'
+# Logs
+gem 'lograge'
 # CSS
 gem 'sass-rails', '4.0.2'
 gem 'bootstrap-sass', '~> 3.1.0'

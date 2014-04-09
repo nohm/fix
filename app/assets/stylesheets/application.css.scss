@@ -49,6 +49,13 @@ html, body {
   margin-right: 3px;
 }
 
+.glyphicon-inverse {
+  color: $white;
+  &:hover {
+    color: $gray-lighter;
+  }
+}
+
 // Completely center an object and its text
 .center {
   text-align: center;
@@ -147,28 +154,4 @@ a span:hover {
 }
 .deflag {
   background-position: -16px 0;
-}
-
-// Footer styling
-footer {
-  padding-top: 10px;
-  margin-top: 10px;
-  background-color: lighten($gray-lighter, 7.5%);
-  color: $gray;
-  text-align: center;
-  border-top: 1px solid $gray-lighter;
-  p {
-    margin-bottom: 0;
-  }
-}
-.footer-links {
-  margin: 10px 0;
-  padding-left: 0;
-  li {
-    display: inline;
-    padding: 0 2px;
-    &:first-child {
-      padding-left: 0;
-    }
-  }
 }

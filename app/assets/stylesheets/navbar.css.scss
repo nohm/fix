@@ -8,7 +8,7 @@
   }
   .navbar-brand {
     color: $white;
-    margin-left: 0px !important;
+    margin-left: 0 !important;
     padding-left: 45px;
     background: url("../images/logo-tiny.png") no-repeat;
     background-size: 40px 40px;
@@ -21,6 +21,7 @@
     li {
       a {
         color: $gray-lighter;
+        padding-right: 0 !important;
         &:hover {
           color: $white;
         }
@@ -33,6 +34,9 @@
       }
     }
   }
+  .navbar-right {
+    padding-right: 15px;
+  }
   .navbar-toggle {
     border-color: $brand-custom;
     &:hover {
@@ -44,7 +48,7 @@
   .info-label {
     color: $gray-lighter;
     margin: 0 !important;
-    padding: 15px;
+    padding: 15px 0;
     position: relative;
   }
 }

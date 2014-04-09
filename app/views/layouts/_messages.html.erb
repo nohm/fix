@@ -3,7 +3,10 @@
     <% if msg.is_a?(String) %>
         <div class="alert alert-<%= name == :notice ? "success" : "danger" %>">
           <a class="close" data-dismiss="alert">&#215;</a>
-          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <div id="flash_<%= name %>">
+            <span class="glyphicon glyphicon-<%= name == :notice ? "ok" : "remove" %>"></span>
+           <%= '  ' + msg %>
+          </div>
           <% flash.delete(name) %>
         </div>
     <% end %>
@@ -13,6 +16,7 @@
       <div class="alert alert-info">
         <a onclick="disableBroadcast('<%= disable_broadcast_path(broadcast[:id]) %>')" class="close" data-dismiss="alert">&#215;</a>
         <div id="broadcast_<%= broadcast[:id] %>">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>
           <strong><%= broadcast[:title] %></strong>
           <%= raw(broadcast[:text]) %>
         </div>

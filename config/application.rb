@@ -11,6 +11,7 @@ module Badger
 
     config.middleware.use Rack::Deflater
     config.i18n.enforce_available_locales = true
+    config.lograge.enabled = true
 
     config.generators do |g|
       

@@ -2,10 +2,10 @@ class HomeController < ApplicationController
   def index
     unless current_user.nil? or current_user.has_role? :user
       if current_user.staff?
-        @companies = Company.all.includes(:entries,:invoices).order('id ASC')
+        @companies = Company.all.includes(:entries,:invoices,:shipments).order('id ASC')
         @panelclass = 'col-xs-6 col-sm-3'
       elsif current_user.supplier?
-        @companies = Company.includes(:entries,:invoices).where(short: current_user.roles.first.name)
+        @companies = Company.includes(:entries,:invoices,:shipments).where(short: current_user.roles.first.name)
         @panelclass = 'col-md-4 col-md-offset-4'
       end
       @simple_stats = Array.new
