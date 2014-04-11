@@ -117,12 +117,10 @@ class EntriesController < ApplicationController
       params[:entry][:number] = @entry.number
     else
       highest_id = 0
-      Type.where(company_id: params[:company_id]).each do |type|
-        entries = Entry.where(type_id: type.id).order('id ASC')
-        if entries.length != 0
-          if entries.last.number.to_i > highest_id
-            highest_id = entries.last.number.to_i
-          end
+      entries = Entry.where(type_id: params[:entry][:type_id]).order('id ASC')
+      if entries.length != 0
+        if entries.last.number.to_i > highest_id
+          highest_id = entries.last.number.to_i
         end
       end
 
@@ -148,12 +146,10 @@ class EntriesController < ApplicationController
     params[:entry][:shipment_id] = params[:shipment_id]
 
     highest_id = 0
-    Type.where(company_id: params[:company_id]).each do |type|
-      entries = Entry.where(type_id: type.id).order('id ASC')
-      if entries.length != 0
-        if entries.last.number.to_i > highest_id
-          highest_id = entries.last.number.to_i
-        end
+    entries = Entry.where(type_id: params[:entry][:type_id]).order('id ASC')
+    if entries.length != 0
+      if entries.last.number.to_i > highest_id
+        highest_id = entries.last.number.to_i
       end
     end
 
