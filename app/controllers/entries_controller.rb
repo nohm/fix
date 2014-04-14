@@ -117,13 +117,14 @@ class EntriesController < ApplicationController
       params[:entry][:number] = @entry.number
     else
       highest_id = 0
-      entries = Entry.where(type_id: params[:entry][:type_id]).order('id ASC')
+      appliance_id = Type.find(params[:entry][:type_id]).appliance_id
+      type_ids = Type.select(:id).where(appliance_id: appliance_id)
+      entries = Entry.select('id, number').where(type_id: type_ids).order('id ASC')
       if entries.length != 0
         if entries.last.number.to_i > highest_id
           highest_id = entries.last.number.to_i
         end
       end
-
       params[:entry][:number] = highest_id + 1
     end
       
@@ -146,13 +147,14 @@ class EntriesController < ApplicationController
     params[:entry][:shipment_id] = params[:shipment_id]
 
     highest_id = 0
-    entries = Entry.where(type_id: params[:entry][:type_id]).order('id ASC')
+    appliance_id = Type.find(params[:entry][:type_id]).appliance_id
+    type_ids = Type.select(:id).where(appliance_id: appliance_id)
+    entries = Entry.select('id, number').where(type_id: type_ids).order('id ASC')
     if entries.length != 0
       if entries.last.number.to_i > highest_id
         highest_id = entries.last.number.to_i
       end
     end
-
     params[:entry][:number] = highest_id + 1
 
     @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
