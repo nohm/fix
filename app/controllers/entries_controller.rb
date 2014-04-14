@@ -118,7 +118,7 @@ class EntriesController < ApplicationController
     else
       highest_id = 0
       appliance_id = Type.find(params[:entry][:type_id]).appliance_id
-      type_ids = Type.select(:id).where(appliance_id: appliance_id)
+      type_ids = Type.select(:id).where(company_id: params[:company_id], appliance_id: appliance_id)
       entries = Entry.select('id, number').where(type_id: type_ids).order('id ASC')
       if entries.length != 0
         if entries.last.number.to_i > highest_id
@@ -148,7 +148,7 @@ class EntriesController < ApplicationController
 
     highest_id = 0
     appliance_id = Type.find(params[:entry][:type_id]).appliance_id
-    type_ids = Type.select(:id).where(appliance_id: appliance_id)
+    type_ids = Type.select(:id).where(company_id: params[:company_id], appliance_id: appliance_id)
     entries = Entry.select('id, number').where(type_id: type_ids).order('id ASC')
     if entries.length != 0
       if entries.last.number.to_i > highest_id
