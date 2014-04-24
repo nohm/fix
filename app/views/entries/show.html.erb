@@ -153,13 +153,15 @@
           <% end %>
         <% end %>
 
-        <div class="text-muted">
-          <p>
-            <%= t('entry.show.created') %> <%= @user[:creator] %>
-            <br>
-            <%= t('entry.show.edited') %> <%= @user[:editor] %>
-          </p>
-        </div>
+        <% if current_user.manager? %>
+          <div class="text-muted">
+            <p>
+              <%= t('entry.show.created') %> <%= @user[:creator] %>
+              <br>
+              <%= t('entry.show.edited') %> <%= @user[:editor] %>
+            </p>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
