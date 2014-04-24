@@ -189,6 +189,8 @@ nl:
       edit: 'Order wijzigen'
       delete: 'Order verwijderen'
       view: 'Bekijk geschiedenis'
+      created: 'Aangemaakt door:'
+      edited: 'Gewijzigd door:'
 
 # app/controllers/entries & model
     status:

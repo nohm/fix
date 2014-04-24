@@ -190,6 +190,8 @@ de:
       edit: 'Eintrag bearbeiten'
       delete: 'Eintrag löschen'
       view: 'Gechichte anzeigen'
+      created: 'Created by:'
+      edited: 'Edited by:'
 
 # app/controllers/entries & model
     status:

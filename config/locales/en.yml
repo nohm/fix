@@ -190,6 +190,8 @@ en:
       edit: 'Edit entry'
       delete: 'Delete entry'
       view: 'View history'
+      created: 'Created by:'
+      edited: 'Edited by:'
 
 # app/controllers/entries & model
     status:

@@ -66,6 +66,10 @@ class EntriesController < ApplicationController
   def show
     authorize! :show, Entry, :message => I18n.t('global.unauthorized')
     @entry = Entry.includes(:attachments).find(params[:id])
+
+    @user = Hash.new
+    @user[:creator] = @entry.user_create_id.nil? ? '?' : User.find(@entry.user_create_id).name
+    @user[:editor] = @entry.user_edit_id.nil? ? '?' : User.find(@entry.user_edit_id).name
   end
 
   def zip
@@ -110,6 +114,7 @@ class EntriesController < ApplicationController
 
     params[:entry][:company_id] = params[:company_id]
     params[:entry][:shipment_id] = params[:shipment_id]
+    params[:entry][:user_edit_id] = current_user.id
 
     @entry = Entry.find(params[:id])
 
@@ -128,7 +133,7 @@ class EntriesController < ApplicationController
       params[:entry][:number] = highest_id + 1
     end
       
-    if @entry.update(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
+    if @entry.update(params[:entry].permit(:user_edit_id,:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
       redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id], :page => session[:page]), :notice => I18n.t('entry.controller.updated')
     else
       @type_names = Array.new
@@ -145,6 +150,7 @@ class EntriesController < ApplicationController
 
     params[:entry][:company_id] = params[:company_id]
     params[:entry][:shipment_id] = params[:shipment_id]
+    params[:entry][:user_create_id] = current_user.id
 
     highest_id = 0
     appliance_id = Type.find(params[:entry][:type_id]).appliance_id
@@ -157,7 +163,7 @@ class EntriesController < ApplicationController
     end
     params[:entry][:number] = highest_id + 1
 
-    @entry = Entry.new(params[:entry].permit(:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
+    @entry = Entry.new(params[:entry].permit(:user_create_id,:appliance_id,:number,:type_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
     
     if @entry.save
       redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id], :page => Entry.where(company_id: params[:company_id], shipment_id: params[:shipment_id]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')

@@ -152,6 +152,14 @@
             </div><!-- /.modal -->
           <% end %>
         <% end %>
+
+        <div class="text-muted">
+          <p>
+            <%= t('entry.show.created') %> <%= @user[:creator] %>
+            <br>
+            <%= t('entry.show.edited') %> <%= @user[:editor] %>
+          </p>
+        </div>
       </div>
     </div>
   </div>
