@@ -55,3 +55,21 @@
 <% end %>
 
 <%= link_to t('global.back'), root_path %>
+
+<script>
+var text = "";
+$('#entry_ordernumbers').bind("keyup cut paste", function(e){
+  if ($(this).val() != text) {
+    text = $(this).val();
+    var split = text.split('\n');
+    var count = 0;
+    for (var i = 0; i < split.length; i++) {
+      if (split[i].length != 0) {
+        count++;
+      }
+    }
+    console.log(count);
+  }    
+});
+console.log($('#entry_ordernumbers').siblings)
+</script>

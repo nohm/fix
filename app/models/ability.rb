@@ -30,6 +30,7 @@ class Ability
       can :manage, Stats
       can [:retrieve, :disable], Broadcast
       can :index, [Type, Stock]
+      can :slip, Invoice
 
     elsif user.has_role? :guest
       can :see_data, :all

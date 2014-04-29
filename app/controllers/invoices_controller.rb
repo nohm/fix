@@ -93,7 +93,7 @@ class InvoicesController < ApplicationController
 
     @company = Company.find(params[:company_id])
 
-    if can? :create, Entry or current_user.roles.first.name == params[:company_id].short
+    if can? :create, Entry or current_user.roles.first.name == @company.short
       @invoices = @company.invoices.order('id ASC').page(params[:page]).per(25)
     else
       redirect_to root_path, :alert => I18n.t('global.unauthorized')
