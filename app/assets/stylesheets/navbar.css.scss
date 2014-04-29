@@ -16,7 +16,7 @@
     &:hover {
       color: $gray-lighter;
     }
-    @media (min-width: $screen-sm-min) {
+    @media (max-width: $screen-sm-min) {
       margin-left: 15px !important;
     }
   }
