@@ -57,6 +57,8 @@
 <%= link_to t('global.back'), root_path %>
 
 <script>
+var label = $('#entry_ordernumbers').siblings()[0];
+var labelVal = label.innerHTML;
 var text = "";
 $('#entry_ordernumbers').bind("keyup cut paste", function(e){
   if ($(this).val() != text) {
@@ -68,8 +70,7 @@ $('#entry_ordernumbers').bind("keyup cut paste", function(e){
         count++;
       }
     }
-    console.log(count);
+    label.innerHTML = labelVal + ' - ' + count;
   }    
 });
-console.log($('#entry_ordernumbers').siblings)
 </script>
