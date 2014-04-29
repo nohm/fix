@@ -155,3 +155,17 @@ a span:hover {
 .deflag {
   background-position: -16px 0;
 }
+
+.batch {
+  .batch-update {
+    margin-top: 10px !important;
+    margin-left: 10px;
+    margin-right: -10px;
+  }
+  .control-label {
+    display: block;
+  }
+  .form-control {
+    width: 75%;
+  }
+}

@@ -49,3 +49,4 @@ function addLoadingSpinner() {
 function disableBroadcast(path) {
   $.ajax({url: path});
 }
+
