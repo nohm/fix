@@ -57,8 +57,16 @@ class EntriesController < ApplicationController
 
     @entry = Entry.new
     @type_names = Array.new
+    last_type_id = -1
+    unless Entry.where(company_id: params[:company_id]).count == 0
+      last_type = Type.find(Entry.last(:order => "id asc", :limit => 1).type_id)
+      last_type_id = last_type.id
+      @type_names.append(["#{last_type.brand} #{last_type.typenum}", last_type.id])
+    end
     Type.where(company_id: params[:company_id]).order('id DESC').pluck(:brand, :typenum, :id).each do |type|
-      @type_names.append(["#{type[0]} #{type[1]}", type[2]])
+      unless type[2] == last_type_id
+        @type_names.append(["#{type[0]} #{type[1]}", type[2]])
+      end
     end
     @class_names = Classifications.pluck(:name, :id)
   end
@@ -103,8 +111,16 @@ class EntriesController < ApplicationController
 
     @entry = Entry.find(params[:id])
     @type_names = Array.new
-    Type.where(company_id: @entry.company_id).order('id DESC').pluck(:brand, :typenum, :id).each do |type|
-      @type_names.append(["#{type[0]} #{type[1]}", type[2]])
+    last_type_id = -1
+    unless Entry.where(company_id: params[:company_id]).count == 0
+      last_type = Type.find(Entry.last(:order => "id asc", :limit => 1).type_id)
+      last_type_id = last_type.id
+      @type_names.append(["#{last_type.brand} #{last_type.typenum}", last_type.id])
+    end
+    Type.where(company_id: params[:company_id]).order('id DESC').pluck(:brand, :typenum, :id).each do |type|
+      unless type[2] == last_type_id
+        @type_names.append(["#{type[0]} #{type[1]}", type[2]])
+      end
     end
     @class_names = Classifications.pluck(:name, :id)
   end
