@@ -59,7 +59,7 @@ class EntriesController < ApplicationController
     @type_names = Array.new
     last_type_id = -1
     unless Entry.where(company_id: params[:company_id]).count == 0
-      last_type = Type.find(Entry.where(company_id: params[:company_id]).last(:order => "id asc", :limit => 1).type_id)
+      last_type = Type.find(Entry.where(company_id: params[:company_id]).order('id ASC').last.type_id)
       last_type_id = last_type.id
       @type_names.append(["#{last_type.brand} #{last_type.typenum}", last_type.id])
     end
@@ -113,7 +113,7 @@ class EntriesController < ApplicationController
     @type_names = Array.new
     last_type_id = -1
     unless Entry.where(company_id: params[:company_id]).count == 0
-      last_type = Type.find(Entry.where(company_id: params[:company_id]).last(:order => "id asc", :limit => 1).type_id)
+      last_type = Type.find(Entry.where(company_id: params[:company_id]).order('id ASC').last.type_id)
       last_type_id = last_type.id
       @type_names.append(["#{last_type.brand} #{last_type.typenum}", last_type.id])
     end
