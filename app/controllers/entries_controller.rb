@@ -57,7 +57,7 @@ class EntriesController < ApplicationController
 
     @entry = Entry.new
     @type_names = Array.new
-    Type.where(company_id: params[:company_id]).pluck(:brand, :typenum, :id).each do |type|
+    Type.where(company_id: params[:company_id]).order('id DESC').pluck(:brand, :typenum, :id).each do |type|
       @type_names.append(["#{type[0]} #{type[1]}", type[2]])
     end
     @class_names = Classifications.pluck(:name, :id)
@@ -103,7 +103,7 @@ class EntriesController < ApplicationController
 
     @entry = Entry.find(params[:id])
     @type_names = Array.new
-    Type.where(company_id: @entry.company_id).pluck(:brand, :typenum, :id).each do |type|
+    Type.where(company_id: @entry.company_id).order('id DESC').pluck(:brand, :typenum, :id).each do |type|
       @type_names.append(["#{type[0]} #{type[1]}", type[2]])
     end
     @class_names = Classifications.pluck(:name, :id)
