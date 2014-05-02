@@ -78,7 +78,7 @@ nl:
 # app/views/kaminari
   views:
     pagination:
-      first: "&laquo; Errste"
+      first: "&laquo; Eerste"
       last: "Laatste &raquo;"
       previous: "&lsaquo; Vorige"
       next: "Volgende &rsaquo;"

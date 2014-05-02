@@ -12,6 +12,8 @@ class Entry < ActiveRecord::Base
   validates :serialnum, presence: true
   validates :company_id, presence: true
 
+  validates_uniqueness_of :serialnum
+
   before_save :format_input, :update_stock
   after_save :update_status
 
