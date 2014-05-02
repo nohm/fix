@@ -50,3 +50,11 @@ function disableBroadcast(path) {
   $.ajax({url: path});
 }
 
+$(document).ready(function() {
+        $("form").bind("keypress", function(e) {
+          console.log(e);
+            if (e.keyCode == 13) {
+                e.preventDefault();
+            }
+        });
+    });

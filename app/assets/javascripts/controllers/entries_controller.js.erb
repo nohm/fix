@@ -1,0 +1,44 @@
+app.controller({
+    "name": "entries",
+    "actions": {
+      "new": function() {
+        registerListeners();
+      },
+      "edit": function() {
+        registerListeners();
+      }
+    }
+});
+
+function registerListeners() {
+  try {
+    var els = document.getElementsByTagName('input');
+    if (els) {
+      for ( var i = 0; i < els.length; i++) {
+        els[i].onkeydown = preventEnterKey;
+      }
+    }
+  } catch(e) {}
+}
+
+function preventEnterKey(e) {
+  // W3C (Chrome|FF) || IE
+  e = e || window.event;
+  var keycode = e.which || e.keyCode;
+  if (keycode == 13) { // Key code of enter button
+      // Cancel default action
+      if (e.preventDefault) { // W3C
+          e.preventDefault();
+      } else { // IE
+          e.returnValue = false;
+      }
+      // Cancel visible action
+      if (e.stopPropagation) { // W3C
+          e.stopPropagation();
+      } else { // IE
+          e.cancelBubble = true;
+      }
+      // We don't need anything else
+      return false;
+    }
+}
