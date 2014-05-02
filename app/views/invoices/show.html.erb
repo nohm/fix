@@ -97,7 +97,7 @@
                       <td><%= entry.type.appliance.name %></td>
                       <td><%= entry.type.brand %></td>
                       <td><%= entry.type.typenum %></td>
-                      <td><%= entry.serialnum %></td>
+                      <td class="monospace"><%= entry.serialnum %></td>
                       <% if entry.scrap == 1 %>
                         <td><span class="glyphicon glyphicon-trash"></span></td>
                       <% elsif entry.repaired == 1 %>

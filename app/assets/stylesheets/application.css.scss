@@ -56,6 +56,11 @@ html, body {
   }
 }
 
+// Monospace class for specific items
+.monospace {
+  font-family: $font-family-monospace;
+}
+
 // Completely center an object and its text
 .center {
   text-align: center;

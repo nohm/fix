@@ -39,7 +39,7 @@
                 <td><%= entry.type.appliance.name %></td>
                 <td><%= entry.type.brand %></td>
                 <td><%= entry.type.typenum %></td>
-                <td><%= entry.serialnum %></td>
+                <td class="monospace"><%= entry.serialnum %></td>
                 <td><%= entry.get_status_translated %></td>
                 <% if can? :zip, Entry %>
                   <td>
