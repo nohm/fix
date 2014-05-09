@@ -206,6 +206,7 @@ nl:
        updated: 'Order gewijzigd.'
        deleted: 'Order verwijdert.'
        images: 'afbeeldingen'
+       duplicate: 'Dubbele serienummers: '
 
 # app/views/home
   home:

@@ -57,14 +57,14 @@ class StocksController < ApplicationController
   def type_stock
     authorize! :type_stock, Stock, :message => I18n.t('global.unauthorized')
 
-    @type = Type.find(params[:type_id])
-    @stocks = @type.stocks
+    @type = Apptype.find(params[:apptype_id])
+    @stocks = @Apptype.stocks
   end
 
   def type_stock_index
     authorize! :type_stock, Stock, :message => I18n.t('global.unauthorized')
 
-    stock_ids = Type.find(params[:type_id]).stock_ids.sort
+    stock_ids = Apptype.find(params[:apptype_id]).stock_ids.sort
     all_stocks = Stock.where(company_id: params[:company_id])
 
     stocks = Array.new
@@ -79,17 +79,17 @@ class StocksController < ApplicationController
   def type_stock_add
     authorize! :type_stock, Stock, :message => I18n.t('global.unauthorized')
 
-    type = Type.find(params[:type_id])
-    unless type.stock_ids.include? params[:stock_id]
-      type.stocks << Stock.find(params[:stock_id])
-      redirect_to type_stock_path(params[:company_id], params[:type_id]), :notice => I18n.t('stock.controller.stock_added_type')
+    type = Apptype.find(params[:apptype_id])
+    unless Apptype.stock_ids.include? params[:stock_id]
+      Apptype.stocks << Stock.find(params[:stock_id])
+      redirect_to type_stock_path(params[:company_id], params[:apptype_id]), :notice => I18n.t('stock.controller.stock_added_type')
     end
   end
 
   def type_stock_remove
     authorize! :type_stock, Stock, :message => I18n.t('global.unauthorized')
 
-    Type.find(params[:type_id]).stocks.delete(Stock.find(params[:stock_id]))
-      redirect_to type_stock_path(params[:company_id], params[:type_id]), :notice => I18n.t('stock.controller.stock_deleted_type')
+    Apptype.find(params[:apptype_id]).stocks.delete(Stock.find(params[:stock_id]))
+      redirect_to type_stock_path(params[:company_id], params[:apptype_id]), :notice => I18n.t('stock.controller.stock_deleted_type')
   end
 end

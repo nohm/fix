@@ -9,10 +9,10 @@ class ShipmentsController < ApplicationController
     @current_status = Array.new
     @shipments.each do |shipment|
       shipment_status = Hash.new
-      type_count = shipment.entries.group(:type_id).uniq.count.sort
+      type_count = shipment.entries.group(:apptype_id).uniq.count.sort
       type_count = Hash[type_count.sort_by{ |_, v| -v }] # sort by count
 
-      type_names = Type.select('id, brand, typenum').find(type_count.keys)
+      type_names = Apptype.select('id, brand, typenum').find(type_count.keys)
       type_names.each do |type|
         shipment_status[type.brand_type] = type_count[type.id]
       end

@@ -25,14 +25,14 @@
           <li class="barcode"><%= @barcode %></li>
           <li class="number"><%= @number %></li>
           <hr/>
-          <li class="image"><%= image_tag @entry.type.appliance.preview.url %></li>
+          <li class="image"><%= image_tag @entry.apptype.appliance.preview.url %></li>
         </ul>
       </div>
       <div class="col right-col">
         <ul>
           <li><strong><%= t('global.shipment_cap') %>: </strong><%= @entry.shipment.number %></li>
-          <li><strong><%= t('global.brand') %>: </strong><%= @entry.type.brand %></li>
-          <li><strong><%= t('global.typenum') %>: </strong><%= @entry.type.typenum %></li>
+          <li><strong><%= t('global.brand') %>: </strong><%= @entry.apptype.brand %></li>
+          <li><strong><%= t('global.typenum') %>: </strong><%= @entry.apptype.typenum %></li>
           <li><strong><%= t('global.serialnum') %>: </strong><%= @entry.serialnum %></li>
           <hr/>
           <li><strong><%= t('global.defect') %> </strong><br><%= @entry.defect.presence || '...' %></li>

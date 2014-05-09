@@ -207,6 +207,7 @@ en:
        updated: 'Entry updated.'
        deleted: 'Entry deleted.'
        images: 'images'
+       duplicate: 'Duplicate serial numbers: '
 
 # app/views/home
   home:

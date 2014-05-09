@@ -8,7 +8,7 @@
       <div class="panel-title"><%= t('entry.new.legend') %></div>
     </div>
     <div class="panel-body">
-      <%= f.select :type_id, @type_names, label: t('global.type') %>
+      <%= f.select :apptype_id, @type_names, label: t('global.type') %>
       <%= f.text_field :serialnum, label: t('global.serialnum') %>
 
       <%= f.text_field :defect, label: t('global.defect') %>

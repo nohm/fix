@@ -25,7 +25,7 @@ class HomeController < ApplicationController
     @appliance_names = Appliance.pluck(:name, :id)
     @class_names = Classifications.pluck(:name, :id)
     @type_names = Array.new
-    Type.pluck(:brand, :typenum, :id).each do |type|
+    Apptype.pluck(:brand, :typenum, :id).each do |type|
       @type_names.append(["#{type[0]} #{type[1]}", type[2]])
     end
   end
@@ -43,8 +43,8 @@ class HomeController < ApplicationController
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
       app = Appliance.where(abb: num[1].upcase).take
-      types = Type.where(appliance_id: app.id).ids
-      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], type_id: types).take
+      types = Apptype.where(appliance_id: app.id).ids
+      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], apptype_id: types).take
       entries.append(entry)
       if entry.nil?
         non_existing.push(num)
@@ -75,7 +75,7 @@ class HomeController < ApplicationController
       @appliance_names = Appliance.pluck(:name, :id)
       @class_names = Classifications.pluck(:name, :id)
       @type_names = Array.new
-      Type.pluck(:brand, :typenum, :id).each do |type|
+      Apptype.pluck(:brand, :typenum, :id).each do |type|
         @type_names.append(["#{type[0]} #{type[1]}", type[2]])
       end
       render 'batch'

@@ -1,6 +1,6 @@
 class Entry < ActiveRecord::Base
   belongs_to :company
-  belongs_to :type
+  belongs_to :apptype
   belongs_to :classifications
   belongs_to :invoice
   belongs_to :shipment
@@ -8,14 +8,28 @@ class Entry < ActiveRecord::Base
   has_many :attachments, dependent: :destroy
   
   validates :number, presence: true
-  validates :type_id, presence: true
+  validates :apptype_id, presence: true
   validates :serialnum, presence: true
   validates :company_id, presence: true
 
-  validates_uniqueness_of :serialnum
+  validate :unique_serial
 
-  before_save :format_input, :update_stock
+  before_save :match_serial, :format_input, :update_stock
   after_save :update_status
+
+  def unique_serial
+    # Find all the matching types
+    type_ids = Apptype.where(brand: self.apptype.brand, typenum: self.apptype.typenum).ids
+    # Find all matching serials for those types
+    entry_numbers = []
+    entries = Entry.includes(:apptype,:company).where(apptype_id: type_ids, serialnum: self.serialnum)
+    entries.each do |entry|
+      entry_numbers.append("#{entry.company.abb}#{entry.apptype.appliance.abb}#{entry.number}")
+    end
+    unless entry_numbers.empty?
+      errors.add(:serialnum, "#{I18n.t('entry.controller.duplicate')}#{entry_numbers.join(', ')}")
+    end
+  end
 
   def get_status
     status = 'New'

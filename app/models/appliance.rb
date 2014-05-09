@@ -1,5 +1,5 @@
 class Appliance < ActiveRecord::Base
-  has_many :types
+  has_many :apptypes
 
   validates :name, presence: true
   validates :abb, presence: true

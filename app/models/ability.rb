@@ -9,7 +9,7 @@ class Ability
     elsif user.has_role? :manager
       can :see_data, :all
       can :see_history, :all
-      can :manage, [Company, Type, Entry, Invoice, Stats, Broadcast, Stock, Shipment]
+      can :manage, [Company, Apptype, Entry, Invoice, Stats, Broadcast, Stock, Shipment]
       can [:create, :destroy], [Attachment, Appliance, Classifications]
       can :type_stock, Stock
 
@@ -19,7 +19,7 @@ class Ability
       cannot [:destroy], Entry
       can [:create, :destroy], Attachment
       can [:retrieve, :disable], Broadcast
-      can :index, [Type, Stock]
+      can :index, [Apptype, Stock]
       can :type_stock, Stock
 
     # Add any company that exists here as a role
@@ -29,7 +29,7 @@ class Ability
       can :zip, Entry
       can :manage, Stats
       can [:retrieve, :disable], Broadcast
-      can :index, [Type, Stock]
+      can :index, [Apptype, Stock]
       can :slip, Invoice
 
     elsif user.has_role? :guest

@@ -13,26 +13,26 @@ class TypesController < ApplicationController
   end
 
   def index
-    authorize! :index, Type, :message => I18n.t('global.unauthorized')
+    authorize! :index, Apptype, :message => I18n.t('global.unauthorized')
 
-    @types = Type.where(company_id: params[:company_id]).order('id ASC').page(params[:page]).per(25)
+    @types = Apptype.where(company_id: params[:company_id]).order('id ASC').page(params[:page]).per(25)
     @company = Company.find(params[:company_id])
     @appliances = Appliance.all.order('id ASC')
   end
 
   def new
-    authorize! :new, Type, :message => I18n.t('global.unauthorized')
+    authorize! :new, Apptype, :message => I18n.t('global.unauthorized')
 
-    @type = Type.new
+    @type = Apptype.new
     @appliance_names = Appliance.pluck(:name, :id)
   end
 
   def create
-    authorize! :create, Type, :message => I18n.t('global.unauthorized')
+    authorize! :create, Apptype, :message => I18n.t('global.unauthorized')
 
     params[:type][:company_id] = params[:company_id]
 
-    @type = Type.new(params[:type].permit(:appliance_id,:brand,:typenum,:test_price,:repair_price,:scrap_price,:company_id))
+    @type = Apptype.new(params[:type].permit(:appliance_id,:brand,:typenum,:test_price,:repair_price,:scrap_price,:company_id))
     if @type.save
       redirect_to company_types_path(params[:company_id]), :notice => I18n.t('type.controller.type_added')
     else
@@ -42,16 +42,16 @@ class TypesController < ApplicationController
   end
 
   def edit
-    authorize! :edit, Type, :message => I18n.t('global.unauthorized')
+    authorize! :edit, Apptype, :message => I18n.t('global.unauthorized')
 
-    @type = Type.find(params[:id])
+    @type = Apptype.find(params[:id])
     @appliance_names = Appliance.pluck(:name, :id)
   end
 
   def update
-    authorize! :update, Type, :message => I18n.t('global.unauthorized')
+    authorize! :update, Apptype, :message => I18n.t('global.unauthorized')
 
-    @type = Type.find(params[:id])
+    @type = Apptype.find(params[:id])
 
     params[:type][:company_id] = params[:company_id]
     if @type.update(params[:type].permit(:appliance_id,:brand,:typenum,:test_price,:repair_price,:scrap_price,:company_id))
@@ -63,10 +63,10 @@ class TypesController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, Type, :message => I18n.t('global.unauthorized')
+    authorize! :destroy, Apptype, :message => I18n.t('global.unauthorized')
 
-    type = Type.find(params[:id])
-    type.stocks.destroy
+    type = Apptype.find(params[:id])
+    Apptype.stocks.destroy
     type.destroy
     redirect_to company_types_path(params[:company_id]), :notice => I18n.t('type.controller.type_deleted')
   end

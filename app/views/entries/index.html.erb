@@ -35,10 +35,10 @@
           <tbody class="searchable">
             <% @entries.each do |entry| %>
               <tr>
-                <td><%= entry.company.abb + entry.type.appliance.abb + entry.number %></td>
-                <td><%= entry.type.appliance.name %></td>
-                <td><%= entry.type.brand %></td>
-                <td><%= entry.type.typenum %></td>
+                <td><%= entry.company.abb + entry.apptype.appliance.abb + entry.number %></td>
+                <td><%= entry.apptype.appliance.name %></td>
+                <td><%= entry.apptype.brand %></td>
+                <td><%= entry.apptype.typenum %></td>
                 <td class="monospace"><%= entry.serialnum %></td>
                 <td><%= entry.get_status_translated %></td>
                 <% if can? :zip, Entry %>

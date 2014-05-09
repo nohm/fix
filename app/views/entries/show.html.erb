@@ -2,9 +2,9 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= @entry.company.abb + @entry.type.appliance.abb + @entry.number %>
+    <%= @entry.company.abb + @entry.apptype.appliance.abb + @entry.number %>
     &middot;
-    <%= @entry.type.brand + ' ' + @entry.type.typenum + ' ' + @entry.type.appliance.name %>
+    <%= @entry.apptype.brand + ' ' + @entry.apptype.typenum + ' ' + @entry.apptype.appliance.name %>
   </div>
   <div class="panel-body panel-table">
 
@@ -16,7 +16,7 @@
             <% if can? :create, Entry %>
               <tr>
                 <td><h6><%= t('entry.show.barcode') %></h6></td>
-                <td><%= @entry.get_barcode(@entry.company.abb + @entry.type.appliance.abb + @entry.number.to_s).html_safe %></td>
+                <td><%= @entry.get_barcode(@entry.company.abb + @entry.apptype.appliance.abb + @entry.number.to_s).html_safe %></td>
               </tr>
             <% end %>
 

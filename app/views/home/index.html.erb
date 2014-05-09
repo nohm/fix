@@ -29,7 +29,7 @@
                 <% if can? :create, Entry %>
                   <%= link_to(t('home.index.batch'), batch_path(company.id), :class => 'list-group-item') %>
                 <% end %>
-                <% if can? :index, Type %>
+                <% if can? :index, Apptype %>
                   <%= link_to(t('home.index.type'), company_types_path(company.id), :class => 'list-group-item') %>
                 <% end %>
                 <% if can? :index, Stock %>

@@ -1,4 +1,4 @@
-class Type < ActiveRecord::Base
+class Apptype < ActiveRecord::Base
   belongs_to :company
   belongs_to :appliance
 

@@ -42,11 +42,11 @@ class InvoicesController < ApplicationController
     @price_type_total = Hash.new
     price_global_total = { I18n.t('invoice.controller.tested') => [0,0,-1], I18n.t('invoice.controller.repaired') => [0,0,-1], I18n.t('invoice.controller.scrapped') => [0,0,-1], I18n.t('invoice.controller.skipped') => [0,0,-1] }
 
-    @types = Type.find(Entry.where(invoice_id: @invoice.id).select("DISTINCT type_id").map(&:type_id).sort!)
+    @types = Apptype.find(Entry.where(invoice_id: @invoice.id).select("DISTINCT apptype_id").map(&:apptype_id).sort!)
     @types.each_with_index do |type, index|
       price_total = { I18n.t('invoice.controller.tested') => [0,0,type.test_price], I18n.t('invoice.controller.repaired') => [0,0,type.repair_price], I18n.t('invoice.controller.scrapped') => [0,0,type.scrap_price], I18n.t('invoice.controller.skipped') => [0,0,0] }
 
-      Entry.where(invoice_id: @invoice.id, type_id: type.id).each do |entry|
+      Entry.where(invoice_id: @invoice.id, apptype_id: type.id).each do |entry|
 
         if entry.scrap == 1
           s = 2
@@ -128,8 +128,8 @@ class InvoicesController < ApplicationController
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
       app = Appliance.where(abb: num[1].upcase).take
-      types = Type.where(appliance_id: app.id).ids
-      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], type_id: types).take
+      types = Apptype.where(appliance_id: app.id).ids
+      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], apptype_id: types).take
       entries.append(entry)
       if entry.nil?
       	non_existing.push(num)

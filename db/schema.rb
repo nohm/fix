@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424092847) do
+ActiveRecord::Schema.define(version: 20140509162957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,26 @@ ActiveRecord::Schema.define(version: 20140424092847) do
     t.string   "preview_content_type"
     t.integer  "preview_file_size"
     t.datetime "preview_updated_at"
+  end
+
+  create_table "apptypes", force: true do |t|
+    t.string   "brand"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+    t.string   "typenum"
+    t.decimal  "test_price",   precision: 5, scale: 2
+    t.decimal  "repair_price", precision: 5, scale: 2
+    t.decimal  "scrap_price",  precision: 5, scale: 2
+    t.integer  "appliance_id"
+  end
+
+  add_index "apptypes", ["appliance_id"], name: "index_apptypes_on_appliance_id", using: :btree
+  add_index "apptypes", ["company_id"], name: "index_apptypes_on_company_id", using: :btree
+
+  create_table "apptypes_stocks", force: true do |t|
+    t.integer "apptype_id"
+    t.integer "stock_id"
   end
 
   create_table "attachments", force: true do |t|
@@ -85,17 +105,17 @@ ActiveRecord::Schema.define(version: 20140424092847) do
     t.integer  "classifications_id"
     t.string   "status"
     t.integer  "company_id"
-    t.integer  "type_id"
+    t.integer  "apptype_id"
     t.integer  "shipment_id"
     t.integer  "user_create_id"
     t.integer  "user_edit_id"
   end
 
+  add_index "entries", ["apptype_id"], name: "index_entries_on_apptype_id", using: :btree
   add_index "entries", ["classifications_id"], name: "index_entries_on_classifications_id", using: :btree
   add_index "entries", ["company_id"], name: "index_entries_on_company_id", using: :btree
   add_index "entries", ["invoice_id"], name: "index_entries_on_invoice_id", using: :btree
   add_index "entries", ["shipment_id"], name: "index_entries_on_shipment_id", using: :btree
-  add_index "entries", ["type_id"], name: "index_entries_on_type_id", using: :btree
 
   create_table "invoices", force: true do |t|
     t.datetime "created_at"
@@ -140,26 +160,6 @@ ActiveRecord::Schema.define(version: 20140424092847) do
     t.datetime "last_mail"
     t.integer  "company_id"
   end
-
-  create_table "stocks_types", force: true do |t|
-    t.integer "type_id"
-    t.integer "stock_id"
-  end
-
-  create_table "types", force: true do |t|
-    t.string   "brand"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "company_id"
-    t.string   "typenum"
-    t.decimal  "test_price",   precision: 5, scale: 2
-    t.decimal  "repair_price", precision: 5, scale: 2
-    t.decimal  "scrap_price",  precision: 5, scale: 2
-    t.integer  "appliance_id"
-  end
-
-  add_index "types", ["appliance_id"], name: "index_types_on_appliance_id", using: :btree
-  add_index "types", ["company_id"], name: "index_types_on_company_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",   null: false

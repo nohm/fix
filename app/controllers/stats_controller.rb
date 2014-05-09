@@ -11,13 +11,13 @@ class StatsController < ApplicationController
 		@charts = Hash.new
 		@charts[:global] = Array.new
 
-		@company.types.each do |type|
+		@company.apptypes.each do |type|
 			type_all = Array.new(7) {0}
 			type_min = Array.new(4) {0}
 			type_total_all = 0
 			type_total_min = 0
 
-			type_entries = @shipment.entries.where(type_id: type.id)
+			type_entries = @shipment.entries.where(apptype_id: type.id)
 			type_entries.each do |entry|
 				if entry.scrap == 1
 					s = 2

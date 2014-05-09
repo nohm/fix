@@ -2,7 +2,7 @@
 <div class="modal fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="modalLabel-report" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= bootstrap_form_for(:home, :as => :home, :url => send_report_path) do |f| %>
+      <%= bootstrap_form_for(:home, :as => :home, :url => send_report_path, html: {class: 'form-horizontal' }) do |f| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="modalLabel-report"><%= t('layouts.report.button_large') %></h4>
