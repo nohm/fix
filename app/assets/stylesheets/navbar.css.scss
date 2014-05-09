@@ -7,6 +7,7 @@
     border-color: lighten($brand-custom, 15%);
   }
   .navbar-brand {
+    font-family: $font-family-title;
     color: $white;
     margin-left: 0 !important;
     padding-left: 45px;

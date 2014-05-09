@@ -24,7 +24,7 @@ class EntriesController < ApplicationController
       if params[:searchnum]
         begin
           types = Type.where(appliance_id: Appliance.where(abb: params[:searchnum][1].upcase).first.id).ids
-          entries = Entry.includes(:attachments).where(type_id: types, number: params[:searchnum][2..-1], company_id: params[:company_id])
+          entries = Entry.where(type_id: types, number: params[:searchnum][2..-1], company_id: params[:company_id])
           redirect_to company_shipment_entry_path(params[:company_id], params[:shipment_id], entries.first.id)
         rescue
           redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id]), :alert => "Entry not found with number #{params[:searchnum]}."
@@ -34,13 +34,13 @@ class EntriesController < ApplicationController
         @entries = Entry.includes(:attachments,:type,:company,:classifications).where(type_id: types, company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC')
       elsif params[:searchtype]
         types = Type.where('typenum ILIKE ?', params[:searchtype]).ids
-        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(type_id: types, company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC')
+        @entries = Entry.includes(:attachments,:type,:company,:classifications,:shipment).where(type_id: types, company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC')
       elsif params[:searchserial]
-        @entries = Entry.includes(:attachments,:type,:company,:classifications).where('serialnum ILIKE ? AND company_id = ? AND shipment_id = ?', params[:searchserial], params[:company_id], params[:shipment_id]).order('id ASC')
+        @entries = Entry.includes(:attachments,:type,:company,:classifications,:shipment).where('serialnum ILIKE ? AND company_id = ? AND shipment_id = ?', params[:searchserial] + '%', params[:company_id], params[:shipment_id]).order('id ASC')
       elsif params[:searchstatus]
-        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(status: params[:searchstatus], company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC')
+        @entries = Entry.includes(:attachments,:type,:company,:classifications,:shipment).where(status: params[:searchstatus], company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC')
       else
-        @entries = Entry.includes(:attachments,:type,:company,:classifications).where(company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC').page(params[:page]).per(25)
+        @entries = Entry.includes(:attachments,:type,:company,:classifications,:shipment).where(company_id: params[:company_id], shipment_id: params[:shipment_id]).order('id ASC').page(params[:page]).per(25)
         @pagination = true
       end
 

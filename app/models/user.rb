@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   # Add any company that exists here as a supplier
   def supplier?
-    YAML.load(ENV["SUPPLIERS"]).include?(self.roles.first.name)
+    Role.where(name: self.roles.first.name).count != 0
   end
 
   def guest?

@@ -32,10 +32,14 @@
                   <% end %>
                 </td>
                 <td>
-                	<%= link_to(t('global.entries'), company_shipment_entries_path(params[:company_id], shipment.id), :class => 'btn btn-primary btn-xs') %>
+                	<%= link_to company_shipment_entries_path(params[:company_id], shipment.id) do %>
+                    <span class="glyphicon glyphicon-list"></span>
+                  <% end %>
                 </td>
                 <td>
-                	<%= link_to(t('global.stats'), company_shipment_stats_path(params[:company_id], shipment.id), :class => 'btn btn-primary btn-xs') %>
+                	<%= link_to company_shipment_stats_path(params[:company_id], shipment.id) do %>
+                    <span class="glyphicon glyphicon-check"></span>
+                  <% end %>
                 </td>
               </tr>
             <% end %>

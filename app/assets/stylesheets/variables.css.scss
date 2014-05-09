@@ -40,5 +40,6 @@ $state-danger-bg:      lighten($brand-danger, 30%);
 $state-danger-border:  lighten($brand-danger, 20%);
 
 // Global font
-$font-family-sans-serif: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+$font-family-title: 'Roboto Slab', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
 $font-family-monospace: 'Source Code Pro', Menlo, Monaco, Consolas, "Courier New", monospace !default;
