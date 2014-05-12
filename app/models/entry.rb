@@ -14,7 +14,7 @@ class Entry < ActiveRecord::Base
 
   validate :unique_serial
 
-  before_save :match_serial, :format_input, :update_stock
+  before_save :format_input, :update_stock
   after_save :update_status
 
   def unique_serial
