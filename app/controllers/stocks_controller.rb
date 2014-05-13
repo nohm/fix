@@ -58,7 +58,7 @@ class StocksController < ApplicationController
     authorize! :type_stock, Stock, :message => I18n.t('global.unauthorized')
 
     @type = Apptype.find(params[:apptype_id])
-    @stocks = @Apptype.stocks
+    @stocks = @type.stocks
   end
 
   def type_stock_index

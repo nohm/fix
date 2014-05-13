@@ -5,7 +5,7 @@ Badger::Application.routes.draw do
   resources :users
 
   resources :companies, :only => [:index, :new, :create, :edit, :update, :destroy] do
-    resources :apptypes, :as => :types, :only => [:index, :new, :create, :edit, :update, :destroy]
+    resources :types, :controller => :apptypes, :only => [:index, :new, :create, :edit, :update, :destroy]
     resources :stocks, :only => [:index, :new, :create, :edit, :update, :destroy]
     resources :invoices, :only => [:index, :show, :new, :create, :destroy]
     resources :shipments do
