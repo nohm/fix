@@ -1,4 +1,4 @@
-class TypesController < ApplicationController
+class ApptypesController < ApplicationController
   before_filter :authenticate_user!
   before_filter do
     permission = false

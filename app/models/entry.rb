@@ -24,7 +24,9 @@ class Entry < ActiveRecord::Base
     entry_numbers = []
     entries = Entry.includes(:apptype,:company).where(apptype_id: type_ids, serialnum: self.serialnum)
     entries.each do |entry|
-      entry_numbers.append("#{entry.company.abb}#{entry.apptype.appliance.abb}#{entry.number}")
+      unless entry.id == self.id
+        entry_numbers.append("#{entry.company.abb}#{entry.apptype.appliance.abb}#{entry.number}")
+      end
     end
     unless entry_numbers.empty?
       errors.add(:serialnum, "#{I18n.t('entry.controller.duplicate')}#{entry_numbers.join(', ')}")

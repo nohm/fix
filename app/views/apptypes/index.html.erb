@@ -21,10 +21,10 @@
               <% if can? :type_stock, Stock %>
                 <th style="width:17px;"></th>
               <% end %>
-              <% if can? :edit, Type %>
+              <% if can? :edit, Apptype %>
                 <th style="width:17px;"></th>
               <% end %>
-              <% if can? :destroy, Type %>
+              <% if can? :destroy, Apptype %>
                 <th style="width:17px;"></th>
               <% end %>
             </tr>
@@ -45,14 +45,14 @@
                     <% end %>
                   </td>
                 <% end %>
-                <% if can? :edit, Type %>
+                <% if can? :edit, Apptype %>
                   <td>
                     <%= link_to edit_company_type_path(type.company_id, type) do %>
                       <span class="glyphicon glyphicon-pencil"></span>
                     <% end %>
                   </td>
                 <% end %>
-                <% if can? :destroy, Type %>
+                <% if can? :destroy, Apptype %>
                   <td>
                     <%= link_to(company_type_path(type.company_id, type), :data => { :confirm => t('global.sure') }, :method => :delete) do %>
                       <span class="glyphicon glyphicon-remove"></span>
