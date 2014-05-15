@@ -99,6 +99,53 @@ class Entry < ActiveRecord::Base
     end
   end
 
+  def get_trigger
+    type = ''
+
+    unless self.note.nil? or self.note.empty?
+      triggers = {
+        '$lost' => ' class=danger',
+        '$sample' => ' class=info'
+      }
+      note_lines = self.note.lines.map {|x| x.chomp}
+
+      note_lines.each do |line|
+        if triggers.keys.include? line
+          type = triggers[line]
+        end
+      end
+    end
+
+    type
+  end
+
+  def process_triggers(note, who)
+    response = true
+
+    unless self.note.nil? or note.nil?
+      triggers_found = 0
+      triggers = ['$lost', '$sample']
+      note_lines = note.lines.map {|x| x.chomp}
+      self_lines = self.note.lines.map {|x| x.chomp}
+
+      self_lines.each do |line|
+        if triggers.include? line
+          triggers_found += 1
+        end
+        if triggers.include? line and !note_lines.include? line and (who.staff? and !who.manager?)
+          response = false
+          errors.add(:note, 'You\'re not allowed to add a trigger!')
+        end
+        if triggers_found > 1
+          response = false
+          errors.add(:note, 'Max. 1 trigger per entry!')
+        end
+      end
+    end
+
+    response
+  end
+
   def get_barcode(number)
     require 'barby'
     require 'barby/barcode/code_39'

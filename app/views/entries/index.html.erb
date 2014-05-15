@@ -34,7 +34,9 @@
           </thead>
           <tbody class="searchable">
             <% @entries.each do |entry| %>
-              <tr>
+              <tr<% if current_user.manager? %>
+                <%= entry.get_trigger %>
+              <% end %>>
                 <td><%= entry.company.abb + entry.apptype.appliance.abb + entry.number %></td>
                 <td><%= entry.apptype.appliance.name %></td>
                 <td><%= entry.apptype.brand %></td>

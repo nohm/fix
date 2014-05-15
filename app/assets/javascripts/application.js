@@ -50,11 +50,6 @@ function disableBroadcast(path) {
   $.ajax({url: path});
 }
 
-$(document).ready(function() {
-        $("form").bind("keypress", function(e) {
-          console.log(e);
-            if (e.keyCode == 13) {
-                e.preventDefault();
-            }
-        });
-    });
+$(document).keypress(function (e) {
+  if (e.which == 13 && e.target.nodeName != "TEXTAREA") return false;
+});

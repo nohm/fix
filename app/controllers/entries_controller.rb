@@ -149,7 +149,7 @@ class EntriesController < ApplicationController
       params[:entry][:number] = highest_id + 1
     end
       
-    if @entry.update(params[:entry].permit(:user_edit_id,:appliance_id,:number,:apptype_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
+    if @entry.process_triggers(params[:entry][:note], current_user) and @entry.update(params[:entry].permit(:user_edit_id,:appliance_id,:number,:apptype_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
       redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id], :page => session[:page]), :notice => I18n.t('entry.controller.updated')
     else
       @type_names = Array.new
@@ -189,7 +189,7 @@ class EntriesController < ApplicationController
 
     @entry = Entry.new(params[:entry].permit(:user_create_id,:appliance_id,:number,:apptype_id,:serialnum,:defect,:repair,:ordered,:testera,:testerb,:test,:repaired,:ready,:scrap,:accessoires,:sent,:classifications_id,:note,:status,:company_id,:shipment_id))
     
-    if @entry.save
+    if @entry.process_triggers(params[:entry][:note], current_user) and @entry.save
       redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id], :page => Entry.where(company_id: params[:company_id], shipment_id: params[:shipment_id]).page(params[:page]).per(25).total_pages), :notice => I18n.t('entry.controller.added')
     else
       @type_names = Array.new
