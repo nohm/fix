@@ -105,7 +105,8 @@ class Entry < ActiveRecord::Base
     unless self.note.nil? or self.note.empty?
       triggers = {
         '$lost' => ' class=danger',
-        '$sample' => ' class=info'
+        '$sample' => ' class=info',
+        '$repeat' => ' class=warning'
       }
       note_lines = self.note.lines.map {|x| x.chomp}
 
@@ -124,7 +125,7 @@ class Entry < ActiveRecord::Base
 
     unless self.note.nil? or note.nil?
       triggers_found = 0
-      triggers = ['$lost', '$sample']
+      triggers = ['$lost', '$sample', '$repeat']
       note_lines = note.lines.map {|x| x.chomp}
       self_lines = self.note.lines.map {|x| x.chomp}
 
@@ -134,11 +135,11 @@ class Entry < ActiveRecord::Base
         end
         if triggers.include? line and !note_lines.include? line and (who.staff? and !who.manager?)
           response = false
-          errors.add(:note, 'You\'re not allowed to add a trigger!')
+          errors.add(:note, I18n.t('entry.controller.unauth_trigger'))
         end
         if triggers_found > 1
           response = false
-          errors.add(:note, 'Max. 1 trigger per entry!')
+          errors.add(:note, I18n.t('entry.controller.too_many_trigger'))
         end
       end
     end

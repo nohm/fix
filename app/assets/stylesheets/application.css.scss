@@ -84,18 +84,30 @@ table h6 {
   margin-bottom: 0 !important;
 }
 
+.panel-footer {
+  padding-bottom: 4px;
+  .btn {
+    margin-bottom: 6px;
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
+}
+
 // Remove margins and padding on tables inside panels
 .panel-table {
   padding: 0 !important;
-  .col-md-6 {
-    &:nth-child(2n+2) {
-      padding-left: 0 !important;
-    }
-    &:nth-child(2n+1) {
-      padding-right: 0 !important;
+  @media (min-width: 768px) {
+    .col-md-6 {
+      &:nth-child(2n+2) {
+        padding-left: 0 !important;
+      }
+      &:nth-child(2n+1) {
+        padding-right: 0 !important;
+      }
     }
   }
-  table {
+  .table-responsive {
     margin-bottom: 0 !important;
     tr:first-child {
       td {
@@ -103,16 +115,8 @@ table h6 {
       }
     }
   }
-}
-
-@media (min-width: 768px) {
-  .panel-table .col-md-6 {
-    &:nth-child(2n+2) {
-      padding-left: 15px !important;
-    }
-    &:nth-child(2n+1) {
-      padding-right: 15px !important;
-    }
+  .table {
+    margin-bottom: 0px;
   }
 }
 
@@ -177,4 +181,8 @@ a span:hover {
 
 form .panel-body {
   margin: 0 15px;
+}
+
+.entry_users {
+  margin: 5px;
 }

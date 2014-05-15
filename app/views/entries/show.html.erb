@@ -154,7 +154,7 @@
         <% end %>
 
         <% if current_user.manager? %>
-          <div class="text-muted">
+          <div class="text-muted entry_users">
             <p>
               <%= t('entry.show.created') %> <%= @user[:creator] %>
               <br>
@@ -171,16 +171,12 @@
         <%= link_to(t('entry.show.zip'), zip_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary') %>
       <% end %>
     <% end %>
-    <div style="float:left;padding-right:4px" data-no-turbolink="true">
-      <% if can? :create, Entry %>
-        <%= link_to(t('entry.show.sticker'), sticker_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary') %>
-      <% end %>
-    </div>
-    <div style="float:left;padding-right:4px" data-no-turbolink="true">
-      <% if can? :create, Entry %>
-        <%= link_to('Create ticket', ticket_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary') %>
-      <% end %>
-    </div>
+    <% if can? :create, Entry %>
+      <%= link_to(t('entry.show.sticker'), sticker_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary', 'data-no-turbolink' => :true) %>
+    <% end %>
+    <% if can? :create, Entry %>
+      <%= link_to(t('entry.show.ticket'), ticket_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary', 'data-no-turbolink' => :true) %>
+    <% end %>
     <% if can? :edit, Entry %>
       <%= link_to(t('entry.show.edit'), edit_company_shipment_entry_path(@entry.company, @entry.shipment, @entry), :class => 'btn btn-mini btn-primary') %>
     <% end %>

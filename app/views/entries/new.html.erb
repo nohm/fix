@@ -36,7 +36,7 @@
 
       <%= f.select :classifications_id, @class_names, label: t('global.class') %>
 
-      <%= f.text_area :note, label: t('global.note') %>
+      <%= f.text_area :note, label: t('global.note'), help: t('global.triggers') %>
     </div>
     <div class="panel-footer">
       <p><%= t('entry.edit.message') %></p>

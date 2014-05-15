@@ -69,6 +69,7 @@ nl:
     shipment: 'levering'
     expectance: 'Geleverd'
     current: 'Nu ingevoerd'
+    triggers: 'Available triggers: $lost, $sample, $repeat'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -187,6 +188,7 @@ nl:
       button_send: 'Opslaan...'
       zip: 'Zip maken'
       sticker: 'Sticker maken'
+      ticket: 'Bon maken'
       edit: 'Order wijzigen'
       delete: 'Order verwijderen'
       view: 'Bekijk geschiedenis'
@@ -208,6 +210,8 @@ nl:
        deleted: 'Order verwijdert.'
        images: 'afbeeldingen'
        duplicate: 'Dubbele serienummers: '
+       unauth_trigger: 'Geen rechten om triggers toe te voegen!'
+       too_many_trigger: 'Max. 1 trigger per order!'
 
 # app/views/home
   home:

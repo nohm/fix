@@ -17,3 +17,22 @@
 <% end %>
 
 <%= link_to t('global.back'), company_invoices_path(params[:company_id]) %>
+
+<script>
+var label = $('#invoice_items').siblings()[0];
+var labelVal = label.innerHTML;
+var text = "";
+$('#invoice_items').bind("keyup cut paste click", function(e){
+  if ($(this).val() != text) {
+    text = $(this).val();
+    var split = text.split('\n');
+    var count = 0;
+    for (var i = 0; i < split.length; i++) {
+      if (split[i].length != 0) {
+        count++;
+      }
+    }
+    label.innerHTML = labelVal + ' - ' + count;
+  }    
+});
+</script>

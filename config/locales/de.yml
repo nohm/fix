@@ -70,6 +70,7 @@ de:
     shipment: 'shipment'
     expectance: 'Delivered'
     current: 'Currently entered'
+    triggers: 'Available triggers: $lost, $sample, $repeat'
 ######################
 ##     /GLOBALS     ##
 ######################
@@ -188,6 +189,7 @@ de:
       button_send: 'Speichern...'
       zip: 'Zip erstellen'
       sticker: 'Sticker erstellen'
+      ticket: 'Create ticket'
       edit: 'Eintrag bearbeiten'
       delete: 'Eintrag löschen'
       view: 'Gechichte anzeigen'
@@ -209,6 +211,8 @@ de:
        deleted: 'Entry gelöscht.'
        images: 'Bilder'
        duplicate: 'Duplicate serial numbers: '
+       unauth_trigger: 'You''re not allowed to add a trigger!'
+       too_many_trigger: 'Max. 1 trigger per entry!'
 
 # app/views/home
   home:
