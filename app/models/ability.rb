@@ -23,7 +23,7 @@ class Ability
       can :type_stock, Stock
 
     # Add any company that exists here as a role
-    elsif user.has_role? :vitel or user.has_role? :maxioutlet or user.has_role? :tronex or user.has_role? :ahead
+    elsif user.supplier?
       can :see_data, :all
       can [:index, :show], [Entry, Invoice, Attachment, Shipment]
       can :zip, Entry

@@ -20,7 +20,7 @@ class Mailer < ActionMailer::Base
     mail(to: ENV["GMAIL_USERNAME"], subject: t('mailer.base.error_report'))
   end
 
-  def send_role_update(role)
+  def send_role_update(role, email)
     @role = role
     @url = "#{ENV['BASE_URL']}/badger"
     mail(to: email, subject: t('mailer.base.role_update'))

@@ -37,6 +37,7 @@ en:
     short: 'Short'
     address: 'Address'
     password: 'Password'
+    password_length: 'Must be at least 8 characters long.'
     password_confirmation: 'Password confirmation'
 
     status: 'Status'

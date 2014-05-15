@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 
   # Add any company that exists here as a supplier
   def supplier?
+    !self.nil? && !self.id.nil? &&
+    !self.staff? && !self.guest? && !(self.has_role? :user) &&
     Role.where(name: self.roles.first.name).count != 0
   end
 

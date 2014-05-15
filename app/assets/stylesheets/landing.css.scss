@@ -42,4 +42,8 @@
       }
     }    
   }
+  // Make help blocks more obvious, as people can't seem to read.
+  .help-block {
+    color: $brand-danger;
+  }
 }

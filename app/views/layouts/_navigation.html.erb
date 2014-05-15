@@ -12,12 +12,14 @@
     </li>
   <li role="presentation">
     <%= link_to(edit_user_registration_path) do %>
-      <span class="glyphicon glyphicon-inverse glyphicon-cog"></span>
+        <span class="glyphicon glyphicon-inverse glyphicon-cog pull-left"></span>
+        <div class="visible-xs"><%= t('layouts.navigation.edit') %></div>
     <% end %>
   </li>
   <li role="presentation">
     <%= link_to(destroy_user_session_path, :method => 'delete', :role => "menuitem", :tabindex => "-1") do %>
-      <span class="glyphicon glyphicon-inverse glyphicon-briefcase"></span>
+        <span class="glyphicon glyphicon-inverse glyphicon-briefcase pull-left"></span>
+        <div class="visible-xs"><%= t('layouts.navigation.logout') %></div>
     <% end %>
   </li>
 </ul>

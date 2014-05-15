@@ -37,6 +37,7 @@ nl:
     short: 'Kort'
     address: 'Adres'
     password: 'Wachtwoord'
+    password_length: 'Moet minstens 8 karakters lang zijn.'
     password_confirmation: 'Wachtwoord confirmatie'
 
     status: 'Status'

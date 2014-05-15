@@ -56,4 +56,10 @@
     padding-left: 15px;
     position: relative;
   }
+  // Dropdown menu icons need some margin
+  .collapse, .collapsing {
+    .glyphicon {
+      margin-top: 3px;
+    }
+  }
 }

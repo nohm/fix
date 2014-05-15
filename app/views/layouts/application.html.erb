@@ -23,7 +23,6 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:300' rel='stylesheet' type='text/css'>
 
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
@@ -55,5 +54,7 @@
     <% end %> 
 
     <%= render 'layouts/report/form' %> 
+
+    <%= javascript_include_tag "application" %>
   </body>
 </html>

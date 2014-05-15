@@ -12,7 +12,7 @@
           <%= f.text_field :name, label: t('global.name') %>
 				  <%= f.email_field :email, label: t('global.email') %>
           <%= f.select :language, @locales %>
-				  <%= f.password_field :password, label: t('global.password'), help: 'Must be at least 8 characters long.' %>
+				  <%= f.password_field :password, label: t('global.password'), help: t('global.password_length') %>
           <br/>
 				  <%= f.password_field :password_confirmation, label: t('global.password_confirmation') %>
 				  
