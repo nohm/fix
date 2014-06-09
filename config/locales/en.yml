@@ -44,7 +44,7 @@ en:
     number: 'Number'
     appliance: 'Appliance'
     brand: 'Brand'
-    typenum: 'Type'
+    type: 'Type'
     serialnum: 'Serial'
     defect: 'What''s broken?'
     repair: 'What''s repaired?'

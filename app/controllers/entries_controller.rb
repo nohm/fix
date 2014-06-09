@@ -22,11 +22,10 @@ class EntriesController < ApplicationController
 
     if can? :index, Entry or current_user.roles.first.name == Company.find(params[:company_id].short)
       if params[:searchnum]
-        begin
-          types = Apptype.where(appliance_id: Appliance.where(abb: params[:searchnum][1].upcase).first.id).ids
-          entries = Entry.where(apptype_id: types, number: params[:searchnum][2..-1], company_id: params[:company_id])
-          redirect_to company_shipment_entry_path(params[:company_id], params[:shipment_id], entries.first.id)
-        rescue
+        entry = Entry.new.find_number(params[:searchnum])
+        unless entry.nil?
+          redirect_to company_shipment_entry_path(params[:company_id], params[:shipment_id], entry.id)
+        else
           redirect_to company_shipment_entries_path(params[:company_id], params[:shipment_id]), :alert => "Entry not found with number #{params[:searchnum]}."
         end
       elsif params[:searchbrand]

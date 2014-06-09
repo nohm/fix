@@ -42,9 +42,7 @@ class HomeController < ApplicationController
     wrong_comp = Array.new
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
-      app = Appliance.where(abb: num[1].upcase).take
-      types = Apptype.where(appliance_id: app.id).ids
-      entry = Entry.where(company_id: params[:company_id], number: num[2..-1], apptype_id: types).take
+      entry = Entry.new.find_number(num)
       entries.append(entry)
       if entry.nil?
         non_existing.push(num)

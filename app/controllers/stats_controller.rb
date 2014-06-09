@@ -17,7 +17,7 @@ class StatsController < ApplicationController
 			type_total_all = 0
 			type_total_min = 0
 
-			type_entries = @shipment.entries.where(apptype_id: type.id)
+			type_entries = Entry.where(shipment_id: @shipment.id, apptype_id: type.id)
 			type_entries.each do |entry|
 				if entry.scrap == 1
 					s = 2
@@ -39,9 +39,9 @@ class StatsController < ApplicationController
 
 			unless type_entries.length == 0
 				@charts[type.brand_type] = Array.new
-				@charts[type.brand_type].append Stats.new.generate_chart(type.brand_type.gsub('_',''), type.entries.length, type_all, params[:type])
+				@charts[type.brand_type].append Stats.new.generate_chart(type.brand_type.gsub('_',''), type_entries.length, type_all, params[:type])
 				unless type_min[0] + type_min[1] + type_min[2] + type_min[3] == 0
-					@charts[type.brand_type].append Stats.new.generate_chart_status(type.brand_type.gsub('_',''), type.entries.length, type_min, params[:type])
+					@charts[type.brand_type].append Stats.new.generate_chart_status(type.brand_type.gsub('_',''), type_entries.length, type_min, params[:type])
 				else
 					if params[:type] == 'extended'
 						@charts[type.brand_type].append LazyHighCharts::HighChart.new('pie')

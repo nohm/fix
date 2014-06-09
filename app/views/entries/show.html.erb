@@ -156,9 +156,9 @@
         <% if current_user.manager? %>
           <div class="text-muted entry_users">
             <p>
-              <%= t('entry.show.created') %> <%= @user[:creator] %>
+              <%= t('entry.show.created') %> <%= @user[:creator] %> - <%= @entry.created_at.to_date %>
               <br>
-              <%= t('entry.show.edited') %> <%= @user[:editor] %>
+              <%= t('entry.show.edited') %> <%= @user[:editor] %> - <%= @entry.updated_at.to_date %>
             </p>
           </div>
         <% end %>

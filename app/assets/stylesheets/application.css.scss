@@ -186,3 +186,7 @@ form .panel-body {
 .entry_users {
   margin: 5px;
 }
+
+.enabled {
+  background-color: lighten($brand-success, 30%);
+}

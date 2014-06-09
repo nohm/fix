@@ -17,6 +17,30 @@ class Entry < ActiveRecord::Base
   before_save :format_input, :update_stock
   after_save :update_status
 
+  def match_number(num)
+    num.scan(/([a-zA-Z]+)(\d+)/).collect { |letters, digits| { :company => letters[0].upcase, :type => letters[1..-1].upcase, :number => digits }}[0]
+  end
+
+  def check_number(num, match)
+    (match[:company].length + match[:type].length + match[:number].length) == num.length
+  end
+
+  def find_number(num)
+    match = match_number(num)
+    if check_number(num, match)
+      begin
+        types = Apptype.where(appliance_id: Appliance.where(abb: match[:type])).ids
+        company = Company.where(abb: match[:company]).first
+        entries = Entry.where(apptype_id: types, number: match[:number], company_id: company.id)
+        entries.first
+      rescue
+        nil
+      end
+    else
+      nil
+    end
+  end
+
   def unique_serial
     # Find all the matching types
     type_ids = Apptype.where(brand: self.apptype.brand, typenum: self.apptype.typenum).ids

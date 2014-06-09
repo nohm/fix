@@ -21,15 +21,31 @@ function addCheckboxes(label) {
       if (input.children.length > 1) {
         var which_input = input.children[1].id;
         $(input.children[1]).addClass('col-md-9');
-        input.innerHTML = input.innerHTML + '<div class="checkbox col-md-3 batch-update"><label for="' + which_input + '_enable"><input name="entry[enable][' + which_input + ']" value="0" type="hidden"><input id="' + which_input + '_enable" name="entry[enable][' + which_input + ']" value="1" type="checkbox"> ' + label + '</label></div>';
+        input.innerHTML = input.innerHTML + generateCheckbox(which_input, label);
       } else {
         var which_input_checkbox = input.children[0].children[0].htmlFor;
         $(input.children[0]).addClass('col-md-9');
-        input.innerHTML = input.innerHTML + '<div class="checkbox col-md-3 batch-update"><label for="' + which_input_checkbox + '_enable"><input name="entry[enable][' + which_input_checkbox + ']" value="0" type="hidden"><input id="' + which_input_checkbox + '_enable" name="entry[enable][' + which_input_checkbox + ']" value="1" type="checkbox"> ' + label + '</label></div>';
+        input.innerHTML = input.innerHTML + generateCheckbox(which_input_checkbox, label);
       }
     //}
     //catch(e) {
       // Don't do anything with errors as I know how bad this is, it still works properly
     //}
   }
+}
+
+function generateCheckbox(which, label) {
+  return  '<div class="checkbox col-md-3 batch-update">' +
+            '<label for="' + which + '_enable" onmouseup="toggleEnable(this);">' +
+              '<input name="entry[enable][' + which + ']" value="0" type="hidden">' +
+              '<input id="' + which + '_enable" name="entry[enable][' + which + ']" value="1" type="checkbox">' + 
+             label + 
+            '</label>' +
+          '</div>';
+}
+
+function toggleEnable(elem) {
+  var elem_id = $(elem).attr('for').replace('_enable', '');
+  var select = $('#' + elem_id);
+  select.toggleClass('enabled');
 }
