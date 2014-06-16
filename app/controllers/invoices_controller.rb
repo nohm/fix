@@ -128,7 +128,6 @@ class InvoicesController < ApplicationController
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
       entry = Entry.find_number(num)
-      entries.append(entry.id)
       if entry.nil?
       	non_existing.push(num)
       elsif entry.sent.to_i == 1
@@ -136,6 +135,7 @@ class InvoicesController < ApplicationController
       elsif entry.company_id != params[:company_id].to_i
         wrong_comp.push(num)
       end
+      entries.append(entry.id)
     end
 
     if non_existing.length == 0 and already_sent.length == 0 and wrong_comp.length == 0 and @invoice.save
