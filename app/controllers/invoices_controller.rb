@@ -126,7 +126,7 @@ class InvoicesController < ApplicationController
     already_sent = Array.new
     wrong_comp = Array.new
     items.lines do |line|
-      num = line.tr("\n","").tr("\r","")
+      num = line.tr("\n","").tr("\r","").tr(" ","")
       entry = Entry.find_number(num)
       if entry.nil?
       	non_existing.push(num)
