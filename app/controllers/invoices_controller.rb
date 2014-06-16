@@ -134,8 +134,9 @@ class InvoicesController < ApplicationController
       	already_sent.push(num)
       elsif entry.company_id != params[:company_id].to_i
         wrong_comp.push(num)
+      else
+        entries.append(entry.id)
       end
-      entries.append(entry.id)
     end
 
     if non_existing.length == 0 and already_sent.length == 0 and wrong_comp.length == 0 and @invoice.save
