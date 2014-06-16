@@ -11,6 +11,9 @@
       <%= f.select :appliance_id, @appliance_names, label: t('global.appliance') %>
       <%= f.text_field :brand, label: t('global.brand') %>
       <%= f.text_field :typenum, label: t('global.typenum') %>
+      <%= f.form_group :serialnum_required do %>
+        <%= f.check_box :serialnum_required, :checked => true, label: t('type.serialnum_required') %>
+      <% end %>
       <%= f.text_field :test_price, prepend: '€', placeholder: '0.00', label: t('global.test_price') %>
       <%= f.text_field :repair_price, prepend: '€', placeholder: '0.00', label: t('global.repair_price') %>
       <%= f.text_field :scrap_price, prepend: '€', placeholder: '0.00', label: t('global.scrap_price') %>

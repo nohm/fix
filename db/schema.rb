@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509162957) do
+ActiveRecord::Schema.define(version: 20140614110613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,10 +33,11 @@ ActiveRecord::Schema.define(version: 20140509162957) do
     t.datetime "updated_at"
     t.integer  "company_id"
     t.string   "typenum"
-    t.decimal  "test_price",   precision: 5, scale: 2
-    t.decimal  "repair_price", precision: 5, scale: 2
-    t.decimal  "scrap_price",  precision: 5, scale: 2
+    t.decimal  "test_price",         precision: 5, scale: 2
+    t.decimal  "repair_price",       precision: 5, scale: 2
+    t.decimal  "scrap_price",        precision: 5, scale: 2
     t.integer  "appliance_id"
+    t.integer  "serialnum_required"
   end
 
   add_index "apptypes", ["appliance_id"], name: "index_apptypes_on_appliance_id", using: :btree

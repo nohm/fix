@@ -326,6 +326,7 @@ en:
 
 # app/views/types
   type:
+    serialnum_required: 'Serial Required?'
     index:
       title: 'Badger · Types for '
       legend: 'Types for '

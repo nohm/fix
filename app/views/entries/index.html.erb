@@ -41,7 +41,7 @@
                 <td><%= entry.apptype.appliance.name %></td>
                 <td><%= entry.apptype.brand %></td>
                 <td><%= entry.apptype.typenum %></td>
-                <td class="monospace"><%= entry.serialnum %></td>
+                <td class="monospace"><%= entry.serialnum.presence || '?' %></td>
                 <td><%= entry.get_status_translated %></td>
                 <% if can? :zip, Entry %>
                   <td>

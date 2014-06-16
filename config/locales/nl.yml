@@ -324,6 +324,7 @@ nl:
 
 # app/views/types
   type:
+    serialnum_required: 'Serienummer verplicht?'
     index:
       title: 'Badger · Types voor '
       legend: 'Types voor '

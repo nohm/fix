@@ -15,6 +15,7 @@
               <th><%= t('global.appliance') %></th>
               <th><%= t('global.brand') %></th>
               <th><%= t('global.type') %></th>
+              <th><%= t('type.serialnum_required') %></th>
               <th><%= t('global.test_price') %></th>
               <th><%= t('global.repair_price') %></th>
               <th><%= t('global.scrap_price') %></th>
@@ -35,6 +36,7 @@
                 <td><%= @appliances[type.appliance_id - 1].name %></td>
                 <td><%= type.brand %></td>
                 <td><%= type.typenum %></td>
+                <td><%= type.serialnum_required == 1 ? t('global.y') : t('global.n') %></td>
                 <td><%= number_to_currency(type.test_price, unit: '€') %></td>
                 <td><%= number_to_currency(type.repair_price, unit: '€') %></td>
                 <td><%= number_to_currency(type.scrap_price, unit: '€') %></td>

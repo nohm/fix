@@ -37,14 +37,24 @@
       </dl>
     </div>
     
-    <% @price_type_total.each do |key, value| %>
-      <div class="col-xs-6 col-sm-6 col-md-4">
-        <dl class="dl-horizontal dl-type">
+    <table class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th><%= t('global.type') %></th>
+            <th>Tested</th>
+            <th>Repaired</th>
+            <th>Scrapped</th>
+            <th>Skipped</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @price_type_total.each do |key, value| %>
+          <tr>
 
-            <dt><%= key.gsub('_',' ') %></dt><dd></dd>
+            <td><%= key.gsub('_',' ') %></td>
             <% value.each do |status, price| %>
-              <dt><%= status %></dt>
-              <dd>
+              <td>
                 <% unless params[:type] == 'slip' %>
                   <% unless price[2] == -1 %>
                     <%= "#{price[0]} x #{number_to_currency(price[2], unit: '€')} = #{number_to_currency(price[1], unit: '€')}" %>
@@ -54,12 +64,11 @@
                 <% else %>
                   <%= "#{price[0]}x" %>
                 <% end %>
-              </dd>
+              </td>
             <% end %>
-            <br>
-        </dl>
-      </div>
-    <% end %>
+        <% end %>
+        </tbody>
+      </table>
   </div>
 </div>
 

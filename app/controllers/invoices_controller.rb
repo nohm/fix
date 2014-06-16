@@ -127,8 +127,8 @@ class InvoicesController < ApplicationController
     wrong_comp = Array.new
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
-      entry = Entry.new.find_number(num)
-      entries.append(entry)
+      entry = Entry.find_number(num)
+      entries.append(entry.id)
       if entry.nil?
       	non_existing.push(num)
       elsif entry.sent.to_i == 1
@@ -139,10 +139,7 @@ class InvoicesController < ApplicationController
     end
 
     if non_existing.length == 0 and already_sent.length == 0 and wrong_comp.length == 0 and @invoice.save
-      entries.each do |entry|
-        entry.update_attribute(:invoice_id, @invoice.id)
-        entry.update_attribute(:sent, 1)
-      end
+      Entry.update_all({:invoice_id => @invoice.id, :sent => 1}, {:id => entries})
       redirect_to company_invoices_path(params[:company_id]), :notice => I18n.t('invoice.controller.added')
     else
       non_existing.each do |item|

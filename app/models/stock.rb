@@ -8,7 +8,7 @@ class Stock < ActiveRecord::Base
   validates :minimum, presence: true
   validates :send_mail, presence: true
 
-  def update_stock(entry)
+  def self.update_stock(entry)
     stocks = entry.apptype.stocks
     stocks.each do |stock|
       diff = 0

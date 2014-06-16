@@ -42,8 +42,8 @@ class HomeController < ApplicationController
     wrong_comp = Array.new
     items.lines do |line|
       num = line.tr("\n","").tr("\r","")
-      entry = Entry.new.find_number(num)
-      entries.append(entry)
+      entry = Entry.find_number(num)
+      entries.append(entry.id)
       if entry.nil?
         non_existing.push(num)
       elsif entry.company_id != params[:company_id].to_i
@@ -52,12 +52,10 @@ class HomeController < ApplicationController
     end
 
     if non_existing.length == 0 and wrong_comp.length == 0
-      entries.each do |entry|
-        params[:entry].each do |key, value|
-          unless key == 'ordernumbers' or key == 'enable'
-            if params[:entry][:enable]['entry_' + key] == '1'
-              entry.update_attribute(key, params[:entry][key])
-            end
+      params[:entry].each do |key, value|
+        unless key == 'ordernumbers' or key == 'enable'
+          if params[:entry][:enable]['entry_' + key] == '1'
+            Entry.update_all({key => params[:entry][key]}, {:id => entries})
           end
         end
       end

@@ -9,23 +9,23 @@ class Entry < ActiveRecord::Base
   
   validates :number, presence: true
   validates :apptype_id, presence: true
-  validates :serialnum, presence: true
   validates :company_id, presence: true
 
-  validate :unique_serial
+  validates :serialnum, presence: true, if: :serialnum_required?
+  validate :unique_serial, if: :serialnum_required?
 
   before_save :format_input, :update_stock
   after_save :update_status
 
-  def match_number(num)
+  def self.match_number(num)
     num.scan(/([a-zA-Z]+)(\d+)/).collect { |letters, digits| { :company => letters[0].upcase, :type => letters[1..-1].upcase, :number => digits }}[0]
   end
 
-  def check_number(num, match)
+  def self.check_number(num, match)
     (match[:company].length + match[:type].length + match[:number].length) == num.length
   end
 
-  def find_number(num)
+  def self.find_number(num)
     match = match_number(num)
     if check_number(num, match)
       begin
@@ -38,22 +38,6 @@ class Entry < ActiveRecord::Base
       end
     else
       nil
-    end
-  end
-
-  def unique_serial
-    # Find all the matching types
-    type_ids = Apptype.where(brand: self.apptype.brand, typenum: self.apptype.typenum).ids
-    # Find all matching serials for those types
-    entry_numbers = []
-    entries = Entry.includes(:apptype,:company).where(apptype_id: type_ids, serialnum: self.serialnum)
-    entries.each do |entry|
-      unless entry.id == self.id
-        entry_numbers.append("#{entry.company.abb}#{entry.apptype.appliance.abb}#{entry.number}")
-      end
-    end
-    unless entry_numbers.empty?
-      errors.add(:serialnum, "#{I18n.t('entry.controller.duplicate')}#{entry_numbers.join(', ')}")
     end
   end
 
@@ -192,6 +176,27 @@ class Entry < ActiveRecord::Base
   end
 
   private
+    # Checks if the type needs a serial to be entered
+    def serialnum_required?
+      Apptype.find(apptype_id).serialnum_required == 1
+    end
+
+    def unique_serial
+      # Find all the matching types
+      type_ids = Apptype.where(brand: self.apptype.brand, typenum: self.apptype.typenum).ids
+      # Find all matching serials for those types
+      entry_numbers = []
+      entries = Entry.includes(:apptype,:company).where(apptype_id: type_ids, serialnum: self.serialnum)
+      entries.each do |entry|
+        unless entry.id == self.id
+          entry_numbers.append("#{entry.company.abb}#{entry.apptype.appliance.abb}#{entry.number}")
+        end
+      end
+      unless entry_numbers.empty?
+        errors.add(:serialnum, "#{I18n.t('entry.controller.duplicate')}#{entry_numbers.join(', ')}")
+      end
+    end
+
     def format_input
       self.serialnum.upcase!
     end
@@ -204,6 +209,6 @@ class Entry < ActiveRecord::Base
     end
 
     def update_stock
-      Stock.new.update_stock(self)
+      Stock.update_stock(self)
     end
 end

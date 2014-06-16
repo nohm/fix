@@ -22,7 +22,7 @@ class EntriesController < ApplicationController
 
     if can? :index, Entry or current_user.roles.first.name == Company.find(params[:company_id].short)
       if params[:searchnum]
-        entry = Entry.new.find_number(params[:searchnum])
+        entry = Entry.find_number(params[:searchnum])
         unless entry.nil?
           redirect_to company_shipment_entry_path(params[:company_id], params[:shipment_id], entry.id)
         else

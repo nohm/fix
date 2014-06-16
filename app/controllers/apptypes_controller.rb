@@ -32,7 +32,7 @@ class ApptypesController < ApplicationController
 
     params[:apptype][:company_id] = params[:company_id]
 
-    @type = Apptype.new(params[:apptype].permit(:appliance_id,:brand,:typenum,:test_price,:repair_price,:scrap_price,:company_id))
+    @type = Apptype.new(params[:apptype].permit(:appliance_id,:brand,:typenum,:serialnum_required,:test_price,:repair_price,:scrap_price,:company_id))
     if @type.save
       redirect_to company_types_path(params[:company_id]), :notice => I18n.t('type.controller.type_added')
     else
@@ -54,7 +54,7 @@ class ApptypesController < ApplicationController
     @type = Apptype.find(params[:id])
 
     params[:apptype][:company_id] = params[:company_id]
-    if @type.update(params[:apptype].permit(:appliance_id,:brand,:typenum,:test_price,:repair_price,:scrap_price,:company_id))
+    if @type.update(params[:apptype].permit(:appliance_id,:brand,:typenum,:serialnum_required,:test_price,:repair_price,:scrap_price,:company_id))
       redirect_to company_types_path(params[:company_id]), :notice => I18n.t('type.controller.type_updated')
     else
       @appliance_names = Appliance.pluck(:name, :id)

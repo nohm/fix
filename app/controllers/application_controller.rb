@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def retrieve_broadcasts
     if user_signed_in? and can? :retrieve, Broadcast
-      @broadcasts = Broadcast.new.retrieve_broadcasts(current_user)
+      @broadcasts = Broadcast.retrieve_broadcasts(current_user)
     else
       @broadcasts = Array.new
     end

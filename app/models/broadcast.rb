@@ -2,7 +2,7 @@ class Broadcast < ActiveRecord::Base
   validates :title, presence: true
   validates :text, presence: true
 
-  def retrieve_broadcasts(current_user)
+  def self.retrieve_broadcasts(current_user)
   	broadcasts = Broadcast.all
   	to_send = Array.new
   	broadcasts.each do |broadcast|
