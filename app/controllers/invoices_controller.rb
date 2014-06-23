@@ -28,11 +28,11 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @company = Company.find(params[:company_id])
 
-    @classes = Classifications.all
-    @shipments = Shipment.all
+    @classes = Classifications.all.order('id ASC')
+    @shipments = Shipment.all.order('id ASC')
     @statuses = [I18n.t('invoice.controller.tested'),I18n.t('invoice.controller.repaired'),I18n.t('invoice.controller.scrapped'),I18n.t('invoice.controller.skipped')]
 
-    @entry_classes = Array.new(@shipments.count) {Array.new(@classes.length) {Array.new}}
+    @entry_classes = Array.new(@shipments.last.id) {Array.new(@classes.last.id) {Array.new}}
     @class_count = Array.new(@classes.length) {0}
     @invoice.entries.each do |entry|
       @class_count[entry.classifications_id - 1] += 1
