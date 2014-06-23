@@ -26,6 +26,9 @@
 @import "landing";
 @import "footer";
 
+// Chosen.js dropdown styling
+@import "plugins/bootstrap-chosen";
+
 body {
   padding-top: 60px; // Bootstrap navbar
   color: $black;

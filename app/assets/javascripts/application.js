@@ -28,7 +28,7 @@
 app.init();
 
 $(document).on('ready page:load', function () {
-	// Animated autohide navbar
+	// Headroom.js
 	$(".navbar").headroom({
   		"tolerance": 0,
   		"offset": 0,
@@ -38,6 +38,10 @@ $(document).on('ready page:load', function () {
     		"unpinned": "slideUp"
   		}
 	});
+  // Chosen.js
+  $.each($('select'), function(key, value) {
+    $('#' + value.id).chosen({});
+  });
 });
 
 // Adds a loading spinner
