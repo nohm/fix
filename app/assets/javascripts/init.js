@@ -1,4 +1,4 @@
 window.app = new Application({
-  name: "Badger",
+  name: "Fix",
   version: "0.1"
 });

@@ -28,7 +28,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: badger_development
+  database: fix_development
   username: <%= ENV["DATABASE_USER"] %>
   password: <%= ENV["DATABASE_PASS"] %>
   host:     localhost
@@ -40,7 +40,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: badger_test
+  database: fix_test
   username: <%= ENV["DATABASE_USER"] %>
   password: <%= ENV["DATABASE_PASS"] %>
   host:     localhost
@@ -52,7 +52,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: badger_production
+  database: fix_production
   username: <%= ENV["DATABASE_USER"] %>
   password: <%= ENV["DATABASE_PASS"] %>
   host:     localhost

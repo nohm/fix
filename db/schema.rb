@@ -11,54 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140614110613) do
+ActiveRecord::Schema.define(version: 20140127154741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "appliances", force: true do |t|
-    t.string   "name"
-    t.string   "abb"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "preview_file_name"
-    t.string   "preview_content_type"
-    t.integer  "preview_file_size"
-    t.datetime "preview_updated_at"
-  end
-
-  create_table "apptypes", force: true do |t|
-    t.string   "brand"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "company_id"
-    t.string   "typenum"
-    t.decimal  "test_price",         precision: 5, scale: 2
-    t.decimal  "repair_price",       precision: 5, scale: 2
-    t.decimal  "scrap_price",        precision: 5, scale: 2
-    t.integer  "appliance_id"
-    t.integer  "serialnum_required"
-  end
-
-  add_index "apptypes", ["appliance_id"], name: "index_apptypes_on_appliance_id", using: :btree
-  add_index "apptypes", ["company_id"], name: "index_apptypes_on_company_id", using: :btree
-
-  create_table "apptypes_stocks", force: true do |t|
-    t.integer "apptype_id"
-    t.integer "stock_id"
-  end
-
-  create_table "attachments", force: true do |t|
-    t.integer  "entry_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "attach_file_name"
-    t.string   "attach_content_type"
-    t.integer  "attach_file_size"
-    t.datetime "attach_updated_at"
-  end
-
-  add_index "attachments", ["entry_id"], name: "index_attachments_on_entry_id", using: :btree
 
   create_table "broadcasts", force: true do |t|
     t.string   "title"
@@ -67,64 +23,6 @@ ActiveRecord::Schema.define(version: 20140614110613) do
     t.datetime "updated_at"
     t.string   "user_ids"
   end
-
-  create_table "classifications", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "companies", force: true do |t|
-    t.string   "title"
-    t.string   "short"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "abb"
-    t.string   "address"
-    t.string   "mail"
-  end
-
-  create_table "entries", force: true do |t|
-    t.string   "number"
-    t.string   "serialnum"
-    t.string   "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.string   "defect"
-    t.string   "ordered"
-    t.integer  "repaired"
-    t.integer  "ready"
-    t.integer  "scrap"
-    t.integer  "accessoires"
-    t.integer  "test"
-    t.integer  "sent"
-    t.integer  "invoice_id"
-    t.string   "repair"
-    t.string   "testera"
-    t.string   "testerb"
-    t.integer  "classifications_id"
-    t.string   "status"
-    t.integer  "company_id"
-    t.integer  "apptype_id"
-    t.integer  "shipment_id"
-    t.integer  "user_create_id"
-    t.integer  "user_edit_id"
-  end
-
-  add_index "entries", ["apptype_id"], name: "index_entries_on_apptype_id", using: :btree
-  add_index "entries", ["classifications_id"], name: "index_entries_on_classifications_id", using: :btree
-  add_index "entries", ["company_id"], name: "index_entries_on_company_id", using: :btree
-  add_index "entries", ["invoice_id"], name: "index_entries_on_invoice_id", using: :btree
-  add_index "entries", ["shipment_id"], name: "index_entries_on_shipment_id", using: :btree
-
-  create_table "invoices", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "company_id"
-  end
-
-  add_index "invoices", ["company_id"], name: "index_invoices_on_company_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -136,31 +34,6 @@ ActiveRecord::Schema.define(version: 20140614110613) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
-
-  create_table "shipments", force: true do |t|
-    t.string   "number"
-    t.string   "expectance"
-    t.integer  "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "stats", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "stocks", force: true do |t|
-    t.string   "name"
-    t.integer  "amount"
-    t.integer  "amount_per_app"
-    t.integer  "minimum"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "send_mail"
-    t.datetime "last_mail"
-    t.integer  "company_id"
-  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",   null: false

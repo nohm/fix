@@ -7,20 +7,10 @@
       <% if user_signed_in? and can? :manage, User %>
         <li class="muted"> &middot; </li>
         <li><%= link_to(t('global.users'), users_path) %></li>
-        <li class="muted"> &middot; </li>
-        <li><%= link_to(t('global.classes'), classifications_path) %></li>
-      <% end %>
-      <% if user_signed_in? and can? :create, Appliance %>
-        <li class="muted"> &middot; </li>
-        <li><%= link_to(t('global.appliances'), appliances_path) %></li>
       <% end %>
       <% if user_signed_in? and can? :manage, Broadcast %>
         <li class="muted"> &middot; </li>
         <li><%= link_to(t('global.broadcasts'), broadcasts_path) %></li>
-      <% end %>
-      <% if user_signed_in? and can? :manage, Company %>
-        <li class="muted"> &middot; </li>
-        <li><%= link_to(t('global.companies'), companies_path) %></li>
       <% end %>
     </ul>
   </div>

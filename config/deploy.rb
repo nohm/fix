@@ -12,8 +12,8 @@ require 'mina/git'
 
 set :domain, 'nohm.eu'
 set :user, 'nohm'
-set :deploy_to, '/var/www/badger_mina'
-set :repository, 'git://github.com/nohm/badger.git'
+set :deploy_to, '/var/www/fix_mina'
+set :repository, 'git://github.com/nohm/fix.git'
 set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.

@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Badger::Application.load_tasks
+Fix::Application.load_tasks

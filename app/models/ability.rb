@@ -32,13 +32,6 @@ class Ability
       can :index, [Apptype, Stock]
       can :slip, Invoice
 
-    elsif user.has_role? :guest
-      can :see_data, :all
-      can :manage, [Entry, Stats]
-      cannot [:destroy], Entry
-      can [:create, :destroy], Attachment
-      can [:retrieve, :disable], Broadcast
-
     elsif user.has_role? :user
       # ...
     end

@@ -1,43 +1,13 @@
 <div class="center">
-    <% if can? :see_data, Entry %>
+    <% if can? :see_data, User %>
       <% if current_user.guest? %> 
         <div class="alert alert-success">
           <Strong><%= t('home.index.guest') %></strong><%= t('home.index.guest_msg') %>
         </div>
       <% end %>
-      <% @companies.each_with_index do |company, index| %>
-        <div class="<%= @panelclass %>">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4><%= company.title %></h4>
-                <div class="simple-stats">
-                <%= "#{@simple_stats[index][0]} #{'entry'.pluralize(@simple_stats[index][0])}" %>
-                <br>
-                <%= "#{@simple_stats[index][1]} #{'invoice'.pluralize(@simple_stats[index][1])}"%>
-                <br>
-                <%= "#{@simple_stats[index][2]} #{'shipment'.pluralize(@simple_stats[index][2])}"%>
-                </div>
-              </div>
-              <div class="list-group">
-                <%= link_to('Shipments', company_shipments_path(company.id), :class => 'list-group-item') %>
-                <% if can? :index, Invoice %>
-                  <%= link_to(t('home.index.invoices'), company_invoices_path(company.id), :class => 'list-group-item') %>
-                <% end %>
-                <% if can? :create, Entry %>
-                  <%= link_to(t('home.index.batch'), batch_path(company.id), :class => 'list-group-item') %>
-                <% end %>
-                <% if can? :index, Apptype %>
-                  <%= link_to(t('home.index.type'), company_types_path(company.id), :class => 'list-group-item') %>
-                <% end %>
-                <% if can? :index, Stock %>
-                  <%= link_to(t('home.index.stock'), company_stocks_path(company.id), :class => 'list-group-item') %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-      <% end %>
+      Hai.
     <% else %>
-      <h2>Badger</h2>
+      <h2>Fix</h2>
       <p><%= t('home.index.welcome') %></p>
       <br>
       <%= t('home.index.no_company') %><a href=\"mailto:#{ENV['ADMIN_EMAIL']}\"><%= t('home.index.no_company_anchor') %></a>
