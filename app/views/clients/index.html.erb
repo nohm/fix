@@ -24,7 +24,7 @@
               <tr>
                 <td><%= client.name %></td>
                 <td><%= client.postal_code + "/" + client.house_number %></td>
-                <td><%= 0 %></td>
+                <td><%= client.repairs.length %></td>
                 <td>
                   <%= link_to client_repairs_path(client.id) do %>
                     <span class="glyphicon glyphicon-list"></span>
