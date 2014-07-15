@@ -31,3 +31,6 @@ SUPPLIERS: [] #All the suppliers
 
 # The main company info
 COMPANY: ''
+
+# Ordernumber prefix
+NUMBER_PREFIX: 'F/'

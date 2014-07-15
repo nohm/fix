@@ -1,0 +1,58 @@
+<% provide(:title, 'Fix - Repairs for ' + @client.name) %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">Repairs for <%= @client.name %></div>
+  </div>
+  <div class="panel-body panel-table">
+    <% if @repairs.length == 0 %>
+      <p class="empty_list">No repairs here.</p>
+    <% else %>
+      <div class="table-responsive">
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Brand</th>
+              <th>Type</th>
+              <th>Serial</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th style="width:17px;"></th>
+              <th style="width:17px;"></th>
+            </tr>
+          </thead>
+          <tbody class="searchable">
+            <% @repairs.each do |repair| %>
+              <tr>
+                <td><%= repair.number %></td>
+                <td><%= repair.brand %></td>
+                <td><%= repair.type_number %></td>
+                <td><%= repair.serial_number %></td>
+                <td><%= repair.get_status %></td>
+                <td><%= repair.priority%></td>
+                <td>
+                  <%= link_to client_repair_path(repair.client_id, repair.id) do %>
+                    <span class="glyphicon glyphicon-search"></span>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to edit_client_repair_path(repair.client_id, repair.id) do %>
+                    <span class="glyphicon glyphicon-pencil"></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+  <div class="panel-footer">
+
+    <% if can? :create, Repair %>
+      <%= link_to('Add repair', new_client_repair_path(@client), :class => 'btn btn-mini btn-primary') %>
+    <% end %>
+
+  </div>
+</div>

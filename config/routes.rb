@@ -4,6 +4,10 @@ Fix::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "users/registrations"}
   resources :users
 
+  resources :clients do
+  	resources :repairs
+  end
+
   resources :broadcasts, :only => [:index, :new, :create, :destroy]
   match 'broadcast/disable/:id' => 'broadcasts#disable', :as => :disable_broadcast, :via => :get
 

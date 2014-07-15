@@ -1,0 +1,60 @@
+<% provide(:title, 'Fix - Clients') %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">Clients</div>
+  </div>
+  <div class="panel-body panel-table">
+    <% if @clients.length == 0 %>
+      <p class="empty_list">No clients here.</p>
+    <% else %>
+      <div class="table-responsive">
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Postal Code</th>
+              <th>Repairs</th>
+              <th style="width:17px;"></th>
+              <th style="width:17px;"></th>
+            </tr>
+          </thead>
+          <tbody class="searchable">
+            <% @clients.each do |client| %>
+              <tr>
+                <td><%= client.name %></td>
+                <td><%= client.postal_code + "/" + client.house_number %></td>
+                <td><%= 0 %></td>
+                <td>
+                  <%= link_to client_repairs_path(client.id) do %>
+                    <span class="glyphicon glyphicon-list"></span>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to edit_client_path(client.id) do %>
+                    <span class="glyphicon glyphicon-pencil"></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+  <div class="panel-footer">
+
+    <% unless @clients.length == 0 %>
+      <% if @pagination %>
+        <%= paginate @clients %>
+      <% else %>
+        <%= link_to('Back', clients_path, :class => 'btn btn-mini btn-primary') %>
+      <% end %>
+    <% end %>
+
+    <% if can? :create, Client %>
+      <%= link_to('Add client', new_client_path, :class => 'btn btn-mini btn-primary') %>
+    <% end %>
+
+  </div>
+</div>

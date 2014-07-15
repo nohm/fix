@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127154741) do
+ActiveRecord::Schema.define(version: 20140715090247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,45 @@ ActiveRecord::Schema.define(version: 20140127154741) do
     t.datetime "updated_at"
     t.string   "user_ids"
   end
+
+  create_table "clients", force: true do |t|
+    t.string   "name"
+    t.string   "phone_number"
+    t.string   "mobile_phone_number"
+    t.string   "email_address"
+    t.string   "postal_code"
+    t.string   "house_number"
+    t.string   "street"
+    t.string   "city"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "repairs", force: true do |t|
+    t.string   "serial_number"
+    t.string   "type_number"
+    t.string   "brand"
+    t.string   "date_of_purchase"
+    t.integer  "warranty"
+    t.integer  "sales_receipt"
+    t.string   "accessoires"
+    t.string   "damage"
+    t.string   "location"
+    t.string   "iris_code"
+    t.string   "after_repair_iris_code"
+    t.string   "problem"
+    t.string   "solution"
+    t.string   "method_acquire"
+    t.string   "method_return"
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "priority"
+    t.integer  "client_id"
+    t.integer  "status_id"
+  end
+
+  add_index "repairs", ["client_id"], name: "index_repairs_on_client_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"

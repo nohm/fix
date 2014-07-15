@@ -1,0 +1,28 @@
+<% provide(:title, 'Fix - Edit client') %>
+
+<%= bootstrap_form_for(@client, method: :patch, :url => client_path(@client), :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
+  <%= f.alert_message t('global.errors') %>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">Edit client</div>
+    </div>
+    <div class="panel-body">
+      <%= f.text_field :name %>
+
+      <%= f.text_field :phone_number %>
+      <%= f.text_field :mobile_phone_number %>
+      <%= f.text_field :email_address %>
+
+      <%= f.text_field :postal_code %>
+      <%= f.text_field :house_number %>
+      <%= f.text_field :street %>
+      <%= f.text_field :city %>
+    </div>
+    <div class="panel-footer">
+      <%= f.submit 'Update client', data: { disable_with: 'Updating client' } %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t('global.back'), clients_path %>

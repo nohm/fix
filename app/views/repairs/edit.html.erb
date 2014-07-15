@@ -1,0 +1,45 @@
+<% provide(:title, 'Fix - Edit repair') %>
+
+<%= bootstrap_form_for(@repair, method: :patch, :url => client_repair_path(@client, @repair), :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
+  <%= f.alert_message t('global.errors') %>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">Edit repair</div>
+    </div>
+    <div class="panel-body">
+      <%= f.select :method_acquire, @repair.acquire_methods %>
+      <%= f.select :method_return, @repair.acquire_methods %>
+
+      <%= f.text_field :priority %>
+      <%= f.text_field :location %>
+
+      <%= f.text_field :brand %>
+      <%= f.text_field :type_number %>
+      <%= f.text_field :serial_number %>
+
+      <%= f.text_field :date_of_purchase %>
+      <%= f.form_group :warranty do %>
+        <%= f.check_box :warranty %>
+      <% end %>
+      <%= f.form_group :sales_receipt do %>
+        <%= f.check_box :sales_receipt %>
+      <% end %>
+
+      <%= f.text_field :accessoires %>
+      <%= f.text_field :damage %>
+
+      <%= f.text_field :iris_code %>
+      <%= f.text_field :problem %>
+      <%= f.text_field :after_repair_iris_code %>
+      <%= f.text_field :solution %>
+
+      <%= f.text_area :note %>
+    </div>
+    <div class="panel-footer">
+      <%= f.submit 'Update repair', data: { disable_with: 'Updating repair' } %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t('global.back'), client_repairs_path(@client) %>

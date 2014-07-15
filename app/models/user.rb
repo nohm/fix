@@ -17,13 +17,6 @@ class User < ActiveRecord::Base
     self.manager? or self.has_role? :technician
   end
 
-  # Add any company that exists here as a supplier
-  def supplier?
-    !self.nil? && !self.id.nil? &&
-    !self.staff? && !self.guest? && !(self.has_role? :user) &&
-    Role.where(name: self.roles.first.name).count != 0
-  end
-
   def guest?
     self.has_role? :guest
   end

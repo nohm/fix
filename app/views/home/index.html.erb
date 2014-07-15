@@ -2,10 +2,22 @@
     <% if can? :see_data, User %>
       <% if current_user.guest? %> 
         <div class="alert alert-success">
-          <Strong><%= t('home.index.guest') %></strong><%= t('home.index.guest_msg') %>
+          <strong><%= t('home.index.guest') %></strong><%= t('home.index.guest_msg') %>
         </div>
       <% end %>
-      Hai.
+      
+      <div class="col-md-6 stat-chart">
+        <h3>Statuses</h3>
+        <%= raw @chart_status %>
+      </div>
+
+      <div class="col-md-6 stat-chart">
+        <h3>Priorities</h3>
+        <%= raw @chart_prio %>
+      </div>
+
+      <%= link_to('Clients', clients_path, :class => 'btn btn-mini btn-primary') %>
+
     <% else %>
       <h2>Fix</h2>
       <p><%= t('home.index.welcome') %></p>

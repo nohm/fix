@@ -15,7 +15,9 @@
 }
 
 // Custom colours for stat progress bars
-.stat-colour-new {
+.stat-colour-new,
+.stat-colour-todo,
+.stat-colour-0 {
   color: lighten($brand-success, 15%) !important;  
   background-color: lighten($brand-success, 15%) !important; 
 }
