@@ -1,0 +1,76 @@
+app.controller({
+    "name": "clients",
+    "actions": {
+      "new": function() {
+        addPostalListener();
+      },
+      "edit": function() {
+        addPostalListener();
+      }
+    }
+});
+
+function addPostalListener() {
+  function gMapsOk(status) {
+    return status == google.maps.GeocoderStatus.OK;
+  }
+
+  function show_response(response, type) {
+    var label = $('#lookup-response')
+    label.html(response);
+    label.removeClass();
+    label.addClass('text-' + type);
+  }
+
+  $('#btn-lookup').click(function(e) {
+    
+    var postal_code = $('#client_postal_code').val();
+    var house_number = $('#client_house_number').val();
+
+    if(postal_code != "" && house_number != ""){
+
+      var postal_code_full = postal_code + ', Nederland';
+      var geocoder = new google.maps.Geocoder();
+
+      geocoder.geocode({ 'address': postal_code_full }, function(results_first, status_first) {
+        if(gMapsOk(status_first)){
+
+          var location = results_first[0].geometry.location
+          var lat_lng = new google.maps.LatLng(location.lat(), location.lng());
+
+          geocoder.geocode({ 'latLng': lat_lng }, function(results_second, status_second) {
+            if(gMapsOk(status_second)){
+
+              var street = results_second[0].address_components[1].long_name;
+              var place_id = results_second[0].address_components.length == 7 ? 2 : 3;
+              var place = results_second[0].address_components[place_id].long_name;
+              var full_adress = street + ' ' + house_number + ', ' + postal_code + ', ' + place + ', Nederland';
+
+              geocoder.geocode({ 'address': full_adress }, function(results_third, status_third){
+                if(gMapsOk(status_third)){
+                  show_response('Lookup successful', 'success');
+                  
+                  $('#client_street').val(results_third[0].address_components[1].long_name);
+                  var place_id = results_third[0].address_components.length == 7 ? 2 : 3;
+                  $('#client_city').val(results_third[0].address_components[place_id].long_name);
+
+                } else {
+                  show_response('Geocode#3 was not successful: ' + status_third, 'warning');
+                }
+              });
+            } else {
+              show_response('Geocode#2 was not successful: ' + status_second, 'warning');
+            }
+          });
+        } else {
+          show_response('Geocode was not successful: ' + status_first, 'warning');
+        }
+      });
+    } else {
+      show_response('Please enter a valid postalcode and housenumber', 'danger');
+    }
+    return false;
+  });//end a.click
+
+
+}
