@@ -22,16 +22,6 @@ class Ability
       can :index, [Apptype, Stock]
       can :type_stock, Stock
 
-    # Add any company that exists here as a role
-    elsif user.supplier?
-      can :see_data, :all
-      can [:index, :show], [Entry, Invoice, Attachment, Shipment]
-      can :zip, Entry
-      can :manage, Stats
-      can [:retrieve, :disable], Broadcast
-      can :index, [Apptype, Stock]
-      can :slip, Invoice
-
     elsif user.has_role? :user
       # ...
     end
