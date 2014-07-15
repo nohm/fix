@@ -1,6 +1,17 @@
 class Repair < ActiveRecord::Base
 	belongs_to :client
 
+	validates :status_id, presence: true
+	validates :brand, presence: true
+	validates :type_number, presence: true
+	validates :serial_number, presence: true
+	validates :warranty, presence: true
+	validates :sales_receipt, presence: true
+	validates :method_acquire, presence: true
+	validates :method_return, presence: true
+	validates :priority, presence: true
+	validates :client_id, presence: true
+
 	def number
 		"#{ENV['NUMBER_PREFIX']}#{self.id}"
 	end
