@@ -15,7 +15,7 @@ class ClientsController < ApplicationController
 	def create
     	authorize! :create, Client, :message => I18n.t('global.unauthorized')
 
-    	@client = Client.new(params[:client].permit(:name,:phone_number,:mobile_phone_number,:postal_code,:house_number,:street,:city))
+    	@client = Client.new(params[:client].permit(:name,:phone_number,:mobile_phone_number,:email_address,:postal_code,:house_number,:street,:city))
 	    if @client.save
 	      redirect_to clients_path, :notice => 'Client added.'
 	    else
@@ -33,7 +33,7 @@ class ClientsController < ApplicationController
 		authorize! :update, Client, :message => I18n.t('global.unauthorized')
 
 		@client = Client.find(params[:id])
-	    if @client.update(params[:client].permit(:name,:phone_number,:mobile_phone_number,:postal_code,:house_number,:street,:city))
+	    if @client.update(params[:client].permit(:name,:phone_number,:mobile_phone_number,:email_address,:postal_code,:house_number,:street,:city))
 	      redirect_to clients_path, :notice => 'Client updated.'
 	    else
 	      render 'edit'
