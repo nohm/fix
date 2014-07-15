@@ -31,4 +31,8 @@ class Repair < ActiveRecord::Base
 	def acquire_methods
 		YAML.load(ENV['ACQUIRES'])
 	end
+
+	def priorities
+		YAML.load(ENV['PRIOS'])
+	end
 end

@@ -11,7 +11,7 @@
       <%= f.select :method_acquire, @repair.acquire_methods %>
       <%= f.select :method_return, @repair.acquire_methods %>
 
-      <%= f.text_field :priority %>
+      <%= f.select :priority, @repair.priorities %>
       <%= f.text_field :location %>
 
       <%= f.text_field :brand %>
