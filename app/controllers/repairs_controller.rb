@@ -7,6 +7,13 @@ class RepairsController < ApplicationController
     	@client = Client.find(params[:client_id])
 	end
 
+	def show
+		authorize! :show, Repair, :message => I18n.t('global.unauthorized')
+
+    	@repair = Repair.find(params[:id])
+    	@client = Client.find(params[:client_id])
+	end
+
 	def new
     	authorize! :new, Repair, :message => I18n.t('global.unauthorized')
 

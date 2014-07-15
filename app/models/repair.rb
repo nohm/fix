@@ -12,6 +12,8 @@ class Repair < ActiveRecord::Base
 	validates :priority, presence: true
 	validates :client_id, presence: true
 
+	before_save :format_input
+
 	def number
 		"#{ENV['NUMBER_PREFIX']}#{self.id}"
 	end
@@ -35,4 +37,20 @@ class Repair < ActiveRecord::Base
 	def priorities
 		YAML.load(ENV['PRIOS'])
 	end
+
+	def get_barcode
+	    require 'barby'
+	    require 'barby/barcode/code_39'
+	    require 'barby/outputter/svg_outputter'
+
+	    barcode = Barby::Code39.new("#{self.number}")
+	    barcode.to_svg(height: 60, xdim: 3)
+	end
+
+	private
+	    def format_input
+	    	self.brand = self.brand.titleize
+	    	self.type_number.upcase!
+      		self.serial_number.upcase!
+    	end
 end

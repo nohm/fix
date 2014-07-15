@@ -1,0 +1,104 @@
+<% provide(:title, 'Fix - Show repair ' + @repair.number) %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= @repair.number %>
+    &middot;
+    <%= @client.name %>
+  </div>
+  <div class="panel-body panel-table">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-condensed table-striped">
+
+            <tr>
+              <td><h6>Barcode</h6></td>
+              <td><%= @repair.get_barcode.html_safe %></td>
+            </tr>
+
+            <tr>
+              <td><h6>Status</h6></td>
+              <td><%= @repair.get_status %></td>
+            </tr>
+
+            <tr>
+              <td><h6>Location</h6></td>
+              <td><%= @repair.location %></td>
+            </tr>
+
+            <tr>
+              <td><h6>Priority</h6></td>
+              <td><%= @repair.priority %></td>
+            </tr>
+
+            <tr>
+              <td><h6>Acquire and return methods</h6></td>
+              <td><%= "#{@repair.method_acquire} - #{@repair.method_return}" %></td>
+            </tr>
+
+            <tr>
+              <td><h6><%= t('global.brand') %></h6></td>
+              <td><%= @repair.brand %></td>
+            </tr>
+            <tr>
+              <td><h6><%= t('global.typenum') %></h6></td>
+              <td><%= @repair.type_number %></td>
+            </tr>
+            <tr>
+              <td><h6><%= t('global.serialnum') %></h6></td>
+              <td class="monospace"><%= @repair.serial_number %></td>
+            </tr>
+
+            <tr>
+              <td><h6>Date of Purchase</h6></td>
+              <td><%= @repair.date_of_purchase %></td>
+            </tr>
+            <tr>
+              <td><h6>Warranty?</h6></td>
+              <td><%= @repair.warranty == 1 ? t('global.yes') : t('global.no') %></td>
+            </tr>
+            <tr>
+              <td><h6>Sales Receipt?</h6></td>
+              <td><%= @repair.sales_receipt == 1 ? t('global.yes') : t('global.no') %></td>
+            </tr>
+
+            <tr>
+              <td><h6>Accessoires</h6></td>
+              <td><%= @repair.accessoires %></td>
+            </tr>
+            <tr>
+              <td><h6>Damage</h6></td>
+              <td><%= @repair.damage %></td>
+            </tr>
+
+            <tr>
+              <td><h6>Iris code</h6></td>
+              <td><%= @repair.iris_code %></td>
+            </tr>
+            <tr>
+              <td><h6>Problem</h6></td>
+              <td><%= @repair.problem %></td>
+            </tr>
+            <tr>
+              <td><h6>After repair iris code</h6></td>
+              <td><%= @repair.after_repair_iris_code %></td>
+            </tr>
+            <tr>
+              <td><h6>Solution</h6></td>
+              <td><%= @repair.solution %></td>
+            </tr>
+
+            <tr>
+              <td><h6>Note</h6></td>
+              <td><%= @repair.note %></td>
+            </tr>       
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to t('global.back'), client_repairs_path(@client) %>

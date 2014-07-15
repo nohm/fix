@@ -17,24 +17,28 @@
 // Custom colours for stat progress bars
 .stat-colour-new,
 .stat-colour-todo,
-.stat-colour-0 {
+.stat-colour-1 {
   color: lighten($brand-success, 15%) !important;  
   background-color: lighten($brand-success, 15%) !important; 
 }
-.stat-colour-tested {
+.stat-colour-tested,
+.stat-colour-2 {
   color: $brand-success !important;
   background-color: $brand-success !important;
 }
-.stat-colour-repaired {
+.stat-colour-repaired,
+.stat-colour-3 {
   color: $brand-info !important;
   background-color: $brand-info !important;
 }
-.stat-colour-scrap {
+.stat-colour-scrap,
+.stat-colour-4 {
   color: $brand-primary !important;
   background-color: $brand-primary !important;
 }
 .stat-colour-waiting,
-.stat-colour-skipped {
+.stat-colour-skipped,
+.stat-colour-5 {
   color: $brand-warning !important;
   background-color: $brand-warning !important;
 }
