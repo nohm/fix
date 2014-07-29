@@ -20,6 +20,7 @@
               <th>Priority</th>
               <th style="width:17px;"></th>
               <th style="width:17px;"></th>
+              <th style="width:17px;"></th>
             </tr>
           </thead>
           <tbody class="searchable">
@@ -39,6 +40,11 @@
                 <td>
                   <%= link_to edit_client_repair_path(repair.client_id, repair.id) do %>
                     <span class="glyphicon glyphicon-pencil"></span>
+                  <% end %>
+                </td>
+                <td data-no-turbolink="true">
+                  <%= link_to print_path(repair.client_id, repair.id) do %>
+                    <span class="glyphicon glyphicon-print"></span>
                   <% end %>
                 </td>
               </tr>

@@ -8,6 +8,8 @@ Fix::Application.routes.draw do
   	resources :repairs
   end
 
+  match 'clients/:client_id/repairs/:id/print' => 'repairs#print', :as => :print, :via => :get
+
   resources :broadcasts, :only => [:index, :new, :create, :destroy]
   match 'broadcast/disable/:id' => 'broadcasts#disable', :as => :disable_broadcast, :via => :get
 

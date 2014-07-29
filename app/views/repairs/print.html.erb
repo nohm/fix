@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <style>
+      body {
+        height: 842px;
+        width: 595px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #repair_client {
+        height: 170px;
+        padding-top: 30px;
+        padding-left: 300px;
+      }
+      #repair_number span {
+        font-size: 20px;
+        margin-top: 28px;
+        float: left;
+      }
+      #repair_costs {
+        margin-top: 75px;
+      }
+      .split_column {
+        width: 100%;
+        margin: 20px 0;
+        overflow: auto;
+      }
+      .split_column td {
+        line-height: 25px;
+      }
+      .split_column td.left {
+        width: 35%;
+      }
+      .split_column td.right {
+        width: 65%;
+      }
+    </style>
+  </head>
+  <body onload="window.print()">
+    
+    <div id="repair_client">
+      <b><%= @client.name %></b><br>
+      <%= @client.street %> <%= @client.house_number %><br>
+      <%= @client.postal_code %> <%= @client.city %><br>
+      <%= @client.phone_number %><br>
+      <%= @client.mobile_phone_number %><br>
+    </div>
+
+    <div id="repair_number">
+      <span><b><%= @repair.number %></b></span>
+      <%= @repair.get_barcode.html_safe %>
+    </div>
+
+    <table class="split_column">
+      <tbody>
+        <tr>
+          <td class="left">Brand</td>
+          <td class="right">: <%= @repair.brand %></td>
+        </tr>
+        <tr>
+          <td class="left">Type Number</td>
+          <td class="right">: <%= @repair.type_number %></td>
+        </tr>
+        <tr>
+          <td class="left">Serial Number</td>
+          <td class="right">: <%= @repair.serial_number %></td>
+        </tr>
+        <tr>
+          <td class="left">Date of Purchase</td>
+          <td class="right">: <%= @repair.date_of_purchase %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="split_column">
+      <tbody>
+        <tr>
+          <td class="left">Accessoires</td>
+          <td class="right">: <%= @repair.accessoires %></td>
+        </tr>
+        <tr>
+          <td class="left">External State</td>
+          <td class="right">: <%= @repair.damage %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="split_column">
+      <tbody>
+        <tr>
+          <td class="left">Iris Code</td>
+          <td class="right">: <%= @repair.iris_code %></td>
+        </tr>
+        <tr>
+          <td class="left">Problem</td>
+          <td class="right">: <%= @repair.problem %></td>
+        </tr>
+        <tr>
+          <td class="left">After-Repair Iris Code</td>
+          <td class="right">: <%= @repair.after_repair_iris_code %></td>
+        </tr>
+        <tr>
+          <td class="left">Solution</td>
+          <td class="right">: <%= @repair.solution %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table id="repair_costs" class="split_column">
+      <tbody>
+        <tr>
+          <td class="left">Costs ex. VAT</td>
+          <td class="right">: €<%= @costs[:basic] %></td>
+        </tr>
+        <tr>
+          <td class="left">VAT</td>
+          <td class="right">: €<%= @costs[:vat] %></td>
+        </tr>
+        <tr>
+          <td class="left">Costs inc. VAT</td>
+          <td class="right">: €<%= @costs[:full] %></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </body>
+</html>
