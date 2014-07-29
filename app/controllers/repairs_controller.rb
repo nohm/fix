@@ -21,12 +21,15 @@ class RepairsController < ApplicationController
     	@client = Client.find(params[:client_id])
 
     	@costs = Hash.new
+        @costs[:basic] = Hash.new
     	if @repair.costs.presence
-    		@costs[:basic] = @repair.costs
-    		@costs[:full] = @repair.costs.to_i * 1.21
-    		@costs[:vat] = @costs[:full] - @costs[:basic]
+    		@costs[:basic][:labour] = @repair.costs
+            @costs[:basic][:material] = @repair.costs
+    		@costs[:full] = (@costs[:basic][:labour].to_i + @costs[:basic][:material].to_i) * 1.21
+    		@costs[:vat] = @costs[:full] - (@costs[:basic][:labour].to_i + @costs[:basic][:material].to_i)
     	else
-    		@costs[:basic] = '0.00'
+    		@costs[:basic][:labour] = '0.00'
+            @costs[:basic][:material] = '0.00'
     		@costs[:full] = '0.00'
     		@costs[:vat] = '0.00'
     	end
@@ -48,7 +51,7 @@ class RepairsController < ApplicationController
     	params[:repair][:priority] = params[:repair][:priority].to_i
     	params[:repair][:status_id] = Repair.process_status
 
-    	@repair = Repair.new(params[:repair].permit(:status_id,:costs,:brand,:type_number,:serial_number,:date_of_purchase,:warranty,:sales_receipt,:accessoires,:damage,:location,:iris_code,:after_repair_iris_code,:problem,:solution,:method_acquire,:method_return,:note,:priority,:client_id))
+    	@repair = Repair.new(params[:repair].permit(:status_id,:costs,:costs_secondary,:brand,:type_number,:serial_number,:date_of_purchase,:warranty,:sales_receipt,:accessoires,:damage,:location,:iris_code,:after_repair_iris_code,:problem,:solution,:method_acquire,:method_return,:note,:priority,:client_id))
     	if @repair.save
 	      redirect_to client_repairs_path(@repair.client_id), :notice => 'Repair added.'
 	    else
@@ -70,7 +73,7 @@ class RepairsController < ApplicationController
     	params[:repair][:status_id] = Repair.process_status
 
 		@repair = Repair.find(params[:id])
-		if @repair.update(params[:repair].permit(:status_id,:costs,:brand,:type_number,:serial_number,:date_of_purchase,:warranty,:sales_receipt,:accessoires,:damage,:location,:iris_code,:after_repair_iris_code,:problem,:solution,:method_acquire,:method_return,:note,:priority,:client_id))
+		if @repair.update(params[:repair].permit(:status_id,:costs,:costs_secondary,:brand,:type_number,:serial_number,:date_of_purchase,:warranty,:sales_receipt,:accessoires,:damage,:location,:iris_code,:after_repair_iris_code,:problem,:solution,:method_acquire,:method_return,:note,:priority,:client_id))
 	      redirect_to client_repairs_path(@repair.client_id), :notice => 'Repair updated.'
 	    else
 	      render 'edit'

@@ -34,7 +34,8 @@
       <%= f.text_field :after_repair_iris_code %>
       <%= f.text_field :solution %>
 
-      <%= f.text_field :costs %>
+      <%= f.text_field :costs, :label => 'Labour costs' %>
+      <%= f.text_field :costs_secondary, :label => 'Material costs' %>
 
       <%= f.text_area :note %>
     </div>

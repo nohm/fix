@@ -54,19 +54,28 @@
     <table class="split_column">
       <tbody>
         <tr>
-          <td class="left">Brand</td>
+          <td class="left">Datum</td>
+          <td class="right">: <%= Date.today.strftime('%d-%m-%Y') %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="split_column">
+      <tbody>
+        <tr>
+          <td class="left">Merk</td>
           <td class="right">: <%= @repair.brand %></td>
         </tr>
         <tr>
-          <td class="left">Type Number</td>
+          <td class="left">Typenummer</td>
           <td class="right">: <%= @repair.type_number %></td>
         </tr>
         <tr>
-          <td class="left">Serial Number</td>
+          <td class="left">Serienummer</td>
           <td class="right">: <%= @repair.serial_number %></td>
         </tr>
         <tr>
-          <td class="left">Date of Purchase</td>
+          <td class="left">Koopdatum</td>
           <td class="right">: <%= @repair.date_of_purchase %></td>
         </tr>
       </tbody>
@@ -79,7 +88,7 @@
           <td class="right">: <%= @repair.accessoires %></td>
         </tr>
         <tr>
-          <td class="left">External State</td>
+          <td class="left">Uitwendige Staat</td>
           <td class="right">: <%= @repair.damage %></td>
         </tr>
       </tbody>
@@ -92,7 +101,7 @@
           <td class="right">: <%= @repair.iris_code %></td>
         </tr>
         <tr>
-          <td class="left">Problem</td>
+          <td class="left">Klacht</td>
           <td class="right">: <%= @repair.problem %></td>
         </tr>
         <tr>
@@ -100,7 +109,7 @@
           <td class="right">: <%= @repair.after_repair_iris_code %></td>
         </tr>
         <tr>
-          <td class="left">Solution</td>
+          <td class="left">Reparatie</td>
           <td class="right">: <%= @repair.solution %></td>
         </tr>
       </tbody>
@@ -109,15 +118,19 @@
     <table id="repair_costs" class="split_column">
       <tbody>
         <tr>
-          <td class="left">Costs ex. VAT</td>
-          <td class="right">: €<%= @costs[:basic] %></td>
+          <td class="left">Arbeidsloon</td>
+          <td class="right">: €<%= @costs[:basic][:labour] %></td>
         </tr>
         <tr>
-          <td class="left">VAT</td>
+          <td class="left">Materiaal</td>
+          <td class="right">: €<%= @costs[:basic][:material] %></td>
+        </tr>
+        <tr>
+          <td class="left">BTW</td>
           <td class="right">: €<%= @costs[:vat] %></td>
         </tr>
         <tr>
-          <td class="left">Costs inc. VAT</td>
+          <td class="left">Kosten inc. BTW</td>
           <td class="right">: €<%= @costs[:full] %></td>
         </tr>
       </tbody>
