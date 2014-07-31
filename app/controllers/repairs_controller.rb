@@ -24,8 +24,8 @@ class RepairsController < ApplicationController
         @costs[:basic] = Hash.new
     	@costs[:basic][:labour] = @repair.costs.presence || '0.00'
         @costs[:basic][:material] = @repair.costs_secondary.presence || '0.00'
-    	@costs[:full] = ((@costs[:basic][:labour].to_f + @costs[:basic][:material].to_f) * 1.21).round(2)
-    	@costs[:vat] = (@costs[:full] - (@costs[:basic][:labour].to_f + @costs[:basic][:material].to_f)).round(2)
+    	@costs[:full] = sprintf('%.2f', ((@costs[:basic][:labour].to_f + @costs[:basic][:material].to_f) * 1.21))
+    	@costs[:vat] = sprintf('%.2f', (@costs[:full].to_f - (@costs[:basic][:labour].to_f + @costs[:basic][:material].to_f)))
 
     	render 'print', :layout => false
 	end
