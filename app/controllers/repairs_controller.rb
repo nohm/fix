@@ -22,17 +22,10 @@ class RepairsController < ApplicationController
 
     	@costs = Hash.new
         @costs[:basic] = Hash.new
-    	if @repair.costs.presence
-    		@costs[:basic][:labour] = @repair.costs
-            @costs[:basic][:material] = @repair.costs
-    		@costs[:full] = (@costs[:basic][:labour].to_i + @costs[:basic][:material].to_i) * 1.21
-    		@costs[:vat] = @costs[:full] - (@costs[:basic][:labour].to_i + @costs[:basic][:material].to_i)
-    	else
-    		@costs[:basic][:labour] = '0.00'
-            @costs[:basic][:material] = '0.00'
-    		@costs[:full] = '0.00'
-    		@costs[:vat] = '0.00'
-    	end
+    	@costs[:basic][:labour] = @repair.costs.presence || '0.00'
+        @costs[:basic][:material] = @repair.costs_secondary.presence || '0.00'
+    	@costs[:full] = ((@costs[:basic][:labour].to_f + @costs[:basic][:material].to_f) * 1.21).round(2)
+    	@costs[:vat] = (@costs[:full] - (@costs[:basic][:labour].to_f + @costs[:basic][:material].to_f)).round(2)
 
     	render 'print', :layout => false
 	end
