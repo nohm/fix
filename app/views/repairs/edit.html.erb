@@ -1,6 +1,6 @@
 <% provide(:title, 'Fix - Edit repair') %>
 
-<%= bootstrap_form_for(@repair, method: :patch, :url => client_repair_path(@client, @repair), :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
+<%= bootstrap_form_for(@repair, method: :patch, :url => client_repair_path(params[:client_id], @repair), :html => { :class => 'form-horizontal', :multipart => true }, style: :horizontal, left: "col-sm-2", right: "col-sm-4", help: :block) do |f| %>
   <%= f.alert_message t('global.errors') %>
   
   <div class="panel panel-default">
@@ -44,5 +44,3 @@
     </div>
   </div>
 <% end %>
-
-<%= link_to t('global.back'), client_repairs_path(@client) %>
