@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827154758) do
+ActiveRecord::Schema.define(version: 20140828171401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,8 +47,6 @@ ActiveRecord::Schema.define(version: 20140827154758) do
     t.string   "accessoires"
     t.string   "damage"
     t.string   "location"
-    t.string   "iris_code"
-    t.string   "after_repair_iris_code"
     t.string   "problem"
     t.string   "solution"
     t.string   "method_acquire"
